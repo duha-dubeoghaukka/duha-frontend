@@ -1,5 +1,33 @@
 import placeNames from "../../utils/placeNames.js";
 import PlaceButton from "../../components/mainpage/PlaceButton";
+import Item from "../../components/mainpage/Item";
+
+const dummyData = [
+    {
+        name: "이름",
+        description: "설명",
+        location: "위치",
+        likes: 999,
+        image: "이미지",
+        isFavorite: true
+    },
+    {
+        name: "이름2",
+        description: "설명",
+        location: "위치",
+        likes: 999,
+        image: "이미지",
+        isFavorite: true
+    },
+    {
+        name: "이름3",
+        description: "설명",
+        location: "위치",
+        likes: 999,
+        image: "이미지",
+        isFavorite: true
+    }
+]
 
 const Places = () => {
     return <div>
@@ -18,6 +46,11 @@ const Places = () => {
                 })
                 }
             </ul>
+        </div>
+        <div>
+            {dummyData.map(data => {
+                return <Item key={data.name} {...data}/>
+            })}
         </div>
     </div>
 }
