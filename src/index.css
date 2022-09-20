@@ -9,6 +9,9 @@
   .btn-white {
     @apply py-2.5 px-5 bg-white1 text-black2 font-semibold rounded-lg shadow-md;
   }
+  .input {
+    @apply border-b border-green1 text-black1 h-10 w-[500px]
+  }
 }
 
 body {
