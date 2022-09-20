@@ -8,16 +8,14 @@ const Layout = props => {
   return (
     <div>
       <div className="fixed w-full py-[31px] bg-[#7FB77E] z-10">
-        <div className="max-w-[1200px]">
-          <h1 className="text-[#F6F6F6] font-bold text-[26px] text-center">
-            {title}
-          </h1>
-          <p className="absolute font-bold text-[26px] right-10 top-[31px] text-[#F6F6F6] cursor-pointer">
-            {isLoggedIn ? "로그아웃" : "로그인"}
-          </p>
-        </div>
+        <h1 className="text-[#F6F6F6] font-bold text-[26px] text-center">
+          {title}
+        </h1>
+        <p className="absolute font-bold text-[26px] right-10 top-[31px] text-[#F6F6F6] cursor-pointer">
+          {isLoggedIn ? "로그아웃" : "로그인"}
+        </p>
       </div>
-      <div className="fixed w-[290px] mt-[100px] border-r-2 h-full">
+      <div className="fixed w-[290px] mt-[100px] border-r-2 h-full bg-white1">
         <div>
           <img
             src="/assets/LogoV2.png"
