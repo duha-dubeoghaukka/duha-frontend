@@ -18,7 +18,7 @@ const Layout = props => {
         <div className="ml-[54px]">
           <div className="mb-[28px]">
             <div className={`flex items-center mb-[8px] cursor-pointer ${greaterCategory === 'mainpage' && 'text-[#7FB77E]'}`}>
-              <HomeIcon />
+              <HomeIcon sx={{ width: '32px' }} />
               <h2 className="font-bold text-[20px] ml-[6px]">메인 페이지</h2>
             </div>
             <ul className="text-[16px] ml-[38px]">
@@ -29,7 +29,7 @@ const Layout = props => {
           </div>
           <div className="mb-[28px]">
             <div className={`flex items-center mb-[8px] cursor-pointer ${greaterCategory === 'schedule' && 'text-[#7FB77E]'}`}>
-              <CalendarMonthIcon />
+              <CalendarMonthIcon sx={{ width: '32px' }} />
               <h2 className="font-bold text-[20px] ml-[6px]">일정</h2>
             </div>
             <ul className="text-[16px] ml-[38px]">
@@ -39,7 +39,7 @@ const Layout = props => {
           </div>
           <div>
             <div className={`flex items-center mb-[8px] cursor-pointer ${greaterCategory === 'mypage' && 'text-[#7FB77E]'}`}>
-              <PersonIcon />
+              <PersonIcon sx={{ width: '32px' }} />
               <h2 className="font-bold text-[20px] ml-[6px]">마이 페이지</h2>
             </div>
             <ul className="text-[16px] ml-[38px]">
