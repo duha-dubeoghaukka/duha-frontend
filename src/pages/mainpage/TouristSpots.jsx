@@ -1,6 +1,7 @@
 import placeNames from "../../utils/placeNames.js";
 import SpotButton from "../../components/mainpage/SpotButton";
 import Item from "../../components/mainpage/Item";
+import Layout from "../../components/layout/Layout";
 
 const dummyData = [
     {
@@ -30,7 +31,7 @@ const dummyData = [
 ]
 
 const TouristSpots = () => {
-    return <div>
+    return <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
         <div>
             <ul className="flex flex-row justify-around">
                 <li className="font-bold text-2xl">관광</li>
@@ -52,7 +53,7 @@ const TouristSpots = () => {
                 return <Item key={data.name} {...data}/>
             })}
         </div>
-    </div>
+    </Layout>
 }
 
 export default TouristSpots;
