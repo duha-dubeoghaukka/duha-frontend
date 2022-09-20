@@ -1,4 +1,6 @@
 {
+  "root": true,
+
   "plugins": ["prettier"],
 
   "extends": ["plugin:prettier/recommended", "prettier"],
@@ -17,7 +19,6 @@
     "import/extensions": "off",
     "prefer-template": "off",
     "max-depth": ["error", 2],
-    "max-lines-per-function": ["error", 15],
     "eol-last": ["error", "always"],
     "prettier/prettier": "error"
   }
