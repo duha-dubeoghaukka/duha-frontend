@@ -1,3 +1,7 @@
+import HomeIcon from '@mui/icons-material/Home';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import PersonIcon from '@mui/icons-material/Person';
+
 const Layout = (props) => {
     const {children, isLoggedIn, title, highlight} = props;
     const [greaterCategory, category] = highlight.split("/");
@@ -13,7 +17,7 @@ const Layout = (props) => {
             <div className="ml-[54px]">
                 <div className="mb-[28px]">
                     <div className={`flex items-center mb-[8px] cursor-pointer ${greaterCategory === "mainpage" && "text-[#7FB77E]"}`}>
-                        <img src="/assets/Home.png" alt="Home" className="w-[32px]"/>
+                        <HomeIcon/>
                         <h2 className="font-bold text-[20px] ml-[6px]">메인 페이지</h2>
                     </div>
                     <ul className="text-[16px] ml-[38px]">
@@ -24,7 +28,7 @@ const Layout = (props) => {
                 </div>
                 <div className="mb-[28px]">
                     <div className={`flex items-center mb-[8px] cursor-pointer ${greaterCategory === "schedule" && "text-[#7FB77E]"}`}>
-                        <img src="/assets/Calendar.png" alt="Calendar" className="w-[32px]"/>
+                        <CalendarMonthIcon/>
                         <h2 className="font-bold text-[20px] ml-[6px]">일정</h2>
                     </div>
                     <ul className="text-[16px] ml-[38px]">
@@ -34,7 +38,7 @@ const Layout = (props) => {
                 </div>
                 <div>
                     <div className={`flex items-center mb-[8px] cursor-pointer ${greaterCategory === "mypage" && "text-[#7FB77E]"}`}>
-                        <img src="/assets/User.png" alt="User" className="w-[32px]"/>
+                        <PersonIcon/>
                         <h2 className="font-bold text-[20px] ml-[6px]">마이 페이지</h2>
                     </div>
                     <ul className="text-[16px] ml-[38px]">
