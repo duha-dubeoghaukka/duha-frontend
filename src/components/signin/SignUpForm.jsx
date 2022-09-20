@@ -3,8 +3,12 @@ import React from 'react';
 const SignUpForm = () => {
   return (
     <div>
-      <button className='btn-primary'>버튼</button>
-      <button className='btn-white'>버튼</button>
+      <form className="flex flex-col">
+        <input type="text" placeholder="아이디" className="input" />
+        <input type="text" placeholder="닉네임" className="input" />
+        <input type="text" placeholder="비밀번호" className="input" />
+        <input type="text" placeholder="비밀번호 확인" className="input" />
+      </form>
     </div>
   );
 };
