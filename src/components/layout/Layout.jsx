@@ -8,14 +8,17 @@ const Layout = props => {
   return (
     <div>
       <div className="fixed w-full py-[31px] bg-[#7FB77E] z-10">
-        <h1 className="text-[#F6F6F6] font-bold text-[26px] text-center">
+        <h1 className="text-[#F6F6F6] font-bold text-[26px] text-center invisible md:visible">
           {title}
         </h1>
         <p className="absolute font-bold text-[26px] right-10 top-[31px] text-[#F6F6F6] cursor-pointer">
           {isLoggedIn ? "로그아웃" : "로그인"}
         </p>
+        <p className="absolute text-[20px] left-10 top-[36px] text-[#F6F6F6] md:invisible">
+          반가워요, 익명의 뚜벅러님!
+        </p>
       </div>
-      <div className="fixed w-[290px] mt-[100px] border-r-2 h-full bg-white1">
+      <div className="fixed w-[290px] mt-[100px] border-r-2 h-full bg-white1 invisible md:visible">
         <div>
           <img
             src="/assets/LogoV2.png"
@@ -30,7 +33,7 @@ const Layout = props => {
                 greaterCategory === "mainpage" && "text-[#7FB77E]"
               }`}
             >
-              <HomeIcon sx={{ width: "32px" }} />
+              <HomeIcon fontSize="large" sx={{ width: "32px" }} />
               <h2 className="font-bold text-[20px] ml-[6px]">메인 페이지</h2>
             </div>
             <ul className="text-[16px] ml-[38px]">
@@ -63,7 +66,7 @@ const Layout = props => {
                 greaterCategory === "schedule" && "text-[#7FB77E]"
               }`}
             >
-              <CalendarMonthIcon sx={{ width: "32px" }} />
+              <CalendarMonthIcon fontSize="large" sx={{ width: "32px" }} />
               <h2 className="font-bold text-[20px] ml-[6px]">일정</h2>
             </div>
             <ul className="text-[16px] ml-[38px]">
@@ -89,7 +92,7 @@ const Layout = props => {
                 greaterCategory === "mypage" && "text-[#7FB77E]"
               }`}
             >
-              <PersonIcon sx={{ width: "32px" }} />
+              <PersonIcon fontSize="large" sx={{ width: "32px" }} />
               <h2 className="font-bold text-[20px] ml-[6px]">마이 페이지</h2>
             </div>
             <ul className="text-[16px] ml-[38px]">
@@ -111,7 +114,18 @@ const Layout = props => {
           </div>
         </div>
       </div>
-      <div className="w-[600px] mx-auto pt-[130px] border-l-2 border-r-2 px-[24px]">
+      <div className="fixed bottom-0 md:invisible h-[83px] bg-white1 w-full flex justify-around items-center">
+        <div>
+          <HomeIcon fontSize="large" className="cursor-pointer" />
+        </div>
+        <div>
+          <CalendarMonthIcon fontSize="large" className="cursor-pointer" />
+        </div>
+        <div>
+          <PersonIcon fontSize="large" className="cursor-pointer" />
+        </div>
+      </div>
+      <div className="md:w-[600px] mx-auto pt-[130px] border-l-2 border-r-2 px-[24px]">
         {children}
       </div>
     </div>
