@@ -1,5 +1,5 @@
 import placeNames from "../../utils/placeNames.js";
-import PlaceButton from "../../components/mainpage/PlaceButton";
+import SpotButton from "../../components/mainpage/SpotButton";
 import Item from "../../components/mainpage/Item";
 
 const dummyData = [
@@ -29,7 +29,7 @@ const dummyData = [
     }
 ]
 
-const Places = () => {
+const TouristSpots = () => {
     return <div>
         <div>
             <ul className="flex flex-row justify-around">
@@ -42,7 +42,7 @@ const Places = () => {
             <ul className="flex flex-row justify-between">
                 <li className="bg-green-400 p-1.5 px-3 rounded text-white font-bold shadow-2xl">전체</li>
                 {placeNames.map(place => {
-                    return <PlaceButton key={place.name} {...place}/>;
+                    return <SpotButton key={place.name} {...place}/>;
                 })
                 }
             </ul>
@@ -55,4 +55,4 @@ const Places = () => {
     </div>
 }
 
-export default Places;
+export default TouristSpots;

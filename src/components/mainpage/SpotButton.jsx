@@ -1,7 +1,7 @@
-const PlaceButton = ({name, romanization}) => {
+const SpotButton = ({name, romanization}) => {
     return <div className="p-1.5 px-3 bg-gray-300 rounded-lg font-bold shadow-xl cursor-pointer">
         {name}
     </div>
 }
 
-export default PlaceButton;
+export default SpotButton;
