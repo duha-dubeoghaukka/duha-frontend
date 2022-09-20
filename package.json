@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "^0.27.2",
+    "eslint-config-airbnb": "^19.0.4",
     "json-server": "^0.17.0",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
@@ -28,7 +29,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "airbnb"
     ]
   },
   "browserslist": {
@@ -46,6 +48,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.11",
     "postcss": "^8.4.16",
+    "prettier-eslint": "^15.0.1",
     "tailwindcss": "^3.1.8"
   }
 }
