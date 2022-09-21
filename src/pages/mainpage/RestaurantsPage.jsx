@@ -33,13 +33,13 @@ const dummyData = [
 
 const TouristSpotsPage = () => {
   return (
-    <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
+    <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
       <div className="mb-[48px]">
         <ul className="flex flex-row justify-around">
-          <Link to="/spots" className="font-bold text-2xl text-green1 cursor-pointer">
+          <Link to="/spots" className="font-bold text-2xl cursor-pointer">
             관광
           </Link>
-          <Link to="/restaurants" className="font-bold text-2xl cursor-pointer">
+          <Link to="/restaurants" className="font-bold text-2xl text-green1 cursor-pointer">
             맛집
           </Link>
           <Link to="/accommodations" className="font-bold text-2xl cursor-pointer">
