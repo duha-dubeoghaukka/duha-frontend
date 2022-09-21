@@ -30,7 +30,7 @@ const dummyData = [
   }
 ];
 
-const TouristSpots = () => {
+const TouristSpotsPage = () => {
   return (
     <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
       <div className="mb-[48px]">
@@ -59,4 +59,4 @@ const TouristSpots = () => {
   );
 };
 
-export default TouristSpots;
+export default TouristSpotsPage;
