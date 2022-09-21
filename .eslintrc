@@ -1,15 +1,11 @@
 {
   "root": true,
-
   "plugins": ["prettier"],
-
-  "extends": ["plugin:prettier/recommended", "prettier"],
-
+  "extends": ["prettier"],
   "env": {
     "browser": true,
     "node": true
   },
-
   "rules": {
     "no-new": "off",
     "no-console": "off",
