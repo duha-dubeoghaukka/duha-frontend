@@ -8,7 +8,7 @@ const dummyData = [
     name: "이름",
     description: "설명",
     location: "위치",
-    likes: 999,
+    likes: 5,
     image: "이미지",
     isFavorite: true
   },
@@ -16,7 +16,7 @@ const dummyData = [
     name: "이름2",
     description: "설명",
     location: "위치",
-    likes: 999,
+    likes: 10,
     image: "이미지",
     isFavorite: true
   },
@@ -24,7 +24,7 @@ const dummyData = [
     name: "이름3",
     description: "설명",
     location: "위치",
-    likes: 999,
+    likes: 2,
     image: "이미지",
     isFavorite: true
   }
@@ -51,9 +51,11 @@ const TouristSpotsPage = () => {
         </ul>
       </div>
       <div>
-        {dummyData.map(data => {
-          return <Item key={data.name} {...data} />;
-        })}
+        {dummyData
+          .sort((a, b) => b.likes - a.likes)
+          .map(data => {
+            return <Item key={data.name} {...data} />;
+          })}
       </div>
     </Layout>
   );
