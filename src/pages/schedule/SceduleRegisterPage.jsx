@@ -24,7 +24,7 @@ function ScheduleRegisterPage() {
   };
 
   return (
-    <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
+    <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
       <div>
         <Calendar onChange={changeDate} selectRange={true} formatDay={(locale, date) => moment(date).format("DD")} />
         <div className="flex w-72 flex-col gap-4">
@@ -50,7 +50,10 @@ function ScheduleRegisterPage() {
             value={value}
             onChange={onChangeHandler}
           />
-          <p>일정을 다른사람과 공유합니다.</p>
+          <div className="flex flex-row  space-x-24">
+            <p className="text-sm">일정을 다른사람과 공유합니다.</p>
+            <input type="checkbox" id="check1" />
+          </div>
           <Button text="등록하기" type="button" buttonStyle="rounded" handleClick={() => console.log("Clicked!")} />
         </div>
       </div>
