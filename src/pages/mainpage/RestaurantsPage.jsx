@@ -1,8 +1,10 @@
-import placeNames from "../../utils/placeNames.js";
+import regionNames from "../../utils/regionNames.js";
 import SpotButton from "../../components/mainpage/SpotButton";
 import Item from "../../components/mainpage/Item";
 import Layout from "../../components/layout/Layout";
 import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import GlobalState from "../../shared/GlobalState";
 
 const dummyData = [
   {
@@ -32,6 +34,10 @@ const dummyData = [
 ];
 
 const TouristSpotsPage = () => {
+  const { selectedRegion } = useContext(GlobalState);
+  useEffect(() => {
+    selectedRegion.setSelectedRegion("전체");
+  }, []);
   return (
     <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
       <div className="mb-[48px]">
@@ -49,10 +55,7 @@ const TouristSpotsPage = () => {
       </div>
       <div className="mb-[43px]">
         <ul className="flex flex-row justify-between">
-          <li className="bg-green1 cursor-pointer w-[70px] h-[43px] rounded-xl text-white1 font-bold text-[16px] shadow-md flex justify-center items-center">
-            전체
-          </li>
-          {placeNames.map(place => {
+          {regionNames.map(place => {
             return <SpotButton key={place.name} {...place} />;
           })}
         </ul>
