@@ -5,8 +5,11 @@ import moment from "moment";
 import Layout from "../../components/layout/Layout";
 import useInput from "../../hooks/useInput";
 import Button from "../../components/button/Button";
+import { schduleApis } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 function Registration() {
+  const navigate = useNavigate();
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [value, setValue, onChangeHandler] = useInput();
@@ -19,7 +22,15 @@ function Registration() {
     if (startDate === "" || endDate === "" || value === "") {
       alert("전부 입력하세요!");
     } else {
-      console.log("clicked");
+      schduleApis.register({
+        title: value,
+        description: null,
+        isPublic: isChecked ? isChecked : false,
+        startAt: startDate,
+        endAt: endDate
+      });
+      alert("일정 등록이 완료되었습니다!");
+      navigate(`/schedule`);
     }
   };
 
