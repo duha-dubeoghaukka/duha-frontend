@@ -17,6 +17,5 @@
     "max-depth": ["error", 2],
     "eol-last": ["error", "always"],
     "prettier/prettier": "error",
-    "parser": "babel-eslint"
-  }
+  },
 }

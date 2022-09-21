@@ -14,7 +14,13 @@
     @apply py-4 bg-[#FFCF54] text-black2 font-semibold rounded-lg shadow-md w-[385px] md:w-[500px];
   }
   .input {
-    @apply border-b border-green1 text-black1 mb-4 mx-auto px-4 h-14 w-[385px] md:w-[500px] focus:outline-none
+    @apply border-b border-green1 text-black1 mx-auto px-4 h-14 w-[385px] md:w-[500px] focus:outline-none placeholder-gray-500 text-gray-600
+  }
+  .input-helper{
+    @apply w-[385px] md:w-[500px] mx-auto text-sm mt-2 text-red-400
+  }
+  .password-icon{
+    @apply absolute top-3 right-4 text-green1 cursor-pointer
   }
 }
 
