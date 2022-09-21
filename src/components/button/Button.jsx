@@ -1,8 +1,8 @@
 import React from "react";
 
 const Button = ({ buttonStyle, type, text, onClick }) => {
-  const roundedButtonClassNames = "bg-green1 hover:bg-grey text-white font-bold py-2 px-10 h-11 w-72 rounded";
-  const disabledButtonClassNames = "bg-#ddd hover:bg-black2 text-white font-bold py-2 px-10 h-11 w-72 rounded";
+  const roundedButtonClassNames = "bg-green1 hover:bg-[#B1D7B4] text-white font-bold py-2 px-10 h-11 w-72 rounded";
+  const disabledButtonClassNames = "bg-[#B1D7B4] hover:bg-green1 text-white font-bold py-2 px-10 h-11 w-72 rounded";
 
   return (
     <div className="p-1">
