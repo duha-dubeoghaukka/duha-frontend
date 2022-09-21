@@ -16,7 +16,7 @@
     "prefer-template": "off",
     "max-depth": ["error", 2],
     "eol-last": ["error", "always"],
-    "prettier/prettier": "error",
-    "parser": "babel-eslint"
-  }
+    "prettier/prettier": "error"
+  },
+  "parser": "babel-eslint"
 }
