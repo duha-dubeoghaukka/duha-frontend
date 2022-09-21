@@ -50,6 +50,7 @@ function ScheduleRegisterPage() {
             value={value}
             onChange={onChangeHandler}
           />
+          <p>일정을 다른사람과 공유합니다.</p>
           <Button text="등록하기" type="button" buttonStyle="rounded" handleClick={() => console.log("Clicked!")} />
         </div>
       </div>
