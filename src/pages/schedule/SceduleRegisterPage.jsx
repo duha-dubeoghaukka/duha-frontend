@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Calendar from "react-calendar";
-import "./styles.css";
-import moment from "moment";
 import Layout from "../../components/layout/Layout";
-import useInput from "../../hooks/useInput";
-import Button from "../../components/button/Button";
 import { useNavigate } from "react-router-dom";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function ScheduleRegisterPage() {
   const navigate = useNavigate();
@@ -13,7 +9,12 @@ function ScheduleRegisterPage() {
 
   return (
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
-      <button onClick={() => navigate(`/schedule/register`)}>클릭</button>
+      <div className="grid place-items-center h-screen">
+        <div className="flex flex-row">
+          <span className="mr-3">새 일정 만들기</span>
+          <AddCircleIcon onClick={() => navigate(`/schedule/register`)}></AddCircleIcon>
+        </div>
+      </div>
     </Layout>
   );
 }
