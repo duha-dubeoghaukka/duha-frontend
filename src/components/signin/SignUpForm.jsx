@@ -1,7 +1,7 @@
-import axios from "axios";
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { instance } from "../../api/api";
 
 const SignUpForm = () => {
   const [inputEmail, setInputEmail] = useState("");
@@ -14,7 +14,7 @@ const SignUpForm = () => {
   const [validConfirmPassword, setValidConfirmPassword] = useState(false);
   const [validEmailDuplicateCheck, setValidEmailDuplicateCheck] = useState(false);
   const [validNicknameDuplicateCheck, setValidNicknameDuplicateCheck] = useState(false);
-  // const [validationError, setValidationError] = useState(false);
+  const [validationError, setValidationError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -68,7 +68,7 @@ const SignUpForm = () => {
       return;
     } else {
       try {
-        await axios.post(`/member/emailcheck`, {
+        await instance.post(`/member/emailcheck`, {
           email: inputEmail
         });
         setValidEmailDuplicateCheck(false);
@@ -84,7 +84,7 @@ const SignUpForm = () => {
       return;
     } else {
       try {
-        await axios.post(`/member/nicknamecheck`, {
+        await instance.post(`/member/nicknamecheck`, {
           nickname: inputNickname
         });
         setValidNicknameDuplicateCheck(false);
@@ -97,11 +97,11 @@ const SignUpForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (validEmailCheck || validNicknameCheck || validPasswordCheck || validConfirmPassword) {
-      // setValidationError(true)
+      setValidationError(true);
       return;
     } else {
       try {
-        await axios.post(`/member/signup`, {
+        await instance.post(`/member/signup`, {
           email: inputEmail,
           nickname: inputNickname,
           password: inputPassword
@@ -164,7 +164,7 @@ const SignUpForm = () => {
           required
         />
         {validConfirmPassword && <p className="input-helper">비밀번호가 일치하지 않습니다</p>}
-        {/* {validationError && <p className="input-helper">양식에 맞게 작성해주세요</p>} */}
+        {validationError && <p className="input-helper">양식에 맞게 작성해주세요</p>}
         <button className="btn-primary mx-auto mt-6 mb-4">회원 가입</button>
         <p className="mx-auto my-4 text-gray-600">
           계정이 있으신가요?{" "}

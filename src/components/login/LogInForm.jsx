@@ -1,18 +1,66 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
+import { instance } from "../../api/api";
 
 const LogInForm = () => {
   const [isHidden, setIsHidden] = useState(true);
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
+  const [validEmailCheck, setValidEmailCheck] = useState(false);
+
   const handleHide = () => setIsHidden(!isHidden);
+
+  const onChangeEmail = e => {
+    const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+    if (emailRegex.test(e.target.value)) {
+      setValidEmailCheck(false);
+    } else {
+      setValidEmailCheck(true);
+      setInputEmail(e.target.value);
+    }
+  };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      await instance.post(`/member/login`, {
+        email: inputEmail,
+        password: inputPassword
+      });
+      alert("로그인 되었습니다.");
+      localStorage.setItem("authorization", response.headers.authorization);
+      localStorage.setItem("refresh-token", response.headers["refresh-token"]);
+      // navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="w-[600px] mx-auto">
-      <form className="flex flex-col my-10 py-10">
+      <form className="flex flex-col my-10" onSubmit={handleSubmit}>
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
-        <input type="text" placeholder="이메일" className="input mt-2" autoComplete="true" required />
+        <input
+          type="text"
+          placeholder="이메일"
+          className="input mt-2"
+          autoComplete="true"
+          dafaultvalue={inputEmail}
+          onChange={onChangeEmail}
+          required
+        />
+        {validEmailCheck && <p className="input-helper">이메일 형식으로 입력해주세요</p>}
         <div className="relative w-[385px] md:w-[500px] mx-auto mt-2">
-          <input type={isHidden ? "password" : "text"} placeholder="비밀번호" className="input" autoComplete="false" required />
+          <input
+            type={isHidden ? "password" : "text"}
+            placeholder="비밀번호"
+            className="input"
+            autoComplete="false"
+            dafaultvalue={inputPassword}
+            required
+          />
           <span className="password-icon" onClick={handleHide}>
             {isHidden ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
           </span>
