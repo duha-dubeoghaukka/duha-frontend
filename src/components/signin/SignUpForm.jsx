@@ -22,6 +22,7 @@ const SignUpForm = () => {
     const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     if (emailRegex.test(e.target.value)) {
       setValidEmailCheck(false);
+      setValidEmailDuplicateCheck(false);
     } else {
       setValidEmailCheck(true);
       setInputEmail(e.target.value);
@@ -29,9 +30,10 @@ const SignUpForm = () => {
   };
 
   const onChangeNickname = e => {
-    const nicknameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|+]{2,6}$/;
+    const nicknameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|+]{2,}$/;
     if (nicknameRegex.test(e.target.value)) {
       setValidNicknameCheck(false);
+      setValidNicknameDuplicateCheck(false);
     } else {
       setValidNicknameCheck(true);
       setInputNickname(e.target.value);
@@ -124,7 +126,11 @@ const SignUpForm = () => {
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
         <div className="relative w-[385px] md:w-[500px] mx-auto">
           <input type="text" placeholder="이메일" className="input mt-2" required dafaultvalue={inputEmail} onChange={onChangeEmail} />
-          <button className="absolute top-6 right-4 font-semibold text-green1" onClick={eamailDuplicateCheck}>
+          <button
+            className="absolute top-6 right-4 font-semibold text-green1 disabled:opacity-50"
+            onClick={eamailDuplicateCheck}
+            disabled={validEmailCheck && true}
+          >
             중복확인
           </button>
         </div>
@@ -139,14 +145,18 @@ const SignUpForm = () => {
             dafaultvalue={inputNickname}
             onChange={onChangeNickname}
           />
-          <button className="absolute top-6 right-4 font-semibold text-green1" onClick={nicknameDuplicateCheck}>
+          <button
+            className="absolute top-6 right-4 font-semibold text-green1 disabled:opacity-50"
+            onClick={nicknameDuplicateCheck}
+            disabled={validNicknameCheck && true}
+          >
             중복확인
           </button>
         </div>
         {validNicknameCheck && <p className="input-helper">한글/영문 2글자 이상</p>}
         {validNicknameDuplicateCheck && <p className="input-helper">중복된 닉네임 입니다</p>}
         <input
-          type="text"
+          type="password"
           placeholder="비밀번호"
           className="input mt-2"
           autoComplete="false"
@@ -156,7 +166,7 @@ const SignUpForm = () => {
         />
         {validPasswordCheck && <p className="input-helper">영문/숫자 조합 4글자 이상</p>}
         <input
-          type="text"
+          type="password"
           placeholder="비밀번호 확인"
           className="input mt-2"
           autoComplete="false"
@@ -164,7 +174,6 @@ const SignUpForm = () => {
           required
         />
         {validConfirmPassword && <p className="input-helper">비밀번호가 일치하지 않습니다</p>}
-        {validationError && <p className="input-helper">양식에 맞게 작성해주세요</p>}
         <button className="btn-primary mx-auto mt-6 mb-4">회원 가입</button>
         <p className="mx-auto my-4 text-gray-600">
           계정이 있으신가요?{" "}
