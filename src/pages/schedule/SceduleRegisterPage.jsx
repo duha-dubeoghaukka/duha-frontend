@@ -12,8 +12,8 @@ function ScheduleRegisterPage() {
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
       <div className="grid place-items-center h-screen">
         <div className="flex flex-row">
-          <span className="mr-3">새 일정 만들기</span>
-          <AddCircleIcon className="cursor-pointer" onClick={() => navigate(`/schedule/register`)}></AddCircleIcon>
+          <span className="mr-3 mt-5 font-semibold">새 일정 만들기</span>
+          <AddCircleIcon className="cursor-pointer mt-5 drop-shadow-md" onClick={() => navigate(`/schedule/register`)}></AddCircleIcon>
         </div>
         <ScheduleCard />
       </div>
