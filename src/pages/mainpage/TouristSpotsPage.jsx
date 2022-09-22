@@ -50,7 +50,8 @@ const TouristSpotsPage = () => {
     return <div>{response.error}</div>;
   }
   if (response.data) {
-    const spots = response.data;
+    const spots = [...response.data];
+    const sortedSpots = spots.sort((a, b) => b.likeNum - a.likeNum);
     return (
       <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
         <div className="mb-[48px]">
@@ -74,7 +75,7 @@ const TouristSpotsPage = () => {
           </ul>
         </div>
         <div>
-          {spots.map(spot => {
+          {sortedSpots.map(spot => {
             return <Item key={spot.id} data={spot} />;
           })}
         </div>

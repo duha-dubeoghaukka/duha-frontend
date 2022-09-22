@@ -20,7 +20,7 @@ const Item = ({ data }) => {
         </div>
       </div>
       <div className="ml-3 w-[220px] h-[110px] flex-shrink-0">
-        <img className="w-full h-full object-cover object-center rounded-xl" src={thumbnailUrl} alt={name} />
+        <img loading="lazy" className="w-full h-full object-cover object-center rounded-xl" src={thumbnailUrl} alt={name} />
       </div>
     </div>
   );
