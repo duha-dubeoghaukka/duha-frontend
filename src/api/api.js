@@ -12,5 +12,8 @@ const api = axios.create({
 export const scheduleAPIs = {
   register: data => {
     return api.post("schedule", data);
+  },
+  getRegisterInfo: () => {
+    return api.get("schedule");
   }
 };
