@@ -75,7 +75,7 @@ const TouristSpotsPage = () => {
           return ["제주시내", "애월", "중문", "서귀포시내", "우도", "성산", "구좌", "조천"].includes(spot.region);
           break;
         default:
-          return [];
+          return false;
           break;
       }
     });
