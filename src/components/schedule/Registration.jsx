@@ -16,7 +16,9 @@ function Registration() {
   const [disableButton, setDisableButton] = useState();
 
   const [isChecked, setIsChecked] = useState();
-  const handleClick = () => setIsChecked(!isChecked);
+  const handleClick = () => {
+    setIsChecked(!isChecked);
+  };
 
   const onSubmit = () => {
     if (startDate === "" || endDate === "" || value === "") {

@@ -22,7 +22,7 @@ const getDataSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getDataThunk.pending, (state, action) => {
+      .addCase(getDataThunk.pending, state => {
         state.isLoading = true;
         state.error = null;
         state.data = null;
