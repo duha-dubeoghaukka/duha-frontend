@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import GlobalState from "../../shared/GlobalState";
 
-const SpotButton = ({ name, romanization }) => {
+const SpotButton = ({ name }) => {
   const { selectedRegion } = useContext(GlobalState);
   const clickRegionHandler = () => {
     selectedRegion.setSelectedRegion(name);

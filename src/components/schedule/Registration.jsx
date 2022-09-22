@@ -5,7 +5,7 @@ import moment from "moment";
 import Layout from "../../components/layout/Layout";
 import useInput from "../../hooks/useInput";
 import Button from "../../components/button/Button";
-import { schduleApis } from "../../api/api";
+import { scheduleAPIs } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 function Registration() {
@@ -16,13 +16,15 @@ function Registration() {
   const [disableButton, setDisableButton] = useState();
 
   const [isChecked, setIsChecked] = useState();
-  const handleClick = () => setIsChecked(!isChecked);
+  const handleClick = () => {
+    setIsChecked(!isChecked);
+  };
 
   const onSubmit = () => {
     if (startDate === "" || endDate === "" || value === "") {
       alert("전부 입력하세요!");
     } else {
-      schduleApis.register({
+      scheduleAPIs.register({
         title: value,
         description: null,
         isPublic: isChecked ? isChecked : false,
