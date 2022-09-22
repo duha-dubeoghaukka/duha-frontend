@@ -5,6 +5,8 @@ import Layout from "../../components/layout/Layout";
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
+import { useDispatch, useSelector } from "react-redux";
+import { getTouristSpots } from "../../redux/modules/getDataSlice";
 
 const dummyData = [
   {
@@ -34,10 +36,13 @@ const dummyData = [
 ];
 
 const TouristSpotsPage = () => {
+  const data = useSelector(state => state.dataReducer);
+  const dispatcher = useDispatch();
   const { selectedRegion } = useContext(GlobalState);
   useEffect(() => {
     selectedRegion.setSelectedRegion("전체");
-  }, []);
+    dispatcher(getTouristSpots());
+  }, [dispatcher]);
   return (
     <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
       <div className="mb-[48px]">
