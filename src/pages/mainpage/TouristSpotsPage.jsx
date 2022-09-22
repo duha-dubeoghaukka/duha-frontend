@@ -51,7 +51,36 @@ const TouristSpotsPage = () => {
   }
   if (response.data) {
     const spots = [...response.data];
-    const sortedSpots = spots.sort((a, b) => b.likeNum - a.likeNum);
+    const filteredSpots = spots.filter(spot => {
+      switch (selectedRegion.selectedRegion) {
+        case "제주 시내":
+          return spot.region === "제주시내";
+          break;
+        case "애월":
+          return spot.region === "애월";
+          break;
+        case "중문":
+          return spot.region === "중문";
+          break;
+        case "서귀포":
+          return spot.region === "서귀포시내";
+          break;
+        case "우도&성산":
+          return spot.region === "우도" || spot.region === "성산";
+          break;
+        case "구좌&조천":
+          return spot.region === "구좌" || spot.region === "조천";
+          break;
+        case "전체":
+          return ["제주시내", "애월", "중문", "서귀포시내", "우도", "성산", "구좌", "조천"].includes(spot.region);
+          break;
+        default:
+          return [];
+          break;
+      }
+    });
+    const processedSpots = filteredSpots.sort((a, b) => b.likeNum - a.likeNum);
+    const numberOfProcessedSpots = processedSpots.length;
     return (
       <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
         <div className="mb-[48px]">
@@ -74,8 +103,11 @@ const TouristSpotsPage = () => {
             })}
           </ul>
         </div>
+        <div className="mb-3">
+          <p className="font-bold">총 {numberOfProcessedSpots}건이 검색되었습니다.</p>
+        </div>
         <div>
-          {sortedSpots.map(spot => {
+          {processedSpots.map(spot => {
             return <Item key={spot.id} data={spot} />;
           })}
         </div>
