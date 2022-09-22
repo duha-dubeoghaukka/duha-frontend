@@ -10,11 +10,11 @@ function ScheduleCard() {
   }, []);
 
   return (
-    <>
+    <div className="h-screen">
       {registerData?.map(item => {
         return <ScheduleCardComponent key={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} />;
       })}
-    </>
+    </div>
   );
 }
 
@@ -24,9 +24,10 @@ function ScheduleCardComponent({ title, startDate, endDate }) {
   const newDate = DateDiff(newStartDate, newEndDate);
   const nights = newDate[0];
   const AllDays = newDate[1];
+
   return (
-    <div className="w-96 h-28 bg-white1 rounded-md drop-shadow-md mt-5">
-      <div className="flex flex-row space-x-28">
+    <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row ">
+      <div className="flex space-x-28">
         <div className="flex flex-col m-5 ">
           <span className="mt-2	font-semibold">
             {nights + "박" + AllDays + "일" + " "}

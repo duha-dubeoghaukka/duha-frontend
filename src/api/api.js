@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "  http://localhost:3001/",
-  // baseURL: "http://43.201.5.53:8080",
+  // baseURL: "  http://localhost:3001/",
+  baseURL: "http://43.201.5.53:8080",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json,"
@@ -15,6 +15,6 @@ export const scheduleAPIs = {
     return api.post("/auth/trip", data);
   },
   getRegisterInfo: () => {
-    return api.get("schedule");
+    return api.get("/auth/trip");
   }
 };

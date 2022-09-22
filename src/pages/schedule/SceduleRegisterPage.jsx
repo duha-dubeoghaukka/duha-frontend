@@ -6,6 +6,7 @@ import ScheduleCard from "../../components/schedule/ScheduleCard";
 
 function ScheduleRegisterPage() {
   const navigate = useNavigate();
+
   useEffect(() => {}, []);
 
   return (
