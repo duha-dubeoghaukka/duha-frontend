@@ -3,7 +3,7 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 const Item = ({ data }) => {
   const { name, description, region, likeNum, thumbnailUrl } = data;
   return (
-    <div className="bg-white1 p-[20px] rounded-xl mb-[32px] shadow-md grid grid-cols-2">
+    <div className="bg-white1 p-[20px] rounded-xl mb-[32px] shadow-md flex justify-between items-center">
       <div className="pl-[50px]">
         <div className="mb-[4px]">
           <p className="font-bold text-[20px]">{name}</p>
@@ -19,8 +19,8 @@ const Item = ({ data }) => {
           <p className="text-[12px]">{likeNum}</p>
         </div>
       </div>
-      <div className="flex justify-end">
-        <img className="w-[220px] h-full object-cover rounded-xl" src={thumbnailUrl} alt={name} />
+      <div className="ml-3 w-[220px] h-[110px] flex-shrink-0">
+        <img className="w-full h-full object-cover object-center rounded-xl" src={thumbnailUrl} alt={name} />
       </div>
     </div>
   );
