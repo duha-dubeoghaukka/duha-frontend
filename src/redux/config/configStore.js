@@ -1,10 +1,13 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { getDataReducer } from "../modules/getDataSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    getDataReducer
+  },
   middleware: getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+    serializableCheck: false
+  })
 });
 
 export default store;

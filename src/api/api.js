@@ -9,7 +9,7 @@ const api = axios.create({
   withCredentials: true
 });
 
-export const schduleApis = {
+export const scheduleAPIs = {
   register: data => {
     return api.post("schedule", data);
   }
