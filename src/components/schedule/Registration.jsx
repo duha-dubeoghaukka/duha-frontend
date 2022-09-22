@@ -5,7 +5,7 @@ import moment from "moment";
 import Layout from "../../components/layout/Layout";
 import useInput from "../../hooks/useInput";
 import Button from "../../components/button/Button";
-import { schduleApis } from "../../api/api";
+import { scheduleAPIs } from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
 function Registration() {
@@ -16,13 +16,15 @@ function Registration() {
   const [disableButton, setDisableButton] = useState();
 
   const [isChecked, setIsChecked] = useState();
-  const handleClick = () => setIsChecked(!isChecked);
+  const handleClick = () => {
+    setIsChecked(!isChecked);
+  };
 
   const onSubmit = () => {
     if (startDate === "" || endDate === "" || value === "") {
       alert("전부 입력하세요!");
     } else {
-      schduleApis.register({
+      scheduleAPIs.register({
         title: value,
         description: null,
         isPublic: isChecked ? isChecked : false,
@@ -47,7 +49,7 @@ function Registration() {
   return (
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
       <div className="grid place-items-center h-screen">
-        <div className="flex w-72 flex-col gap-4 ">
+        <div className="flex w-72 flex-col gap-4 h-screen">
           <Calendar onChange={changeDate} selectRange={true} formatDay={(locale, date) => moment(date).format("DD")} />
           <input
             type="text"
