@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import React, { useEffect, useState } from "react";
+import Layout from "../../components/layout/Layout";
+import { useNavigate } from "react-router-dom";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function ScheduleRegisterPage() {
-  const [value, onChange] = useState(new Date());
+  const navigate = useNavigate();
+  useEffect(() => {}, []);
 
   return (
-    <>
-      <div>
-        <Calendar onChange={onChange} value={value} />
-        {/* <div className="text-gray-500 mt-4">{moment(value).format('YYYY년 MM월 DD일')}</div> */}
+    <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
+      <div className="grid place-items-center h-screen">
+        <div className="flex flex-row">
+          <span className="mr-3">새 일정 만들기</span>
+          <AddCircleIcon onClick={() => navigate(`/schedule/register`)}></AddCircleIcon>
+        </div>
       </div>
-    </>
+    </Layout>
   );
 }
 

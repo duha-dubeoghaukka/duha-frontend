@@ -8,6 +8,7 @@ import ScheduleRegisterPage from "../pages/schedule/SceduleRegisterPage";
 import RestaurantsPage from "../pages/mainpage/RestaurantsPage";
 import LogIn from "../pages/user/LogIn";
 import AccommodationsPage from "../pages/mainpage/AccommodationsPage";
+import Registration from "../components/schedule/Resitration";
 
 const Router = () => {
   return (
@@ -19,7 +20,8 @@ const Router = () => {
         <Route path="/accommodations" element={<AccommodationsPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/schedule/register" element={<ScheduleRegisterPage />} />
+        <Route path="/schedule" element={<ScheduleRegisterPage />} />
+        <Route path="/schedule/register" element={<Registration />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

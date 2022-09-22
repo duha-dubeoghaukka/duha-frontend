@@ -120,7 +120,7 @@ const SignUpForm = () => {
 
   return (
     <div className="w-[600px] mx-auto">
-      <form className="flex flex-col my-10 py-10" onSubmit={handleSubmit}>
+      <form className="flex flex-col my-10" onSubmit={handleSubmit}>
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
         <div className="relative w-[385px] md:w-[500px] mx-auto">
           <input type="text" placeholder="이메일" className="input mt-2" required dafaultvalue={inputEmail} onChange={onChangeEmail} />

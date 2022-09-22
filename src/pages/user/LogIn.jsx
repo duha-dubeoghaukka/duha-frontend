@@ -3,7 +3,11 @@ import LogInForm from "../../components/login/LogInForm";
 import Layout from "../../components/layout/Layout";
 
 const LogIn = () => {
-  return <LogInForm />;
+  return (
+    <Layout title="로그인" highlight={"mainpage/accommodations"}>
+      <LogInForm />
+    </Layout>
+  );
 };
 
 export default LogIn;
