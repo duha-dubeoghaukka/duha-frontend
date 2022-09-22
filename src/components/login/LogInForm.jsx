@@ -10,14 +10,14 @@ const LogInForm = () => {
     <div className="w-[600px] mx-auto">
       <form className="flex flex-col my-10 py-10">
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
-        <input type="text" placeholder="이메일" className="input mb-2" autoComplete="true" required />
-        <div className="relative w-[385px] md:w-[500px] mx-auto mb-2">
+        <input type="text" placeholder="이메일" className="input mt-2" autoComplete="true" required />
+        <div className="relative w-[385px] md:w-[500px] mx-auto mt-2">
           <input type={isHidden ? "password" : "text"} placeholder="비밀번호" className="input" autoComplete="false" required />
           <span className="password-icon" onClick={handleHide}>
             {isHidden ? <VisibilityOutlinedIcon /> : <VisibilityOffOutlinedIcon />}
           </span>
         </div>
-        <button className="btn-primary mx-auto my-2">로그인</button>
+        <button className="btn-primary mx-auto mt-4 mb-2">로그인</button>
         <button className="btn-kakao mx-auto my-2">카카오 계정으로 시작하기</button>
         <button className="btn-white flex items-center justify-center mx-auto my-2">
           <svg width={19} height={20} viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">

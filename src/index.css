@@ -20,7 +20,7 @@
     @apply w-[385px] md:w-[500px] mx-auto text-sm mt-2 text-red-400
   }
   .password-icon{
-    @apply absolute top-3 right-4 text-green1 cursor-pointer
+    @apply absolute top-4 right-4 text-green1 cursor-pointer
   }
 }
 
