@@ -30,7 +30,7 @@ function ScheduleCardComponent({ title, startDate, endDate }) {
         <div className="flex flex-row space-x-36">
           <div className="flex flex-col m-5 ">
             <span className="mt-2	font-semibold">
-              {nights + "박" + AllDays + "일"}
+              {nights + "박" + AllDays + "일" + " "}
               {title}
             </span>
             <span className="mt-2 font-light text-sm">
