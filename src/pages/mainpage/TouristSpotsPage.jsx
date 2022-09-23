@@ -12,7 +12,7 @@ import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 
 const TouristSpotsPage = () => {
-  const { isLoading, error, data } = useQuery(["repoData"], () => {
+  const { isLoading, error, data } = useQuery(["touristSpots"], () => {
     return instance.get("/touristspot");
   });
   const { regionSelection, pageSelection } = useContext(GlobalState);
