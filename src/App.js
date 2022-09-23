@@ -7,15 +7,20 @@ const queryClient = new QueryClient();
 
 function App() {
   const [selectedRegion, setSelectedRegion] = useState("전체");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentSpotPage, setCurrentSpotPage] = useState(1);
+  const [currentRestaurantPage, setCurrentRestaurantPage] = useState(1);
   const globalStates = {
     regionSelection: {
       selectedRegion,
       setSelectedRegion
     },
-    pageSelection: {
-      currentPage,
-      setCurrentPage
+    spotPageSelection: {
+      currentSpotPage,
+      setCurrentSpotPage
+    },
+    restaurantPageSelection: {
+      currentRestaurantPage,
+      setCurrentRestaurantPage
     }
   };
   return (
