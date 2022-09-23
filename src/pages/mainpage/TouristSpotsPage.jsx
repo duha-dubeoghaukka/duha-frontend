@@ -19,6 +19,7 @@ const TouristSpotsPage = () => {
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentPage, setCurrentPage } = pageSelection;
   useEffect(() => {
+    setCurrentPage(1);
     setSelectedRegion("전체");
   }, []);
   if (isLoading) {
