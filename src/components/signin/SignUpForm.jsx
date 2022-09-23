@@ -13,12 +13,15 @@ const SignUpForm = () => {
   const [validPasswordCheck, setValidPasswordCheck] = useState(false);
   const [validConfirmPassword, setValidConfirmPassword] = useState(false);
   const [validEmailDuplicateCheck, setValidEmailDuplicateCheck] = useState(false);
+  const [validEmailDuplicateCheckSuccess, setValidEmailDuplicateCheckSuccess] = useState(false);
   const [validNicknameDuplicateCheck, setValidNicknameDuplicateCheck] = useState(false);
-  const [validationError, setValidationError] = useState(false);
+  const [validNicknameDuplicateCheckSuccess, setValidNicknameDuplicateCheckSuccess] = useState(false);
+  const [validationCheck, setValidatioinCheck] = useState(false);
 
   const navigate = useNavigate();
 
   const onChangeEmail = e => {
+    setInputEmail(e.target.value);
     const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     if (emailRegex.test(e.target.value)) {
       setValidEmailCheck(false);
@@ -30,6 +33,7 @@ const SignUpForm = () => {
   };
 
   const onChangeNickname = e => {
+    setInputNickname(e.target.value);
     const nicknameRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|+]{2,}$/;
     if (nicknameRegex.test(e.target.value)) {
       setValidNicknameCheck(false);
@@ -70,10 +74,16 @@ const SignUpForm = () => {
       return;
     } else {
       try {
-        await api.post(`/member/emailcheck`, {
+        const response = await api.post(`/member/emailcheck`, {
           email: inputEmail
         });
-        setValidEmailDuplicateCheck(false);
+        if (response.data.isSuccess === false) {
+          setValidEmailDuplicateCheck(true);
+          setValidEmailDuplicateCheckSuccess(false);
+        } else {
+          setValidEmailDuplicateCheck(false);
+          setValidEmailDuplicateCheckSuccess(true);
+        }
       } catch (error) {
         setValidEmailDuplicateCheck(true);
       }
@@ -86,10 +96,16 @@ const SignUpForm = () => {
       return;
     } else {
       try {
-        await api.post(`/member/nicknamecheck`, {
+        const response = await api.post(`/member/nicknamecheck`, {
           nickname: inputNickname
         });
-        setValidNicknameDuplicateCheck(false);
+        if (response.data.isSuccess === false) {
+          setValidNicknameDuplicateCheck(true);
+          setValidNicknameDuplicateCheckSuccess(false);
+        } else {
+          setValidNicknameDuplicateCheck(false);
+          setValidNicknameDuplicateCheckSuccess(true);
+        }
       } catch (error) {
         setValidNicknameDuplicateCheck(true);
       }
@@ -98,22 +114,19 @@ const SignUpForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (validEmailCheck || validNicknameCheck || validPasswordCheck || validConfirmPassword) {
-      setValidationError(true);
-      return;
-    } else {
+    if (validationCheck) {
       try {
         await api.post(`/member/signup`, {
           email: inputEmail,
           nickname: inputNickname,
           password: inputPassword
         });
-        alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
-        // navigate("/login");
-        setInputEmail("");
-        setInputNickname("");
-        setInputPassword("");
-        setInputConfirmPassword("");
+        if (response.data.isSuccess === false) {
+          alert(response.data.message);
+        } else {
+          alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+          navigate("/login");
+        }
       } catch (error) {
         console.log(error);
       }
@@ -136,6 +149,7 @@ const SignUpForm = () => {
         </div>
         {validEmailCheck && <p className="input-helper">이메일 형식으로 입력해주세요</p>}
         {validEmailDuplicateCheck && <p className="input-helper">중복된 이메일 입니다</p>}
+        {validEmailDuplicateCheckSuccess && <p className="input-helper text-green1">사용가능한 이메일 입니다</p>}
         <div className="relative w-[385px] md:w-[500px] mx-auto">
           <input
             type="text"
@@ -155,6 +169,7 @@ const SignUpForm = () => {
         </div>
         {validNicknameCheck && <p className="input-helper">한글/영문 2글자 이상</p>}
         {validNicknameDuplicateCheck && <p className="input-helper">중복된 닉네임 입니다</p>}
+        {validNicknameDuplicateCheckSuccess && <p className="input-helper text-green1">사용가능한 닉네임 입니다</p>}
         <input
           type="password"
           placeholder="비밀번호"

@@ -11,11 +11,8 @@
     "no-undef": "off",
     "import/extensions": "off",
     "prefer-template": "off",
-    "max-depth": ["error", 2],
     "eol-last": ["error", "always"],
     "prettier/prettier": "error",
     "parser": "@babel/eslint-parser"
-    // "parserOptions": { "requireConfigFile": "false" },
-    // "babelOptions": { "configFile": "./.babelrc" }
   }
 }
