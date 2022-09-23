@@ -1,6 +1,5 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { instance } from "../../api/api";
 
 const SignUpForm = () => {
@@ -62,10 +61,10 @@ const SignUpForm = () => {
     }
   };
 
-  const eamailDuplicateCheck = async e => {
+  const emailDuplicateCheck = async e => {
     e.preventDefault();
     if (validEmailCheck || !inputEmail) {
-      return;
+
     } else {
       try {
         await instance.post(`/member/emailcheck`, {
@@ -81,7 +80,7 @@ const SignUpForm = () => {
   const nicknameDuplicateCheck = async e => {
     e.preventDefault();
     if (validNicknameDuplicateCheck || !inputNickname) {
-      return;
+
     } else {
       try {
         await instance.post(`/member/nicknamecheck`, {
@@ -98,7 +97,7 @@ const SignUpForm = () => {
     e.preventDefault();
     if (validEmailCheck || validNicknameCheck || validPasswordCheck || validConfirmPassword) {
       setValidationError(true);
-      return;
+
     } else {
       try {
         await instance.post(`/member/signup`, {
@@ -124,7 +123,7 @@ const SignUpForm = () => {
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
         <div className="relative w-[385px] md:w-[500px] mx-auto">
           <input type="text" placeholder="이메일" className="input mt-2" required dafaultvalue={inputEmail} onChange={onChangeEmail} />
-          <button className="absolute top-6 right-4 font-semibold text-green1" onClick={eamailDuplicateCheck}>
+          <button className="absolute top-6 right-4 font-semibold text-green1" onClick={emailDuplicateCheck}>
             중복확인
           </button>
         </div>
