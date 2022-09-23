@@ -45,7 +45,7 @@ function HomeCardComponent({ title, route }) {
           <span className="mt-2	font-bold group-hover:text-white1">{title}</span>
         </div>
         <div className="flex flex-row m-5 ">
-          <NavigateNextIcon className="mt-5 cursor-pointer" onClick={() => navigate(`${route}`)} />
+          <NavigateNextIcon className="mt-5 cursor-pointer group-hover:fill-white1" onClick={() => navigate(`${route}`)} />
         </div>
       </div>
     </div>
