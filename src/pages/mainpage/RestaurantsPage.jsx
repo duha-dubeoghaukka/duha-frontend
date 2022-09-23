@@ -16,11 +16,11 @@ const RestaurantsPage = () => {
   const { isLoading, error, data } = useQuery(["restaurants"], () => {
     return instance.get("/restaurant");
   });
-  const { regionSelection, pageSelection } = useContext(GlobalState);
+  const { regionSelection, restaurantPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentPage, setCurrentPage } = pageSelection;
+  const { currentRestaurantPage, setCurrentRestaurantPage } = restaurantPageSelection;
   useEffect(() => {
-    setCurrentPage(1);
+    setCurrentRestaurantPage(1);
     setSelectedRegion("전체");
   }, []);
   if (isLoading) {
@@ -37,7 +37,7 @@ const RestaurantsPage = () => {
     const splittedRestaurants = arraySplitter(filteredRestaurants);
     const numberOfPages = splittedRestaurants.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentRestaurants = splittedRestaurants[currentPage - 1];
+    const currentRestaurants = splittedRestaurants[currentRestaurantPage - 1];
     return (
       <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
         <div className="mb-[48px]">
@@ -70,7 +70,7 @@ const RestaurantsPage = () => {
         </div>
         <div className="flex justify-center">
           {pages.map(page => {
-            if (page === currentPage) {
+            if (page === currentRestaurantPage) {
               return (
                 <div key={page} className="mr-1">
                   <p>{page}</p>
@@ -82,7 +82,7 @@ const RestaurantsPage = () => {
                   key={page}
                   className="mr-1 cursor-pointer"
                   onClick={() => {
-                    setCurrentPage(page);
+                    setCurrentRestaurantPage(page);
                   }}
                 >
                   <p className="underline text-sky-500">{page}</p>

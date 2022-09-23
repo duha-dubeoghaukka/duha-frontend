@@ -1,7 +1,6 @@
 import regionNames from "../../utils/regionNames.js";
 import RegionButton from "../../components/mainpage/RegionButton";
 import Layout from "../../components/layout/Layout";
-import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import Item from "../../components/mainpage/Item";
@@ -11,16 +10,17 @@ import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 const TouristSpotsPage = () => {
   const { isLoading, error, data } = useQuery(["touristSpots"], () => {
     return instance.get("/touristspot");
   });
-  const { regionSelection, pageSelection } = useContext(GlobalState);
+  const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentPage, setCurrentPage } = pageSelection;
+  const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
   useEffect(() => {
-    setCurrentPage(1);
+    setCurrentSpotPage(1);
     setSelectedRegion("전체");
   }, []);
   if (isLoading) {
@@ -37,7 +37,7 @@ const TouristSpotsPage = () => {
     const splittedSpots = arraySplitter(filteredSpots);
     const numberOfPages = splittedSpots.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentSpots = splittedSpots[currentPage - 1];
+    const currentSpots = splittedSpots[currentSpotPage - 1];
     return (
       <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
         <div className="mb-[48px]">
@@ -70,7 +70,7 @@ const TouristSpotsPage = () => {
         </div>
         <div className="flex justify-center">
           {pages.map(page => {
-            if (page === currentPage) {
+            if (page === currentSpotPage) {
               return (
                 <div key={page} className="mr-1">
                   <p>{page}</p>
@@ -82,7 +82,7 @@ const TouristSpotsPage = () => {
                   key={page}
                   className="mr-1 cursor-pointer"
                   onClick={() => {
-                    setCurrentPage(page);
+                    setCurrentSpotPage(page);
                   }}
                 >
                   <p className="underline text-sky-500">{page}</p>
