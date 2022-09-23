@@ -10,6 +10,7 @@ import { instance } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
+import Spinner from "../../components/Spinner/Spinner";
 
 const TouristSpotsPage = () => {
   const { isLoading, error, data } = useQuery(["touristSpots"], () => {
@@ -23,7 +24,7 @@ const TouristSpotsPage = () => {
     setSelectedRegion("전체");
   }, []);
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   if (error) {
     return <div>{error}</div>;
