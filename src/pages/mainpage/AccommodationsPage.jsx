@@ -65,7 +65,7 @@ const TouristSpotsPage = () => {
           })}
         </ul>
       </div>
-      <div>
+      <div className="mb-[100px] md:mb-0">
         {dummyData
           .sort((a, b) => b.likes - a.likes)
           .map(data => {
