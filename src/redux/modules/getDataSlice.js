@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { instance } from "../../api/api";
 
 const initialState = {
   isLoading: false,
@@ -18,7 +18,7 @@ export const getTouristSpots = createAsyncThunk("getTouristSpots", async (data, 
 
 export const getRestaurants = createAsyncThunk("getRestaurants", async (data, thunk) => {
   try {
-    const { data } = await axios.get("http://43.201.5.53:8080/restaurant");
+    const { data } = await instance.get("/restaurant");
     return thunk.fulfillWithValue(data);
   } catch (error) {
     return thunk.rejectWithValue(error);
@@ -27,7 +27,7 @@ export const getRestaurants = createAsyncThunk("getRestaurants", async (data, th
 
 export const getAccommodations = createAsyncThunk("getAccommodations", async (data, thunk) => {
   try {
-    const { data } = await axios.get("http://43.201.5.53:8080/accommodation");
+    const { data } = await instance.get("/accommodation");
     return thunk.fulfillWithValue(data);
   } catch (error) {
     return thunk.rejectWithValue(error);

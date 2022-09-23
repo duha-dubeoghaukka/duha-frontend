@@ -1,5 +1,5 @@
 import regionNames from "../../utils/regionNames.js";
-import SpotButton from "../../components/mainpage/SpotButton";
+import RegionButton from "../../components/mainpage/RegionButton";
 import Item from "../../components/mainpage/Item";
 import Layout from "../../components/layout/Layout";
 import { Link } from "react-router-dom";
@@ -99,7 +99,7 @@ const RestaurantsPage = () => {
         <div className="mb-[43px]">
           <ul className="flex flex-row justify-between">
             {regionNames.map(place => {
-              return <SpotButton key={place.name} {...place} />;
+              return <RegionButton key={place.name} {...place} />;
             })}
           </ul>
         </div>

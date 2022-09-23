@@ -7,6 +7,7 @@ import GlobalState from "../../shared/GlobalState";
 import { useDispatch, useSelector } from "react-redux";
 import { getTouristSpots } from "../../redux/modules/getDataSlice";
 import Item from "../../components/mainpage/Item";
+import Spinner from "../../components/Spinner/Spinner";
 
 const dummyData = [
   {
@@ -44,7 +45,7 @@ const TouristSpotsPage = () => {
     dispatcher(getTouristSpots());
   }, [dispatcher]);
   if (response.isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   if (response.error) {
     return <div>{response.error}</div>;
@@ -106,7 +107,7 @@ const TouristSpotsPage = () => {
         <div className="mb-3">
           <p className="font-bold">총 {numberOfProcessedSpots}건이 검색되었습니다.</p>
         </div>
-        <div>
+        <div className="mb-[100px] md:mb-0">
           {processedSpots.map(spot => {
             return <Item key={spot.id} data={spot} />;
           })}
