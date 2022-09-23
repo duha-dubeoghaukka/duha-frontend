@@ -63,7 +63,7 @@ const RestaurantsPage = () => {
         <div className="mb-3">
           <p className="font-bold">총 {filteredRestaurants.length}건이 검색되었습니다.</p>
         </div>
-        <div className="mb-[100px] md:mb-0">
+        <div className="mb-0">
           {currentRestaurants.map(restaurant => {
             return <Item key={restaurant.id} data={restaurant} />;
           })}

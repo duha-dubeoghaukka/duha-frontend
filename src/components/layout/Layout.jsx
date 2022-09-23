@@ -6,7 +6,7 @@ const Layout = props => {
   const { children, isLoggedIn, title, highlight } = props;
   const [greaterCategory, category] = highlight.split("/");
   return (
-    <div>
+    <div className="mb-[100px]">
       <div className="fixed w-full py-5 bg-green1 z-10">
         <h1 className="text-white1 font-semibold text-[16px] text-center invisible md:visible">{title}</h1>
         <p className="absolute font-semibold text-[16px] right-10 top-5 text-white1 cursor-pointer">{isLoggedIn ? "로그아웃" : "로그인"}</p>
@@ -62,7 +62,7 @@ const Layout = props => {
           <PersonIcon fontSize="large" className="cursor-pointer" />
         </div>
       </div>
-      <div className="md:w-[600px] mx-auto pt-20 px-[24px] md:px-0 mb-10">{children}</div>
+      <div className="md:w-[600px] mx-auto pt-20 px-[24px] md:px-0 md:mb-10">{children}</div>
     </div>
   );
 };
