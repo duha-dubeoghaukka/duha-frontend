@@ -7,6 +7,7 @@ import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import { useDispatch, useSelector } from "react-redux";
 import { getRestaurants } from "../../redux/modules/getDataSlice";
+import Spinner from "../../components/Spinner/Spinner";
 
 const dummyData = [
   {
@@ -44,7 +45,7 @@ const RestaurantsPage = () => {
     dispatcher(getRestaurants());
   }, [dispatcher]);
   if (response.isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
   if (response.error) {
     return <div>{response.error}</div>;
@@ -106,7 +107,7 @@ const RestaurantsPage = () => {
         <div className="mb-3">
           <p className="font-bold">총 {numberOfProcessedRestaurants}건이 검색되었습니다.</p>
         </div>
-        <div>
+        <div className="mb-[100px] md:mb-0">
           {processedRestaurants.map(restaurant => {
             return <Item key={restaurant.id} data={restaurant} />;
           })}
