@@ -3,9 +3,11 @@
 @tailwind utilities;
 
 @layer components {
-  /* 모바일:385px, 웹 500px 고정입니다 */
   .btn-primary {
     @apply py-4 bg-green1 text-white1 font-semibold rounded-lg shadow-md w-[385px] md:w-[500px];
+  }
+  .btn-primary-sm {
+    @apply py-4 bg-green1 text-white1 font-semibold rounded-lg shadow-md w-[345px] md:w-[500px];
   }
   .btn-white {
     @apply py-4 bg-white1 text-black2 font-semibold rounded-lg shadow-md w-[385px] md:w-[500px];
