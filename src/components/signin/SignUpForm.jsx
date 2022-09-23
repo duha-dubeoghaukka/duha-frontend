@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { instance } from "../../api/api";
+import { api } from "../../api/api";
 
 const SignUpForm = () => {
   const [inputEmail, setInputEmail] = useState("");
@@ -70,7 +70,7 @@ const SignUpForm = () => {
       return;
     } else {
       try {
-        await instance.post(`/member/emailcheck`, {
+        await api.post(`/member/emailcheck`, {
           email: inputEmail
         });
         setValidEmailDuplicateCheck(false);
@@ -86,7 +86,7 @@ const SignUpForm = () => {
       return;
     } else {
       try {
-        await instance.post(`/member/nicknamecheck`, {
+        await api.post(`/member/nicknamecheck`, {
           nickname: inputNickname
         });
         setValidNicknameDuplicateCheck(false);
@@ -103,7 +103,7 @@ const SignUpForm = () => {
       return;
     } else {
       try {
-        await instance.post(`/member/signup`, {
+        await api.post(`/member/signup`, {
           email: inputEmail,
           nickname: inputNickname,
           password: inputPassword
