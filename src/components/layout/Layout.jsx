@@ -23,6 +23,7 @@ const Layout = props => {
               <h2 className="font-bold text-[20px] ml-[6px]">메인 페이지</h2>
             </div>
             <ul className="text-[16px] ml-[38px]">
+              <li className={`cursor-pointer ${category === "home" && "text-green1"}`}>홈</li>
               <li className={`cursor-pointer ${category === "spots" && "text-green1"}`}>관광지</li>
               <li className={`cursor-pointer ${category === "restaurants" && "text-green1"}`}>맛집</li>
               <li className={`cursor-pointer ${category === "accommodations" && "text-green1"}`}>숙소</li>

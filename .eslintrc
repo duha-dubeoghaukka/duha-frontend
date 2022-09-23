@@ -1,15 +1,8 @@
 {
   "root": true,
-  "plugins": [
-    "prettier"
-  ],
-  "extends": [
-    "prettier"
-  ],
-  "env": {
-    "browser": true,
-    "node": true
-  },
+  "plugins": ["prettier"],
+  "extends": ["prettier"],
+  "env": { "browser": true, "node": true },
   "rules": {
     "no-new": "off",
     "no-console": "off",
@@ -18,13 +11,8 @@
     "no-undef": "off",
     "import/extensions": "off",
     "prefer-template": "off",
-    "max-depth": ["error", 2],
-    "eol-last": [
-      "error",
-      "always"
-    ],
-    "prettier/prettier": "error"
-    // "parserOptions": { "requireConfigFile": "false" },
-    // "babelOptions": { "configFile": "./.babelrc" }
+    "eol-last": ["error", "always"],
+    "prettier/prettier": "error",
+    "parser": "@babel/eslint-parser"
   }
 }

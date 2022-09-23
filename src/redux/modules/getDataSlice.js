@@ -9,7 +9,7 @@ const initialState = {
 
 export const getTouristSpots = createAsyncThunk("getTouristSpots", async (data, thunk) => {
   try {
-    const { data } = await axios.get("http://43.201.5.53:8080/touristspot");
+    const { data } = await instance.get("/touristspot");
     return thunk.fulfillWithValue(data);
   } catch (error) {
     return thunk.rejectWithValue(error);

@@ -11,9 +11,12 @@ const LogInForm = () => {
   const [inputPassword, setInputPassword] = useState("");
   const [validEmailCheck, setValidEmailCheck] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleHide = () => setIsHidden(!isHidden);
 
   const onChangeEmail = e => {
+    setInputEmail(e.target.value);
     const emailRegex = /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
     if (emailRegex.test(e.target.value)) {
       setValidEmailCheck(false);
@@ -23,23 +26,31 @@ const LogInForm = () => {
     }
   };
 
+  const onChangePassword = e => {
+    setInputPassword(e.target.value);
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      await instance.post(`/member/login`, {
+      const response = await instance.post(`/member/login`, {
         email: inputEmail,
         password: inputPassword
       });
-      alert("로그인 되었습니다.");
-      localStorage.setItem("authorization", response.headers.authorization);
-      localStorage.setItem("refresh-token", response.headers["refresh-token"]);
-      // navigate("/");
+      if (response.data.isSuccess === true) {
+        alert("로그인 되었습니다. 메인페이지로 이동합니다.");
+        localStorage.setItem("authorization", response.headers.authorization);
+        localStorage.setItem("refresh-token", response.headers["refresh-token"]);
+        // navigate("/");
+      } else {
+        alert(response.data.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <div className="w-[600px] mx-auto">
+    <div className="w-full md:w-[600px] mx-auto">
       <form className="flex flex-col my-10" onSubmit={handleSubmit}>
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
         <input
@@ -59,6 +70,7 @@ const LogInForm = () => {
             className="input"
             autoComplete="false"
             dafaultvalue={inputPassword}
+            onChange={onChangePassword}
             required
           />
           <span className="password-icon" onClick={handleHide}>
