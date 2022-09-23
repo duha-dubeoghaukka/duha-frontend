@@ -62,7 +62,7 @@ const Layout = props => {
           <PersonIcon fontSize="large" className="cursor-pointer" />
         </div>
       </div>
-      <div className="md:w-[600px] mx-auto pt-20 px-[24px] md:px-0">{children}</div>
+      <div className="md:w-[600px] mx-auto pt-20 px-[24px] md:px-0 mb-10">{children}</div>
     </div>
   );
 };
