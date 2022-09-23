@@ -23,14 +23,14 @@ function ScheduleCardComponent({ title, startDate, endDate }) {
   const newEndDate = DateCalculation(endDate);
   const newDate = DateDiff(newStartDate, newEndDate);
   const nights = newDate[0];
-  const AllDays = newDate[1];
+  const allDays = newDate[1];
 
   return (
     <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row ">
       <div className="flex space-x-28">
         <div className="flex flex-col m-5 ">
           <span className="mt-2	font-semibold">
-            {nights + "박" + AllDays + "일" + " "}
+            {nights + "박" + allDays + "일" + " "}
             {title}
           </span>
           <span className="mt-2 font-light text-sm">

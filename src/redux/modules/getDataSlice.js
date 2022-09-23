@@ -7,9 +7,27 @@ const initialState = {
   error: null
 };
 
-const getDataThunk = createAsyncThunk("data", async (data, thunk) => {
+export const getTouristSpots = createAsyncThunk("getTouristSpots", async (data, thunk) => {
   try {
-    const { data } = await axios.get();
+    const { data } = await axios.get("http://43.201.5.53:8080/touristspot");
+    return thunk.fulfillWithValue(data);
+  } catch (error) {
+    return thunk.rejectWithValue(error);
+  }
+});
+
+export const getRestaurants = createAsyncThunk("getRestaurants", async (data, thunk) => {
+  try {
+    const { data } = await axios.get("http://43.201.5.53:8080/restaurant");
+    return thunk.fulfillWithValue(data);
+  } catch (error) {
+    return thunk.rejectWithValue(error);
+  }
+});
+
+export const getAccommodations = createAsyncThunk("getAccommodations", async (data, thunk) => {
+  try {
+    const { data } = await axios.get("http://43.201.5.53:8080/accommodation");
     return thunk.fulfillWithValue(data);
   } catch (error) {
     return thunk.rejectWithValue(error);
@@ -17,21 +35,49 @@ const getDataThunk = createAsyncThunk("data", async (data, thunk) => {
 });
 
 const getDataSlice = createSlice({
-  name: "data",
+  name: "getData",
   initialState,
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(getDataThunk.pending, state => {
+      .addCase(getTouristSpots.pending, state => {
         state.isLoading = true;
         state.error = null;
         state.data = null;
       })
-      .addCase(getDataThunk.fulfilled, (state, action) => {
+      .addCase(getTouristSpots.fulfilled, (state, action) => {
         state.isLoading = false;
         state.data = action.payload;
       })
-      .addCase(getDataThunk.rejected, (state, action) => {
+      .addCase(getTouristSpots.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(getRestaurants.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+        state.data = null;
+      })
+      .addCase(getRestaurants.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(getRestaurants.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(getAccommodations.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+        state.data = null;
+      })
+      .addCase(getAccommodations.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(getAccommodations.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
@@ -39,4 +85,3 @@ const getDataSlice = createSlice({
 });
 
 export const getDataReducer = getDataSlice.reducer;
-export const getDataActions = getDataSlice.actions;
