@@ -10,6 +10,15 @@ const api = axios.create({
   withCredentials: true
 });
 
+// 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
+api.interceptors.request.use(function (config) {
+  const refreshToken = localStorage.getItem("refresh-Token");
+  const accessToken = localStorage.getItem("authorization");
+  config.headers.common["authorization"] = `${accessToken}`;
+  config.headers.common["refresh-token"] = `${refreshToken}`;
+  return config;
+});
+
 export const scheduleAPIs = {
   register: data => {
     return api.post("/auth/trip", data);
@@ -24,13 +33,4 @@ export const instance = axios.create({
   headers: {
     "Content-Type": "application/json"
   }
-});
-
-// 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
-api.interceptors.request.use(function (config) {
-  const refreshToken = localStorage.getItem("refresh-Token");
-  const accessToken = localStorage.getItem("authorization");
-  config.headers.common["authorization"] = `${accessToken}`;
-  config.headers.common["refresh-token"] = `${refreshToken}`;
-  return config;
 });
