@@ -71,7 +71,6 @@ const SignUpForm = () => {
   const emailDuplicateCheck = async e => {
     e.preventDefault();
     if (validEmailCheck || !inputEmail) {
-
     } else {
       try {
         const response = await api.post(`/member/emailcheck`, {
@@ -93,7 +92,6 @@ const SignUpForm = () => {
   const nicknameDuplicateCheck = async e => {
     e.preventDefault();
     if (validNicknameDuplicateCheck || !inputNickname) {
-
     } else {
       try {
         const response = await api.post(`/member/nicknamecheck`, {
@@ -139,15 +137,11 @@ const SignUpForm = () => {
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
         <div className="relative w-[385px] md:w-[500px] mx-auto">
           <input type="text" placeholder="이메일" className="input mt-2" required dafaultvalue={inputEmail} onChange={onChangeEmail} />
-<<<<<<< HEAD
           <button
             className="absolute top-6 right-4 font-semibold text-green1 disabled:opacity-50"
-            onClick={eamailDuplicateCheck}
+            onClick={emailDuplicateCheck}
             disabled={validEmailCheck && true}
           >
-=======
-          <button className="absolute top-6 right-4 font-semibold text-green1" onClick={emailDuplicateCheck}>
->>>>>>> 29a84a57a35606ec19b45a11974035f32f4ca184
             중복확인
           </button>
         </div>
