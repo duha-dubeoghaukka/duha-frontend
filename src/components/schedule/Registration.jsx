@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import "../../pages/schedule/styles.css";
+import "./styles.css";
 import moment from "moment";
 import Layout from "../../components/layout/Layout";
 import useInput from "../../hooks/useInput";
@@ -10,12 +10,12 @@ import { useNavigate } from "react-router-dom";
 
 function Registration() {
   const navigate = useNavigate();
+
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
   const [value, setValue, onChangeHandler] = useInput();
-  const [disableButton, setDisableButton] = useState();
-
   const [isChecked, setIsChecked] = useState();
+
   const handleClick = () => {
     setIsChecked(!isChecked);
   };
