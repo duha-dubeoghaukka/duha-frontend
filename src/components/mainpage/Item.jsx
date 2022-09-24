@@ -9,7 +9,7 @@ const Item = ({ data }) => {
   const navigator = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl } = data;
   const bookmark = async () => {
-    const { response } = await instance.get("/auth/touristspot/bookmark" / +id);
+    const { response } = await instance.get("/auth/touristspot/bookmark/" + id);
     console.dir(response);
   };
   const starClickHandler = () => {
