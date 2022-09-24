@@ -1,10 +1,31 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
+import { useNavigate } from "react-router-dom";
+import { instance } from "../../api/api";
+import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const Item = ({ data }) => {
-  const { name, description, region, likeNum, thumbnailUrl } = data;
-  const starClickHandler = () => {};
+  const navigator = useNavigate();
+  const { id, name, description, region, likeNum, thumbnailUrl } = data;
+  const bookmark = async () => {
+    const { response } = await instance.get("/auth/touristspot/bookmark" / +id);
+    console.dir(response);
+  };
+  const starClickHandler = () => {
+    const isLoggedIn = checkIsLoggedIn();
+    if (isLoggedIn) {
+      bookmark()
+        .then(response => {
+          console.dir(response);
+        })
+        .catch(error => {
+          console.dir(error);
+        });
+    } else {
+      return navigator("/login");
+    }
+  };
   return (
     <div className="p-[15px] bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md flex justify-between items-center">
       <div className="pl-[5px] md:pl-[50px]">
