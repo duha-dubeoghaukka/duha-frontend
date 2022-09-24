@@ -1,8 +1,15 @@
 {
   "root": true,
-  "plugins": ["prettier"],
-  "extends": ["prettier"],
-  "env": { "browser": true, "node": true },
+  "plugins": [
+    "prettier"
+  ],
+  "extends": [
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "rules": {
     "no-new": "off",
     "no-console": "off",
@@ -11,8 +18,10 @@
     "no-undef": "off",
     "import/extensions": "off",
     "prefer-template": "off",
-    "eol-last": ["error", "always"],
-    "prettier/prettier": "error",
-    "parser": "@babel/eslint-parser"
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "prettier/prettier": "error"
   }
 }
