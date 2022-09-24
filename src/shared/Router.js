@@ -9,6 +9,7 @@ import RestaurantsPage from "../pages/mainpage/RestaurantsPage";
 import LogIn from "../pages/user/LogIn";
 import Registration from "../components/schedule/Registration";
 import AddCourse from "../pages/schedule/AddCourse";
+import Weather from "../pages/weather/Weather";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/spots" element={<TouristSpotsPage />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
+        <Route path="/weather" element={<Weather />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/schedule" element={<ScheduleRegisterPage />} />
