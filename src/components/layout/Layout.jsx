@@ -80,7 +80,7 @@ const Layout = props => {
                 <h2 className="font-bold text-[20px] ml-[6px]">일정</h2>
               </div>
               <div className="text-base ml-[38px] flex flex-col">
-                <Link to="/schedule" className={`cursor-pointer ${category === "create" && "text-green1"}`}>
+                <Link to="/schedule/register" className={`cursor-pointer ${category === "create" && "text-green1"}`}>
                   일정 등록
                 </Link>
                 <Link to="/" className={`cursor-pointer ${category === "share" && "text-green1"}`}>
