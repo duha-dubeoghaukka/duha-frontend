@@ -28,7 +28,7 @@ const Item = ({ data }) => {
           onClick={starClickHandler}
           className="absolute top-1 right-1 cursor-pointer"
           fontSize="large"
-          sx={{ color: "white" }}
+          sx={{ color: "#ffd740" }}
         />
       </div>
     </div>
