@@ -8,7 +8,7 @@ function ScheduleCard() {
   const [registerData, setRegisterData] = useState();
 
   useEffect(() => {
-    scheduleAPIs.getRegisterInfo().then(res => console.log("res", res.data));
+    scheduleAPIs.getRegisterInfo().then(res => setRegisterData(res.data.data));
   }, []);
 
   return (
