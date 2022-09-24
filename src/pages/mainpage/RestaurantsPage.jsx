@@ -1,87 +1,43 @@
 import regionNames from "../../utils/regionNames.js";
-import SpotButton from "../../components/mainpage/SpotButton";
+import RegionButton from "../../components/mainpage/RegionButton";
 import Item from "../../components/mainpage/Item";
 import Layout from "../../components/layout/Layout";
 import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
-import { useDispatch, useSelector } from "react-redux";
-import { getRestaurants } from "../../redux/modules/getDataSlice";
+import { useQuery } from "react-query";
+import { instance } from "../../api/api";
+import { removeDuplicates } from "../../utils/removeDuplicates";
+import { filterItems } from "../../utils/filterItems";
+import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
 
-const dummyData = [
-  {
-    name: "이름",
-    description: "설명",
-    location: "위치",
-    likes: 5,
-    image: "이미지",
-    isFavorite: true
-  },
-  {
-    name: "이름2",
-    description: "설명",
-    location: "위치",
-    likes: 10,
-    image: "이미지",
-    isFavorite: true
-  },
-  {
-    name: "이름3",
-    description: "설명",
-    location: "위치",
-    likes: 2,
-    image: "이미지",
-    isFavorite: true
-  }
-];
-
 const RestaurantsPage = () => {
-  const response = useSelector(state => state.getDataReducer);
-  const dispatcher = useDispatch();
-  const { selectedRegion } = useContext(GlobalState);
+  const { isLoading, error, data } = useQuery(["restaurants"], () => {
+    return instance.get("/restaurant");
+  });
+  const { regionSelection, restaurantPageSelection } = useContext(GlobalState);
+  const { selectedRegion, setSelectedRegion } = regionSelection;
+  const { currentRestaurantPage, setCurrentRestaurantPage } = restaurantPageSelection;
   useEffect(() => {
-    selectedRegion.setSelectedRegion("전체");
-    dispatcher(getRestaurants());
-  }, [dispatcher]);
-  if (response.isLoading) {
+    setCurrentRestaurantPage(1);
+    setSelectedRegion("전체");
+  }, []);
+  if (isLoading) {
     return <Spinner />;
   }
-  if (response.error) {
-    return <div>{response.error}</div>;
+  if (error) {
+    return <div>{error}</div>;
   }
-  if (response.data) {
-    const restaurants = [...response.data];
-    const filteredRestaurants = restaurants.filter(restaurant => {
-      switch (selectedRegion.selectedRegion) {
-        case "제주 시내":
-          return restaurant.region === "제주시내";
-          break;
-        case "애월":
-          return restaurant.region === "애월";
-          break;
-        case "중문":
-          return restaurant.region === "중문";
-          break;
-        case "서귀포":
-          return restaurant.region === "서귀포시내";
-          break;
-        case "우도&성산":
-          return restaurant.region === "우도" || restaurant.region === "성산";
-          break;
-        case "구좌&조천":
-          return restaurant.region === "구좌" || restaurant.region === "조천";
-          break;
-        case "전체":
-          return ["제주시내", "애월", "중문", "서귀포시내", "우도", "성산", "구좌", "조천"].includes(restaurant.region);
-          break;
-        default:
-          return false;
-          break;
-      }
-    });
-    const processedRestaurants = filteredRestaurants.sort((a, b) => b.likeNum - a.likeNum);
-    const numberOfProcessedRestaurants = processedRestaurants.length;
+  if (data) {
+    const restaurants = data.data;
+    const processedRestaurants = removeDuplicates(restaurants);
+    const sortedRestaurants = processedRestaurants.sort((a, b) => b.likeNum - a.likeNum);
+    const filteredRestaurants = filterItems(sortedRestaurants, selectedRegion);
+    const splittedRestaurants = arraySplitter(filteredRestaurants);
+    const numberOfPages = splittedRestaurants.length;
+    const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
+    const currentRestaurants = splittedRestaurants[currentRestaurantPage - 1];
     return (
       <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
         <div className="mb-[48px]">
@@ -100,16 +56,39 @@ const RestaurantsPage = () => {
         <div className="mb-[43px]">
           <ul className="flex flex-row justify-between">
             {regionNames.map(place => {
-              return <SpotButton key={place.name} {...place} />;
+              return <RegionButton key={place.name} {...place} />;
             })}
           </ul>
         </div>
         <div className="mb-3">
-          <p className="font-bold">총 {numberOfProcessedRestaurants}건이 검색되었습니다.</p>
+          <p className="font-bold">총 {filteredRestaurants.length}건이 검색되었습니다.</p>
         </div>
-        <div className="mb-[100px] md:mb-0">
-          {processedRestaurants.map(restaurant => {
+        <div className="mb-0">
+          {currentRestaurants.map(restaurant => {
             return <Item key={restaurant.id} data={restaurant} />;
+          })}
+        </div>
+        <div className="flex justify-center">
+          {pages.map(page => {
+            if (page === currentRestaurantPage) {
+              return (
+                <div key={page} className="mr-1">
+                  <p>{page}</p>
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  key={page}
+                  className="mr-1 cursor-pointer"
+                  onClick={() => {
+                    setCurrentRestaurantPage(page);
+                  }}
+                >
+                  <p className="underline text-sky-500">{page}</p>
+                </div>
+              );
+            }
           })}
         </div>
       </Layout>

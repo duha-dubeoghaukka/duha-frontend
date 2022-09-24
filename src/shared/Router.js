@@ -7,7 +7,6 @@ import SignUp from "../pages/user/SignUp";
 import ScheduleRegisterPage from "../pages/schedule/ScheduleRegisterPage";
 import RestaurantsPage from "../pages/mainpage/RestaurantsPage";
 import LogIn from "../pages/user/LogIn";
-import AccommodationsPage from "../pages/mainpage/AccommodationsPage";
 import Registration from "../components/schedule/Registration";
 
 const Router = () => {
@@ -17,7 +16,6 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/spots" element={<TouristSpotsPage />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
-        <Route path="/accommodations" element={<AccommodationsPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/schedule" element={<ScheduleRegisterPage />} />

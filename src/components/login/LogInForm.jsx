@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import { instance } from "../../api/api";
+import { api } from "../../api/api";
 
 const LogInForm = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -33,20 +33,20 @@ const LogInForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await instance.post(`/member/login`, {
+      const response = await api.post(`/member/login`, {
         email: inputEmail,
         password: inputPassword
       });
-      if (response.data.isSuccess === true) {
+      if (response.data.isSuccess) {
         alert("로그인 되었습니다. 메인페이지로 이동합니다.");
         localStorage.setItem("authorization", response.headers.authorization);
         localStorage.setItem("refresh-token", response.headers["refresh-token"]);
-        // navigate("/");
+        navigate("/");
       } else {
         alert(response.data.message);
       }
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
   return (
