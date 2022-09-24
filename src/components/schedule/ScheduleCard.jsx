@@ -3,13 +3,15 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { DateCalculation, DateDiff } from "../../utils/dateCalculation";
 import { scheduleAPIs } from "../../api/api";
 import Spinner from "../Spinner/Spinner";
+import { useLocation } from "react-router-dom";
 
 function ScheduleCard() {
+  const location = useLocation();
   const [registerData, setRegisterData] = useState();
 
   useEffect(() => {
     scheduleAPIs.getRegisterInfo().then(res => setRegisterData(res.data.data));
-  }, []);
+  }, [location.key]);
 
   return (
     <div className="h-screen">

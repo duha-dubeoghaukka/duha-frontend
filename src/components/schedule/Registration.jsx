@@ -24,15 +24,22 @@ function Registration() {
     if (startDate === "" || endDate === "" || value === "") {
       alert("전부 입력하세요!");
     } else {
-      scheduleAPIs.register({
-        title: value,
-        description: null,
-        isPublic: isChecked ? isChecked : false,
-        startAt: startDate,
-        endAt: endDate
-      });
-      alert("일정 등록이 완료되었습니다!");
-      navigate(`/schedule`);
+      scheduleAPIs
+        .register({
+          title: value,
+          description: null,
+          isPublic: isChecked ? isChecked : false,
+          startAt: startDate,
+          endAt: endDate
+        })
+        .then(res => {
+          if (res.data.isSuccess) {
+            alert("일정 등록이 완료되었습니다!");
+            navigate(`/schedule`);
+          } else {
+            alert("일정 등록이 실패되었습니다!");
+          }
+        });
     }
   };
 
