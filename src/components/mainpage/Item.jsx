@@ -32,7 +32,7 @@ const Item = ({ data }) => {
     setIsBookMarked(false);
   };
   return (
-    <div className="p-[15px] bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md flex justify-between items-center">
+    <div className="p-[15px] bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md flex justify-between items-center cursor-pointer hover:brightness-95 transition-all">
       <div className="pl-[5px] md:pl-[50px]">
         <div className="mb-[4px]">
           <p className="font-bold text-[20px]">{name}</p>

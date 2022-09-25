@@ -23,7 +23,7 @@ const RegionButton = ({ name }) => {
     return (
       <div
         onClick={clickRegionHandler}
-        className="w-[70px] h-[43px] text-[16px] flex justify-center items-center bg-white1 rounded-lg font-bold shadow-md cursor-pointer"
+        className="cursor-pointer transition-all hover:brightness-95 w-[70px] h-[43px] text-[16px] flex justify-center items-center bg-white1 rounded-lg font-bold shadow-md cursor-pointer"
       >
         <p className="text-black1">{name}</p>
       </div>
