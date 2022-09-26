@@ -48,7 +48,7 @@ const Item = ({ data }) => {
           <p className="text-[12px]">{likeNum}</p>
         </div>
       </div>
-      <div className="ml-3 w-[150px] h-[90px] md:w-[220px] md:h-[150px] flex-shrink-0 relative">
+      <div className="ml-3 w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative">
         <img loading="lazy" className="w-full h-full object-cover object-center rounded-xl" src={thumbnailUrl} alt={name} />
         {isBookMarked ? (
           <StarRoundedIcon
