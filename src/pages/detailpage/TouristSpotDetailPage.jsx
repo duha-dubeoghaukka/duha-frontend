@@ -37,9 +37,9 @@ const TouristSpotDetailPage = () => {
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="flex justify-between mb-[20px]">
           <div className="flex items-center">
-            <h2 className="font-bold text-[26px] mr-1">{name}</h2>
-            <p className="text-[20px] mr-1">({likeNum})</p>
+            <h2 className="font-bold text-[26px] mr-3">{name}</h2>
             <FavoriteRoundedIcon sx={{ color: "red" }} />
+            <p className="text-[16px] ml-1">{likeNum}</p>
           </div>
           <div className="cursor-pointer">
             <StarOutlineRoundedIcon fontSize="large" />
