@@ -54,7 +54,7 @@ const LogInForm = () => {
   };
 
   const kakaoLogin = () => {
-    isToken ? navigate(`/`) : window.open(KAKAO_AUTH_URI);
+    isToken ? navigate(`/`) : (location.href = KAKAO_AUTH_URI);
   };
 
   return (
