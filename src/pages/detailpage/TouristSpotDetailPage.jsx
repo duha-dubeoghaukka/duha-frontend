@@ -4,10 +4,16 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import MapIcon from "@mui/icons-material/Map";
 import ReviewItem from "./ReviewItem";
+import { useEffect } from "react";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const TouristSpotDetailPage = () => {
   const { spotID } = useParams();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0
+    });
+  }, []);
   return (
     <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
       <div className="flex justify-between mb-[20px]">
