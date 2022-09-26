@@ -51,7 +51,7 @@ const Layout = props => {
           </div>
         </div>
       </div>
-      <div className="fixed bottom-0 md:invisible h-[83px] bg-white1 w-full flex justify-around items-center">
+      <div className="fixed z-10 bottom-0 md:invisible h-[83px] bg-white1 w-full flex justify-around items-center">
         <div>
           <HomeIcon fontSize="large" className="cursor-pointer" />
         </div>

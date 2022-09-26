@@ -23,6 +23,9 @@ const RestaurantsPage = () => {
     setCurrentRestaurantPage(1);
     setSelectedRegion("전체");
   }, []);
+  const selectChangeHandler = event => {
+    setSelectedRegion(event.target.value);
+  };
   if (isLoading) {
     return <Spinner />;
   }
@@ -54,11 +57,19 @@ const RestaurantsPage = () => {
           </ul>
         </div>
         <div className="mb-[43px]">
-          <ul className="flex flex-row justify-between">
-            {regionNames.map(place => {
-              return <RegionButton key={place.name} {...place} />;
+          <ul className="hidden md:flex flex-row justify-between">
+            {regionNames.map(region => {
+              return <RegionButton key={region.name} {...region} />;
             })}
           </ul>
+          <select
+            onChange={selectChangeHandler}
+            className="pl-3 text-[16px] block md:hidden w-full h-[43px] text-black1 font-bold rounded-lg border-black1 border-solid border-2"
+          >
+            {regionNames.map(region => {
+              return <option key={region.name}>{region.name}</option>;
+            })}
+          </select>
         </div>
         <div className="mb-3">
           <p className="font-bold">총 {filteredRestaurants.length}건이 검색되었습니다.</p>
