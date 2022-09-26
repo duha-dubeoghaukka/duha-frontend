@@ -32,6 +32,9 @@ export const scheduleAPIs = {
 export const socialLoginAPIs = {
   kakaoLogin: code => {
     return axios.get(`http://3.35.17.60/oauth/kakao?code=${code}`);
+  },
+  googleLogin: code => {
+    return axios.get(`http://3.35.17.60/oauth/google?code=${code}`);
   }
 };
 

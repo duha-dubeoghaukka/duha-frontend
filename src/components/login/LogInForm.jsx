@@ -5,6 +5,7 @@ import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { api, kakaoAPIS } from "../../api/api";
 import { KAKAO_AUTH_URI } from "../../utils/socialLoginUtils/kakao";
+import { GOOGLE_AUTH_URI } from "../../utils/socialLoginUtils/google";
 import axios from "axios";
 
 const LogInForm = () => {
@@ -55,6 +56,10 @@ const LogInForm = () => {
 
   const kakaoLogin = () => {
     isToken ? navigate(`/`) : (location.href = KAKAO_AUTH_URI);
+  };
+
+  const googleLogin = () => {
+    isToken ? navigate(`/`) : (location.href = GOOGLE_AUTH_URI);
   };
 
   return (
@@ -108,7 +113,9 @@ const LogInForm = () => {
               fill="#EB4335"
             />
           </svg>
-          <a className="ml-2">Google 계정으로 시작하기</a>
+          <a className="ml-2" onClick={() => googleLogin()}>
+            Google 계정으로 시작하기
+          </a>
         </button>
         <p className="mx-auto my-4 text-gray-600">
           계정이 없으신가요?{" "}

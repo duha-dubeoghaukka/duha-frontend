@@ -22,7 +22,23 @@ const KakaoLogin = props => {
 
   return (
     <>
-      <div>로그인 처리중입니다! 잠시만 기다려주세요</div>
+      <div className="grid place-items-center h-screen">
+        <div className="box-border h-96  w-3/5	p-4 border-2 rounded-md">
+          <div className="grid place-items-center">
+            <div className="flex flex-row mt-20">
+              <img className="w-14 h-14 " src={`${process.env.PUBLIC_URL}/assets/KakaoLogo.png`} />
+              <div className="h-12 ml-5 mt-3">
+                <span className="font-semibold	text-xl">Kakao Login</span>
+              </div>
+            </div>
+          </div>
+          <div className="flex w-4/5	border-b-2 mt-3 ml-10"></div>
+          <div className="grid place-items-center ">
+            <span className="mt-14 font-normal text-lg">로그인 처리중입니다!</span>
+            <span className="mt-2 font-normal	text-lg ">잠시만 기다려주세요</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
