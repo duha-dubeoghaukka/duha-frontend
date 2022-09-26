@@ -10,6 +10,8 @@ import LogIn from "../pages/user/LogIn";
 import Registration from "../components/schedule/Registration";
 import Weather from "../pages/weather/Weather";
 import FavoritesListPage from "../pages/mypage/FavoritesListPage";
+import TouristSpotDetailPage from "../pages/detailpage/TouristSpotDetailPage";
+import RestaurantDetailPage from "../pages/detailpage/RestaurantDetailPage";
 
 const Router = () => {
   return (
