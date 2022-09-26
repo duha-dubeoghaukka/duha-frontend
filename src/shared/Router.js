@@ -23,8 +23,8 @@ const Router = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path="/schedule" element={<ScheduleRegisterPage />} />
         <Route path="/schedule/register" element={<Registration />} />
-        <Route path="*" element={<NotFound />} />
         <Route path="/favorites/list" element={<FavoritesListPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );
