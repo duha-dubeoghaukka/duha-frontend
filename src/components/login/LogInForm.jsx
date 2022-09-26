@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import { api } from "../../api/api";
+import { api, kakaoAPIS } from "../../api/api";
 import { KAKAO_AUTH_URI } from "../../utils/socialLoginUtils/kakao";
+import axios from "axios";
 
 const LogInForm = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -13,6 +14,7 @@ const LogInForm = () => {
   const [validEmailCheck, setValidEmailCheck] = useState(false);
 
   const navigate = useNavigate();
+  const isToken = localStorage.getItem("authorization");
 
   const handleHide = () => setIsHidden(!isHidden);
 
@@ -51,6 +53,10 @@ const LogInForm = () => {
     }
   };
 
+  const kakaoLogin = () => {
+    isToken ? navigate(`/`) : window.open(KAKAO_AUTH_URI);
+  };
+
   return (
     <div className="w-full md:w-[600px] mx-auto">
       <form className="flex flex-col my-10" onSubmit={handleSubmit}>
@@ -80,7 +86,7 @@ const LogInForm = () => {
           </span>
         </div>
         <button className="btn-primary mx-auto mt-4 mb-2">로그인</button>
-        <a className="btn-kakao mx-auto my-2 grid place-items-center" href={KAKAO_AUTH_URI}>
+        <a className="btn-kakao mx-auto my-2 grid place-items-center" onClick={() => kakaoLogin()}>
           카카오 계정으로 시작하기
         </a>
         <button className="btn-white flex items-center justify-center mx-auto my-2">
