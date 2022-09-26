@@ -34,7 +34,7 @@ const TouristSpotsPage = () => {
     return <div>{error}</div>;
   }
   if (data) {
-    const spots = data.data;
+    const spots = data.data.data;
     const processedSpots = removeDuplicates(spots);
     const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
     const filteredSpots = filterItems(sortedSpots, selectedRegion);

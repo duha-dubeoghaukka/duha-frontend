@@ -31,9 +31,12 @@ const Item = ({ data }) => {
   const filledStarClickHandler = () => {
     setIsBookMarked(false);
   };
+  const itemClickHandler = () => {
+    return navigator("/spots/" + id);
+  };
   return (
-    <div className="p-[15px] bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md flex justify-between items-center cursor-pointer hover:brightness-95 transition-all">
-      <div className="pl-[5px] md:pl-[50px]">
+    <div className="p-[15px] group bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md cursor-pointer flex justify-between items-center hover:brightness-95 transition-all">
+      <div className="pl-[5px] md:pl-[50px] group-hover:brightness-95" onClick={itemClickHandler}>
         <div className="mb-[4px]">
           <p className="font-bold text-[20px]">{name}</p>
         </div>
@@ -49,7 +52,13 @@ const Item = ({ data }) => {
         </div>
       </div>
       <div className="ml-3 w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative">
-        <img loading="lazy" className="w-full h-full object-cover object-center rounded-xl" src={thumbnailUrl} alt={name} />
+        <img
+          loading="lazy"
+          className="w-full h-full object-cover object-center rounded-xl"
+          src={thumbnailUrl}
+          alt={name}
+          onClick={itemClickHandler}
+        />
         {isBookMarked ? (
           <StarRoundedIcon
             onClick={filledStarClickHandler}
