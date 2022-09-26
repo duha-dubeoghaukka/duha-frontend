@@ -21,6 +21,7 @@ const TouristSpotsPage = () => {
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
   const selectChangeHandler = event => {
     setSelectedRegion(event.target.value);
+    setCurrentSpotPage(1);
   };
   useEffect(() => {
     setCurrentSpotPage(1);

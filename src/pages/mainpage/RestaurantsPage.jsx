@@ -25,6 +25,7 @@ const RestaurantsPage = () => {
   }, []);
   const selectChangeHandler = event => {
     setSelectedRegion(event.target.value);
+    setCurrentRestaurantPage(1);
   };
   if (isLoading) {
     return <Spinner />;
