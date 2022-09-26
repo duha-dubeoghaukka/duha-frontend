@@ -24,6 +24,9 @@
   .password-icon{
     @apply absolute top-4 right-4 text-green1 cursor-pointer
   }
+  .course-layout{
+    @apply w-[385px] md:w-[600px] h-fit mx-auto bg-white1 rounded-lg px-[50px] py-[35px] shadow-lg
+  }
 }
 
 body {
