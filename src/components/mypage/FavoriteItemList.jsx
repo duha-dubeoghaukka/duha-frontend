@@ -2,26 +2,22 @@ import React from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
 
-function HomeCard() {
+function FavoriteItemList() {
   const data = [
     {
-      title: "관광",
-      route: `/spots`
+      title: "즐겨찾기한 일정 00개",
+      route: ``
     },
     {
-      title: "맛집",
-      route: `/restaurants`
+      title: "즐겨찾기한 관광 00개",
+      route: ``
     },
     {
-      title: "숙소",
-      route: `/accommodations`
+      title: "즐겨찾기한 맛집 00개",
+      route: ``
     },
     {
-      title: "날씨 더 알아보기",
-      route: ""
-    },
-    {
-      title: "물 때 알아보기",
+      title: "즐겨찾기한 숙소 00개",
       route: ""
     }
   ];
@@ -29,13 +25,13 @@ function HomeCard() {
   return (
     <div className="h-screen">
       {data.map((item, index) => {
-        return <HomeCardComponent key={index} title={item.title} route={item.route} />;
+        return <FavoriteItemListComponent key={index} title={item.title} route={item.route} />;
       })}
     </div>
   );
 }
 
-function HomeCardComponent({ title, route }) {
+function FavoriteItemListComponent({ title, route }) {
   const navigate = useNavigate();
 
   return (
@@ -52,4 +48,4 @@ function HomeCardComponent({ title, route }) {
   );
 }
 
-export default HomeCard;
+export default FavoriteItemList;

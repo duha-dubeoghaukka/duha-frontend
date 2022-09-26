@@ -10,6 +10,7 @@ import LogIn from "../pages/user/LogIn";
 import Registration from "../components/schedule/Registration";
 import AddCourse from "../pages/schedule/AddCourse";
 import Weather from "../pages/weather/Weather";
+import FavoritesListPage from "../pages/mypage/FavoritesListPage";
 
 const Router = () => {
   return (
@@ -24,6 +25,7 @@ const Router = () => {
         <Route path="/schedule" element={<ScheduleRegisterPage />} />
         <Route path="/schedule/register" element={<Registration />} />
         <Route path="/schedule/course" element={<AddCourse />} />
+        <Route path="/favorites/list" element={<FavoritesListPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
