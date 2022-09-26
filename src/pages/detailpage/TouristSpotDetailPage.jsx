@@ -22,20 +22,20 @@ const TouristSpotDetailPage = () => {
           <p className="text-[20px] mr-1">(999)</p>
           <FavoriteRoundedIcon sx={{ color: "red" }} />
         </div>
-        <div>
+        <div className="cursor-pointer">
           <StarOutlineRoundedIcon fontSize="large" />
         </div>
       </div>
       <div className="mb-[20px]">
         <div className="flex justify-between align-top px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
           <div>
-            <p className="mb-[26px]">주소</p>
-            <p className="mb-[26px]">전화번호</p>
-            <p>영업정보</p>
+            <p className="mb-[26px] text-[20px]">주소</p>
+            <p className="mb-[26px] text-[20px]">전화번호</p>
+            <p className="text-[20px]">영업정보</p>
           </div>
           <div>
-            <p className="mb-[26px]">제주특별자치도 00000</p>
-            <p className="mb-[26px]">010-0000-0000</p>
+            <p className="mb-[34px]">제주특별자치도 00000</p>
+            <p className="mb-[34px]">010-0000-0000</p>
             <p>10:00 ~ 18:00 / 휴무일: 매주 일요일</p>
           </div>
           <div>
@@ -46,7 +46,7 @@ const TouristSpotDetailPage = () => {
       <div>
         <div className="p-[32px] bg-white1 rounded-lg">
           <div className="mb-[24px]">
-            <h3>리뷰</h3>
+            <h3 className="text-[26px]">리뷰</h3>
           </div>
           <div className="grid gap-[44px]">
             <ReviewItem />
