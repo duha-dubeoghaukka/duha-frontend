@@ -8,6 +8,10 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { instance } from "../../api/api";
 import Spinner from "../../components/Spinner/Spinner";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Autoplay, Pagination } from "swiper";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const TouristSpotDetailPage = () => {
@@ -28,7 +32,7 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, touristSpotReviews } = spot;
+    const { address, likeNum, name, phone, touristSpotReviews, imgUrl } = spot;
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="flex justify-between mb-[20px]">
@@ -40,6 +44,30 @@ const TouristSpotDetailPage = () => {
           <div className="cursor-pointer">
             <StarOutlineRoundedIcon fontSize="large" />
           </div>
+        </div>
+        <div>
+          <Swiper
+            className="h-[335px] mb-[20px] flex justify-center items-center rounded-lg"
+            modules={[Pagination, Autoplay]}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false
+            }}
+            pagination={{
+              dynamicBullets: true,
+              clickable: true
+            }}
+            loop={true}
+            speed={300}
+          >
+            {imgUrl.map(image => {
+              return (
+                <SwiperSlide key={image}>
+                  <img src={image} alt={name} className="w-full h-full object-cover object-center" />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
         <div className="mb-[20px]">
           <div className="flex justify-between align-top px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
@@ -65,7 +93,7 @@ const TouristSpotDetailPage = () => {
             </div>
             <div className="grid gap-[44px]">
               {touristSpotReviews.map(review => {
-                return <ReviewItem key={review} data={review} />;
+                return <ReviewItem key={review.id} data={review} />;
               })}
             </div>
           </div>
