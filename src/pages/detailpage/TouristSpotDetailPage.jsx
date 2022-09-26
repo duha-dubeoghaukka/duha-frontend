@@ -36,6 +36,25 @@ const TouristSpotDetailPage = () => {
           </div>
         </div>
       </div>
+      <div>
+        <div>
+          <h3>리뷰</h3>
+        </div>
+        <div className="p-[32px] bg-white1 rounded-lg">
+          <div className="flex items-center mb-[28px]">
+            <div className="mr-[16px]">
+              <p>사진</p>
+            </div>
+            <div>
+              <p>닉네임</p>
+              <p>리뷰 등록일</p>
+            </div>
+          </div>
+          <div>
+            <p>설명란</p>
+          </div>
+        </div>
+      </div>
     </Layout>
   );
 };
