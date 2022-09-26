@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
+import MapIcon from "@mui/icons-material/Map";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const TouristSpotDetailPage = () => {
@@ -16,6 +17,23 @@ const TouristSpotDetailPage = () => {
         </div>
         <div>
           <StarOutlineRoundedIcon fontSize="large" />
+        </div>
+      </div>
+      <div>
+        <div className="flex justify-between align-top px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
+          <div>
+            <p className="mb-[26px]">주소</p>
+            <p className="mb-[26px]">전화번호</p>
+            <p>영업정보</p>
+          </div>
+          <div>
+            <p className="mb-[26px]">제주특별자치도 00000</p>
+            <p className="mb-[26px]">010-0000-0000</p>
+            <p>10:00 ~ 18:00 / 휴무일: 매주 일요일</p>
+          </div>
+          <div>
+            <MapIcon className="cursor-pointer" fontSize="large" />
+          </div>
         </div>
       </div>
     </Layout>
