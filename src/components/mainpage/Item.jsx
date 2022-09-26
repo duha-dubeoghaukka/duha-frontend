@@ -1,6 +1,6 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { instance } from "../../api/api";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { useState } from "react";
@@ -32,7 +32,10 @@ const Item = ({ data }) => {
     setIsBookMarked(false);
   };
   return (
-    <div className="p-[15px] bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md flex justify-between items-center cursor-pointer hover:brightness-95 transition-all">
+    <Link
+      to={`/spots/${id}`}
+      className="p-[15px] bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md flex justify-between items-center hover:brightness-95 transition-all"
+    >
       <div className="pl-[5px] md:pl-[50px]">
         <div className="mb-[4px]">
           <p className="font-bold text-[20px]">{name}</p>
@@ -66,7 +69,7 @@ const Item = ({ data }) => {
           />
         )}
       </div>
-    </div>
+    </Link>
   );
 };
 
