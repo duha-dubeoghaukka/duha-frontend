@@ -67,7 +67,7 @@ const TouristSpotsPage = () => {
             className="pl-3 text-[16px] block md:hidden w-full h-[43px] text-black1 font-bold rounded-lg border-black1 border-solid border-2"
           >
             {regionNames.map(region => {
-              return <option>{region.name}</option>;
+              return <option key={region.name}>{region.name}</option>;
             })}
           </select>
         </div>
