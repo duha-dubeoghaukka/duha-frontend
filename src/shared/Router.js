@@ -13,7 +13,6 @@ import Weather from "../pages/weather/Weather";
 import FavoritesListPage from "../pages/mypage/FavoritesListPage";
 import TouristSpotDetailPage from "../pages/detailpage/TouristSpotDetailPage";
 import RestaurantDetailPage from "../pages/detailpage/RestaurantDetailPage";
-import MapPage from "../pages/detailpage/mappage/MapPage";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
 import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
@@ -25,7 +24,6 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/spots" element={<TouristSpotsPage />} />
         <Route path="/spots/:spotID" element={<TouristSpotDetailPage />} />
-        <Route path="/:category/:id/map" element={<MapPage />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
         <Route path="/restaurants/:restaurantID" element={<RestaurantDetailPage />} />
         <Route path="/weather" element={<Weather />} />

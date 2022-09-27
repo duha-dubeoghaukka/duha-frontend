@@ -4,7 +4,7 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import MapIcon from "@mui/icons-material/Map";
 import ReviewItem from "./ReviewItem";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import { instance } from "../../api/api";
 import Spinner from "../../components/Spinner/Spinner";
@@ -13,9 +13,13 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
 import WestIcon from "@mui/icons-material/West";
+import GlobalState from "../../shared/GlobalState";
+import Map from "./mappage/Map";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const TouristSpotDetailPage = () => {
+  const { mapModal } = useContext(GlobalState);
+  const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data } = useQuery(["touristSpotDetail"], () => {
     return instance.get("/touristspot/" + spotID);
   });
@@ -25,6 +29,12 @@ const TouristSpotDetailPage = () => {
       top: 0
     });
   }, []);
+  const mapClickHandler = () => {
+    setIsMapModalOpen(true);
+  };
+  const backdropClickHandler = () => {
+    setIsMapModalOpen(false);
+  };
   if (isLoading) {
     return <Spinner />;
   }
@@ -86,9 +96,9 @@ const TouristSpotDetailPage = () => {
               <p className="mb-[34px]">{phone}</p>
               <p>추가 예정</p>
             </div>
-            <Link to={`/spots/${spotID}/map`}>
+            <div onClick={mapClickHandler}>
               <MapIcon className="cursor-pointer" fontSize="large" />
-            </Link>
+            </div>
           </div>
         </div>
         <div>
@@ -103,6 +113,14 @@ const TouristSpotDetailPage = () => {
             </div>
           </div>
         </div>
+        {isMapModalOpen && (
+          <div>
+            <div className="fixed top-0 left-0 z-10 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
+            <div className="fixed z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
+              <Map address={address} />
+            </div>
+          </div>
+        )}
       </Layout>
     );
   }
