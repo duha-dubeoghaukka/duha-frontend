@@ -81,9 +81,9 @@ const TouristSpotDetailPage = () => {
               <p className="mb-[34px]">{phone}</p>
               <p>추가 예정</p>
             </div>
-            <div>
+            <Link to={`/spots/${spotID}/map`}>
               <MapIcon className="cursor-pointer" fontSize="large" />
-            </div>
+            </Link>
           </div>
         </div>
         <div>
