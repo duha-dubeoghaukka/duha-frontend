@@ -42,6 +42,12 @@ const TouristSpotsPage = () => {
     const numberOfPages = splittedSpots.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
     const currentSpots = splittedSpots[currentSpotPage - 1];
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    };
     return (
       <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
         <div className="mb-[48px]">
@@ -102,6 +108,9 @@ const TouristSpotsPage = () => {
               );
             }
           })}
+        </div>
+        <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
+          <p>최상단으로 이동</p>
         </div>
       </Layout>
     );
