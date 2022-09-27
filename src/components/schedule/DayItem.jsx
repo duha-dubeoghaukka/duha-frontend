@@ -6,6 +6,12 @@ import CourseItem from "./CourseItem";
 const DayItem = () => {
   const navigate = useNavigate();
 
+  const Day = () => localStorage.getItem("day");
+
+  useEffect(() => {
+    Day();
+  }, []);
+
   return (
     <div>
       <div className="text-green1 font-bold text-lg text-center mt-4 mb-6">Day1</div>

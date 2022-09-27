@@ -19,14 +19,14 @@ function ScheduleCard() {
         <Spinner />
       ) : (
         registerData?.map(item => {
-          return <ScheduleCardComponent key={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} />;
+          return <ScheduleCardComponent key={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} id={item.id} />;
         })
       )}
     </div>
   );
 }
 
-function ScheduleCardComponent({ title, startDate, endDate }) {
+function ScheduleCardComponent({ title, startDate, endDate, id }) {
   const newStartDate = DateCalculation(startDate);
   const newEndDate = DateCalculation(endDate);
   const newDate = DateDiff(newStartDate, newEndDate);
@@ -35,11 +35,17 @@ function ScheduleCardComponent({ title, startDate, endDate }) {
 
   const navigate = useNavigate();
 
+  const setItem = () => {
+    localStorage.setItem("allDays", allDays);
+    localStorage.setItem("id", id);
+  };
+
   return (
     <div
       className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row"
       onClick={() => {
         navigate("course");
+        setItem();
       }}
     >
       <div className="flex space-x-28">
