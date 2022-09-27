@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
-import { api, kakaoAPIS } from "../../api/api";
+import { api } from "../../api/api";
 import { KAKAO_AUTH_URI } from "../../utils/socialLoginUtils/kakao";
 import { GOOGLE_AUTH_URI } from "../../utils/socialLoginUtils/google";
-import axios from "axios";
 
 const LogInForm = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -91,9 +90,9 @@ const LogInForm = () => {
           </span>
         </div>
         <button className="btn-primary mx-auto mt-4 mb-2">로그인</button>
-        <a className="btn-kakao mx-auto my-2 grid place-items-center" onClick={() => kakaoLogin()}>
+        <button className="btn-kakao mx-auto my-2 grid place-items-center" onClick={() => kakaoLogin()}>
           카카오 계정으로 시작하기
-        </a>
+        </button>
         <button className="btn-white flex items-center justify-center mx-auto my-2">
           <svg width={19} height={20} viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
