@@ -15,6 +15,7 @@ import TouristSpotDetailPage from "../pages/detailpage/TouristSpotDetailPage";
 import RestaurantDetailPage from "../pages/detailpage/RestaurantDetailPage";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
+import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
 
 const Router = () => {
   return (
@@ -34,6 +35,7 @@ const Router = () => {
         <Route path="/favorites/list" element={<FavoritesListPage />} />
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/auth/google/callback" element={<GoogleLogin />} />
+        <Route path="/schedule/share" element={<ShareSchedulePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
