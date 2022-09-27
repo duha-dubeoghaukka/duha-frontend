@@ -1,10 +1,11 @@
 import React from "react";
 import Layout from "../../components/layout/Layout";
+import ShareCard from "../../components/schedule/ShareCard";
 
 function ShareSchedulePage() {
   return (
     <Layout isLoggedIn={false} title="일정 공유" highlight={"schedule/share"}>
-      <div>일정 공유 페이지 입니다</div>
+      <ShareCard>일정 공유 페이지 입니다</ShareCard>
     </Layout>
   );
 }
