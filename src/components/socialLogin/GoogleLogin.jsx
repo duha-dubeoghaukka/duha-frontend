@@ -6,12 +6,10 @@ const GoogleLogin = props => {
   const href = window.location.href;
   let params = new URL(document.URL).searchParams;
   let code = params.get("code");
-  console.log("code", code);
   const navigate = useNavigate();
 
   useEffect(() => {
     socialLoginAPIs.googleLogin(code).then(res => {
-      console.log("res", res);
       if (res.data.isSuccess) {
         localStorage.setItem("authorization", res.headers.authorization);
         localStorage.setItem("refresh-token", res.headers["refresh-token"]);
@@ -23,7 +21,6 @@ const GoogleLogin = props => {
 
   return (
     <>
-      return (
       <>
         <div className="grid place-items-center h-screen">
           <div className="box-border h-96  w-3/5	p-4 border-2 rounded-md">
@@ -43,7 +40,6 @@ const GoogleLogin = props => {
           </div>
         </div>
       </>
-      );{" "}
     </>
   );
 };
