@@ -1,4 +1,5 @@
 import axios from "axios";
+import { KAKAO_AUTH_URI } from "../utils/socialLoginUtils/kakao";
 
 export const api = axios.create({
   // baseURL: "  http://localhost:3001/",
@@ -25,6 +26,15 @@ export const scheduleAPIs = {
   },
   getRegisterInfo: () => {
     return api.get("/auth/trip");
+  }
+};
+
+export const socialLoginAPIs = {
+  kakaoLogin: code => {
+    return axios.get(`http://3.35.17.60/oauth/kakao?code=${code}`);
+  },
+  googleLogin: code => {
+    return axios.get(`http://3.35.17.60/oauth/google?code=${code}`);
   }
 };
 

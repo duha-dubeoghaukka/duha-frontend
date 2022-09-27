@@ -3,7 +3,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { DateCalculation, DateDiff } from "../../utils/dateCalculation";
 import { scheduleAPIs } from "../../api/api";
 import Spinner from "../Spinner/Spinner";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ScheduleCard() {
   const location = useLocation();
@@ -33,8 +33,15 @@ function ScheduleCardComponent({ title, startDate, endDate }) {
   const nights = newDate[0];
   const allDays = newDate[1];
 
+  const navigate = useNavigate();
+
   return (
-    <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row ">
+    <div
+      className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row"
+      onClick={() => {
+        navigate("course");
+      }}
+    >
       <div className="flex space-x-28">
         <div className="flex flex-col m-5 ">
           <span className="mt-2	font-semibold">
