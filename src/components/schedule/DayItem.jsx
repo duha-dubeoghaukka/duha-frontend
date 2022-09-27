@@ -6,15 +6,36 @@ import CourseItem from "./CourseItem";
 const DayItem = () => {
   const navigate = useNavigate();
 
-  const Day = () => localStorage.getItem("day");
+  const day = localStorage.getItem("day");
+  const id = localStorage.getItem("id");
+
+  const dayArr = Array(parseInt(day))
+    .fill()
+    .map((_, i) => i + 1);
+
+  const fetchData = async () => {
+    try {
+      await api.get(`/auth/trip/${id}`);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 
   useEffect(() => {
-    Day();
+    fetchData();
   }, []);
 
   return (
     <div>
-      <div className="text-green1 font-bold text-lg text-center mt-4 mb-6">Day1</div>
+      <div className="mt-4 mb-6 flex justify-center">
+        {dayArr.map(day => {
+          return (
+            <div key={day} className="text-green1 font-bold text-lg px-4">
+              Day{day}
+            </div>
+          );
+        })}
+      </div>
       <div className="course-layout">
         <CourseItem />
         <CourseItem />
