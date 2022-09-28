@@ -36,7 +36,7 @@ const Router = () => {
         <Route path="/schedule/course" element={<AddCourse />} />
         <Route path="/schedule/course/addspot" element={<AddSpot />} />
         <Route path="/schedule/course/addrestaurant" element={<AddRestaurant />} />
-        <Route path="/favorites/list" element={<FavoritesListPage />} />
+        <Route path="/mypage/favorites/list" element={<FavoritesListPage />} />
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/auth/google/callback" element={<GoogleLogin />} />
         <Route path="/schedule/share" element={<ShareSchedulePage />} />
