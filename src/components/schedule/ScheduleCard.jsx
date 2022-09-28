@@ -33,6 +33,24 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
   const nights = newDate[0];
   const allDays = newDate[1];
 
+  const onDeleteSchedule = tripId => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      scheduleAPIs
+        .deleteSchedule(tripId)
+        .then(res => {
+          if (res.data.isSuccess) {
+            alert("삭제가 완료되었습니다!");
+            window.location.reload();
+          } else {
+            alert("삭제가 취소되었습니다!");
+          }
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
+
   const navigate = useNavigate();
 
   const setItem = () => {
@@ -59,7 +77,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
           </span>
         </div>
         <div className="flex flex-row m-5 ">
-          <DeleteOutlineIcon className="mt-5 cursor-pointer" />
+          <DeleteOutlineIcon className="mt-5 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
           <span className="mt-6 ml-1 font-normal text-sm ">삭제</span>
         </div>
       </div>
