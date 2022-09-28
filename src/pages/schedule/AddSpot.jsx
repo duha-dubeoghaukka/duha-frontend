@@ -5,19 +5,18 @@ import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import Item from "../../components/mainpage/Item";
 import { useQuery } from "react-query";
-import { bookmarkAPI } from "../../api/api";
+import { instance } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 
-const TouristSpotsPage = () => {
-  const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
-    return bookmarkAPI.get("/touristspot");
+const AddSpot = () => {
+  const { isLoading, error, data } = useQuery(["touristSpots"], () => {
+    return instance.get("/touristspot");
   });
-  const { regionSelection, spotPageSelection, spotsBookmarks } = useContext(GlobalState);
-  const { spotBookmarks, setSpotBookmarks } = spotsBookmarks;
+  const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
   const selectChangeHandler = event => {
@@ -37,33 +36,20 @@ const TouristSpotsPage = () => {
   if (data) {
     const spots = data.data.data;
     const processedSpots = removeDuplicates(spots);
-    for (const spot of processedSpots) {
-      for (const bookmark of spotBookmarks) {
-        if (spot.id === bookmark.id) {
-          spot.bookmarked = bookmark.bookmarked;
-        }
-      }
-    }
     const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
     const filteredSpots = filterItems(sortedSpots, selectedRegion);
     const splittedSpots = arraySplitter(filteredSpots);
     const numberOfPages = splittedSpots.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
     const currentSpots = splittedSpots[currentSpotPage - 1];
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
     return (
       <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
         <div className="mb-[48px]">
           <ul className="flex flex-row justify-around">
-            <Link to="/spots" className="font-bold text-2xl text-green1 cursor-pointer">
+            <Link to="/schedule/course/addspot" className="font-bold text-2xl text-green1 cursor-pointer">
               관광
             </Link>
-            <Link to="/restaurants" className="font-bold text-2xl cursor-pointer">
+            <Link to="/schedule/course/addrestaurant" className="font-bold text-2xl cursor-pointer">
               맛집
             </Link>
             <Link to="/accommodations" className="font-bold text-2xl cursor-pointer">
@@ -117,12 +103,9 @@ const TouristSpotsPage = () => {
             }
           })}
         </div>
-        <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
-          <p>최상단으로 이동</p>
-        </div>
       </Layout>
     );
   }
 };
 
-export default TouristSpotsPage;
+export default AddSpot;

@@ -3,7 +3,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { DateCalculation, DateDiff } from "../../utils/dateCalculation";
 import { scheduleAPIs } from "../../api/api";
 import Spinner from "../Spinner/Spinner";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function ScheduleCard() {
   const location = useLocation();
@@ -19,14 +19,14 @@ function ScheduleCard() {
         <Spinner />
       ) : (
         registerData?.map(item => {
-          return <ScheduleCardComponent key={item.id} tripId={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} />;
+          return <ScheduleCardComponent key={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} id={item.id} />;
         })
       )}
     </div>
   );
 }
 
-function ScheduleCardComponent({ tripId, title, startDate, endDate }) {
+function ScheduleCardComponent({ title, startDate, endDate, id }) {
   const newStartDate = DateCalculation(startDate);
   const newEndDate = DateCalculation(endDate);
   const newDate = DateDiff(newStartDate, newEndDate);
@@ -51,8 +51,21 @@ function ScheduleCardComponent({ tripId, title, startDate, endDate }) {
     }
   };
 
+  const navigate = useNavigate();
+
+  const setItem = () => {
+    localStorage.setItem("day", allDays);
+    localStorage.setItem("id", id);
+  };
+
   return (
-    <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row ">
+    <div
+      className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row"
+      onClick={() => {
+        navigate("course");
+        setItem();
+      }}
+    >
       <div className="flex space-x-28">
         <div className="flex flex-col m-5 ">
           <span className="mt-2	font-semibold">
@@ -64,7 +77,7 @@ function ScheduleCardComponent({ tripId, title, startDate, endDate }) {
           </span>
         </div>
         <div className="flex flex-row m-5 ">
-          <DeleteOutlineIcon className="mt-5 cursor-pointer" onClick={() => onDeleteSchedule(tripId)} />
+          <DeleteOutlineIcon className="mt-5 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
           <span className="mt-6 ml-1 font-normal text-sm ">삭제</span>
         </div>
       </div>

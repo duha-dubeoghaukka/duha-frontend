@@ -1,33 +1,32 @@
 import regionNames from "../../utils/regionNames.js";
 import RegionButton from "../../components/mainpage/RegionButton";
+import Item from "../../components/mainpage/Item";
 import Layout from "../../components/layout/Layout";
+import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
-import Item from "../../components/mainpage/Item";
 import { useQuery } from "react-query";
-import { bookmarkAPI } from "../../api/api";
+import { instance } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
-import { Link } from "react-router-dom";
 
-const TouristSpotsPage = () => {
-  const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
-    return bookmarkAPI.get("/touristspot");
+const AddRestaurant = () => {
+  const { isLoading, error, data } = useQuery(["restaurants"], () => {
+    return instance.get("/restaurant");
   });
-  const { regionSelection, spotPageSelection, spotsBookmarks } = useContext(GlobalState);
-  const { spotBookmarks, setSpotBookmarks } = spotsBookmarks;
+  const { regionSelection, restaurantPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
-  const selectChangeHandler = event => {
-    setSelectedRegion(event.target.value);
-    setCurrentSpotPage(1);
-  };
+  const { currentRestaurantPage, setCurrentRestaurantPage } = restaurantPageSelection;
   useEffect(() => {
-    setCurrentSpotPage(1);
+    setCurrentRestaurantPage(1);
     setSelectedRegion("전체");
   }, []);
+  const selectChangeHandler = event => {
+    setSelectedRegion(event.target.value);
+    setCurrentRestaurantPage(1);
+  };
   if (isLoading) {
     return <Spinner />;
   }
@@ -35,38 +34,25 @@ const TouristSpotsPage = () => {
     return <div>{error}</div>;
   }
   if (data) {
-    const spots = data.data.data;
-    const processedSpots = removeDuplicates(spots);
-    for (const spot of processedSpots) {
-      for (const bookmark of spotBookmarks) {
-        if (spot.id === bookmark.id) {
-          spot.bookmarked = bookmark.bookmarked;
-        }
-      }
-    }
-    const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
-    const filteredSpots = filterItems(sortedSpots, selectedRegion);
-    const splittedSpots = arraySplitter(filteredSpots);
-    const numberOfPages = splittedSpots.length;
+    const restaurants = data.data;
+    const processedRestaurants = removeDuplicates(restaurants);
+    const sortedRestaurants = processedRestaurants.sort((a, b) => b.likeNum - a.likeNum);
+    const filteredRestaurants = filterItems(sortedRestaurants, selectedRegion);
+    const splittedRestaurants = arraySplitter(filteredRestaurants);
+    const numberOfPages = splittedRestaurants.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentSpots = splittedSpots[currentSpotPage - 1];
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
+    const currentRestaurants = splittedRestaurants[currentRestaurantPage - 1];
     return (
-      <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
+      <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
         <div className="mb-[48px]">
           <ul className="flex flex-row justify-around">
-            <Link to="/spots" className="font-bold text-2xl text-green1 cursor-pointer">
+            <Link to="/schedule/course/addspot" className="font-bold text-2xl cursor-pointer">
               관광
             </Link>
-            <Link to="/restaurants" className="font-bold text-2xl cursor-pointer">
+            <Link to="/schedule/course/addrestaurant" className="font-bold text-2xl text-green1 cursor-pointer">
               맛집
             </Link>
-            <Link to="/accommodations" className="font-bold text-2xl cursor-pointer">
+            <Link to="/addaccommodations" className="font-bold text-2xl cursor-pointer">
               숙소
             </Link>
           </ul>
@@ -87,16 +73,16 @@ const TouristSpotsPage = () => {
           </select>
         </div>
         <div className="mb-3">
-          <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
+          <p className="font-bold">총 {filteredRestaurants.length}건이 검색되었습니다.</p>
         </div>
         <div className="mb-0">
-          {currentSpots.map(spot => {
-            return <Item key={spot.id} data={spot} />;
+          {currentRestaurants.map(restaurant => {
+            return <Item key={restaurant.id} data={restaurant} />;
           })}
         </div>
         <div className="flex justify-center">
           {pages.map(page => {
-            if (page === currentSpotPage) {
+            if (page === currentRestaurantPage) {
               return (
                 <div key={page} className="mr-1">
                   <p>{page}</p>
@@ -108,7 +94,7 @@ const TouristSpotsPage = () => {
                   key={page}
                   className="mr-1 cursor-pointer"
                   onClick={() => {
-                    setCurrentSpotPage(page);
+                    setCurrentRestaurantPage(page);
                   }}
                 >
                   <p className="underline text-sky-500">{page}</p>
@@ -117,12 +103,9 @@ const TouristSpotsPage = () => {
             }
           })}
         </div>
-        <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
-          <p>최상단으로 이동</p>
-        </div>
       </Layout>
     );
   }
 };
 
-export default TouristSpotsPage;
+export default AddRestaurant;
