@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useNavigate } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
+import Spinner from "../Spinner/Spinner";
 
 function FavoriteItemList() {
   const [favoriteScheduleNum, setFavoriteScheduleNum] = useState();
   const [favoriteSpotNum, setFavoriteSpotNum] = useState();
   const [favoriteRestaurantNum, setFavoriteRestaurantNum] = useState();
   const [favoriteAccommodateNum, setFavoriteAccommodateNum] = useState();
+  const [isData, setIsData] = useState(false);
 
   const data = [
     {
@@ -32,10 +34,15 @@ function FavoriteItemList() {
     mypageAPIs
       .getFavoritesNum()
       .then(res => {
-        setFavoriteScheduleNum(res.data.data.tripBookmarkNum);
-        setFavoriteSpotNum(res.data.data.touristSpotBookmarkNum);
-        setFavoriteRestaurantNum(res.data.data.restaurantBookmarkNum);
-        setFavoriteAccommodateNum(res.data.data.accommodationBookmarkNum);
+        if (res.data.isSuccess) {
+          setIsData(true);
+          setFavoriteScheduleNum(res.data.data.tripBookmarkNum);
+          setFavoriteSpotNum(res.data.data.touristSpotBookmarkNum);
+          setFavoriteRestaurantNum(res.data.data.restaurantBookmarkNum);
+          setFavoriteAccommodateNum(res.data.data.accommodationBookmarkNum);
+        } else {
+          setIsData(false);
+        }
       })
       .catch(err => {
         console.log("err", err);
@@ -44,9 +51,13 @@ function FavoriteItemList() {
 
   return (
     <div className="h-screen">
-      {data.map((item, index) => {
-        return <FavoriteItemListComponent key={index} title={item.title} route={item.route} />;
-      })}
+      {isData ? (
+        data.map((item, index) => {
+          return <FavoriteItemListComponent key={index} title={item.title} route={item.route} />;
+        })
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 }
