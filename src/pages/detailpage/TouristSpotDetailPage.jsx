@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
+import WestIcon from "@mui/icons-material/West";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const TouristSpotDetailPage = () => {
@@ -35,6 +36,10 @@ const TouristSpotDetailPage = () => {
     const { address, likeNum, name, phone, touristSpotReviews, imgUrl } = spot;
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
+        <Link to="/spots" className="flex items-center mb-3">
+          <WestIcon className="mr-3" />
+          <p className="text-[16px] text-black1">뒤로 가기</p>
+        </Link>
         <div className="flex justify-between mb-[20px]">
           <div className="flex items-center">
             <h2 className="font-bold text-[26px] mr-3">{name}</h2>
@@ -81,9 +86,9 @@ const TouristSpotDetailPage = () => {
               <p className="mb-[34px]">{phone}</p>
               <p>추가 예정</p>
             </div>
-            <div>
+            <Link to={`/spots/${spotID}/map`}>
               <MapIcon className="cursor-pointer" fontSize="large" />
-            </div>
+            </Link>
           </div>
         </div>
         <div>

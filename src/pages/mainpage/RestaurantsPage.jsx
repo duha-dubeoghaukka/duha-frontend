@@ -42,6 +42,12 @@ const RestaurantsPage = () => {
     const numberOfPages = splittedRestaurants.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
     const currentRestaurants = splittedRestaurants[currentRestaurantPage - 1];
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    };
     return (
       <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
         <div className="mb-[48px]">
@@ -102,6 +108,9 @@ const RestaurantsPage = () => {
               );
             }
           })}
+        </div>
+        <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
+          <p>최상단으로 이동</p>
         </div>
       </Layout>
     );
