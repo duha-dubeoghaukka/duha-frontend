@@ -1,11 +1,14 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate } from "react-router-dom";
 import Bookmark from "./Bookmark";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { bookmarkAPI } from "../../api/api";
+import GlobalState from "../../shared/GlobalState";
 
 const Item = props => {
+  const { spotsBookmarks } = useContext(GlobalState);
+  const { spotBookmarks, setSpotBookmarks } = spotsBookmarks;
   const navigator = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = props.data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
@@ -20,6 +23,23 @@ const Item = props => {
         .then(response => {
           if (response.data.isSuccess) {
             setIsBookmarked(previousIsBookMarked => !previousIsBookMarked);
+            if (spotBookmarks.find(bookmark => bookmark.id === id)) {
+              const spotBookmarksCopy = [...spotBookmarks];
+              const mutatedBookmarks = spotBookmarksCopy.map(bookmark => {
+                if (bookmark.id === id) {
+                  bookmark.bookmarked = !bookmark.bookmarked;
+                }
+                return bookmark;
+              });
+              setIsBookmarked(mutatedBookmarks);
+            } else {
+              const spotBookmarksCopy = [...spotBookmarks];
+              spotBookmarksCopy.push({
+                id,
+                bookmarked: !bookmarked
+              });
+              setSpotBookmarks(spotBookmarksCopy);
+            }
           } else {
             alert(response.error);
           }
