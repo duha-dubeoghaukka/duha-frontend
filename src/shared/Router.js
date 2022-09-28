@@ -15,9 +15,9 @@ import TouristSpotDetailPage from "../pages/detailpage/TouristSpotDetailPage";
 import RestaurantDetailPage from "../pages/detailpage/RestaurantDetailPage";
 import AddSpot from "../pages/schedule/AddSpot";
 import AddRestaurant from "../pages/schedule/AddRestaurant";
-import MapPage from "../pages/detailpage/mappage/MapPage";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
+import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
 
 const Router = () => {
   return (
@@ -26,7 +26,6 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/spots" element={<TouristSpotsPage />} />
         <Route path="/spots/:spotID" element={<TouristSpotDetailPage />} />
-        <Route path="/:category/:id/map" element={<MapPage />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
         <Route path="/restaurants/:restaurantID" element={<RestaurantDetailPage />} />
         <Route path="/weather" element={<Weather />} />
@@ -40,6 +39,7 @@ const Router = () => {
         <Route path="/favorites/list" element={<FavoritesListPage />} />
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/auth/google/callback" element={<GoogleLogin />} />
+        <Route path="/schedule/share" element={<ShareSchedulePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
