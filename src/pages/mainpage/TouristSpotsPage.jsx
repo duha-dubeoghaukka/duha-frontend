@@ -16,7 +16,8 @@ const TouristSpotsPage = () => {
   const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
     return bookmarkAPI.get("/touristspot");
   });
-  const { regionSelection, spotPageSelection } = useContext(GlobalState);
+  const { regionSelection, spotPageSelection, spotsBookmarks } = useContext(GlobalState);
+  const { spotBookmarks, setSpotBookmarks } = spotsBookmarks;
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
   const selectChangeHandler = event => {
@@ -36,6 +37,13 @@ const TouristSpotsPage = () => {
   if (data) {
     const spots = data.data.data;
     const processedSpots = removeDuplicates(spots);
+    for (const spot of processedSpots) {
+      for (const bookmark of spotBookmarks) {
+        if (spot.id === bookmark.id) {
+          spot.bookmarked = bookmark.bookmarked;
+        }
+      }
+    }
     const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
     const filteredSpots = filterItems(sortedSpots, selectedRegion);
     const splittedSpots = arraySplitter(filteredSpots);

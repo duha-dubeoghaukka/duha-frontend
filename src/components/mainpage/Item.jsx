@@ -1,13 +1,55 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import { useNavigate } from "react-router-dom";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import Bookmark from "./Bookmark";
+import { useContext, useState } from "react";
+import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
+import { bookmarkAPI } from "../../api/api";
+import GlobalState from "../../shared/GlobalState";
 
-const Item = ({ data }) => {
+const Item = props => {
+  const { spotsBookmarks } = useContext(GlobalState);
+  const { spotBookmarks, setSpotBookmarks } = spotsBookmarks;
   const navigator = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
+  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = props.data;
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const itemClickHandler = () => {
     return navigator("/spots/" + id);
+  };
+  const bookmarkHandler = () => {
+    const isLoggedIn = checkIsLoggedIn();
+    if (isLoggedIn) {
+      const promise = bookmarkAPI.get("/auth/touristspot/bookmark/" + id);
+      promise
+        .then(response => {
+          if (response.data.isSuccess) {
+            setIsBookmarked(previousIsBookMarked => !previousIsBookMarked);
+            if (spotBookmarks.find(bookmark => bookmark.id === id)) {
+              const spotBookmarksCopy = [...spotBookmarks];
+              const mutatedBookmarks = spotBookmarksCopy.map(bookmark => {
+                if (bookmark.id === id) {
+                  bookmark.bookmarked = !bookmark.bookmarked;
+                }
+                return bookmark;
+              });
+              setIsBookmarked(mutatedBookmarks);
+            } else {
+              const spotBookmarksCopy = [...spotBookmarks];
+              spotBookmarksCopy.push({
+                id,
+                bookmarked: !bookmarked
+              });
+              setSpotBookmarks(spotBookmarksCopy);
+            }
+          } else {
+            alert(response.error);
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
+    } else {
+      alert("로그인을 먼저 해주세요");
+    }
   };
   return (
     <div className="p-[15px] group bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md cursor-pointer flex justify-between items-center hover:brightness-95 transition-all">
@@ -34,15 +76,7 @@ const Item = ({ data }) => {
           alt={name}
           onClick={itemClickHandler}
         />
-        {bookmarked ? (
-          <StarRoundedIcon className="absolute top-1 right-1 cursor-pointer hover:scale-125" fontSize="large" sx={{ color: "#ffd740" }} />
-        ) : (
-          <StarOutlineRoundedIcon
-            className="absolute top-1 right-1 cursor-pointer hover:scale-125"
-            fontSize="large"
-            sx={{ color: "#ffd740" }}
-          />
-        )}
+        <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
       </div>
     </div>
   );
