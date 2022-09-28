@@ -45,6 +45,9 @@ export const scheduleAPIs = {
   },
   getShareSchedule: () => {
     return api.get("/trip");
+  },
+  deleteSchedule: tripId => {
+    return api.delete(`/auth/trip/${tripId}`);
   }
 };
 
