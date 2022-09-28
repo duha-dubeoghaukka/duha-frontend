@@ -19,19 +19,37 @@ function ScheduleCard() {
         <Spinner />
       ) : (
         registerData?.map(item => {
-          return <ScheduleCardComponent key={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} />;
+          return <ScheduleCardComponent key={item.id} tripId={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} />;
         })
       )}
     </div>
   );
 }
 
-function ScheduleCardComponent({ title, startDate, endDate }) {
+function ScheduleCardComponent({ tripId, title, startDate, endDate }) {
   const newStartDate = DateCalculation(startDate);
   const newEndDate = DateCalculation(endDate);
   const newDate = DateDiff(newStartDate, newEndDate);
   const nights = newDate[0];
   const allDays = newDate[1];
+
+  const onDeleteSchedule = tripId => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      scheduleAPIs
+        .deleteSchedule(tripId)
+        .then(res => {
+          if (res.data.isSuccess) {
+            alert("삭제가 완료되었습니다!");
+            window.location.reload();
+          } else {
+            alert("삭제가 취소되었습니다!");
+          }
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
 
   return (
     <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row ">
@@ -46,7 +64,7 @@ function ScheduleCardComponent({ title, startDate, endDate }) {
           </span>
         </div>
         <div className="flex flex-row m-5 ">
-          <DeleteOutlineIcon className="mt-5 cursor-pointer" />
+          <DeleteOutlineIcon className="mt-5 cursor-pointer" onClick={() => onDeleteSchedule(tripId)} />
           <span className="mt-6 ml-1 font-normal text-sm ">삭제</span>
         </div>
       </div>
