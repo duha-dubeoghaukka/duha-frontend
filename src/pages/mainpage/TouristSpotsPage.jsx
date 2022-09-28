@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import Item from "../../components/mainpage/Item";
 import { useQuery } from "react-query";
-import { instance } from "../../api/api";
+import { bookmarkAPI } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
@@ -13,8 +13,8 @@ import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 
 const TouristSpotsPage = () => {
-  const { isLoading, error, data } = useQuery(["touristSpots"], () => {
-    return instance.get("/touristspot");
+  const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
+    return bookmarkAPI.get("/touristspot");
   });
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;

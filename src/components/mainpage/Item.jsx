@@ -1,36 +1,11 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import { useNavigate } from "react-router-dom";
-import { instance } from "../../api/api";
-import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
-import { useState } from "react";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const Item = ({ data }) => {
   const navigator = useNavigate();
-  const [isBookMarked, setIsBookMarked] = useState(false);
-  const { id, name, description, region, likeNum, thumbnailUrl } = data;
-  const bookmark = async () => {
-    const { response } = await instance.get("/auth/touristspot/bookmark/" + id);
-    console.dir(response);
-  };
-  const emptyStarClickHandler = () => {
-    const isLoggedIn = checkIsLoggedIn();
-    if (isLoggedIn) {
-      bookmark()
-        .then(response => {
-          console.dir(response);
-        })
-        .catch(error => {
-          setIsBookMarked(true);
-        });
-    } else {
-      return navigator("/login");
-    }
-  };
-  const filledStarClickHandler = () => {
-    setIsBookMarked(false);
-  };
+  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const itemClickHandler = () => {
     return navigator("/spots/" + id);
   };
@@ -59,17 +34,11 @@ const Item = ({ data }) => {
           alt={name}
           onClick={itemClickHandler}
         />
-        {isBookMarked ? (
-          <StarRoundedIcon
-            onClick={filledStarClickHandler}
-            className="absolute top-1 right-1 cursor-pointer"
-            fontSize="large"
-            sx={{ color: "#ffd740" }}
-          />
+        {bookmarked ? (
+          <StarRoundedIcon className="absolute top-1 right-1 cursor-pointer hover:scale-125" fontSize="large" sx={{ color: "#ffd740" }} />
         ) : (
           <StarOutlineRoundedIcon
-            onClick={emptyStarClickHandler}
-            className="absolute top-1 right-1 cursor-pointer"
+            className="absolute top-1 right-1 cursor-pointer hover:scale-125"
             fontSize="large"
             sx={{ color: "#ffd740" }}
           />
