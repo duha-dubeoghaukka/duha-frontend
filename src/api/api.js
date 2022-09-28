@@ -47,7 +47,6 @@ export const scheduleAPIs = {
     return api.get("/trip");
   },
   deleteSchedule: tripId => {
-    console.log("dd", tripId);
     return api.delete(`/auth/trip/${tripId}`);
   }
 };
