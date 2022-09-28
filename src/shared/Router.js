@@ -13,6 +13,8 @@ import Weather from "../pages/weather/Weather";
 import FavoritesListPage from "../pages/mypage/FavoritesListPage";
 import TouristSpotDetailPage from "../pages/detailpage/TouristSpotDetailPage";
 import RestaurantDetailPage from "../pages/detailpage/RestaurantDetailPage";
+import AddSpot from "../pages/schedule/AddSpot";
+import AddRestaurant from "../pages/schedule/AddRestaurant";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
 import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
@@ -32,6 +34,8 @@ const Router = () => {
         <Route path="/schedule" element={<ScheduleRegisterPage />} />
         <Route path="/schedule/register" element={<Registration />} />
         <Route path="/schedule/course" element={<AddCourse />} />
+        <Route path="/schedule/course/addspot" element={<AddSpot />} />
+        <Route path="/schedule/course/addrestaurant" element={<AddRestaurant />} />
         <Route path="/favorites/list" element={<FavoritesListPage />} />
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/auth/google/callback" element={<GoogleLogin />} />
