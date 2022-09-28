@@ -83,7 +83,7 @@ const Layout = props => {
                 <Link to="/schedule" className={`cursor-pointer ${category === "create" && "text-green1"}`}>
                   일정 등록
                 </Link>
-                <Link to="/" className={`cursor-pointer ${category === "share" && "text-green1"}`}>
+                <Link to="/schedule/share" className={`cursor-pointer ${category === "share" && "text-green1"}`}>
                   일정 공유
                 </Link>
               </div>
