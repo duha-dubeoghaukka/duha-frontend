@@ -58,6 +58,12 @@ export const socialLoginAPIs = {
   }
 };
 
+export const mypageAPIs = {
+  getFavoritesNum: () => {
+    return api.get("/auth/mypage");
+  }
+};
+
 export const instance = axios.create({
   baseURL: "http://43.201.5.53:8080/",
   headers: {
