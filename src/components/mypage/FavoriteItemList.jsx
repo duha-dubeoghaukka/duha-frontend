@@ -47,7 +47,6 @@ function FavoriteItemList() {
       .catch(err => {
         console.log("err", err);
       });
-    mypageAPIs.getFavoritesSpot().then(res => console.log("res", res.data.data));
   }, []);
 
   return (
