@@ -1,7 +1,7 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate } from "react-router-dom";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
-import { bookmarkAPI } from "../../api/api";
+import { api } from "../../api/api";
 import Bookmark from "./Bookmark";
 import { useState } from "react";
 
@@ -17,12 +17,15 @@ const Item = ({ data, counter, setCounter, category }) => {
       case "restaurant":
         return navigator("/restaurants/" + id);
         break;
+      case "accommodation":
+        return navigator("/accommodations/" + id);
+        break;
     }
   };
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
-      bookmarkAPI
+      api
         .get(`/auth/${category}/bookmark/` + id)
         .then(response => {
           if (response.data.isSuccess) {
