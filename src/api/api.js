@@ -66,7 +66,7 @@ export const mypageAPIs = {
     return api.get("/auth/mypage");
   },
   getFavoriteLists: pathVariable => {
-    return api.get(`http://13.125.222.172/auth/mypage/${pathVariable}/bookmark`);
+    return api.get(`auth/mypage/${pathVariable}/bookmark`);
   }
 };
 
