@@ -9,7 +9,7 @@ import Registration from "../components/schedule/Registration";
 import AddCourse from "../pages/schedule/AddCourse";
 import Weather from "../pages/weather/Weather";
 import FavoritesListPage from "../pages/mypage/FavoritesListPage";
-import TouristSpotDetailPage from "../pages/detailpage/TouristSpotDetailPage";
+import TouristSpotDetailPage from "../pages/detailpage/touristspot/TouristSpotDetailPage";
 import AddSpot from "../pages/schedule/AddSpot";
 import AddRestaurant from "../pages/schedule/AddRestaurant";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";

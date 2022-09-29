@@ -4,17 +4,17 @@ import Layout from "../../../components/layout/Layout";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../../shared/GlobalState";
 import Item from "../../../components/mainpage/Item";
-import { bookmarkAPI } from "../../../api/api";
 import { removeDuplicates } from "../../../utils/removeDuplicates";
 import { filterItems } from "../../../utils/filterItems";
 import { arraySplitter } from "../../../utils/arraySplitter";
 import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
+import { api } from "../../../api/api";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
-  const { isLoading, error, data, refetch } = useQuery(["bookmarkedTouristSpots"], () => {
-    return bookmarkAPI.get("/touristspot");
+  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
+    return api.get("/touristspot");
   });
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
@@ -30,13 +30,13 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   useEffect(() => {
     refetch();
   }, [regionSelection, currentSpotPage]);
-  if (isLoading) {
+  if (isLoading || isFetching || status === "loading") {
     return <Spinner />;
   }
-  if (error) {
+  if (error || status === "error") {
     return <div>{error}</div>;
   }
-  if (data) {
+  if (data && status === "success" && isFetching === false) {
     const spots = data.data.data;
     const processedSpots = removeDuplicates(spots);
     const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
