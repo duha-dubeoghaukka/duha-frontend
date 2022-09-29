@@ -28,10 +28,6 @@ function App() {
     mapModal: {
       isMapModalOpen,
       setIsMapModalOpen
-    },
-    bookmarkCount: {
-      counter,
-      increaseCounter
     }
   };
   return (
