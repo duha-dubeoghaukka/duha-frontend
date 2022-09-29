@@ -4,20 +4,18 @@ import Layout from "../../components/layout/Layout";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import Item from "../../components/mainpage/Item";
-import { useQuery } from "react-query";
 import { bookmarkAPI } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
+import { useQuery } from "react-query";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
-  const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
-    console.dir("Fetching new data...");
+  const { isLoading, error, data, refetch } = useQuery(["bookmarkedTouristSpots"], () => {
     return bookmarkAPI.get("/touristspot");
   });
-  console.dir("TouristSpotsPage rerendered");
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
@@ -29,6 +27,9 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
   }, []);
+  useEffect(() => {
+    refetch();
+  }, [regionSelection, currentSpotPage]);
   if (isLoading) {
     return <Spinner />;
   }
