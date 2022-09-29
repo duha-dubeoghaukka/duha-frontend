@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
   const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
+    console.dir("Fetching new data...");
     return bookmarkAPI.get("/touristspot");
   });
   console.dir("TouristSpotsPage rerendered");
