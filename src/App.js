@@ -10,7 +10,6 @@ function App() {
   const [currentSpotPage, setCurrentSpotPage] = useState(1);
   const [currentRestaurantPage, setCurrentRestaurantPage] = useState(1);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
-  const [spotBookmarks, setSpotBookmarks] = useState([]);
   const globalStates = {
     regionSelection: {
       selectedRegion,
@@ -27,10 +26,6 @@ function App() {
     mapModal: {
       isMapModalOpen,
       setIsMapModalOpen
-    },
-    spotsBookmarks: {
-      spotBookmarks,
-      setSpotBookmarks
     }
   };
   return (
