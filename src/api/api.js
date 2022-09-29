@@ -61,6 +61,9 @@ export const socialLoginAPIs = {
 export const mypageAPIs = {
   getFavoritesNum: () => {
     return api.get("/auth/mypage");
+  },
+  getFavoritesSpot: () => {
+    return api.get("http://13.125.222.172/auth/mypage/touristspot/bookmark");
   }
 };
 
