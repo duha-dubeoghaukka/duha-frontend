@@ -94,10 +94,10 @@ const Layout = props => {
                 <h2 className="font-bold text-[20px] ml-[6px]">마이 페이지</h2>
               </div>
               <div className="text-base ml-[38px] flex flex-col">
-                <Link to="/" className={`cursor-pointer ${category === "favorites" && "text-green1"}`}>
+                <Link to="/" className={`cursor-pointer ${category === "myschedule" && "text-green1"}`}>
                   내 일정
                 </Link>
-                <Link to="/" className={`cursor-pointer ${category === "favorites" && "text-green1"}`}>
+                <Link to="/mypage/favorites/list" className={`cursor-pointer ${category === "favorites" && "text-green1"}`}>
                   즐겨찾기한 목록
                 </Link>
                 <Link to="/" className={`cursor-pointer ${category === "edit" && "text-green1"}`}>
@@ -115,7 +115,7 @@ const Layout = props => {
         <Link to="/schedule">
           <CalendarMonthIcon fontSize="large" className="cursor-pointer" />
         </Link>
-        <Link to="/">
+        <Link to="/mypage/favorites/list">
           <PersonIcon fontSize="large" className="cursor-pointer" />
         </Link>
       </div>

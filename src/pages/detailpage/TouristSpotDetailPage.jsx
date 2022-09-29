@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
@@ -15,9 +15,13 @@ import { Autoplay, Pagination } from "swiper";
 import WestIcon from "@mui/icons-material/West";
 import GlobalState from "../../shared/GlobalState";
 import Map from "./mappage/Map";
+import { useLocation } from "react-router-dom";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const TouristSpotDetailPage = () => {
+  const navigate = useNavigate();
+  const { state } = useLocation();
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data } = useQuery(["touristSpotDetail"], () => {
@@ -46,10 +50,10 @@ const TouristSpotDetailPage = () => {
     const { address, likeNum, name, phone, reviews, imgUrl } = spot;
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
-        <Link to="/spots" className="flex items-center mb-3">
-          <WestIcon className="mr-3" />
+        <div className="flex items-center mb-3">
+          <WestIcon className="mr-3" onClick={() => navigate(-1)} />
           <p className="text-[16px] text-black1">뒤로 가기</p>
-        </Link>
+        </div>
         <div className="flex justify-between mb-[20px]">
           <div className="flex items-center">
             <h2 className="font-bold text-[26px] mr-3">{name}</h2>
@@ -57,7 +61,11 @@ const TouristSpotDetailPage = () => {
             <p className="text-[16px] ml-1">{likeNum}</p>
           </div>
           <div className="cursor-pointer">
-            <StarOutlineRoundedIcon fontSize="large" />
+            {state ? (
+              <StarRoundedIcon fontSize="large" sx={{ color: "#ffd740" }} />
+            ) : (
+              <StarOutlineRoundedIcon fontSize="large" sx={{ color: "#ffd740" }} />
+            )}
           </div>
         </div>
         <div>
