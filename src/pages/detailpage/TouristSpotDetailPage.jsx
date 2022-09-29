@@ -43,7 +43,7 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, touristSpotReviews, imgUrl } = spot;
+    const { address, likeNum, name, phone, reviews, imgUrl } = spot;
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <Link to="/spots" className="flex items-center mb-3">
@@ -107,7 +107,7 @@ const TouristSpotDetailPage = () => {
               <h3 className="text-[26px]">리뷰</h3>
             </div>
             <div className="grid gap-[44px]">
-              {touristSpotReviews.map(review => {
+              {reviews.map(review => {
                 return <ReviewItem key={review.id} data={review} />;
               })}
             </div>
@@ -117,7 +117,7 @@ const TouristSpotDetailPage = () => {
           <div>
             <div className="fixed top-0 left-0 z-10 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
             <div className="fixed z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
-              <Map address={address} />
+              <Map address={address} name={name} />
             </div>
           </div>
         )}
