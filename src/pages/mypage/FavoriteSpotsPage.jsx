@@ -7,7 +7,7 @@ function FavoriteSpotsPage() {
   const [spotData, setSpotData] = useState();
 
   useEffect(() => {
-    mypageAPIs.getFavoritesSpot().then(res => setSpotData(res.data.data));
+    mypageAPIs.getFavoriteLists("touristspot").then(res => setSpotData(res.data.data));
   }, []);
 
   return (
