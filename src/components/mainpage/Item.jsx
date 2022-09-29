@@ -18,7 +18,8 @@ const Item = ({ data }) => {
       bookmarkAPI
         .get("/auth/touristspot/bookmark/" + id)
         .then(response => {
-          console.dir(response);
+          const nextBookmarked = response.data.data.bookmarked;
+          setIsBookmarked(nextBookmarked);
         })
         .catch(error => {
           alert(error);

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const bookmarkAPI = axios.create({
-  baseURL: "http://3.35.17.60",
+  baseURL: "http://13.125.222.172",
   headers: {
     "Content-Type": "application/json;charset=UTF-8",
     accept: "application/json,"
