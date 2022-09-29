@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import MainPage from "../pages/mainpage/MainPage";
 import NotFound from "../pages/404/NotFound";
-import TouristSpotsPage from "../pages/mainpage/TouristSpotsPage";
 import SignUp from "../pages/user/SignUp";
 import ScheduleRegisterPage from "../pages/schedule/ScheduleRegisterPage";
 import LogIn from "../pages/user/LogIn";
@@ -16,17 +15,19 @@ import AddRestaurant from "../pages/schedule/AddRestaurant";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
 import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
+import TouristSpotsPageContainer from "../pages/mainpage/TouristSpotsPageContainer";
 import FavoriteCoursePage from "../pages/mypage/FavoriteCoursePage";
 import FavoriteSpotsPage from "../pages/mypage/FavoriteSpotsPage";
 import FavoriteRestaurantsPage from "../pages/mypage/FavoriteRestaurantsPage";
 import FavoriteAccommodationPage from "../pages/mypage/FavoriteAccommodationPage";
+
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/spots" element={<TouristSpotsPage />} />
+        <Route path="/spots" element={<TouristSpotsPageContainer />} />
         <Route path="/spots/:spotID" element={<TouristSpotDetailPage />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/signup" element={<SignUp />} />

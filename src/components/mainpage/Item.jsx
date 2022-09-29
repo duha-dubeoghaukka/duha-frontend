@@ -5,7 +5,7 @@ import { bookmarkAPI } from "../../api/api";
 import Bookmark from "./Bookmark";
 import { useState } from "react";
 
-const Item = ({ data }) => {
+const Item = ({ data, counter, setCounter }) => {
   const navigator = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
@@ -21,6 +21,7 @@ const Item = ({ data }) => {
           if (response.data.isSuccess) {
             const nextBookmarked = response.data.data.bookmarked;
             setIsBookmarked(nextBookmarked);
+            setCounter(previousCounter => previousCounter + 1);
           } else {
             alert(response.data.message);
           }
