@@ -6,7 +6,7 @@ import Bookmark from "./Bookmark";
 import { useState } from "react";
 import updateLocalStorage from "../../utils/updateLocalStorage";
 
-const Item = ({ data }) => {
+const Item = ({ data, counter, setCounter }) => {
   const navigator = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
@@ -23,6 +23,7 @@ const Item = ({ data }) => {
             const nextBookmarked = response.data.data.bookmarked;
             setIsBookmarked(nextBookmarked);
             updateLocalStorage(id, nextBookmarked);
+            setCounter(previousCounter => previousCounter + 1);
           } else {
             alert(response.data.message);
           }

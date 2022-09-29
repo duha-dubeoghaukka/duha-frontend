@@ -5,17 +5,18 @@ import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import Item from "../../components/mainpage/Item";
 import { useQuery } from "react-query";
-import { api } from "../../api/api";
+import { bookmarkAPI } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 
-const TouristSpotsPage = () => {
+const TouristSpotsPage = ({ counter, setCounter }) => {
   const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
-    return api.get("/touristspot");
+    return bookmarkAPI.get("/touristspot");
   });
+  console.dir("TouristSpotsPage rerendered");
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
@@ -83,7 +84,7 @@ const TouristSpotsPage = () => {
         </div>
         <div className="mb-0">
           {currentSpots.map(spot => {
-            return <Item key={spot.id} data={spot} />;
+            return <Item key={spot.id} data={spot} counter={counter} setCounter={setCounter} />;
           })}
         </div>
         <div className="flex justify-center">
