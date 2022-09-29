@@ -22,6 +22,7 @@ import FavoriteRestaurantsPage from "../pages/mypage/FavoriteRestaurantsPage";
 import FavoriteAccommodationPage from "../pages/mypage/FavoriteAccommodationPage";
 import RestaurantsPage from "../pages/mainpage/restaurants/RestaurantsPage";
 import RestaurantDetailPage from "../pages/detailpage/restaurant/RestaurantDetailPage";
+import AccommodationsPage from "../pages/mainpage/Accommodations/AccommodationsPage";
 
 const Router = () => {
   return (
@@ -30,6 +31,7 @@ const Router = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/spots" element={<TouristSpotsPageContainer />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
+        <Route path="/accommodations" element={<AccommodationsPage />} />
         <Route path="/spots/:spotID" element={<TouristSpotDetailPage />} />
         <Route path="/restaurants/:restaurantID" element={<RestaurantDetailPage />} />
         <Route path="/weather" element={<Weather />} />

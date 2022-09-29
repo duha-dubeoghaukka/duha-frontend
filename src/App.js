@@ -10,6 +10,7 @@ function App() {
   const [selectedRegion, setSelectedRegion] = useState("전체");
   const [currentSpotPage, setCurrentSpotPage] = useState(1);
   const [currentRestaurantPage, setCurrentRestaurantPage] = useState(1);
+  const [currentAccommodationPage, setCurrentAccommodationPage] = useState(1);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const [counter, increaseCounter] = useCounter();
   const globalStates = {
@@ -24,6 +25,10 @@ function App() {
     restaurantPageSelection: {
       currentRestaurantPage,
       setCurrentRestaurantPage
+    },
+    accommodationPageSelection: {
+      currentAccommodationPage,
+      setCurrentAccommodationPage
     },
     mapModal: {
       isMapModalOpen,
