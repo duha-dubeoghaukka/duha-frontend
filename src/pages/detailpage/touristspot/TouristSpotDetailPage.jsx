@@ -16,13 +16,14 @@ import Map from "../mappage/Map";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { api } from "../../../api/api";
 import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
+import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
-  const { isLoading, error, data } = useQuery(["touristSpotDetail"], () => {
+  const { isLoading, error, data, refetch } = useQuery(["touristSpotDetail"], () => {
     return api.get("/touristspot/" + spotID);
   });
   const { spotID } = useParams();
@@ -36,6 +37,26 @@ const TouristSpotDetailPage = () => {
   };
   const backdropClickHandler = () => {
     setIsMapModalOpen(false);
+  };
+  const bookmarkHandler = () => {
+    const isLoggedIn = checkIsLoggedIn();
+    if (isLoggedIn) {
+      api
+        .get("/auth/touristspot/bookmark/" + spotID)
+        .then(response => {
+          if (response.data.isSuccess) {
+            const nextBookmark = response.data.data.bookmarked;
+            refetch();
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
+    } else {
+      alert("로그인을 먼저 해주세요");
+    }
   };
   if (isLoading) {
     return <Spinner />;
@@ -58,7 +79,7 @@ const TouristSpotDetailPage = () => {
             <FavoriteRoundedIcon sx={{ color: "red" }} />
             <p className="text-[16px] ml-1">{likeNum}</p>
           </div>
-          <TouristSpotDetailBookmark bookmarked={bookmarked} />
+          <TouristSpotDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
         </div>
         <div>
           <Swiper
