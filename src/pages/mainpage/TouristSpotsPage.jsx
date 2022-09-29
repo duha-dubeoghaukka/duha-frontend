@@ -13,7 +13,7 @@ import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 
 const TouristSpotsPage = () => {
-  let { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
+  const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
     return api.get("/touristspot");
   });
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
@@ -23,13 +23,6 @@ const TouristSpotsPage = () => {
     setSelectedRegion(event.target.value);
     setCurrentSpotPage(1);
   };
-  useEffect(() => {
-    const fetchSpots = async () => {
-      const response = await api.get("/touristspot");
-      data = response;
-    };
-    fetchSpots();
-  }, [regionSelection]);
   useEffect(() => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
