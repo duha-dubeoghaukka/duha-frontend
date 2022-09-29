@@ -5,7 +5,7 @@ import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import Item from "../../components/mainpage/Item";
 import { useQuery } from "react-query";
-import { bookmarkAPI } from "../../api/api";
+import { api } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
@@ -14,10 +14,9 @@ import { Link } from "react-router-dom";
 
 const TouristSpotsPage = () => {
   const { isLoading, error, data } = useQuery(["bookmarkedTouristSpots"], () => {
-    return bookmarkAPI.get("/touristspot");
+    return api.get("/touristspot");
   });
-  const { regionSelection, spotPageSelection, spotsBookmarks } = useContext(GlobalState);
-  const { spotBookmarks, setSpotBookmarks } = spotsBookmarks;
+  const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
   const selectChangeHandler = event => {
@@ -37,13 +36,6 @@ const TouristSpotsPage = () => {
   if (data) {
     const spots = data.data.data;
     const processedSpots = removeDuplicates(spots);
-    for (const spot of processedSpots) {
-      for (const bookmark of spotBookmarks) {
-        if (spot.id === bookmark.id) {
-          spot.bookmarked = bookmark.bookmarked;
-        }
-      }
-    }
     const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
     const filteredSpots = filterItems(sortedSpots, selectedRegion);
     const splittedSpots = arraySplitter(filteredSpots);

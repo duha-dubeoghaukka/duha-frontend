@@ -33,6 +33,24 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
   const nights = newDate[0];
   const allDays = newDate[1];
 
+  const onDeleteSchedule = tripId => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      scheduleAPIs
+        .deleteSchedule(tripId)
+        .then(res => {
+          if (res.data.isSuccess) {
+            alert("삭제가 완료되었습니다!");
+            window.location.reload();
+          } else {
+            alert("삭제가 취소되었습니다!");
+          }
+        })
+        .catch(err => {
+          console.log("err", err);
+        });
+    }
+  };
+
   const navigate = useNavigate();
 
   const setItem = () => {
@@ -41,14 +59,14 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
   };
 
   return (
-    <div
-      className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row"
-      onClick={() => {
-        navigate("course");
-        setItem();
-      }}
-    >
-      <div className="flex space-x-28">
+    <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row">
+      <div
+        className="pr-36"
+        onClick={() => {
+          navigate("course");
+          setItem();
+        }}
+      >
         <div className="flex flex-col m-5 ">
           <span className="mt-2	font-semibold">
             {nights + "박" + allDays + "일" + " "}
@@ -58,10 +76,9 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
             {startDate}~{endDate}
           </span>
         </div>
-        <div className="flex flex-row m-5 ">
-          <DeleteOutlineIcon className="mt-5 cursor-pointer" />
-          <span className="mt-6 ml-1 font-normal text-sm ">삭제</span>
-        </div>
+      </div>
+      <div className="flex flex-row mt-5 ">
+        <DeleteOutlineIcon className="mt-5 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
       </div>
     </div>
   );

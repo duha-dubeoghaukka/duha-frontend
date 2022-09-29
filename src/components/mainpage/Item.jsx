@@ -1,16 +1,13 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate } from "react-router-dom";
-import Bookmark from "./Bookmark";
-import { useContext, useState } from "react";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { bookmarkAPI } from "../../api/api";
-import GlobalState from "../../shared/GlobalState";
+import Bookmark from "./Bookmark";
+import { useState } from "react";
 
-const Item = props => {
-  const { spotsBookmarks } = useContext(GlobalState);
-  const { spotBookmarks, setSpotBookmarks } = spotsBookmarks;
+const Item = ({ data }) => {
   const navigator = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = props.data;
+  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const itemClickHandler = () => {
     return navigator("/spots/" + id);
@@ -18,37 +15,21 @@ const Item = props => {
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
-      const promise = bookmarkAPI.get("/auth/touristspot/bookmark/" + id);
-      promise
+      bookmarkAPI
+        .get("/auth/touristspot/bookmark/" + id)
         .then(response => {
           if (response.data.isSuccess) {
-            setIsBookmarked(previousIsBookMarked => !previousIsBookMarked);
-            if (spotBookmarks.find(bookmark => bookmark.id === id)) {
-              const spotBookmarksCopy = [...spotBookmarks];
-              const mutatedBookmarks = spotBookmarksCopy.map(bookmark => {
-                if (bookmark.id === id) {
-                  bookmark.bookmarked = !bookmark.bookmarked;
-                }
-                return bookmark;
-              });
-              setIsBookmarked(mutatedBookmarks);
-            } else {
-              const spotBookmarksCopy = [...spotBookmarks];
-              spotBookmarksCopy.push({
-                id,
-                bookmarked: !bookmarked
-              });
-              setSpotBookmarks(spotBookmarksCopy);
-            }
+            const nextBookmarked = response.data.data.bookmarked;
+            setIsBookmarked(nextBookmarked);
           } else {
-            alert(response.error);
+            alert(response.data.message);
           }
         })
         .catch(error => {
           alert(error);
         });
     } else {
-      alert("로그인을 먼저 해주세요");
+      alert("로그인을 먼저 해주세요.");
     }
   };
   return (
