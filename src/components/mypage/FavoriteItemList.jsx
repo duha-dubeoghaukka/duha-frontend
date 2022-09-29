@@ -14,19 +14,19 @@ function FavoriteItemList() {
   const data = [
     {
       title: `즐겨찾기한 일정 ${favoriteScheduleNum}개`,
-      route: ``
+      route: `/mypage/favorites/course`
     },
     {
       title: `즐겨찾기한 관광 ${favoriteSpotNum}개`,
-      route: ``
+      route: `/mypage/favorites/spots`
     },
     {
       title: `즐겨찾기한 맛집 ${favoriteRestaurantNum}개`,
-      route: ``
+      route: `/mypage/favorites/restaurant`
     },
     {
       title: `즐겨찾기한 숙소 ${favoriteAccommodateNum}개`,
-      route: ""
+      route: `/mypage/favorites/accommodation`
     }
   ];
 
