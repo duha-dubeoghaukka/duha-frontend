@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import CategoryItem from "../../components/mypage/CategoryItem";
+import Spinner from "../../components/Spinner/Spinner";
 
 function FavoriteSpotsPage() {
   const [spotData, setSpotData] = useState();
@@ -17,9 +18,13 @@ function FavoriteSpotsPage() {
           {spotData?.length ? "000님이 즐겨찾기하신 관광지 목록을 확인해보세요!" : "관광지 즐겨찾기를 추가해보세요! "}
         </span>
       </div>
-      {spotData?.map(item => {
-        return <CategoryItem key={item.id} item={item} category={`spots`} />;
-      })}
+      {spotData ? (
+        spotData?.map(item => {
+          return <CategoryItem key={item.id} item={item} category={`spots`} />;
+        })
+      ) : (
+        <Spinner />
+      )}
     </Layout>
   );
 }
