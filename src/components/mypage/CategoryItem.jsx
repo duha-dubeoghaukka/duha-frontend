@@ -3,7 +3,7 @@ import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate } from "react-router-dom";
 
-function CategoryItem({ item, category, categoryName }) {
+function CategoryItem({ item, category }) {
   const navigate = useNavigate();
 
   const { id, bookmarked, description, likeNum, name, region, thumbnailUrl } = item;
