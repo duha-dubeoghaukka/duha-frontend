@@ -20,6 +20,7 @@ import FavoriteCoursePage from "../pages/mypage/FavoriteCoursePage";
 import FavoriteSpotsPage from "../pages/mypage/FavoriteSpotsPage";
 import FavoriteRestaurantsPage from "../pages/mypage/FavoriteRestaurantsPage";
 import FavoriteAccommodationPage from "../pages/mypage/FavoriteAccommodationPage";
+import RestaurantsPage from "../pages/mainpage/restaurants/RestaurantsPage";
 
 const Router = () => {
   return (
@@ -27,6 +28,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/spots" element={<TouristSpotsPageContainer />} />
+        <Route path="/restaurants" element={<RestaurantsPage />} />
         <Route path="/spots/:spotID" element={<TouristSpotDetailPage />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/signup" element={<SignUp />} />

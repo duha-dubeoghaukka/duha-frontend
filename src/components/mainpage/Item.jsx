@@ -5,18 +5,25 @@ import { bookmarkAPI } from "../../api/api";
 import Bookmark from "./Bookmark";
 import { useState } from "react";
 
-const Item = ({ data, counter, setCounter }) => {
+const Item = ({ data, counter, setCounter, category }) => {
   const navigator = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const itemClickHandler = () => {
-    return navigator("/spots/" + id);
+    switch (category) {
+      case "touristspot":
+        return navigator("/spots/" + id);
+        break;
+      case "restaurant":
+        return navigator("/restaurants/" + id);
+        break;
+    }
   };
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
       bookmarkAPI
-        .get("/auth/touristspot/bookmark/" + id)
+        .get(`/auth/${category}/bookmark/` + id)
         .then(response => {
           if (response.data.isSuccess) {
             const nextBookmarked = response.data.data.bookmarked;
