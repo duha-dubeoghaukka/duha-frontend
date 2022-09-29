@@ -4,7 +4,6 @@ import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { bookmarkAPI } from "../../api/api";
 import Bookmark from "./Bookmark";
 import { useState } from "react";
-import updateLocalStorage from "../../utils/updateLocalStorage";
 
 const Item = ({ data, counter, setCounter }) => {
   const navigator = useNavigate();
@@ -22,7 +21,6 @@ const Item = ({ data, counter, setCounter }) => {
           if (response.data.isSuccess) {
             const nextBookmarked = response.data.data.bookmarked;
             setIsBookmarked(nextBookmarked);
-            updateLocalStorage(id, nextBookmarked);
             setCounter(previousCounter => previousCounter + 1);
           } else {
             alert(response.data.message);
