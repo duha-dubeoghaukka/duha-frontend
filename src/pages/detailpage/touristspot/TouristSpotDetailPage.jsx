@@ -1,23 +1,21 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
-import Layout from "../../components/layout/Layout";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import Layout from "../../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 import MapIcon from "@mui/icons-material/Map";
-import ReviewItem from "./ReviewItem";
+import ReviewItem from "../ReviewItem";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
-import { instance } from "../../api/api";
-import Spinner from "../../components/Spinner/Spinner";
+import Spinner from "../../../components/Spinner/Spinner";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
 import WestIcon from "@mui/icons-material/West";
-import GlobalState from "../../shared/GlobalState";
-import Map from "./mappage/Map";
-import { useLocation } from "react-router-dom";
+import GlobalState from "../../../shared/GlobalState";
+import Map from "../mappage/Map";
 // import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import { api } from "../../../api/api";
+import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
@@ -25,7 +23,7 @@ const TouristSpotDetailPage = () => {
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data } = useQuery(["touristSpotDetail"], () => {
-    return instance.get("/touristspot/" + spotID);
+    return api.get("/touristspot/" + spotID);
   });
   const { spotID } = useParams();
   useEffect(() => {
@@ -47,7 +45,7 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl } = spot;
+    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked } = spot;
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="flex items-center mb-3">
@@ -60,13 +58,7 @@ const TouristSpotDetailPage = () => {
             <FavoriteRoundedIcon sx={{ color: "red" }} />
             <p className="text-[16px] ml-1">{likeNum}</p>
           </div>
-          <div className="cursor-pointer">
-            {state ? (
-              <StarRoundedIcon fontSize="large" sx={{ color: "#ffd740" }} />
-            ) : (
-              <StarOutlineRoundedIcon fontSize="large" sx={{ color: "#ffd740" }} />
-            )}
-          </div>
+          <TouristSpotDetailBookmark bookmarked={bookmarked} />
         </div>
         <div>
           <Swiper
