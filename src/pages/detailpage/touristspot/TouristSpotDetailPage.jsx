@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
@@ -13,14 +13,12 @@ import { Autoplay, Pagination } from "swiper";
 import WestIcon from "@mui/icons-material/West";
 import GlobalState from "../../../shared/GlobalState";
 import Map from "../mappage/Map";
-// import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { api } from "../../../api/api";
 import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data, refetch } = useQuery(["touristSpotDetail"], () => {
