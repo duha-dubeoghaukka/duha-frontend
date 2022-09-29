@@ -15,12 +15,11 @@ import AddRestaurant from "../pages/schedule/AddRestaurant";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
 import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
-import TouristSpotsPageContainer from "../pages/mainpage/TouristSpotsPageContainer";
+import TouristSpotsPageContainer from "../pages/mainpage/touristspots/TouristSpotsPageContainer";
 import FavoriteCoursePage from "../pages/mypage/FavoriteCoursePage";
 import FavoriteSpotsPage from "../pages/mypage/FavoriteSpotsPage";
 import FavoriteRestaurantsPage from "../pages/mypage/FavoriteRestaurantsPage";
 import FavoriteAccommodationPage from "../pages/mypage/FavoriteAccommodationPage";
-
 
 const Router = () => {
   return (

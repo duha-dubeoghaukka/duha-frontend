@@ -1,14 +1,14 @@
-import regionNames from "../../utils/regionNames.js";
-import RegionButton from "../../components/mainpage/RegionButton";
-import Layout from "../../components/layout/Layout";
+import regionNames from "../../../utils/regionNames.js";
+import RegionButton from "../../../components/mainpage/RegionButton";
+import Layout from "../../../components/layout/Layout";
 import { useContext, useEffect } from "react";
-import GlobalState from "../../shared/GlobalState";
-import Item from "../../components/mainpage/Item";
-import { bookmarkAPI } from "../../api/api";
-import { removeDuplicates } from "../../utils/removeDuplicates";
-import { filterItems } from "../../utils/filterItems";
-import { arraySplitter } from "../../utils/arraySplitter";
-import Spinner from "../../components/Spinner/Spinner";
+import GlobalState from "../../../shared/GlobalState";
+import Item from "../../../components/mainpage/Item";
+import { bookmarkAPI } from "../../../api/api";
+import { removeDuplicates } from "../../../utils/removeDuplicates";
+import { filterItems } from "../../../utils/filterItems";
+import { arraySplitter } from "../../../utils/arraySplitter";
+import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 
