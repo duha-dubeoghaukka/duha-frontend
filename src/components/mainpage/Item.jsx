@@ -3,10 +3,12 @@ import { useNavigate } from "react-router-dom";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { bookmarkAPI } from "../../api/api";
 import Bookmark from "./Bookmark";
+import { useState } from "react";
 
 const Item = ({ data }) => {
   const navigator = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const itemClickHandler = () => {
     return navigator("/spots/" + id);
   };
@@ -50,7 +52,7 @@ const Item = ({ data }) => {
           alt={name}
           onClick={itemClickHandler}
         />
-        <Bookmark bookmarked={false} bookmarkHandler={bookmarkHandler} />
+        <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
       </div>
     </div>
   );
