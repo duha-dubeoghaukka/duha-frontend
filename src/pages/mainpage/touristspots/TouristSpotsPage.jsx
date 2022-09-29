@@ -13,7 +13,7 @@ import { useQuery } from "react-query";
 import { api } from "../../../api/api";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
-  const { isLoading, error, data, refetch } = useQuery(["bookmarkedTouristSpots"], () => {
+  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
     return api.get("/touristspot");
   });
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
@@ -30,13 +30,13 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   useEffect(() => {
     refetch();
   }, [regionSelection, currentSpotPage]);
-  if (isLoading) {
+  if (isLoading || isFetching || status === "loading") {
     return <Spinner />;
   }
-  if (error) {
+  if (error || status === "error") {
     return <div>{error}</div>;
   }
-  if (data) {
+  if (data && status === "success" && isFetching === false) {
     const spots = data.data.data;
     const processedSpots = removeDuplicates(spots);
     const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
