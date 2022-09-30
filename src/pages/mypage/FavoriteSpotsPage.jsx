@@ -4,10 +4,13 @@ import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import CategoryItem from "../../components/mypage/CategoryItem";
 import Spinner from "../../components/Spinner/Spinner";
+import decodeToken from "../../utils/decodeToken";
 
 function FavoriteSpotsPage() {
   const [spotData, setSpotData] = useState();
   const navigate = useNavigate();
+  const token = localStorage.getItem("authorization");
+  const nickName = decodeToken(token);
 
   useEffect(() => {
     mypageAPIs
@@ -25,7 +28,7 @@ function FavoriteSpotsPage() {
     <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
       <div className="grid place-items-center m-10">
         <span className="font-medium text-xl">
-          {spotData?.length ? "000님이 즐겨찾기하신 관광지 목록을 확인해보세요!" : "관광지 즐겨찾기를 추가해보세요! "}
+          {spotData?.length ? `${nickName}님이 즐겨찾기하신 관광지 목록을 확인해보세요!` : `관광지 즐겨찾기를 추가해보세요!`}
         </span>
       </div>
       {spotData ? (

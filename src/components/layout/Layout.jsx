@@ -4,6 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuIcon from "@mui/icons-material/Menu";
+import decodeToken from "../../utils/decodeToken";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,13 +25,17 @@ const Layout = props => {
     }
   };
 
+  const nickName = decodeToken(token);
+
   return (
     <div className="mb-[100px]">
       <div className="fixed w-full py-5 bg-green1 z-10 flex justify-between md:grid md:grid-cols-4 md:justify-items-center">
         <button className="mx-2 text-white1 hidden md:block" onClick={() => setIsOpen(!isOpen)}>
           <MenuIcon />
         </button>
-        <p className="font-semibold text-sm md:text-base text-white1 md:hidden mx-4">반가워요, 익명의 뚜벅러님!</p>
+        <p className="font-semibold text-sm md:text-base text-white1 md:hidden mx-4">
+          {nickName ? `반가워요, ${nickName}뚜벅러님!` : `로그인을 해주세요!`}
+        </p>
         <h1 className="text-white1 font-semibold text-base hidden md:block col-span-2">{title}</h1>
         <div className="flex">
           <button className="font-semibold text-sm md:text-base text-white1 mx-4" onClick={loginHandler}>
