@@ -20,7 +20,7 @@ function FavoriteAccommodationPage() {
       </div>
       {accommodationData ? (
         accommodationData?.map(item => {
-          return <CategoryItem key={item.id} item={item} category={`restaurants`} />;
+          return <CategoryItem key={item.id} item={item} category={`accommodations`} />;
         })
       ) : (
         <Spinner />
