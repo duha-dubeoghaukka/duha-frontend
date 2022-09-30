@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useNavigation } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import FavoriteItemList from "../../components/mypage/FavoriteItemList";
+import decodeToken from "../../utils/decodeToken";
 import { routingLoginPage } from "../../utils/routingLoginPage";
 
 function FavoritesListPage() {
