@@ -12,24 +12,24 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
 
-const TouristSpotsPage = ({ counter, setCounter }) => {
-  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
-    return api.get("/touristspot");
+const RestaurantsPage = () => {
+  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedRestaurants"], () => {
+    return api.get("/restaurant");
   });
-  const { regionSelection, spotPageSelection } = useContext(GlobalState);
+  const { regionSelection, restaurantPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
+  const { currentRestaurantPage, setCurrentRestaurantPage } = restaurantPageSelection;
   const selectChangeHandler = event => {
     setSelectedRegion(event.target.value);
-    setCurrentSpotPage(1);
+    setCurrentRestaurantPage(1);
   };
   useEffect(() => {
-    setCurrentSpotPage(1);
+    setCurrentRestaurantPage(1);
     setSelectedRegion("전체");
   }, []);
   useEffect(() => {
     refetch();
-  }, [regionSelection, currentSpotPage]);
+  }, [regionSelection, currentRestaurantPage]);
   if (isLoading || isFetching || status === "loading") {
     return <Spinner />;
   }
@@ -37,28 +37,30 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     return <div>{error}</div>;
   }
   if (data && status === "success" && isFetching === false) {
-    const spots = data.data.data;
-    const processedSpots = removeDuplicates(spots);
-    const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
-    const filteredSpots = filterItems(sortedSpots, selectedRegion);
-    const splittedSpots = arraySplitter(filteredSpots);
-    const numberOfPages = splittedSpots.length;
+    const restaurants = data.data.data;
+    const processedRestaurants = removeDuplicates(restaurants);
+    const sortedRestaurants = processedRestaurants.sort((a, b) => b.likeNum - a.likeNum);
+    const filteredRestaurants = filterItems(sortedRestaurants, selectedRegion);
+    const splittedRestaurants = arraySplitter(filteredRestaurants);
+    const numberOfPages = splittedRestaurants.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentSpots = splittedSpots[currentSpotPage - 1];
+    const currentRestaurants = splittedRestaurants[currentRestaurantPage - 1];
     const scrollToTop = () => {
       window.scrollTo({
         top: 0,
         behavior: "smooth"
       });
     };
+    const counter = undefined;
+    const setCounter = () => {};
     return (
-      <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
+      <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
         <div className="mb-[48px]">
           <ul className="flex flex-row justify-around">
-            <Link to="/spots" className="font-bold text-2xl text-green1 cursor-pointer">
+            <Link to="/spots" className="font-bold text-2xl cursor-pointer">
               관광
             </Link>
-            <Link to="/restaurants" className="font-bold text-2xl cursor-pointer">
+            <Link to="/restaurants" className="font-bold text-2xl text-green1 cursor-pointer">
               맛집
             </Link>
             <Link to="/accommodations" className="font-bold text-2xl cursor-pointer">
@@ -82,16 +84,16 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           </select>
         </div>
         <div className="mb-3">
-          <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
+          <p className="font-bold">총 {filteredRestaurants.length}건이 검색되었습니다.</p>
         </div>
         <div className="mb-0">
-          {currentSpots.map(spot => {
-            return <Item key={spot.id} data={spot} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+          {currentRestaurants.map(restaurant => {
+            return <Item key={restaurant.id} data={restaurant} category={"restaurant"} counter={counter} setCounter={setCounter} />;
           })}
         </div>
         <div className="flex justify-center">
           {pages.map(page => {
-            if (page === currentSpotPage) {
+            if (page === currentRestaurantPage) {
               return (
                 <div key={page} className="mr-1">
                   <p>{page}</p>
@@ -103,7 +105,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
                   key={page}
                   className="mr-1 cursor-pointer"
                   onClick={() => {
-                    setCurrentSpotPage(page);
+                    setCurrentRestaurantPage(page);
                   }}
                 >
                   <p className="underline text-sky-500">{page}</p>
@@ -120,4 +122,4 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   }
 };
 
-export default TouristSpotsPage;
+export default RestaurantsPage;

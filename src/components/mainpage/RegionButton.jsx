@@ -2,13 +2,15 @@ import { useContext } from "react";
 import GlobalState from "../../shared/GlobalState";
 
 const RegionButton = ({ name }) => {
-  const { regionSelection, spotPageSelection, restaurantPageSelection } = useContext(GlobalState);
+  const { regionSelection, spotPageSelection, restaurantPageSelection, accommodationPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { setCurrentSpotPage } = spotPageSelection;
   const { setCurrentRestaurantPage } = restaurantPageSelection;
+  const { setCurrentAccommodationPage } = accommodationPageSelection;
   const clickRegionHandler = () => {
     setCurrentSpotPage(1);
     setCurrentRestaurantPage(1);
+    setCurrentAccommodationPage(1);
     setSelectedRegion(name);
   };
   if (selectedRegion === name) {
