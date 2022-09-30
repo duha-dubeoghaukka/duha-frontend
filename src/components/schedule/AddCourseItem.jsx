@@ -10,11 +10,12 @@ const AddCourseItem = ({ data, setCounter, category }) => {
   const navigate = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
+
   const itemClickHandler = async () => {
     try {
       const { data } = await api.post(`/auth/course/details`, {
         courseId: currentCourseId,
-        category: "관광지",
+        category: "맛집",
         detailId: id
       });
       if (data.isSuccess) {
