@@ -3,11 +3,14 @@ import Layout from "../../components/layout/Layout";
 import { useNavigate } from "react-router-dom";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ScheduleCard from "../../components/schedule/ScheduleCard";
+import { routingLoginPage } from "../../utils/routingLoginPage";
 
 function ScheduleRegisterPage() {
   const navigate = useNavigate();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    routingLoginPage(navigate);
+  }, []);
 
   return (
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
