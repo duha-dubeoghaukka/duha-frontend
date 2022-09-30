@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import CategoryItem from "../../components/mypage/CategoryItem";
@@ -6,9 +7,18 @@ import Spinner from "../../components/Spinner/Spinner";
 
 function FavoriteAccommodationPage() {
   const [accommodationData, setAccommodationData] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    mypageAPIs.getFavoriteLists("accommodation").then(res => setAccommodationData(res.data.data));
+    mypageAPIs
+      .getFavoriteLists("accommodation")
+      .then(res => setAccommodationData(res.data.data))
+      .catch(err => {
+        if (err.response.data.code === "NEED_LOGIN") {
+          alert("로그인이 필요한 서비스입니다.");
+          navigate(`/login`);
+        }
+      });
   }, []);
 
   return (
