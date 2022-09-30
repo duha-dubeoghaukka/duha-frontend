@@ -3,7 +3,6 @@ import RegionButton from "../../components/mainpage/RegionButton";
 import Layout from "../../components/layout/Layout";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
-import Item from "../../components/mainpage/Item";
 import { useQuery } from "react-query";
 import { instance } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
@@ -11,6 +10,7 @@ import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
+import AddCourseItem from "../../components/schedule/AddCourseItem";
 
 const AddSpot = () => {
   const { isLoading, error, data } = useQuery(["touristSpots"], () => {
@@ -46,13 +46,13 @@ const AddSpot = () => {
       <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
         <div className="mb-[48px]">
           <ul className="flex flex-row justify-around">
-            <Link to="/schedule/course/addspot" className="font-bold text-2xl text-green1 cursor-pointer">
+            <Link to="/" className="font-bold text-2xl text-green1 cursor-pointer">
               관광
             </Link>
-            <Link to="/schedule/course/addrestaurant" className="font-bold text-2xl cursor-pointer">
+            <Link to="/" className="font-bold text-2xl cursor-pointer">
               맛집
             </Link>
-            <Link to="/accommodations" className="font-bold text-2xl cursor-pointer">
+            <Link to="/" className="font-bold text-2xl cursor-pointer">
               숙소
             </Link>
           </ul>
@@ -77,7 +77,7 @@ const AddSpot = () => {
         </div>
         <div className="mb-0">
           {currentSpots.map(spot => {
-            return <Item key={spot.id} data={spot} />;
+            return <AddCourseItem key={spot.id} data={spot} />;
           })}
         </div>
         <div className="flex justify-center">
