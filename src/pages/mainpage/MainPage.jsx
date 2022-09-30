@@ -33,7 +33,7 @@ function MainPage() {
     <Layout isLoggedIn={false} title="메인 페이지" highlight={"mainpage/home"}>
       <div className="grid place-items-center h-screen">
         <div className="flex flex-row m-3">
-          <span className="font-bold m-3">오늘 제주 날씨는</span>
+          <span className="font-bold m-3">현재 제주 날씨는</span>
           {temperature ? (
             <>
               <div>{selectIcon}</div>
