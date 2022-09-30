@@ -7,6 +7,7 @@ import useInput from "../../hooks/useInput";
 import Button from "../../components/button/Button";
 import { scheduleAPIs } from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import { routingLoginPage } from "../../utils/routingLoginPage";
 
 function Registration() {
   const navigate = useNavigate();
@@ -51,7 +52,9 @@ function Registration() {
     setEndDate(endDateFormat);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    routingLoginPage(navigate);
+  }, []);
 
   return (
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
