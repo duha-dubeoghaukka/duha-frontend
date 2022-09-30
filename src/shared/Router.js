@@ -11,7 +11,6 @@ import Weather from "../pages/weather/Weather";
 import FavoritesListPage from "../pages/mypage/FavoritesListPage";
 import TouristSpotDetailPage from "../pages/detailpage/touristspot/TouristSpotDetailPage";
 import AddSpot from "../pages/schedule/AddSpot";
-import AddRestaurant from "../pages/schedule/AddRestaurant";
 import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
 import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
@@ -44,7 +43,6 @@ const Router = () => {
         <Route path="/schedule/:tripId" element={<AddCourse />} />
         <Route path="/schedule/:tripId/edit" element={<AddCourse />} />
         <Route path="/schedule/:tripId/:currentCourseId/addspot" element={<AddSpot />} />
-        <Route path="/schedule/:tripId/:currentCourseId/addrestaurant" element={<AddRestaurant />} />
         <Route path="/mypage/favorites/list" element={<FavoritesListPage />} />
         <Route path="/mypage/favorites/course" element={<FavoriteCoursePage />} />
         <Route path="/mypage/favorites/spots" element={<FavoriteSpotsPage />} />
