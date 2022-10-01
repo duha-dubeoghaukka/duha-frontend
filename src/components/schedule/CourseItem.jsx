@@ -24,8 +24,8 @@ const CourseItem = ({ dayCourse, currentDay }) => {
   return (
     <div>
       {dayCourse.map(course => (
-        <div className="flex flex-col ">
-          <div className="flex items-center flex justify-between md:mb-3 mb-1" key={course.detailOrder}>
+        <div key={course.detailOrder}>
+          <div className="flex items-center flex justify-between md:mb-3 mb-1">
             <div className="flex items-center">
               <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">
                 {course.detailOrder}
@@ -42,7 +42,7 @@ const CourseItem = ({ dayCourse, currentDay }) => {
               }}
             />
           </div>
-          <KeyboardDoubleArrowDownIcon className="md:mb-3 mb-1 ml-3 text-green1" />
+          {course.detailOrder !== dayCourse.length && <KeyboardDoubleArrowDownIcon className="md:mb-3 mb-1 ml-3 text-green1" />}
         </div>
       ))}
     </div>

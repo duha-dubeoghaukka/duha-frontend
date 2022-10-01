@@ -68,7 +68,7 @@ const DayItem = () => {
       </div>
       <div className="course-layout">
         <CourseItem dayCourse={dayCourse} currentDay={currentDay} />
-        <button className="btn-primary-sm py-3" onClick={addCourseHandler}>
+        <button className="btn-primary-sm py-3 mt-4" onClick={addCourseHandler}>
           코스 추가
         </button>
         {/* <button className="btn-primary py-3 mt-4">저장 하기</button> */}
