@@ -9,12 +9,11 @@ import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddCourseItem from "../../components/schedule/AddCourseItem";
 
 const AddSpot = () => {
   const { tripId, currentCourseId } = useParams();
-  const navigate = useNavigate();
   const { isLoading, error, data } = useQuery(["touristSpots"], () => {
     return instance.get("/touristspot");
   });
