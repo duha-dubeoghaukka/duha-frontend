@@ -24,6 +24,7 @@ import RestaurantDetailPage from "../pages/detailpage/restaurant/RestaurantDetai
 import AccommodationsPage from "../pages/mainpage/Accommodations/AccommodationsPage";
 import AccommodationDetailPage from "../pages/detailpage/accommodation/AccommodationDetailPage";
 import AddRestaurant from "../pages/schedule/AddRestaurant";
+import AddAccommodation from "../pages/schedule/AddAccommodation";
 
 const Router = () => {
   return (
@@ -45,6 +46,7 @@ const Router = () => {
         <Route path="/schedule/:tripId/edit" element={<AddCourse />} />
         <Route path="/schedule/:tripId/:currentCourseId/addspot" element={<AddSpot />} />
         <Route path="/schedule/:tripId/:currentCourseId/addrestaurant" element={<AddRestaurant />} />
+        <Route path="/schedule/:tripId/:currentCourseId/addaccommodation" element={<AddAccommodation />} />
         <Route path="/mypage/favorites/list" element={<FavoritesListPage />} />
         <Route path="/mypage/favorites/course" element={<FavoriteCoursePage />} />
         <Route path="/mypage/favorites/spots" element={<FavoriteSpotsPage />} />

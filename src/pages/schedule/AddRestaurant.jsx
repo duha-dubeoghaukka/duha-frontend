@@ -7,14 +7,13 @@ import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { api } from "../../api/api";
 import AddCourseItem from "../../components/schedule/AddCourseItem";
 
 const AddRestaurant = () => {
   const { tripId, currentCourseId } = useParams();
-  const navigate = useNavigate();
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedRestaurants"], () => {
     return api.get("/restaurant");
   });
@@ -65,7 +64,7 @@ const AddRestaurant = () => {
             <Link to={`/schedule/${tripId}/${currentCourseId}/addrestaurant`} className="font-bold text-2xl text-green1 cursor-pointer">
               맛집
             </Link>
-            <Link to={`/schedule/${tripId}/${currentCourseId}/addrestaurant`} className="font-bold text-2xl cursor-pointer">
+            <Link to={`/schedule/${tripId}/${currentCourseId}/addaccommodation`} className="font-bold text-2xl cursor-pointer">
               숙소
             </Link>
           </ul>

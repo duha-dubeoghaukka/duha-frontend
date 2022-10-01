@@ -76,7 +76,7 @@ const AddCourseItem = ({ data, setCounter, category }) => {
           alt={name}
           onClick={itemClickHandler}
         />
-        <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
+        {/* <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} /> */}
       </div>
     </div>
   );
