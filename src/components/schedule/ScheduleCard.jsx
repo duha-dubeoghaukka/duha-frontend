@@ -63,7 +63,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
       <div
         className="pr-36"
         onClick={() => {
-          navigate(`${id}`);
+          navigate(`${id}/1`);
           setItem();
         }}
       >

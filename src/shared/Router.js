@@ -42,10 +42,10 @@ const Router = () => {
         <Route path="/login" element={<LogIn />} />
         <Route path="/schedule" element={<ScheduleRegisterPage />} />
         <Route path="/schedule/register" element={<Registration />} />
-        <Route path="/schedule/:tripId" element={<AddCourse />} />
-        <Route path="/schedule/:tripId/:currentCourseId/addspot" element={<AddSpot />} />
-        <Route path="/schedule/:tripId/:currentCourseId/addrestaurant" element={<AddRestaurant />} />
-        <Route path="/schedule/:tripId/:currentCourseId/addaccommodation" element={<AddAccommodation />} />
+        <Route path="/schedule/:tripId/:day" element={<AddCourse />} />
+        <Route path="/schedule/:tripId/:day/:currentCourseId/addspot" element={<AddSpot />} />
+        <Route path="/schedule/:tripId/:day/:currentCourseId/addrestaurant" element={<AddRestaurant />} />
+        <Route path="/schedule/:tripId/:day/:currentCourseId/addaccommodation" element={<AddAccommodation />} />
         <Route path="/mypage/favorites/list" element={<FavoritesListPage />} />
         <Route path="/mypage/favorites/course" element={<FavoriteCoursePage />} />
         <Route path="/mypage/favorites/spots" element={<FavoriteSpotsPage />} />

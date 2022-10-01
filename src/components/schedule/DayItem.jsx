@@ -3,8 +3,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
 import CourseItem from "./CourseItem";
 import _, { find } from "lodash";
+import Spinner from "../Spinner/Spinner";
 
 const DayItem = () => {
+  const { day } = useParams();
   const [courses, setCourses] = useState(null);
   const [dayCourse, setDayCourse] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
@@ -17,6 +19,7 @@ const DayItem = () => {
     setDayCourse(clickDay.courseDetails);
     setCurrentDay(clickDay.day);
     setCurrentCourseId(clickDay.courseId);
+    navigate(`/schedule/${id}/${day}`);
   };
 
   const fetchData = async () => {
@@ -33,7 +36,7 @@ const DayItem = () => {
   const addCourseHandler = () => {
     if (dayCourse.length >= 10) {
       alert("코스등록은 하루에 10개까지 가능합니다.");
-    } else navigate(`${currentCourseId}/addspot`);
+    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addspot`);
   };
 
   useEffect(() => {
@@ -41,10 +44,10 @@ const DayItem = () => {
   }, []);
 
   useEffect(() => {
-    if (courses?.length > 1) onClickDay(1);
+    if (courses?.length > 1) onClickDay(Number(day));
   }, [courses]);
 
-  if (!courses) return <>로딩중...</>;
+  if (!courses) return <Spinner />;
 
   return (
     <div>

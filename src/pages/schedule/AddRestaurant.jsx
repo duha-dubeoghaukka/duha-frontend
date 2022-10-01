@@ -13,7 +13,7 @@ import { api } from "../../api/api";
 import AddCourseItem from "../../components/schedule/AddCourseItem";
 
 const AddRestaurant = () => {
-  const { tripId, currentCourseId } = useParams();
+  const { tripId, day, currentCourseId } = useParams();
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedRestaurants"], () => {
     return api.get("/restaurant");
   });
@@ -58,13 +58,16 @@ const AddRestaurant = () => {
       <Layout title="일정 등록" highlight={"schedule/create"}>
         <div className="mb-[48px]">
           <ul className="flex flex-row justify-around">
-            <Link to={`/schedule/${tripId}/${currentCourseId}/addspot`} className="font-bold text-2xl cursor-pointer">
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addspot`} className="font-bold text-2xl cursor-pointer">
               관광
             </Link>
-            <Link to={`/schedule/${tripId}/${currentCourseId}/addrestaurant`} className="font-bold text-2xl text-green1 cursor-pointer">
+            <Link
+              to={`/schedule/${tripId}/${day}/${currentCourseId}/addrestaurant`}
+              className="font-bold text-2xl text-green1 cursor-pointer"
+            >
               맛집
             </Link>
-            <Link to={`/schedule/${tripId}/${currentCourseId}/addaccommodation`} className="font-bold text-2xl cursor-pointer">
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addaccommodation`} className="font-bold text-2xl cursor-pointer">
               숙소
             </Link>
           </ul>
