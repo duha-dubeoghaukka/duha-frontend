@@ -51,7 +51,7 @@ const DayItem = () => {
 
   return (
     <div>
-      <div className="mt-4 mb-6 flex justify-center">
+      <div className="mt-4 mb-6 flex flex-wrap justify-center">
         {courses.map(course => {
           return (
             <div
