@@ -3,30 +3,34 @@ import RegionButton from "../../components/mainpage/RegionButton";
 import Layout from "../../components/layout/Layout";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
-import Item from "../../components/mainpage/Item";
 import { useQuery } from "react-query";
 import { instance } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import AddCourseItem from "../../components/schedule/AddCourseItem";
 
 const AddSpot = () => {
+  const { tripId, currentCourseId } = useParams();
   const { isLoading, error, data } = useQuery(["touristSpots"], () => {
     return instance.get("/touristspot");
   });
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
+
   const selectChangeHandler = event => {
     setSelectedRegion(event.target.value);
     setCurrentSpotPage(1);
   };
+
   useEffect(() => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
   }, []);
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -42,17 +46,18 @@ const AddSpot = () => {
     const numberOfPages = splittedSpots.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
     const currentSpots = splittedSpots[currentSpotPage - 1];
+
     return (
-      <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
+      <Layout title="일정 등록" highlight={"schedule/create"}>
         <div className="mb-[48px]">
           <ul className="flex flex-row justify-around">
-            <Link to="/schedule/course/addspot" className="font-bold text-2xl text-green1 cursor-pointer">
+            <Link to={`/schedule/${tripId}/${currentCourseId}/addspot`} className="font-bold text-2xl text-green1 cursor-pointer">
               관광
             </Link>
-            <Link to="/schedule/course/addrestaurant" className="font-bold text-2xl cursor-pointer">
+            <Link to={`/schedule/${tripId}/${currentCourseId}/addrestaurant`} className="font-bold text-2xl cursor-pointer">
               맛집
             </Link>
-            <Link to="/accommodations" className="font-bold text-2xl cursor-pointer">
+            <Link to={`/schedule/${tripId}/${currentCourseId}/addrestaurant`} className="font-bold text-2xl cursor-pointer">
               숙소
             </Link>
           </ul>
@@ -77,7 +82,7 @@ const AddSpot = () => {
         </div>
         <div className="mb-0">
           {currentSpots.map(spot => {
-            return <Item key={spot.id} data={spot} />;
+            return <AddCourseItem key={spot.id} data={spot} category="관광지" />;
           })}
         </div>
         <div className="flex justify-center">

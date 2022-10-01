@@ -1,13 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { api } from "../../api/api";
+import { useParams } from "react-router-dom";
 
-const CourseItem = () => {
+const CourseItem = ({ dayCourse, currentDay }) => {
+  const { tripId } = useParams();
+
+  const deleteCourse = async (id, category) => {
+    try {
+      const { data } = await api.delete(`/auth/course/details`, {
+        category,
+        detailId: id
+      });
+      if (data.isSuccess) {
+        alert("코스가 삭제되었습니다.");
+        navigate(`/schedule/${tripId}`);
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
+
+  if (dayCourse.length === 0) return <div className="mb-6 text-center font-bold text-base">{currentDay}일차에 등록된 코스가 없습니다.</div>;
   return (
-    <div className="flex items-center mb-9">
-      <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">1</div>
-      <div className="my-2 ml-9">
-        <div className="font-bold text-base">관광</div>
-        <div className="font-bold text-base">관광지 이름</div>
-      </div>
+    <div>
+      {dayCourse.map(course => (
+        <div className="flex items-center mb-9 flex justify-between" key={course.detailOrder}>
+          <div className="flex items-center">
+            <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">{course.detailOrder}</div>
+            <div className="my-2 ml-9">
+              <div className="font-semibold text-sm">{course.category}</div>
+              <div className="font-bold md:text-base text-sm">{course.name}</div>
+            </div>
+          </div>
+          <RemoveCircleOutlineIcon
+            className="cursor-pointer"
+            onClick={() => {
+              deleteCourse(course.id, course.category);
+            }}
+          />
+        </div>
+      ))}
     </div>
   );
 };
