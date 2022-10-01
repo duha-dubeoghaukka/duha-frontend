@@ -3,16 +3,15 @@ import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { api } from "../../api/api";
 import { useParams } from "react-router-dom";
 
-const CourseItem = ({ dayCourse, currentDay, currentCourseId }) => {
+const CourseItem = ({ dayCourse, currentDay }) => {
   const { tripId } = useParams();
 
-  const deleteCourse = async id => {
+  const deleteCourse = async (id, category) => {
     try {
       const { data } = await api.delete(`/auth/course/details`, {
-        category: "관광지",
+        category,
         detailId: id
       });
-      console.log(data);
       if (data.isSuccess) {
         alert("코스가 삭제되었습니다.");
         navigate(`/schedule/${tripId}`);
@@ -25,7 +24,6 @@ const CourseItem = ({ dayCourse, currentDay, currentCourseId }) => {
   };
 
   if (dayCourse.length === 0) return <div className="mb-6 text-center font-bold text-base">{currentDay}일차에 등록된 코스가 없습니다.</div>;
-
   return (
     <div>
       {dayCourse.map(course => (
@@ -40,7 +38,7 @@ const CourseItem = ({ dayCourse, currentDay, currentCourseId }) => {
           <RemoveCircleOutlineIcon
             className="cursor-pointer"
             onClick={() => {
-              deleteCourse(course.id);
+              deleteCourse(course.id, course.category);
             }}
           />
         </div>

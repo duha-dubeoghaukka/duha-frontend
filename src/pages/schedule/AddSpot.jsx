@@ -83,7 +83,7 @@ const AddSpot = () => {
         </div>
         <div className="mb-0">
           {currentSpots.map(spot => {
-            return <AddCourseItem key={spot.id} data={spot} />;
+            return <AddCourseItem key={spot.id} data={spot} category="관광지" />;
           })}
         </div>
         <div className="flex justify-center">

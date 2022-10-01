@@ -5,7 +5,7 @@ import CourseItem from "./CourseItem";
 import _, { find } from "lodash";
 
 const DayItem = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState(null);
   const [dayCourse, setDayCourse] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
@@ -21,8 +21,10 @@ const DayItem = () => {
 
   const fetchData = async () => {
     try {
-      const { data } = await api.get(`/auth/trip/${id}`);
-      setCourses(data.data.courses);
+      const {
+        data: { data }
+      } = await api.get(`/auth/trip/${id}`);
+      setCourses(data.courses);
     } catch (error) {
       throw new Error(error);
     }
@@ -31,6 +33,12 @@ const DayItem = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (courses?.length > 1) onClickDay(1);
+  }, [courses]);
+
+  if (!courses) return <>로딩중...</>;
 
   return (
     <div>
@@ -50,7 +58,7 @@ const DayItem = () => {
         })}
       </div>
       <div className="course-layout">
-        <CourseItem dayCourse={dayCourse} currentDay={currentDay} currentCourseId={currentCourseId} />
+        <CourseItem dayCourse={dayCourse} currentDay={currentDay} />
         <button className="btn-primary-sm py-3" onClick={() => navigate(`${currentCourseId}/addspot`)}>
           코스 추가
         </button>

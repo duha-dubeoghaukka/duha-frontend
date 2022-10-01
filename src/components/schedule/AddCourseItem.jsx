@@ -15,7 +15,7 @@ const AddCourseItem = ({ data, setCounter, category }) => {
     try {
       const { data } = await api.post(`/auth/course/details`, {
         courseId: currentCourseId,
-        category: "맛집",
+        category,
         detailId: id
       });
       if (data.isSuccess) {
