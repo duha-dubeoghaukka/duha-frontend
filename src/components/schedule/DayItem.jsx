@@ -4,6 +4,7 @@ import { api } from "../../api/api";
 import CourseItem from "./CourseItem";
 import _, { find } from "lodash";
 import Spinner from "../Spinner/Spinner";
+import MapContainer from "../../components/map/MapContainer";
 
 const DayItem = () => {
   const { day } = useParams();
@@ -67,6 +68,9 @@ const DayItem = () => {
         })}
       </div>
       <div className="course-layout">
+        <div className="bg-gray-200 md:h-[500px] h-[345px] mb-4 md:mb-6 shadow-md rounded-lg">
+          <MapContainer dayCourse={dayCourse} />
+        </div>
         <CourseItem dayCourse={dayCourse} currentDay={currentDay} />
         <button className="btn-primary-sm py-3 mt-4" onClick={addCourseHandler}>
           코스 추가
