@@ -30,6 +30,12 @@ const DayItem = () => {
     }
   };
 
+  const addCourseHandler = () => {
+    if (dayCourse.length >= 10) {
+      alert("코스등록은 하루에 10개까지 가능합니다.");
+    } else navigate(`${currentCourseId}/addspot`);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -59,7 +65,7 @@ const DayItem = () => {
       </div>
       <div className="course-layout">
         <CourseItem dayCourse={dayCourse} currentDay={currentDay} />
-        <button className="btn-primary-sm py-3" onClick={() => navigate(`${currentCourseId}/addspot`)}>
+        <button className="btn-primary-sm py-3" onClick={addCourseHandler}>
           코스 추가
         </button>
         {/* <button className="btn-primary py-3 mt-4">저장 하기</button> */}
