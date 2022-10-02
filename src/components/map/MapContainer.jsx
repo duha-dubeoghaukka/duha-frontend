@@ -46,7 +46,7 @@ const MapContainer = ({ dayCourse }) => {
   };
 
   return (
-    <Map // 지도를 표시할 Container
+    <Map
       center={{
         // 지도의 중심좌표
         lat: data[0].latlng.lat,
@@ -68,26 +68,11 @@ const MapContainer = ({ dayCourse }) => {
             { lat: 33.2522055, lng: 126.6231188 }
           ]
         ]}
-        strokeWeight={5} // 선의 두께 입니다
-        strokeColor={"#7FB77E"} // 선의 색깔입니다
-        strokeOpacity={1} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-        strokeStyle={"shortdash"} // 선의 스타일입니다
+        strokeWeight={5}
+        strokeColor={"#7FB77E"}
+        strokeOpacity={1}
+        strokeStyle={"shortdash"}
       />
-
-      {/* {positions.map((position, index) => (
-        <MapMarker
-          key={`${position.title}-${position.latlng}`}
-          position={position.latlng} // 마커를 표시할 위치
-          image={{
-            src: "https://i.ibb.co/yyxq0XX/001.png",
-            size: {
-              width: 44,
-              height: 49
-            }
-          }}
-          title={position.title} // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-        />
-      ))} */}
 
       {data.map(value => (
         <EventMarkerContainer
