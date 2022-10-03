@@ -5,18 +5,22 @@ const MapContainer = ({ dayCourse }) => {
   console.log(dayCourse);
   const data = [
     {
+      id: 1,
       content: <div className="px-2 py-1 text-sm font-bold text-black1">천지연폭포</div>,
       latlng: { lat: 33.2447173, lng: 126.5598201 }
     },
     {
+      id: 2,
       content: <div className="px-2 py-1 text-sm font-bold text-black1">쇠소깍</div>,
       latlng: { lat: 33.2522055, lng: 126.6231188 }
     },
     {
+      id: 3,
       content: <div className="px-2 py-1 text-sm font-bold text-black1">우도(해양도립공원)</div>,
       latlng: { lat: 33.51949, lng: 126.95109 }
     },
     {
+      id: 4,
       content: <div className="px-2 py-1 text-sm font-bold text-black1">쇠소깍</div>,
       latlng: { lat: 33.2522055, lng: 126.6231188 }
     }
@@ -76,7 +80,7 @@ const MapContainer = ({ dayCourse }) => {
 
       {data.map(value => (
         <EventMarkerContainer
-          key={`EventMarkerContainer-${value.latlng.lat}-${value.latlng.lng}`}
+          key={value.id}
           position={value.latlng}
           content={value.content}
           image={{
