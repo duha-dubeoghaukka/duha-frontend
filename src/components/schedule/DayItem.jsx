@@ -80,7 +80,7 @@ const DayItem = () => {
         {!toggle && (
           <>
             {dayCourse.length > 0 && (
-              <div className="bg-gray-200 md:h-[350px] h-[200px] mb-4 md:mb-6 shadow-md rounded-lg">
+              <div className="bg-gray-200 md:h-[350px] h-[250px] mb-4 md:mb-6 shadow-md rounded-lg">
                 <MapContainer dayCourse={dayCourse} />
               </div>
             )}
