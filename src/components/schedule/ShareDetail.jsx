@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { scheduleAPIs } from "../../api/api";
+import Spinner from "../Spinner/Spinner";
 
 function ShareDetail() {
   const param = useParams();
@@ -22,6 +23,8 @@ function ShareDetail() {
       setFirstDayData(res.data.data.courses[0].courseDetails);
     });
   }, []);
+
+  if (!courseItem) return <Spinner />;
 
   const onClickDay = day => {
     if (day) {
