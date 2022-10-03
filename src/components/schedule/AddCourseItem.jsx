@@ -6,7 +6,7 @@ import Bookmark from "../mainpage/Bookmark";
 import { useState } from "react";
 
 const AddCourseItem = ({ data, setCounter, category }) => {
-  const { tripId, currentCourseId } = useParams();
+  const { tripId, currentCourseId, day } = useParams();
   const navigate = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
@@ -20,7 +20,7 @@ const AddCourseItem = ({ data, setCounter, category }) => {
       });
       if (data.isSuccess) {
         alert("코스가 저장되었습니다.");
-        navigate(`/schedule/${tripId}`);
+        navigate(`/schedule/${tripId}/${day}`);
       } else {
         alert(data.message);
       }
@@ -76,7 +76,7 @@ const AddCourseItem = ({ data, setCounter, category }) => {
           alt={name}
           onClick={itemClickHandler}
         />
-        <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
+        {/* <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} /> */}
       </div>
     </div>
   );
