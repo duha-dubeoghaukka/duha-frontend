@@ -22,7 +22,7 @@ function ShareCard() {
 }
 
 function ShareCardComponent({ item }) {
-  const { title, startAt, endAt } = item;
+  const { id, title, startAt, endAt } = item;
   const navigate = useNavigate();
 
   return (
@@ -35,7 +35,10 @@ function ShareCardComponent({ item }) {
           </span>
         </div>
         <div className="flex flex-row m-5 ">
-          <NavigateNextIcon className="mt-5 cursor-pointer group-hover:fill-white1" />
+          <NavigateNextIcon
+            className="mt-5 cursor-pointer group-hover:fill-white1"
+            onClick={() => navigate(`/schedule/share/detail/${id}`)}
+          />
         </div>
       </div>
     </div>
