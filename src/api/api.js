@@ -48,12 +48,15 @@ export const scheduleAPIs = {
   },
   deleteSchedule: tripId => {
     return api.delete(`/auth/trip/${tripId}`);
+  },
+  getShareDetailCourse: tripId => {
+    return api.get(`/trip/${tripId}`);
   }
 };
 
 export const socialLoginAPIs = {
   kakaoLogin: code => {
-    return api.get(`/oauth/kakao?code=${code}`);
+    return api.get(`http://13.125.222.172/oauth/kakao?code=${code}`);
   },
   googleLogin: code => {
     console.log("code", code);
