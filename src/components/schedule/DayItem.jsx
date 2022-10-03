@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
 import CourseItem from "./CourseItem";
-import _, { find } from "lodash";
+import _ from "lodash";
 import Spinner from "../Spinner/Spinner";
 import MapContainer from "../../components/map/MapContainer";
 
@@ -73,7 +73,7 @@ const DayItem = () => {
             <MapContainer dayCourse={dayCourse} />
           </div>
         )}
-        <CourseItem dayCourse={dayCourse} currentDay={currentDay} />
+        <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={currentDay} />
         <button className="btn-primary-sm py-3 mt-4" onClick={addCourseHandler}>
           코스 추가
         </button>
