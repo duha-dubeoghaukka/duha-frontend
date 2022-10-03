@@ -12,6 +12,7 @@ const DayItem = () => {
   const [dayCourse, setDayCourse] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
+  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
 
@@ -68,10 +69,22 @@ const DayItem = () => {
         })}
       </div>
       <div className="course-layout">
-        {dayCourse.length > 0 && (
-          <div className="bg-gray-200 md:h-[500px] h-[345px] mb-4 md:mb-6 shadow-md rounded-lg">
-            <MapContainer dayCourse={dayCourse} />
-          </div>
+        {/* <button
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+          className="text-white1 text-sm font-bold bg-green1 px-2 py-1 rounded-md"
+        >
+          {toggle ? "지도" : "닫기"}
+        </button> */}
+        {!toggle && (
+          <>
+            {dayCourse.length > 0 && (
+              <div className="bg-gray-200 md:h-[350px] h-[200px] mb-4 md:mb-6 shadow-md rounded-lg">
+                <MapContainer dayCourse={dayCourse} />
+              </div>
+            )}
+          </>
         )}
         <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={currentDay} />
         <button className="btn-primary-sm py-3 mt-4" onClick={addCourseHandler}>
