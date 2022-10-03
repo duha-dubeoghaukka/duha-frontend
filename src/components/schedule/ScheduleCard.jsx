@@ -54,7 +54,6 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
   const navigate = useNavigate();
 
   const setItem = () => {
-    localStorage.setItem("day", allDays);
     localStorage.setItem("id", id);
   };
 
@@ -63,7 +62,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id }) {
       <div
         className="pr-36"
         onClick={() => {
-          navigate(`${id}`);
+          navigate(`${id}/1`);
           setItem();
         }}
       >
