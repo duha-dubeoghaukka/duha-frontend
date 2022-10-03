@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { scheduleAPIs } from "../../api/api";
+import ShareCardBookmark from "./ShareCardBookmark";
 
 function ShareCard() {
   const [shareData, setShareData] = useState();
@@ -26,7 +27,7 @@ function ShareCardComponent({ item }) {
   const navigate = useNavigate();
 
   return (
-    <div className="group w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row hover:bg-green1">
+    <div className="group w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row hover:bg-green1 relative">
       <div className="flex space-x-20">
         <div className="flex flex-col m-6 p-3 w-48">
           <span className="font-bold group-hover:text-white1">{title}</span>
@@ -40,6 +41,9 @@ function ShareCardComponent({ item }) {
             onClick={() => navigate(`/schedule/share/detail/${id}`)}
           />
         </div>
+      </div>
+      <div>
+        <ShareCardBookmark />
       </div>
     </div>
   );
