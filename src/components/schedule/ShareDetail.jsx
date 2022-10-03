@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { scheduleAPIs } from "../../api/api";
+import MapContainer from "../map/MapContainer";
 import Spinner from "../Spinner/Spinner";
 
 function ShareDetail() {
@@ -32,7 +33,7 @@ function ShareDetail() {
       const data = courseItem.filter(item => item.day === day);
       if (data[0].courseDetails[0]) {
         setIsDetailData(true);
-        setMessage("");
+        setMessage(null);
         setCourseDetail(data[0].courseDetails);
       } else {
         setIsDetailData(false);
@@ -54,6 +55,17 @@ function ShareDetail() {
         })}
       </div>
       <div className="course-layout">
+        {activeDay
+          ? courseDetail?.length > 0 && (
+              <div className="bg-gray-200 md:h-[350px] h-[200px] mb-4 md:mb-6 shadow-md rounded-lg">
+                <MapContainer dayCourse={courseDetail} />
+              </div>
+            )
+          : firstDayData?.length > 0 && (
+              <div className="bg-gray-200 md:h-[350px] h-[200px] mb-4 md:mb-6 shadow-md rounded-lg">
+                <MapContainer dayCourse={firstDayData} />
+              </div>
+            )}
         {/* active day가 true이면 선택한 day 코스 조회, 아니면 day1 데이터 조회*/}
         {activeDay ? (
           isDetailData ? (
@@ -79,7 +91,7 @@ function CourseItemComponent({ item }) {
   const { detailOrder, category, name } = item;
 
   return (
-    <div>
+    <>
       <div className="flex items-center mb-9 flex justify-between">
         <div className="flex items-center">
           <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">{detailOrder}</div>
@@ -89,7 +101,7 @@ function CourseItemComponent({ item }) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
