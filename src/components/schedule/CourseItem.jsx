@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { api } from "../../api/api";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -30,13 +30,11 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
   if (dayCourse.length === 0) return <div className="mb-6 text-center font-bold text-base">{currentDay}일차에 등록된 코스가 없습니다.</div>;
   return (
     <div>
-      {sortBy(dayCourse, ["detailOrder"]).map(course => (
+      {sortBy(dayCourse, ["detailOrder"]).map((course, index) => (
         <div key={course.detailOrder}>
           <div className="flex items-center flex justify-between md:mb-3 mb-1">
             <div className="flex items-center">
-              <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">
-                {course.detailOrder}
-              </div>
+              <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">{index + 1}</div>
               <div className="my-2 ml-9">
                 <div className="font-semibold text-sm">{course.category}</div>
                 <div className="font-bold md:text-base text-sm">{course.name}</div>
@@ -49,7 +47,7 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
               }}
             />
           </div>
-          {course.detailOrder !== dayCourse.length && <KeyboardDoubleArrowDownIcon className="md:mb-3 mb-1 ml-3 text-green1" />}
+          {index + 1 !== dayCourse.length && <KeyboardDoubleArrowDownIcon className="md:mb-3 mb-1 ml-3 text-green1" />}
         </div>
       ))}
     </div>
