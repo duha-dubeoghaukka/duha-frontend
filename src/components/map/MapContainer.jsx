@@ -1,32 +1,24 @@
-import { React, useState } from "react";
+import { data } from "autoprefixer";
+import { React, useEffect, useState } from "react";
 import { Map, MapMarker, useMap, Polyline } from "react-kakao-maps-sdk";
 
 const MapContainer = ({ dayCourse }) => {
-  console.log(dayCourse);
-  const data = [
-    {
-      id: 1,
-      content: <div className="px-2 py-1 text-sm font-bold text-black1">천지연폭포</div>,
-      latlng: { lat: 33.2447173, lng: 126.5598201 }
-    },
-    {
-      id: 2,
-      content: <div className="px-2 py-1 text-sm font-bold text-black1">쇠소깍</div>,
-      latlng: { lat: 33.2522055, lng: 126.6231188 }
-    },
-    {
-      id: 3,
-      content: <div className="px-2 py-1 text-sm font-bold text-black1">우도(해양도립공원)</div>,
-      latlng: { lat: 33.51949, lng: 126.95109 }
-    },
-    {
-      id: 4,
-      content: <div className="px-2 py-1 text-sm font-bold text-black1">쇠소깍</div>,
-      latlng: { lat: 33.2522055, lng: 126.6231188 }
-    }
-  ];
+  const mapData = dayCourse.map(course => {
+    return {
+      name: <div className="px-2 py-1 text-sm font-bold text-black1">{course.name}</div>,
+      detailId: course.detailId,
+      latlng: { lat: course.latitude, lng: course.longitude }
+    };
+  });
 
-  const EventMarkerContainer = ({ position, content }) => {
+  const data = dayCourse.map(item => {
+    return {
+      lat: item.latitude,
+      lng: item.longitude
+    };
+  });
+
+  const EventMarkerContainer = ({ position, name }) => {
     const map = useMap();
     const [isVisible, setIsVisible] = useState(false);
 
@@ -44,7 +36,7 @@ const MapContainer = ({ dayCourse }) => {
           }
         }}
       >
-        {isVisible && content}
+        {isVisible && name}
       </MapMarker>
     );
   };
@@ -53,8 +45,8 @@ const MapContainer = ({ dayCourse }) => {
     <Map
       center={{
         // 지도의 중심좌표
-        lat: data[0].latlng.lat,
-        lng: data[0].latlng.lng
+        lat: mapData[0].latlng.lat,
+        lng: mapData[0].latlng.lng
       }}
       style={{
         width: "100%",
@@ -63,34 +55,9 @@ const MapContainer = ({ dayCourse }) => {
       }}
       level={10} // 지도의 확대 레벨
     >
-      <Polyline
-        path={[
-          [
-            { lat: 33.2447173, lng: 126.5598201 },
-            { lat: 33.2522055, lng: 126.6231188 },
-            { lat: 33.51949, lng: 126.95109 },
-            { lat: 33.2522055, lng: 126.6231188 }
-          ]
-        ]}
-        strokeWeight={5}
-        strokeColor={"#7FB77E"}
-        strokeOpacity={1}
-        strokeStyle={"shortdash"}
-      />
-
-      {data.map(value => (
-        <EventMarkerContainer
-          key={value.id}
-          position={value.latlng}
-          content={value.content}
-          image={{
-            src: "https://i.ibb.co/yyxq0XX/001.png",
-            size: {
-              width: 44,
-              height: 49
-            }
-          }}
-        />
+      <Polyline path={[data]} strokeWeight={5} strokeColor={"#7FB77E"} strokeOpacity={1} strokeStyle={"shortdash"} />
+      {mapData.map(item => (
+        <EventMarkerContainer key={item.detailId} position={item.latlng} name={item.name} />
       ))}
     </Map>
   );
