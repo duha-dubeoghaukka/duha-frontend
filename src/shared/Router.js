@@ -24,6 +24,7 @@ import RestaurantDetailPage from "../pages/detailpage/restaurant/RestaurantDetai
 import AccommodationsPage from "../pages/mainpage/Accommodations/AccommodationsPage";
 import AccommodationDetailPage from "../pages/detailpage/accommodation/AccommodationDetailPage";
 import AddRestaurant from "../pages/schedule/AddRestaurant";
+import ShareDetailPage from "../pages/schedule/ShareDetailPage";
 
 const Router = () => {
   return (
@@ -53,6 +54,7 @@ const Router = () => {
         <Route path="/auth/kakao/callback" element={<KakaoLogin />} />
         <Route path="/auth/google/callback" element={<GoogleLogin />} />
         <Route path="/schedule/share" element={<ShareSchedulePage />} />
+        <Route path="/schedule/share/detail/:id" element={<ShareDetailPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
