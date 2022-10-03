@@ -5,7 +5,7 @@ import ShareDetail from "../../components/schedule/ShareDetail";
 function ShareDetailPage() {
   return (
     <Layout title="일정 공유" highlight={"schedule/share"}>
-      {/* <ShareDetail /> */}
+      <ShareDetail />
     </Layout>
   );
 }
