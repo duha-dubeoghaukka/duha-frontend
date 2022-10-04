@@ -4,6 +4,12 @@ import SearchIcon from "@mui/icons-material/Search";
 const SearchField = () => {
   const [userInput, setUserInput] = useState("");
   const handleUserInput = event => {
+    const input = event.target.value;
+    const inputRegex = new RegExp(/^[가-힣a-zA-Z0-9\s]+$/);
+    const isValidInput = inputRegex.test(input);
+    if (isValidInput) {
+      console.dir(input);
+    }
     setUserInput(event.target.value);
   };
   return (
