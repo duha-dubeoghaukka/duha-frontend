@@ -3,9 +3,10 @@ import jwt_decode from "jwt-decode";
 const decodeToken = token => {
   if (token) {
     const decode_token = jwt_decode(token);
-    const email = decode_token.sub;
-    const nickName = email.split("@")[0];
-    return nickName;
+    const array = decode_token.sub.split(":");
+    const nickName = array[1];
+    const platform = array[2] === "null" ? "" : array[2] + "_";
+    return platform + nickName;
   } else {
     return null;
   }
