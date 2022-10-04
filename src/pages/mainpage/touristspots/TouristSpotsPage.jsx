@@ -73,6 +73,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             })}
           </ul>
           <select
+            value={selectedRegion}
             onChange={selectChangeHandler}
             className="pl-3 text-[16px] block md:hidden w-full h-[43px] text-black1 font-bold rounded-lg border-black1 border-solid border-2"
           >
