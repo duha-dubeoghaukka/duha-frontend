@@ -11,6 +11,7 @@ import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
+import SearchField from "../../../components/search/SearchField";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
@@ -66,7 +67,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             </Link>
           </ul>
         </div>
-        <div className="mb-[43px]">
+        <div className="mb-[16px]">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} />;
@@ -81,6 +82,9 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
               return <option key={region.name}>{region.name}</option>;
             })}
           </select>
+        </div>
+        <div className="mb-[16px]">
+          <SearchField />
         </div>
         <div className="mb-3">
           <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
