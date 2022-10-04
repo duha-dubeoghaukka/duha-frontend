@@ -1,37 +1,63 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../api/api";
 import ShareCardBookmark from "./ShareCardBookmark";
 import { useQuery } from "react-query";
 import Spinner from "../Spinner/Spinner";
+import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 
 function ShareCard() {
-  const { error, isLoading, data, refetch } = useQuery("shareCards", () => {
+  const { error, isLoading, data, refetch, status, isFetching } = useQuery("shareCards", () => {
     return api.get("/trip");
   });
-  if (isLoading) {
+  const refetchQuery = () => {
+    refetch();
+  };
+  if (isLoading || status === "loading") {
     return <Spinner />;
   }
-  if (error) {
+  if (error || status === "error") {
     return <div>{error}</div>;
   }
-  if (data) {
+  if (data && status === "success") {
     const schedules = data.data.data;
     return (
       <div className="grid place-items-center h-screen">
         <span className="m-5 font-normal text-lg">다른 뚜벅이들의 제주 일정을 참고해보세요!</span>
         {schedules?.map(item => {
-          return <ShareCardComponent key={item.id} item={item} />;
+          return <ShareCardComponent key={item.id} item={item} refetchQuery={refetchQuery} />;
         })}
       </div>
     );
   }
 }
 
-function ShareCardComponent({ item }) {
+function ShareCardComponent({ item, refetchQuery }) {
   const { id, title, startAt, endAt, bookmarked } = item;
-  const bookmarkHandler = event => {};
-
+  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
+  useEffect(() => {
+    refetchQuery();
+  }, [isBookmarked]);
+  const bookmarkHandler = () => {
+    const isLoggedIn = checkIsLoggedIn();
+    if (isLoggedIn) {
+      api
+        .get("/auth/trip/bookmark/" + id)
+        .then(response => {
+          if (response.data.isSuccess) {
+            const nextBookmarked = response.data.data.bookmarked;
+            setIsBookmarked(nextBookmarked);
+          } else {
+            alert(response.data.message);
+          }
+        })
+        .catch(error => {
+          alert(error);
+        });
+    } else {
+      alert("먼저 로그인을 해주세요");
+    }
+  };
   return (
     <div className="relative">
       <Link
@@ -48,7 +74,7 @@ function ShareCardComponent({ item }) {
         </div>
       </Link>
       <div>
-        <ShareCardBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+        <ShareCardBookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
       </div>
     </div>
   );
