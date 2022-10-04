@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { api } from "../../api/api";
 import ShareCardBookmark from "./ShareCardBookmark";
 import { useQuery } from "react-query";
@@ -30,26 +30,27 @@ function ShareCard() {
 
 function ShareCardComponent({ item }) {
   const { id, title, startAt, endAt, bookmarked } = item;
-  const navigate = useNavigate();
-  const bookmarkHandler = () => {};
+  const bookmarkHandler = event => {};
 
   return (
-    <Link
-      to={`/schedule/share/detail/${id}`}
-      className="group w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row hover:bg-green1 relative cursor-pointer"
-    >
-      <div className="flex space-x-20">
-        <div className="flex flex-col m-6 p-3 w-48">
-          <span className="font-bold group-hover:text-white1">{title}</span>
-          <span className="mt-2	font-base text-xs group-hover:text-white1">
-            {startAt}-{endAt}
-          </span>
+    <div className="relative">
+      <Link
+        to={`/schedule/share/detail/${id}`}
+        className="group w-96 h-28 bg-white1 rounded-md shadow-lg flex flex-row hover:bg-green1 cursor-pointer"
+      >
+        <div className="flex space-x-20">
+          <div className="flex flex-col m-6 p-3 w-48">
+            <span className="font-bold group-hover:text-white1">{title}</span>
+            <span className="mt-2	font-base text-xs group-hover:text-white1">
+              {startAt}-{endAt}
+            </span>
+          </div>
         </div>
-      </div>
+      </Link>
       <div>
         <ShareCardBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
       </div>
-    </Link>
+    </div>
   );
 }
 
