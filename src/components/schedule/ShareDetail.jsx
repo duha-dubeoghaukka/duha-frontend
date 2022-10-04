@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { scheduleAPIs } from "../../api/api";
 import MapContainer from "../map/MapContainer";
 import Spinner from "../Spinner/Spinner";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+import { sortBy } from "lodash";
 
 function ShareDetail() {
   const param = useParams();
@@ -69,15 +71,15 @@ function ShareDetail() {
         {/* active day가 true이면 선택한 day 코스 조회, 아니면 day1 데이터 조회*/}
         {activeDay ? (
           isDetailData ? (
-            courseDetail?.map(item => {
-              return <CourseItemComponent key={item.detailOrder} item={item} day={day} />;
+            sortBy(courseDetail, ["detailOrder"])?.map(item => {
+              return <CourseItemComponent key={item.detailOrder} item={item} day={day} course={courseDetail} />;
             })
           ) : (
             <div className="mb-6 text-center font-bold text-base">{message}</div>
           )
         ) : firstDayData?.length || 0 ? (
-          firstDayData?.map(item => {
-            return <CourseItemComponent key={item.detailOrder} item={item} />;
+          sortBy(firstDayData, ["detailOrder"])?.map(item => {
+            return <CourseItemComponent key={item.detailOrder} item={item} course={firstDayData} />;
           })
         ) : (
           <div className="mb-6 text-center font-bold text-base">{message}</div>
@@ -87,12 +89,12 @@ function ShareDetail() {
   );
 }
 
-function CourseItemComponent({ item }) {
+function CourseItemComponent({ item, course }) {
   const { detailOrder, category, name } = item;
 
   return (
     <>
-      <div className="flex items-center mb-9 flex justify-between">
+      <div className="flex items-center flex justify-between md:mb-3 mb-1">
         <div className="flex items-center">
           <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">{detailOrder}</div>
           <div className="my-2 ml-9">
@@ -101,6 +103,7 @@ function CourseItemComponent({ item }) {
           </div>
         </div>
       </div>
+      {detailOrder !== course.length && <KeyboardDoubleArrowDownIcon className="md:mb-3 mb-1 ml-3 text-green1" />}
     </>
   );
 }
