@@ -70,6 +70,9 @@ export const mypageAPIs = {
   },
   getFavoriteLists: pathVariable => {
     return api.get(`auth/mypage/${pathVariable}/bookmark`);
+  },
+  postBookMark: id => {
+    return api.get("/auth/trip/bookmark/" + id);
   }
 };
 

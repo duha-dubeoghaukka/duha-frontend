@@ -28,7 +28,7 @@ function FavoriteAccommodationPage() {
     <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
       <div className="grid place-items-center m-10">
         <span className="font-medium text-xl">
-          {accommodationData?.length ? `${nickName}님이 즐겨찾기하신 관광지 목록을 확인해보세요!` : `숙소 즐겨찾기를 추가해보세요!`}
+          {accommodationData?.length ? `${nickName}님이 즐겨찾기하신 숙소 목록을 확인해보세요!` : `숙소 즐겨찾기를 추가해보세요!`}
         </span>
       </div>
       {accommodationData ? (
