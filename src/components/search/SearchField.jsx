@@ -1,14 +1,21 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import { debouncer } from "../../utils/debouncer";
 
 const SearchField = () => {
   const [userInput, setUserInput] = useState("");
+  const printValue = useCallback(
+    debouncer(value => {
+      console.dir(value);
+    }, 500),
+    []
+  );
   const handleUserInput = event => {
     const input = event.target.value;
     const inputRegex = new RegExp(/^[가-힣a-zA-Z0-9\s]+$/);
     const isValidInput = inputRegex.test(input);
     if (isValidInput) {
-      console.dir(input);
+      printValue(input);
     }
     setUserInput(event.target.value);
   };
@@ -21,7 +28,7 @@ const SearchField = () => {
         onChange={handleUserInput}
         className="w-full border-green1 border-solid border-2 rounded-lg p-2 px-5 text-black1"
       />
-      <SearchIcon fontSize="large" sx={{ color: "rgb(125, 171, 120)" }} className="absolute right-3 top-[4px]" />
+      <SearchIcon fontSize="large" sx={{ color: "rgb(125, 171, 120)" }} className="absolute right-3 top-[4px] cursor-pointer" />
     </div>
   );
 };
