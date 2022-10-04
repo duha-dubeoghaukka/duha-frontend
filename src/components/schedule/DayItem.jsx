@@ -70,13 +70,13 @@ const DayItem = () => {
       </div>
       <div className="course-layout">
         {/* <button
-          onClick={() => {
-            setToggle(!toggle);
-          }}
-          className="text-white1 text-sm font-bold bg-green1 px-2 py-1 rounded-md"
-        >
-          {toggle ? "지도" : "닫기"}
-        </button> */}
+            onClick={() => {
+              setToggle(!toggle);
+            }}
+            className="text-white1 text-sm font-bold bg-green1 px-2 py-1 rounded-md"
+          >
+            {toggle ? "지도" : "닫기"}
+          </button> */}
         {!toggle && (
           <>
             {dayCourse.length > 0 && (

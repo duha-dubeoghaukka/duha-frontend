@@ -3,6 +3,7 @@ import GlobalState from "./shared/GlobalState";
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import useCounter from "./hooks/useCounter";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const queryClient = new QueryClient();
 
@@ -40,11 +41,13 @@ function App() {
     }
   };
   return (
-    <QueryClientProvider client={queryClient}>
-      <GlobalState.Provider value={globalStates}>
-        <Router />
-      </GlobalState.Provider>
-    </QueryClientProvider>
+    <DragDropContext>
+      <QueryClientProvider client={queryClient}>
+        <GlobalState.Provider value={globalStates}>
+          <Router />
+        </GlobalState.Provider>
+      </QueryClientProvider>
+    </DragDropContext>
   );
 }
 
