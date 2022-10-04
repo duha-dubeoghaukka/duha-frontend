@@ -1,11 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import CategoryItem from "../../components/mypage/CategoryItem";
+import { ShareCardComponent } from "../../components/schedule/ShareCard";
+import decodeToken from "../../utils/decodeToken";
+import { useQuery } from "react-query";
+import Spinner from "../../components/Spinner/Spinner";
+import { api } from "../../api/api";
+import TripItem from "../../components/mypage/TripItem";
 
 function FavoriteCoursePage() {
+  const [tripData, setTripData] = useState();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("authorization");
+  const nickName = decodeToken(token);
+
+  useEffect(() => {
+    mypageAPIs
+      .getFavoriteLists("trip")
+      .then(res => setTripData(res.data.data))
+      .catch(err => {
+        if (err.response.data.code === "NEED_LOGIN") {
+          alert("로그인이 필요한 서비스입니다.");
+          navigate(`/login`);
+        }
+      });
+  }, []);
+
   return (
     <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
-      <CategoryItem />
+      <div className="grid place-items-center">
+        <span className="m-10 font-medium text-xl">
+          {tripData?.length ? `${nickName}님이 즐겨찾기하신 일정을 확인해보세요!` : `일정 즐겨찾기를 추가해보세요!`}
+        </span>
+        <div className="h-screen">
+          {tripData ? (
+            tripData?.map(item => {
+              return <TripItem key={item.id} item={item} />;
+            })
+          ) : (
+            <Spinner />
+          )}
+        </div>
+      </div>
     </Layout>
   );
 }
