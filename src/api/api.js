@@ -38,10 +38,10 @@ export const scheduleAPIs = {
 
 export const socialLoginAPIs = {
   kakaoLogin: code => {
-    return api.get(`http://13.125.222.172/oauth/kakao?code=${code}`);
+    return api.get(`/oauth/kakao?code=${code}`);
   },
   googleLogin: code => {
-    return api.get(`oauth/google?code=${code}`);
+    return api.get(`/oauth/google?code=${code}`);
   }
 };
 
