@@ -33,7 +33,7 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
     <Droppable droppableId="courses">
       {provided => (
         <div className="courses" {...provided.droppableProps} ref={provided.innerRef}>
-          {sortBy(dayCourse, ["detailOrder"]).map((course, index) => (
+          {dayCourse.map((course, index) => (
             <Draggable key={course.detailId} draggableId={String(course.detailId)} index={index}>
               {provided => (
                 <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
@@ -54,6 +54,13 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
                           deleteCourse(course.detailId, course.category);
                         }}
                       />
+                      {/* <KeyboardArrowUpOutlinedIcon
+                    className="cursor-pointer"
+                    onClick={() => {
+                      onClickHandler(course.detailOrder);
+                    }}
+                  />
+                  <KeyboardArrowDownOutlinedIcon className="cursor-pointer" /> */}
                     </div>
                   </div>
                   {index + 1 !== dayCourse.length && <KeyboardDoubleArrowDownIcon className="md:mb-3 mb-1 ml-3 text-green1" />}

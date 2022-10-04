@@ -41,13 +41,11 @@ function App() {
     }
   };
   return (
-    <DragDropContext>
-      <QueryClientProvider client={queryClient}>
-        <GlobalState.Provider value={globalStates}>
-          <Router />
-        </GlobalState.Provider>
-      </QueryClientProvider>
-    </DragDropContext>
+    <QueryClientProvider client={queryClient}>
+      <GlobalState.Provider value={globalStates}>
+        <Router />
+      </GlobalState.Provider>
+    </QueryClientProvider>
   );
 }
 

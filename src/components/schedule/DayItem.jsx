@@ -5,6 +5,7 @@ import CourseItem from "./CourseItem";
 import _ from "lodash";
 import Spinner from "../Spinner/Spinner";
 import MapContainer from "../../components/map/MapContainer";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const DayItem = () => {
   const { day } = useParams();
@@ -51,47 +52,59 @@ const DayItem = () => {
 
   if (!courses) return <Spinner />;
 
+  const handleOnDragEnd = result => {
+    if (!result.destination) return;
+    const changeDayCourse = [...dayCourse];
+    const draggingItemIndex = result.source.index;
+    const afterDragItemIndex = result.destination.index;
+    const removeCourse = changeDayCourse.splice(draggingItemIndex, 1);
+    changeDayCourse.splice(afterDragItemIndex, 0, removeCourse[0]);
+    setDayCourse(changeDayCourse);
+  };
+
   return (
-    <div>
-      <div className="mt-4 mb-6 flex flex-wrap justify-center">
-        {courses.map(course => {
-          return (
-            <div
-              key={course.courseId}
-              className="text-green1 font-bold text-lg px-4 cursor-pointer"
-              onClick={() => {
-                onClickDay(course.day);
-              }}
-            >
-              Day{course.day}
-            </div>
-          );
-        })}
-      </div>
-      <div className="course-layout">
-        {/* <button
-            onClick={() => {
-              setToggle(!toggle);
-            }}
-            className="text-white1 text-sm font-bold bg-green1 px-2 py-1 rounded-md"
-          >
-            {toggle ? "지도" : "닫기"}
-          </button> */}
-        {!toggle && (
-          <>
-            {dayCourse.length > 0 && (
-              <div className="bg-gray-200 md:h-[350px] h-[250px] mb-4 md:mb-6 shadow-md rounded-lg">
-                <MapContainer dayCourse={dayCourse} />
+    <DragDropContext onDragEnd={handleOnDragEnd}>
+      <div>
+        <div className="mt-4 mb-6 flex flex-wrap justify-center">
+          {courses.map(course => {
+            return (
+              <div
+                key={course.courseId}
+                className="text-green1 font-bold text-lg px-4 cursor-pointer"
+                onClick={() => {
+                  onClickDay(course.day);
+                }}
+              >
+                Day{course.day}
               </div>
-            )}
-          </>
-        )}
-        <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={currentDay} />
-        <button className="btn-primary-sm py-3 mt-4" onClick={addCourseHandler}>
-          코스 추가
-        </button>
+            );
+          })}
+        </div>
+        <div className="course-layout">
+          {/* <button
+              onClick={() => {
+                setToggle(!toggle);
+              }}
+              className="text-white1 text-sm font-bold bg-green1 px-2 py-1 rounded-md"
+            >
+              {toggle ? "지도" : "닫기"}
+            </button> */}
+          {!toggle && (
+            <>
+              {dayCourse.length > 0 && (
+                <div className="bg-gray-200 md:h-[350px] h-[250px] mb-4 md:mb-6 shadow-md rounded-lg">
+                  <MapContainer dayCourse={dayCourse} />
+                </div>
+              )}
+            </>
+          )}
+          <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={currentDay} />
+          <button className="btn-primary-sm py-3 mt-4" onClick={addCourseHandler}>
+            코스 추가
+          </button>
+        </div>
       </div>
-    </div>
+    </DragDropContext>
   );
 };
 
