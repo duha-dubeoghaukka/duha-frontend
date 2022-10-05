@@ -18,6 +18,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
     return api.get("/touristspot");
   });
+  const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -35,11 +36,16 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     setAutoCompletedInput(name);
     setSearchResults([]);
   };
+  const sendSearchedResults = results => {
+    setSearchedResults(results);
+    setSearchMode(true);
+  };
   useEffect(() => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
   }, []);
   useEffect(() => {
+    setSearchMode(false);
     refetch();
   }, [regionSelection, currentSpotPage]);
   if (isLoading || isFetching || status === "loading") {
@@ -95,7 +101,12 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           </select>
         </div>
         <div className="mb-[16px]">
-          <SearchField setSearchMode={setSearchMode} sendResults={sendResults} autoCompletedInput={autoCompletedInput} />
+          <SearchField
+            setSearchMode={setSearchMode}
+            sendResults={sendResults}
+            autoCompletedInput={autoCompletedInput}
+            sendSearchedResults={sendSearchedResults}
+          />
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
               {searchResults.map(result => {
@@ -104,37 +115,52 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             </div>
           )}
         </div>
-        <div className="mb-3">
-          <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
-        </div>
-        <div className="mb-0">
-          {currentSpots.map(spot => {
-            return <Item key={spot.id} data={spot} counter={counter} setCounter={setCounter} category={"touristspot"} />;
-          })}
-        </div>
-        <div className="flex justify-center">
-          {pages.map(page => {
-            if (page === currentSpotPage) {
-              return (
-                <div key={page} className="mr-1">
-                  <p>{page}</p>
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  key={page}
-                  className="mr-1 cursor-pointer"
-                  onClick={() => {
-                    setCurrentSpotPage(page);
-                  }}
-                >
-                  <p className="underline text-sky-500">{page}</p>
-                </div>
-              );
-            }
-          })}
-        </div>
+        {searchMode ? (
+          <div>
+            <div className="mb-3">
+              <p className="font-bold">총 {searchedResults.length}건이 검색되었습니다.</p>
+            </div>
+            <div>
+              {searchedResults.map(result => {
+                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+              })}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="mb-3">
+              <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
+            </div>
+            <div className="mb-0">
+              {currentSpots.map(spot => {
+                return <Item key={spot.id} data={spot} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+              })}
+            </div>
+            <div className="flex justify-center">
+              {pages.map(page => {
+                if (page === currentSpotPage) {
+                  return (
+                    <div key={page} className="mr-1">
+                      <p>{page}</p>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      key={page}
+                      className="mr-1 cursor-pointer"
+                      onClick={() => {
+                        setCurrentSpotPage(page);
+                      }}
+                    >
+                      <p className="underline text-sky-500">{page}</p>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        )}
         <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
           <p>최상단으로 이동</p>
         </div>
