@@ -3,17 +3,18 @@ import SearchIcon from "@mui/icons-material/Search";
 import { debouncer } from "../../utils/debouncer";
 import { api } from "../../api/api";
 
-const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults }) => {
+const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, region }) => {
   const [userInput, setUserInput] = useState("");
   useEffect(() => {
     setUserInput(autoCompletedInput);
   }, [autoCompletedInput]);
   const searchHandler = () => {
     api
-      .get(`/touristspot/search?region=${"애월"}&keyword=${userInput}`)
+      .get(`/touristspot/search?region=${region}&keyword=${userInput}`)
       .then(response => {
         const results = response.data.data;
         sendSearchedResults(results);
+        sendResults([]);
       })
       .catch(error => {
         alert(error);
@@ -22,7 +23,7 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults }) =
   const sendValue = useCallback(
     debouncer(value => {
       api
-        .get(`/touristspot/search?region=${"애월"}&keyword=${value}`)
+        .get(`/touristspot/search?region=${region}&keyword=${value}`)
         .then(response => {
           const results = response.data.data;
           sendResults(results);

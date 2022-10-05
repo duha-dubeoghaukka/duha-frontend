@@ -46,6 +46,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   }, []);
   useEffect(() => {
     setSearchMode(false);
+    setAutoCompletedInput("");
     refetch();
   }, [regionSelection, currentSpotPage]);
   if (isLoading || isFetching || status === "loading") {
@@ -106,6 +107,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             sendResults={sendResults}
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
+            region={selectedRegion}
           />
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
