@@ -9,16 +9,19 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
     setUserInput(autoCompletedInput);
   }, [autoCompletedInput]);
   const searchHandler = () => {
-    api
-      .get(`/touristspot/search?region=${region}&keyword=${userInput}`)
-      .then(response => {
-        const results = response.data.data;
-        sendSearchedResults(results);
-        sendResults([]);
-      })
-      .catch(error => {
-        alert(error);
-      });
+    const whiteSpacesRegex = new RegExp(/\s*/);
+    if (!whiteSpacesRegex.test(userInput)) {
+      api
+        .get(`/touristspot/search?region=${region}&keyword=${userInput}`)
+        .then(response => {
+          const results = response.data.data;
+          sendSearchedResults(results);
+          sendResults([]);
+        })
+        .catch(error => {
+          alert(error);
+        });
+    }
   };
   const sendValue = useCallback(
     debouncer(value => {
@@ -37,8 +40,9 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
   const handleUserInput = event => {
     const input = event.target.value;
     const inputRegex = new RegExp(/^[가-힣a-zA-Z0-9\s]+$/);
+    const whiteSpacesRegex = new RegExp(/\s*/);
     const isValidInput = inputRegex.test(input);
-    if (input === "") {
+    if (whiteSpacesRegex.test(input)) {
       sendValue("N/A");
     } else if (isValidInput) {
       sendValue(input);
