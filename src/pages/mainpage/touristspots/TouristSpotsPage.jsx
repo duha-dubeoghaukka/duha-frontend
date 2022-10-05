@@ -94,7 +94,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
               {searchResults.map(result => {
-                return <AutoComplete data={result} />;
+                return <AutoComplete key={result.name} data={result} />;
               })}
             </div>
           )}

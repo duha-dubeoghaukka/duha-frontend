@@ -24,7 +24,9 @@ const SearchField = ({ setSearchMode, sendResults }) => {
     const input = event.target.value;
     const inputRegex = new RegExp(/^[가-힣a-zA-Z0-9\s]+$/);
     const isValidInput = inputRegex.test(input);
-    if (isValidInput) {
+    if (input === "") {
+      sendValue("N/A");
+    } else if (isValidInput) {
       sendValue(input);
     }
     setUserInput(event.target.value);
@@ -38,8 +40,7 @@ const SearchField = ({ setSearchMode, sendResults }) => {
         onChange={handleUserInput}
         className="w-full border-green1 border-solid border-2 rounded-lg p-2 px-5 text-black1"
       />
-      <SearchIcon fontSize="large" sx={{ color: "rgb(125, 171, 120)" }}
-                  className="absolute right-3 top-[4px] cursor-pointer" />
+      <SearchIcon fontSize="large" sx={{ color: "rgb(125, 171, 120)" }} className="absolute right-3 top-[4px] cursor-pointer" />
     </div>
   );
 };
