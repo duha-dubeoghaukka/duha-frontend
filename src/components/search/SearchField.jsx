@@ -1,10 +1,13 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import { debouncer } from "../../utils/debouncer";
 import { api } from "../../api/api";
 
-const SearchField = ({ setSearchMode, sendResults }) => {
+const SearchField = ({ setSearchMode, sendResults, autoCompletedInput }) => {
   const [userInput, setUserInput] = useState("");
+  useEffect(() => {
+    setUserInput(autoCompletedInput);
+  }, [autoCompletedInput]);
   const sendValue = useCallback(
     debouncer(value => {
       api

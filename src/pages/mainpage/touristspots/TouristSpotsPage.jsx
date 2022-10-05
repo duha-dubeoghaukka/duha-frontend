@@ -19,6 +19,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     return api.get("/touristspot");
   });
   const [searchMode, setSearchMode] = useState(false);
+  const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
@@ -29,6 +30,10 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   };
   const sendResults = results => {
     setSearchResults(results);
+  };
+  const selectAutoComplete = name => {
+    setAutoCompletedInput(name);
+    setSearchResults([]);
   };
   useEffect(() => {
     setCurrentSpotPage(1);
@@ -90,11 +95,11 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           </select>
         </div>
         <div className="mb-[16px]">
-          <SearchField setSearchMode={setSearchMode} sendResults={sendResults} />
+          <SearchField setSearchMode={setSearchMode} sendResults={sendResults} autoCompletedInput={autoCompletedInput} />
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
               {searchResults.map(result => {
-                return <AutoComplete key={result.name} data={result} />;
+                return <AutoComplete key={result.name} data={result} selectAutoComplete={selectAutoComplete} />;
               })}
             </div>
           )}
