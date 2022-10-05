@@ -14,7 +14,6 @@ const DayItem = () => {
   const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
   const [toggle, setToggle] = useState(false);
-  const [newDayCourse, setNewDaycourse] = useState([]);
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
 
@@ -51,10 +50,6 @@ const DayItem = () => {
     if (courses?.length > 1) onClickDay(Number(day));
   }, [courses]);
 
-  useEffect(() => {
-    if (newDayCourse.length > 0) changeCourse();
-  }, [newDayCourse]);
-
   if (!courses) return <Spinner />;
 
   const handleOnDragEnd = result => {
@@ -66,12 +61,12 @@ const DayItem = () => {
     const afterDragItemIndex = result.destination.index;
     const removeCourse = changeDayCourse.splice(draggingItemIndex, 1);
     changeDayCourse.splice(afterDragItemIndex, 0, removeCourse[0]);
-    setNewDaycourse(changeDayCourse);
-    setDayCourse(changeDayCourse);
+    changeCourse(changeDayCourse);
   };
 
-  const changeCourse = async () => {
-    const editData = newDayCourse.map((item, index) => {
+  const changeCourse = async changeDayCourse => {
+    setDayCourse(changeDayCourse);
+    const editData = changeDayCourse.map((item, index) => {
       return {
         detailOrder: index + 1,
         category: item.category,
@@ -84,11 +79,7 @@ const DayItem = () => {
         courseId: id,
         courseDetails: [...editData]
       });
-      if (data.isSuccess) {
-        console.log("코스가 변경되었습니다.");
-      } else {
-        alert(data.message);
-      }
+      if (!data.isSuccess) alert(data.message);
     } catch (error) {
       throw new Error(error);
     }

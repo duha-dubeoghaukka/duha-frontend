@@ -61,6 +61,7 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
               )}
             </Draggable>
           ))}
+          {provided.placeholder}
         </div>
       )}
     </Droppable>
