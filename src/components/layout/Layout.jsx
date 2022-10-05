@@ -105,7 +105,7 @@ const Layout = props => {
                 <Link to="/mypage/favorites/list" className={`cursor-pointer ${category === "favorites" && "text-green1"}`}>
                   즐겨찾기한 목록
                 </Link>
-                <Link to="/" className={`cursor-pointer ${category === "edit" && "text-green1"}`}>
+                <Link to="/mypage/user/edit" className={`cursor-pointer ${category === "edit" && "text-green1"}`}>
                   회원 정보 변경
                 </Link>
               </div>
