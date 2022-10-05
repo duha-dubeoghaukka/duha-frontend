@@ -1,7 +1,7 @@
 import regionNames from "../../../utils/regionNames.js";
 import RegionButton from "../../../components/mainpage/RegionButton";
 import Layout from "../../../components/layout/Layout";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import GlobalState from "../../../shared/GlobalState";
 import Item from "../../../components/mainpage/Item";
 import { removeDuplicates } from "../../../utils/removeDuplicates";
@@ -12,17 +12,23 @@ import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
 import SearchField from "../../../components/search/SearchField";
+import AutoComplete from "../../../components/search/AutoComplete";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
     return api.get("/touristspot");
   });
+  const [searchMode, setSearchMode] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
   const selectChangeHandler = event => {
     setSelectedRegion(event.target.value);
     setCurrentSpotPage(1);
+  };
+  const sendResults = results => {
+    setSearchResults(results);
   };
   useEffect(() => {
     setCurrentSpotPage(1);
@@ -84,7 +90,14 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           </select>
         </div>
         <div className="mb-[16px]">
-          <SearchField />
+          <SearchField setSearchMode={setSearchMode} sendResults={sendResults} />
+          {searchResults && (
+            <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
+              {searchResults.map(result => {
+                return <AutoComplete data={result} />;
+              })}
+            </div>
+          )}
         </div>
         <div className="mb-3">
           <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
