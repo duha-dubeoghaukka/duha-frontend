@@ -54,13 +54,6 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
                           deleteCourse(course.detailId, course.category);
                         }}
                       />
-                      {/* <KeyboardArrowUpOutlinedIcon
-                    className="cursor-pointer"
-                    onClick={() => {
-                      onClickHandler(course.detailOrder);
-                    }}
-                  />
-                  <KeyboardArrowDownOutlinedIcon className="cursor-pointer" /> */}
                     </div>
                   </div>
                   {index + 1 !== dayCourse.length && <KeyboardDoubleArrowDownIcon className="md:mb-3 mb-1 ml-3 text-green1" />}
