@@ -59,7 +59,7 @@ function ShareCardComponent({ item, refetchQuery }) {
     }
   };
   return (
-    <div className="relative">
+    <div className="relative mt-5 ">
       <Link
         to={`/schedule/share/detail/${id}`}
         className="group w-96 h-28 bg-white1 rounded-md shadow-lg flex flex-row hover:bg-green1 cursor-pointer"
