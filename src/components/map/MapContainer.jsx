@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import { React, useState } from "react";
 import { Map, MapMarker, useMap, Polyline } from "react-kakao-maps-sdk";
 
