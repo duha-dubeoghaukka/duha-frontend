@@ -4,7 +4,7 @@ const regionNames = [
     romanization: "All"
   },
   {
-    name: "제주 시내",
+    name: "제주시내",
     romanization: "Downtown Jeju"
   },
   {

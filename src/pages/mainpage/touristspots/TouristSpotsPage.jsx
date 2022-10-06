@@ -1,7 +1,7 @@
 import regionNames from "../../../utils/regionNames.js";
 import RegionButton from "../../../components/mainpage/RegionButton";
 import Layout from "../../../components/layout/Layout";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import GlobalState from "../../../shared/GlobalState";
 import Item from "../../../components/mainpage/Item";
 import { removeDuplicates } from "../../../utils/removeDuplicates";
@@ -11,11 +11,17 @@ import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
+import SearchField from "../../../components/search/SearchField";
+import AutoComplete from "../../../components/search/AutoComplete";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
     return api.get("/touristspot");
   });
+  const [searchedResults, setSearchedResults] = useState([]);
+  const [searchMode, setSearchMode] = useState(false);
+  const [autoCompletedInput, setAutoCompletedInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
@@ -23,11 +29,24 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     setSelectedRegion(event.target.value);
     setCurrentSpotPage(1);
   };
+  const sendResults = results => {
+    setSearchResults(results);
+  };
+  const selectAutoComplete = name => {
+    setAutoCompletedInput(name);
+    setSearchResults([]);
+  };
+  const sendSearchedResults = results => {
+    setSearchedResults(results);
+    setSearchMode(true);
+  };
   useEffect(() => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
   }, []);
   useEffect(() => {
+    setSearchMode(false);
+    setAutoCompletedInput("");
     refetch();
   }, [regionSelection, currentSpotPage]);
   if (isLoading || isFetching || status === "loading") {
@@ -66,13 +85,14 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             </Link>
           </ul>
         </div>
-        <div className="mb-[43px]">
+        <div className="mb-[16px]">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} />;
             })}
           </ul>
           <select
+            value={selectedRegion}
             onChange={selectChangeHandler}
             className="pl-3 text-[16px] block md:hidden w-full h-[43px] text-black1 font-bold rounded-lg border-black1 border-solid border-2"
           >
@@ -81,37 +101,68 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             })}
           </select>
         </div>
-        <div className="mb-3">
-          <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
+        <div className="mb-[16px]">
+          <SearchField
+            setSearchMode={setSearchMode}
+            sendResults={sendResults}
+            autoCompletedInput={autoCompletedInput}
+            sendSearchedResults={sendSearchedResults}
+            region={selectedRegion}
+          />
+          {searchResults && (
+            <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
+              {searchResults.map(result => {
+                return <AutoComplete key={result.name} data={result} selectAutoComplete={selectAutoComplete} />;
+              })}
+            </div>
+          )}
         </div>
-        <div className="mb-0">
-          {currentSpots.map(spot => {
-            return <Item key={spot.id} data={spot} counter={counter} setCounter={setCounter} category={"touristspot"} />;
-          })}
-        </div>
-        <div className="flex justify-center">
-          {pages.map(page => {
-            if (page === currentSpotPage) {
-              return (
-                <div key={page} className="mr-1">
-                  <p>{page}</p>
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  key={page}
-                  className="mr-1 cursor-pointer"
-                  onClick={() => {
-                    setCurrentSpotPage(page);
-                  }}
-                >
-                  <p className="underline text-sky-500">{page}</p>
-                </div>
-              );
-            }
-          })}
-        </div>
+        {searchMode ? (
+          <div>
+            <div className="mb-3">
+              <p className="font-bold">총 {searchedResults.length}건이 검색되었습니다.</p>
+            </div>
+            <div>
+              {searchedResults.map(result => {
+                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+              })}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="mb-3">
+              <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
+            </div>
+            <div className="mb-0">
+              {currentSpots.map(spot => {
+                return <Item key={spot.id} data={spot} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+              })}
+            </div>
+            <div className="flex justify-center">
+              {pages.map(page => {
+                if (page === currentSpotPage) {
+                  return (
+                    <div key={page} className="mr-1">
+                      <p>{page}</p>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      key={page}
+                      className="mr-1 cursor-pointer"
+                      onClick={() => {
+                        setCurrentSpotPage(page);
+                      }}
+                    >
+                      <p className="underline text-sky-500">{page}</p>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        )}
         <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
           <p>최상단으로 이동</p>
         </div>

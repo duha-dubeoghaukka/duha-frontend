@@ -1,7 +1,7 @@
 export const filterItems = (array, region) => {
   return array.filter(item => {
     switch (region) {
-      case "제주 시내":
+      case "제주시내":
         return item.region === "제주시내";
         break;
       case "애월":
