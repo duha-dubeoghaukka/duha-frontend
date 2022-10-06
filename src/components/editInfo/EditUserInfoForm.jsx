@@ -1,8 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Button from "../button/Button";
 import useInput from "../../hooks/useInput";
+import decodeToken from "../../utils/decodeToken";
+import { userInfo, userInfoAPIs } from "../../api/api";
+import { useNavigate } from "react-router-dom";
 
 function EditUserInfoForm() {
+  const token = localStorage.getItem("authorization");
+  const userNickName = decodeToken(token);
+  const navigate = useNavigate();
+
   const [nickName, setNickName, onChangeNickName] = useInput();
   const [currentPassword, setCurrentPassword] = useState();
   const [newPassword, setNewPassword] = useState();
@@ -54,18 +61,66 @@ function EditUserInfoForm() {
     // 닉네임만 변경
     if (nickName && !isCurrentPassword) {
       console.log("닉네임 변경");
+      let data = {
+        nickname: nickName
+      };
+      userInfoAPIs
+        .editUserInfo(data)
+        .then(res => {
+          if (!res.data.isSuccess) {
+            alert(res.data.message);
+          } else {
+            alert("닉네임 변경이 완료되었습니다.");
+          }
+        })
+        .catch(err => console.log(err));
     }
     // 비밀번호만 변경
-    else if (!nickName && currentPassword) {
-      console.log("비밀번호만 변경");
-    }
+    // else if (!nickName && currentPassword) {
+    //   console.log("비밀번호만 변경");
+    //   let data = {
+    //     currentPassword,
+    //     newPassword
+    //   };
+    //   userInfoAPIs
+    //     .editUserInfo(data)
+    //     .then(res => {
+    //       if (!res.data.isSuccess) {
+    //         alert(res.data.message);
+    //       } else {
+    //         alert("비밀번호 변경이 완료되었습니다.");
+    //       }
+    //     })
+    //     .catch(err => console.log(err.response));
+    // }
     // 둘 다 변경
     else if (nickName && currentPassword) {
-      console.log("둘다 변경");
+      let data = {
+        nickname: nickName,
+        currentPassword,
+        newPassword
+      };
+      userInfoAPIs
+        .editUserInfo(data)
+        .then(res => {
+          console.log("res", res.data);
+          if (!res.data.isSuccess) {
+            alert(res.data.message);
+            console.log("aaa", res.data);
+          } else {
+            alert("회원 정보 수정이 완료되었습니다.");
+            localStorage.removeItem("authorization");
+            localStorage.setItem("authorization", res.headers.authorization);
+            // navigate(-1);
+          }
+        })
+        .catch(err => console.log(err));
     }
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setNickName(userNickName);
+  }, []);
 
   return (
     <div className="w-full h-full">
