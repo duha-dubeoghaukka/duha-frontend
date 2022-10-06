@@ -16,7 +16,7 @@ const regionNames = [
     romanization: "Jungmun"
   },
   {
-    name: "서귀포",
+    name: "서귀포시내",
     romanization: "Seogwipo"
   },
   {

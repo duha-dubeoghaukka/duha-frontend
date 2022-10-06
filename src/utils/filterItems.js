@@ -10,7 +10,7 @@ export const filterItems = (array, region) => {
       case "중문":
         return item.region === "중문";
         break;
-      case "서귀포":
+      case "서귀포시내":
         return item.region === "서귀포시내";
         break;
       case "우도&성산":
