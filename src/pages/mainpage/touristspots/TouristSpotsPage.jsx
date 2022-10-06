@@ -108,6 +108,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
             region={selectedRegion}
+            category="touristSpots"
           />
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">

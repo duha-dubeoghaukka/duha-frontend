@@ -3,7 +3,17 @@ import SearchIcon from "@mui/icons-material/Search";
 import { debouncer } from "../../utils/debouncer";
 import { api } from "../../api/api";
 
-const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, region }) => {
+const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, region, category }) => {
+  const categoryMapper = {
+    touristSpots: "touristspot",
+    restaurants: "restaurant",
+    accommodations: "accommodation"
+  };
+  const placeHolderMapper = {
+    touristSpots: "관광지를",
+    restaurants: "맛집을",
+    accommodations: "숙소를"
+  };
   const [userInput, setUserInput] = useState("");
   useEffect(() => {
     setUserInput(autoCompletedInput);
@@ -12,7 +22,11 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
     const whiteSpacesRegex = new RegExp(/^\s*$/);
     if (!whiteSpacesRegex.test(userInput)) {
       api
-        .get(region === "전체" ? `/touristspot/search?keyword=${userInput}` : `/touristspot/search?region=${region}&keyword=${userInput}`)
+        .get(
+          region === "전체"
+            ? `/${categoryMapper[category]}/search?keyword=${userInput}`
+            : `/${categoryMapper[category]}/search?region=${region}&keyword=${userInput}`
+        )
         .then(response => {
           const results = response.data.data;
           sendSearchedResults(results);
@@ -26,7 +40,11 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
   const sendValue = useCallback(
     debouncer(value => {
       api
-        .get(region === "전체" ? `/touristspot/search?keyword=${value}` : `/touristspot/search?region=${region}&keyword=${value}`)
+        .get(
+          region === "전체"
+            ? `/${categoryMapper[category]}/search?keyword=${value}`
+            : `/${categoryMapper[category]}/search?region=${region}&keyword=${value}`
+        )
         .then(response => {
           const results = response.data.data;
           sendResults(results);
@@ -52,7 +70,7 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
   return (
     <div className="relative">
       <input
-        placeholder="관광지를 검색하세요"
+        placeholder={`${placeHolderMapper[category]} 검색하세요...`}
         type="text"
         value={userInput}
         onChange={handleUserInput}
