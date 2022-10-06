@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
@@ -33,19 +33,25 @@ const SignUpForm = () => {
 
   const onSubmit = async singupInfo => {
     try {
-      await api.post("/member/emailcheck", {
+      const { data } = await api.post("/member/emailcheck", {
         email: singupInfo.email
       });
+      if (!data.isSuccess) {
+        return alert(data.message);
+      }
     } catch (error) {
-      return alert("중복된 이메일입니다.");
+      throw new Error(error);
     }
 
     try {
-      await api.post("/member/nicknamecheck", {
+      const { data } = await api.post("/member/nicknamecheck", {
         nickname: singupInfo.nickname
       });
+      if (!data.isSuccess) {
+        return alert(data.message);
+      }
     } catch (error) {
-      return alert("중복된 닉네임입니다.");
+      throw new Error(error);
     }
 
     try {
