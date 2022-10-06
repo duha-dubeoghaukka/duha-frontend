@@ -52,7 +52,7 @@ const Layout = props => {
         </div>
       </div>
       {isOpen && (
-        <div className="fixed w-[290px] pt-20 h-full bg-white shadow-md hidden md:block">
+        <div className="fixed w-[290px] pt-20 h-full bg-white shadow-md hidden md:block z-[5]">
           <div>
             <Link to="/">
               <img src="/assets/LogoV2.png" alt="뚜벅하우까 로고" className="w-[180px] mx-auto my-[43px] cursor-pointer" />
