@@ -52,7 +52,7 @@ const Layout = props => {
         </div>
       </div>
       {isOpen && (
-        <div className="fixed w-[290px] pt-20 h-full bg-white shadow-md hidden md:block">
+        <div className="fixed w-[290px] pt-20 h-full bg-white shadow-md hidden md:block z-[5]">
           <div>
             <Link to="/">
               <img src="/assets/LogoV2.png" alt="뚜벅하우까 로고" className="w-[180px] mx-auto my-[43px] cursor-pointer" />
@@ -124,7 +124,7 @@ const Layout = props => {
           <PersonIcon fontSize="large" className="cursor-pointer" />
         </Link>
       </div>
-      <div className="md:w-[600px] mx-auto pt-20 md:px-[24px] md:px-0 md:mb-10">{children}</div>
+      <div className="md:w-[600px] mx-auto pt-20 px-[24px] md:px-0 md:mb-10">{children}</div>
     </div>
   );
 };
