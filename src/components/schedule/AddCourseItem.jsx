@@ -1,15 +1,11 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate, useParams } from "react-router-dom";
-import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { api } from "../../api/api";
-import Bookmark from "../mainpage/Bookmark";
-import { useState } from "react";
 
 const AddCourseItem = ({ data, setCounter, category }) => {
   const { tripId, currentCourseId, day } = useParams();
   const navigate = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
-  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
+  const { id, name, description, region, likeNum, thumbnailUrl } = data;
 
   const itemClickHandler = async () => {
     try {
@@ -26,28 +22,6 @@ const AddCourseItem = ({ data, setCounter, category }) => {
       }
     } catch (error) {
       throw new Error(error);
-    }
-  };
-
-  const bookmarkHandler = () => {
-    const isLoggedIn = checkIsLoggedIn();
-    if (isLoggedIn) {
-      api
-        .get(`/auth/${category}/bookmark/` + id)
-        .then(response => {
-          if (response.data.isSuccess) {
-            const nextBookmarked = response.data.data.bookmarked;
-            setIsBookmarked(nextBookmarked);
-            setCounter(previousCounter => previousCounter + 1);
-          } else {
-            alert(response.data.message);
-          }
-        })
-        .catch(error => {
-          alert(error);
-        });
-    } else {
-      alert("로그인을 먼저 해주세요.");
     }
   };
 
@@ -76,7 +50,6 @@ const AddCourseItem = ({ data, setCounter, category }) => {
           alt={name}
           onClick={itemClickHandler}
         />
-        {/* <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} /> */}
       </div>
     </div>
   );

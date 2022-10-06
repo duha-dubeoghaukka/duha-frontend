@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { api } from "../../api/api";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import sortBy from "lodash/sortBy";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
