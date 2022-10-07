@@ -22,7 +22,7 @@ function ScheduleCard() {
   };
 
   return (
-    <div className="h-screen">
+    <>
       {!schedules ? (
         <Spinner />
       ) : (
@@ -39,7 +39,7 @@ function ScheduleCard() {
           );
         })
       )}
-    </div>
+    </>
   );
 }
 
