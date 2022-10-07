@@ -139,15 +139,6 @@ function EditUserInfoForm() {
           <p className="input-helper ml-4">{isCheckPassword ? checkPasswordMessage : checkPasswordMessage}</p>
 
           <div className="ml-3 mt-3">
-            {/* <Button
-              text="등록하기"
-              type="button"
-              buttonStyle={"disabled"}
-              width="w-[385px] md:w-[500px]"
-              height="h-14"
-              margin="mb-3"
-              // onClick={}
-            /> */}
             <button className="btn-primary mb-3" onClick={() => onSubmit()}>
               <p>변경 완료</p>
             </button>
