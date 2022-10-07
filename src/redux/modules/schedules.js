@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk, getDefaultMiddleware } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { api } from "../../api/api";
 
 const initialState = {
