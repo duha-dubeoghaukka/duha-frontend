@@ -15,7 +15,6 @@ function EditUserInfoForm() {
   const [checkPassword, setCheckPassword] = useState();
 
   //check
-  const [isNickName, setIsNickName] = useState(false);
   const [isCurrentPassword, setIsCurrentPassword] = useState(false);
   const [isNewPasswrord, setIsNewPassword] = useState();
   const [isCheckPassword, setIsCheckPassword] = useState();
