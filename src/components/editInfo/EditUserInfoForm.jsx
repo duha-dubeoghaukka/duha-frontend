@@ -109,9 +109,8 @@ function EditUserInfoForm() {
             console.log("aaa", res.data);
           } else {
             alert("회원 정보 수정이 완료되었습니다.");
-            localStorage.removeItem("authorization");
-            localStorage.setItem("authorization", res.headers.authorization);
-            // navigate(-1);
+            // localStorage.removeItem("authorization");
+            // localStorage.setItem("authorization", res.headers.authorization);
           }
         })
         .catch(err => console.log(err));
