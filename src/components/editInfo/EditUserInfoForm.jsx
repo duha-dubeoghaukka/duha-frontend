@@ -2,12 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
 import decodeToken from "../../utils/decodeToken";
 import { userInfoAPIs } from "../../api/api";
-import { useDispatch } from "react-redux";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
   const userNickName = decodeToken(token);
-  const dispatch = useDispatch();
 
   const [nickName, setNickName, onChangeNickName] = useInput();
   const [currentPassword, setCurrentPassword] = useState();
