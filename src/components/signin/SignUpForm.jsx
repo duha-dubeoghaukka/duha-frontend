@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 
 import { useForm } from "react-hook-form";
@@ -73,7 +72,7 @@ const SignUpForm = () => {
   return (
     <div className="w-full md:w-[600px] mx-auto">
       <form className="flex flex-col my-10" onSubmit={handleSubmit(onSubmit)}>
-        <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
+        <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" alt={"Logo"} />
         <div className="relative w-[385px] md:w-[500px] mx-auto">
           <input type="text" placeholder="이메일" className="input mt-2" {...register("email")} />
           {/* <button

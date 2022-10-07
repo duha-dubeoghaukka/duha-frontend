@@ -43,7 +43,6 @@ const TouristSpotDetailPage = () => {
         .get("/auth/touristspot/bookmark/" + spotID)
         .then(response => {
           if (response.data.isSuccess) {
-            const nextBookmark = response.data.data.bookmarked;
             refetch();
           } else {
             alert(response.data.message);

@@ -26,7 +26,7 @@ const GoogleLogin = props => {
           <div className="box-border h-96  w-3/5	p-4 border-2 rounded-md">
             <div className="grid place-items-center">
               <div className="flex flex-row mt-20">
-                <img className="w-14 h-14 " src={`${process.env.PUBLIC_URL}/assets/GoogleLogo.png`} />
+                <img className="w-14 h-14 " src={`${process.env.PUBLIC_URL}/assets/GoogleLogo.png`} alt={"Google Logo"} />
                 <div className="h-12 ml-5 mt-3">
                   <span className="font-semibold	text-xl">Google Login</span>
                 </div>

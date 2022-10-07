@@ -7,7 +7,7 @@ import Spinner from "../Spinner/Spinner";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 
 function ShareCard() {
-  const { error, isLoading, data, refetch, status, isFetching } = useQuery("shareCards", () => {
+  const { error, isLoading, data, refetch, status } = useQuery("shareCards", () => {
     return api.get("/trip");
   });
   const refetchQuery = () => {

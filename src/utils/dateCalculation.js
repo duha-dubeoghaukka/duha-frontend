@@ -3,8 +3,7 @@ export const DateCalculation = date => {
   let year = arrayToDate[0];
   let month = arrayToDate[1];
   let day = arrayToDate[2];
-  let newDate = new Date(year, month, day);
-  return newDate;
+  return new Date(year, month, day);
 };
 
 export const DateDiff = (startDate, endDate) => {

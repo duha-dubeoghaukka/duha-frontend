@@ -43,7 +43,6 @@ const RestaurantDetailPage = () => {
         .get("/auth/restaurant/bookmark/" + restaurantID)
         .then(response => {
           if (response.data.isSuccess) {
-            const nextBookmark = response.data.data.bookmarked;
             refetch();
           } else {
             alert(response.data.message);

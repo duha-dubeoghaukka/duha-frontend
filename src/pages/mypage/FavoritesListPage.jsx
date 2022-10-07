@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../components/layout/Layout";
 import FavoriteItemList from "../../components/mypage/FavoriteItemList";
-import decodeToken from "../../utils/decodeToken";
 import { routingLoginPage } from "../../utils/routingLoginPage";
 
 function FavoritesListPage() {
@@ -15,7 +14,7 @@ function FavoritesListPage() {
   return (
     <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
       <div className="grid place-items-center h-screen">
-        <img className="w-56 m-6" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
+        <img className="w-56 m-6" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} alt={"Logo"} />
         <FavoriteItemList />
       </div>
     </Layout>

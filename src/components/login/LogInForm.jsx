@@ -1,6 +1,5 @@
 import { React, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { api } from "../../api/api";
@@ -64,7 +63,7 @@ const LogInForm = () => {
   return (
     <div className="w-full md:w-[600px] mx-auto">
       <form className="flex flex-col my-10" onSubmit={handleSubmit}>
-        <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
+        <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" alt={"Logo"} />
         <input
           type="text"
           placeholder="이메일"

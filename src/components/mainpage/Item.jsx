@@ -5,7 +5,7 @@ import { api } from "../../api/api";
 import Bookmark from "./Bookmark";
 import { useState } from "react";
 
-const Item = ({ data, counter, setCounter, category }) => {
+const Item = ({ data, setCounter, category }) => {
   const navigator = useNavigate();
   const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
