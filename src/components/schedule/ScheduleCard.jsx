@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 function ScheduleCard() {
   const dispatch = useDispatch();
   const { schedules } = useSelector(state => state.schedules);
-  console.log("aa", schedules);
 
   useEffect(() => {
     dispatch(__getSchedules());
