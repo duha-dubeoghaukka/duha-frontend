@@ -26,6 +26,7 @@ import AccommodationsPage from "../pages/mainpage/Accommodations/AccommodationsP
 import AccommodationDetailPage from "../pages/detailpage/accommodation/AccommodationDetailPage";
 import AddRestaurant from "../pages/schedule/AddRestaurant";
 import AddAccommodation from "../pages/schedule/AddAccommodation";
+import EditUserInfoPage from "../pages/user/EditUserInfoPage";
 
 const Router = () => {
   return (
@@ -56,6 +57,7 @@ const Router = () => {
         <Route path="/auth/google/callback" element={<GoogleLogin />} />
         <Route path="/schedule/share" element={<ShareSchedulePage />} />
         <Route path="/schedule/share/detail/:id" element={<ShareDetailPage />} />
+        <Route path="/mypage/user/edit" element={<EditUserInfoPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -57,6 +57,12 @@ export const mypageAPIs = {
   }
 };
 
+export const userInfoAPIs = {
+  editUserInfo: data => {
+    return api.put(`/auth/member/modify`, data);
+  }
+};
+
 export const instance = axios.create({
   baseURL: "http://43.201.5.53:8080/",
   headers: {
