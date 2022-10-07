@@ -87,7 +87,7 @@ const RestaurantsPage = () => {
             </Link>
           </ul>
         </div>
-        <div className="mb-[43px]">
+        <div className="mb-[16px]">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} />;
@@ -126,7 +126,7 @@ const RestaurantsPage = () => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"restaurant"} />;
               })}
             </div>
           </div>
