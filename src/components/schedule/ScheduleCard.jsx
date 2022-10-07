@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { __getSchedules, __deleteSchedule } from "../../redux/modules/schedules";
 import { useSelector } from "react-redux";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 
 function ScheduleCard() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function ScheduleCard() {
               startDate={item.startAt}
               endDate={item.endAt}
               id={item.id}
+              isPublic={item.isPublic}
               onDeleteSchedule={onDeleteSchedule}
             />
           );
@@ -43,7 +45,7 @@ function ScheduleCard() {
   );
 }
 
-function ScheduleCardComponent({ title, startDate, endDate, id, onDeleteSchedule }) {
+function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDeleteSchedule }) {
   const newStartDate = DateCalculation(startDate);
   const newEndDate = DateCalculation(endDate);
   const newDate = DateDiff(newStartDate, newEndDate);
@@ -56,10 +58,14 @@ function ScheduleCardComponent({ title, startDate, endDate, id, onDeleteSchedule
     localStorage.setItem("id", id);
   };
 
+  const onUpdate = id => {
+    navigate(`/schedule/update/${id}`, { state: [title, startDate, endDate, isPublic] });
+  };
+
   return (
     <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row">
       <div
-        className="pr-36"
+        className="pr-32"
         onClick={() => {
           navigate(`${id}/1`);
           setItem();
@@ -76,7 +82,8 @@ function ScheduleCardComponent({ title, startDate, endDate, id, onDeleteSchedule
         </div>
       </div>
       <div className="flex flex-row mt-5 ">
-        <DeleteOutlineIcon className="mt-5 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
+        <ModeEditOutlineOutlinedIcon className="mt-5 cursor-pointer" onClick={() => onUpdate(id)} />
+        <DeleteOutlineIcon className="mt-5 ml-1 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
       </div>
     </div>
   );

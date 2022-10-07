@@ -6,11 +6,17 @@ import Layout from "../../components/layout/Layout";
 import useInput from "../../hooks/useInput";
 import Button from "../../components/button/Button";
 import { scheduleAPIs } from "../../api/api";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { routingLoginPage } from "../../utils/routingLoginPage";
+import { useDispatch } from "react-redux";
+import { __editSchedule } from "../../redux/modules/schedules";
 
 function Registration() {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const dispatch = useDispatch();
+  const param = useParams();
+  const id = Number(param.id);
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -44,6 +50,25 @@ function Registration() {
     }
   };
 
+  const onEdit = id => {
+    let data = {
+      title: value,
+      isPublic: isChecked,
+      startAt: startDate,
+      endAt: endDate
+    };
+    dispatch(__editSchedule({ id: id, editData: data }))
+      .then(res => {
+        if (res.payload.isSuccess) {
+          alert("변경이 완료되었습니다.");
+          navigate(`/schedule`);
+        } else {
+          alert(res.payload.message);
+        }
+      })
+      .catch(err => alert(err.response));
+  };
+
   const changeDate = e => {
     const startDateFormat = moment(e[0]).format("YYYY/MM/DD");
     const endDateFormat = moment(e[1]).format("YYYY/MM/DD");
@@ -54,6 +79,12 @@ function Registration() {
 
   useEffect(() => {
     routingLoginPage(navigate);
+    if (state) {
+      setValue(state[0]);
+      setStartDate(state[1]);
+      setEndDate(state[2]);
+      setIsChecked(state[3]);
+    }
   }, []);
 
   return (
@@ -87,12 +118,21 @@ function Registration() {
             <p className="text-sm">일정을 다른사람과 공유합니다.</p>
             <input type="checkbox" checked={isChecked || ""} name="checked" onChange={handleClick} />
           </div>
-          <Button
-            text="등록하기"
-            type="button"
-            buttonStyle={startDate === "" || endDate === "" || value === "" ? "disabled" : "rounded"}
-            onClick={() => onSubmit()}
-          />
+          {state ? (
+            <Button
+              text="변경하기"
+              type="button"
+              buttonStyle={startDate === "" || endDate === "" || value === "" ? "disabled" : "rounded"}
+              onClick={() => onEdit(id)}
+            />
+          ) : (
+            <Button
+              text="등록하기"
+              type="button"
+              buttonStyle={startDate === "" || endDate === "" || value === "" ? "disabled" : "rounded"}
+              onClick={() => onSubmit()}
+            />
+          )}
         </div>
       </div>
     </Layout>
