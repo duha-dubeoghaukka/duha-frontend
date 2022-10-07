@@ -22,15 +22,17 @@ export const scheduleAPIs = {
   register: data => {
     return api.post("/auth/trip", data);
   },
-  getRegisterInfo: () => {
-    return api.get("/auth/trip");
-  },
+  // 차후에 리팩토링 예정
+  // getRegisterInfo: () => {
+  //   return api.get("/auth/trip");
+  // },
   getShareSchedule: () => {
     return api.get("/trip");
   },
-  deleteSchedule: tripId => {
-    return api.delete(`/auth/trip/${tripId}`);
-  },
+  // 차후에 리팩토링 예정
+  // deleteSchedule: tripId => {
+  //   return api.delete(`/auth/trip/${tripId}`);
+  // },
   getShareDetailCourse: tripId => {
     return api.get(`/trip/${tripId}`);
   }

@@ -1,10 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
 import decodeToken from "../../utils/decodeToken";
+import { useQuery } from "react-query";
+import { userInfoAPIs } from "../../api/api";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
   const userNickName = decodeToken(token);
+  const editInfo = useQuery("editInfo", userInfoAPIs);
 
   const [nickName, setNickName, onChangeNickName] = useInput();
   const [currentPassword, setCurrentPassword] = useState();
@@ -134,7 +137,6 @@ function EditUserInfoForm() {
             type="password"
           />
           <p className="input-helper ml-4">{isCheckPassword ? checkPasswordMessage : checkPasswordMessage}</p>
-
           <div className="ml-3 mt-3">
             <button className="btn-primary mb-3" onClick={() => onSubmit()}>
               <p>변경 완료</p>

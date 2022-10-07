@@ -1,55 +1,55 @@
 import React, { useEffect, useState } from "react";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { DateCalculation, DateDiff } from "../../utils/dateCalculation";
-import { scheduleAPIs } from "../../api/api";
 import Spinner from "../Spinner/Spinner";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { __getSchedules, __deleteSchedule } from "../../redux/modules/schedules";
+import { useSelector } from "react-redux";
 
 function ScheduleCard() {
-  const location = useLocation();
-  const [registerData, setRegisterData] = useState();
+  const dispatch = useDispatch();
+  const { schedules } = useSelector(state => state.schedules);
+  console.log("aa", schedules);
 
   useEffect(() => {
-    scheduleAPIs.getRegisterInfo().then(res => setRegisterData(res.data.data));
-  }, [location.key]);
+    dispatch(__getSchedules());
+  }, [dispatch]);
+
+  const onDeleteSchedule = tripId => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      dispatch(__deleteSchedule(tripId));
+    }
+  };
 
   return (
     <div className="h-screen">
-      {!registerData ? (
+      {!schedules ? (
         <Spinner />
       ) : (
-        registerData?.map(item => {
-          return <ScheduleCardComponent key={item.id} title={item.title} startDate={item.startAt} endDate={item.endAt} id={item.id} />;
+        schedules?.map(item => {
+          return (
+            <ScheduleCardComponent
+              key={item.id}
+              title={item.title}
+              startDate={item.startAt}
+              endDate={item.endAt}
+              id={item.id}
+              onDeleteSchedule={onDeleteSchedule}
+            />
+          );
         })
       )}
     </div>
   );
 }
 
-function ScheduleCardComponent({ title, startDate, endDate, id }) {
+function ScheduleCardComponent({ title, startDate, endDate, id, onDeleteSchedule }) {
   const newStartDate = DateCalculation(startDate);
   const newEndDate = DateCalculation(endDate);
   const newDate = DateDiff(newStartDate, newEndDate);
   const nights = newDate[0];
   const allDays = newDate[1];
-
-  const onDeleteSchedule = tripId => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      scheduleAPIs
-        .deleteSchedule(tripId)
-        .then(res => {
-          if (res.data.isSuccess) {
-            alert("삭제가 완료되었습니다!");
-            window.location.reload();
-          } else {
-            alert("삭제가 취소되었습니다!");
-          }
-        })
-        .catch(err => {
-          console.log("err", err);
-        });
-    }
-  };
 
   const navigate = useNavigate();
 
