@@ -1,7 +1,7 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const ReviewItem = ({ data }) => {
-  const { review, reviewedAt, reviewer } = data;
+  const { review, reviewer } = data;
   return (
     <div>
       <div className="flex items-center mb-[24px]">

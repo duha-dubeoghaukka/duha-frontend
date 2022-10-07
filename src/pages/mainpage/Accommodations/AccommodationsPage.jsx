@@ -1,7 +1,7 @@
 import regionNames from "../../../utils/regionNames.js";
 import RegionButton from "../../../components/mainpage/RegionButton";
 import Layout from "../../../components/layout/Layout";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import GlobalState from "../../../shared/GlobalState";
 import Item from "../../../components/mainpage/Item";
 import { removeDuplicates } from "../../../utils/removeDuplicates";
@@ -11,11 +11,17 @@ import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
+import SearchField from "../../../components/search/SearchField";
+import AutoComplete from "../../../components/search/AutoComplete";
 
 const AccommodationsPage = () => {
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedAccommodations"], () => {
     return api.get("/accommodation");
   });
+  const [searchedResults, setSearchedResults] = useState([]);
+  const [searchMode, setSearchMode] = useState(false);
+  const [autoCompletedInput, setAutoCompletedInput] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const { regionSelection, accommodationPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentAccommodationPage, setCurrentAccommodationPage } = accommodationPageSelection;
@@ -23,11 +29,24 @@ const AccommodationsPage = () => {
     setSelectedRegion(event.target.value);
     setCurrentAccommodationPage(1);
   };
+  const sendResults = results => {
+    setSearchResults(results);
+  };
+  const selectAutoComplete = name => {
+    setAutoCompletedInput(name);
+    setSearchResults([]);
+  };
+  const sendSearchedResults = results => {
+    setSearchedResults(results);
+    setSearchMode(true);
+  };
   useEffect(() => {
     setCurrentAccommodationPage(1);
     setSelectedRegion("전체");
   }, []);
   useEffect(() => {
+    setSearchMode(false);
+    setAutoCompletedInput("");
     refetch();
   }, [regionSelection, currentAccommodationPage]);
   if (isLoading || isFetching || status === "loading") {
@@ -68,13 +87,14 @@ const AccommodationsPage = () => {
             </Link>
           </ul>
         </div>
-        <div className="mb-[43px]">
+        <div className="mb-[16px]">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} />;
             })}
           </ul>
           <select
+            value={selectedRegion}
             onChange={selectChangeHandler}
             className="pl-3 text-[16px] block md:hidden w-full h-[43px] text-black1 font-bold rounded-lg border-black1 border-solid border-2"
           >
@@ -83,39 +103,71 @@ const AccommodationsPage = () => {
             })}
           </select>
         </div>
-        <div className="mb-3">
-          <p className="font-bold">총 {filteredAccommodations.length}건이 검색되었습니다.</p>
+        <div className="mb-[16px]">
+          <SearchField
+            setSearchMode={setSearchMode}
+            sendResults={sendResults}
+            autoCompletedInput={autoCompletedInput}
+            sendSearchedResults={sendSearchedResults}
+            region={selectedRegion}
+            category="accommodations"
+          />
+          {searchResults && (
+            <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
+              {searchResults.map(result => {
+                return <AutoComplete key={result.name} data={result} selectAutoComplete={selectAutoComplete} />;
+              })}
+            </div>
+          )}
         </div>
-        <div className="mb-0">
-          {currentAccommodations.map(accommodation => {
-            return (
-              <Item key={accommodation.id} data={accommodation} category={"accommodation"} counter={counter} setCounter={setCounter} />
-            );
-          })}
-        </div>
-        <div className="flex justify-center">
-          {pages.map(page => {
-            if (page === currentAccommodationPage) {
-              return (
-                <div key={page} className="mr-1">
-                  <p>{page}</p>
-                </div>
-              );
-            } else {
-              return (
-                <div
-                  key={page}
-                  className="mr-1 cursor-pointer"
-                  onClick={() => {
-                    setCurrentAccommodationPage(page);
-                  }}
-                >
-                  <p className="underline text-sky-500">{page}</p>
-                </div>
-              );
-            }
-          })}
-        </div>
+        {searchMode ? (
+          <div>
+            <div className="mb-3">
+              <p className="font-bold">총 {searchedResults.length}건이 검색되었습니다.</p>
+            </div>
+            <div>
+              {searchedResults.map(result => {
+                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"accommodation"} />;
+              })}
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="mb-3">
+              <p className="font-bold">총 {filteredAccommodations.length}건이 검색되었습니다.</p>
+            </div>
+            <div className="mb-0">
+              {currentAccommodations.map(accommodation => {
+                return (
+                  <Item key={accommodation.id} data={accommodation} category={"accommodation"} counter={counter} setCounter={setCounter} />
+                );
+              })}
+            </div>
+            <div className="flex justify-center">
+              {pages.map(page => {
+                if (page === currentAccommodationPage) {
+                  return (
+                    <div key={page} className="mr-1">
+                      <p>{page}</p>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div
+                      key={page}
+                      className="mr-1 cursor-pointer"
+                      onClick={() => {
+                        setCurrentAccommodationPage(page);
+                      }}
+                    >
+                      <p className="underline text-sky-500">{page}</p>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        )}
         <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
           <p>최상단으로 이동</p>
         </div>

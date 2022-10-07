@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 
 import { useForm } from "react-hook-form";
@@ -33,19 +32,25 @@ const SignUpForm = () => {
 
   const onSubmit = async singupInfo => {
     try {
-      await api.post("/member/emailcheck", {
+      const { data } = await api.post("/member/emailcheck", {
         email: singupInfo.email
       });
+      if (!data.isSuccess) {
+        return alert(data.message);
+      }
     } catch (error) {
-      return alert("중복된 이메일입니다.");
+      throw new Error(error);
     }
 
     try {
-      await api.post("/member/nicknamecheck", {
+      const { data } = await api.post("/member/nicknamecheck", {
         nickname: singupInfo.nickname
       });
+      if (!data.isSuccess) {
+        return alert(data.message);
+      }
     } catch (error) {
-      return alert("중복된 닉네임입니다.");
+      throw new Error(error);
     }
 
     try {
@@ -67,7 +72,7 @@ const SignUpForm = () => {
   return (
     <div className="w-full md:w-[600px] mx-auto">
       <form className="flex flex-col my-10" onSubmit={handleSubmit(onSubmit)}>
-        <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" />
+        <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" alt={"Logo"} />
         <div className="relative w-[385px] md:w-[500px] mx-auto">
           <input type="text" placeholder="이메일" className="input mt-2" {...register("email")} />
           {/* <button

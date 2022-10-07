@@ -43,7 +43,6 @@ const AccommodationDetailPage = () => {
         .get("/auth/accommodation/bookmark/" + accommodationID)
         .then(response => {
           if (response.data.isSuccess) {
-            const nextBookmark = response.data.data.bookmarked;
             refetch();
           } else {
             alert(response.data.message);
