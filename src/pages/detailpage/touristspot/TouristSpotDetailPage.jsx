@@ -64,7 +64,6 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    console.dir(spot);
     const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations } = spot;
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
