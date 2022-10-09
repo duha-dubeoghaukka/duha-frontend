@@ -135,7 +135,7 @@ const TouristSpotDetailPage = () => {
                 </div>
               )}
             </div>
-            <div onClick={mapClickHandler}>
+            <div onClick={mapClickHandler} className="flex-grow-[1] flex flex-row-reverse">
               <MapIcon className="cursor-pointer" fontSize="large" />
             </div>
           </div>
