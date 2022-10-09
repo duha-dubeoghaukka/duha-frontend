@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import { api } from "../../../api/api";
 import SearchField from "../../../components/search/SearchField";
 import AutoComplete from "../../../components/search/AutoComplete";
+import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 
 const RestaurantsPage = () => {
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedRestaurants"], () => {
@@ -119,6 +120,10 @@ const RestaurantsPage = () => {
               })}
             </div>
           )}
+        </div>
+        <div className="flex items-center mb-3">
+          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
+          <p className="font-bold text-green1">버스 정류장이 300m 반경 이내에 존재하는 항목.</p>
         </div>
         {searchMode ? (
           <div>
