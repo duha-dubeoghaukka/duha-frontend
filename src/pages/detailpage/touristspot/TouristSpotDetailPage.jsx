@@ -122,16 +122,20 @@ const TouristSpotDetailPage = () => {
               <p>추가 예정</p>
               {stations.length > 0 && (
                 <div className="mt-[33px]">
-                  {stations.map(station => {
-                    return (
-                      <div className="flex">
-                        <DirectionsBusIcon className="mr-1" />
-                        <p>
-                          {station.stationName} - {station.distance}m
-                        </p>
-                      </div>
-                    );
-                  })}
+                  {stations
+                    .sort((a, b) => {
+                      return a.distance - b.distance;
+                    })
+                    .map(station => {
+                      return (
+                        <div className="flex">
+                          <DirectionsBusIcon className="mr-1" />
+                          <p>
+                            {station.stationName} - {station.distance}m
+                          </p>
+                        </div>
+                      );
+                    })}
                 </div>
               )}
             </div>
