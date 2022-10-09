@@ -110,14 +110,14 @@ const TouristSpotDetailPage = () => {
         )}
         <div className="mb-[20px]">
           <div className="flex justify-between align-top px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
-            <div>
+            <div className="flex-shrink-0 min-w-[90px]">
               <p className="mb-[26px] text-[20px]">주소</p>
               <p className="mb-[26px] text-[20px]">전화번호</p>
               <p className="text-[20px]">영업정보</p>
               {stations.length > 0 && <p className="text-[20px] mt-[26px]">가까운 버스 정류장</p>}
             </div>
-            <div>
-              <p className="mb-[33px]">{address}</p>
+            <div className="flex-grow-0 flex-shrink overflow-hidden">
+              <p className="mb-[34px] whitespace-nowrap overflow-hidden overflow-ellipsis">{address}</p>
               <p className="mb-[33px]">{phone}</p>
               <p>추가 예정</p>
               {stations.length > 0 && (
