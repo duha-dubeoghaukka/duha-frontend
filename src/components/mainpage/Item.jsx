@@ -1,4 +1,5 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import { useNavigate } from "react-router-dom";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { api } from "../../api/api";
@@ -7,7 +8,7 @@ import { useState } from "react";
 
 const Item = ({ data, setCounter, category }) => {
   const navigator = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked } = data;
+  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked, hasNearStation } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const itemClickHandler = () => {
     switch (category) {
@@ -69,6 +70,15 @@ const Item = ({ data, setCounter, category }) => {
           onClick={itemClickHandler}
         />
         <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
+        {hasNearStation && (
+          <DirectionsBusFilledOutlinedIcon
+            fontSize="large"
+            sx={{
+              color: "rgb(116, 175, 115)"
+            }}
+            className="absolute bottom-1 right-1"
+          />
+        )}
       </div>
     </div>
   );
