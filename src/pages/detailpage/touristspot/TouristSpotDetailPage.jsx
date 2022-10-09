@@ -16,6 +16,7 @@ import Map from "../mappage/Map";
 import { api } from "../../../api/api";
 import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
+import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
@@ -63,7 +64,8 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked } = spot;
+    console.dir(spot);
+    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations } = spot;
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="flex items-center mb-3">
@@ -102,17 +104,37 @@ const TouristSpotDetailPage = () => {
             })}
           </Swiper>
         </div>
+        {description && (
+          <div className="mb-3">
+            <p className="text-black1">{description}</p>
+          </div>
+        )}
         <div className="mb-[20px]">
           <div className="flex justify-between align-top px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
             <div>
               <p className="mb-[26px] text-[20px]">주소</p>
               <p className="mb-[26px] text-[20px]">전화번호</p>
               <p className="text-[20px]">영업정보</p>
+              {stations.length > 0 && <p className="text-[20px] mt-[26px]">가까운 버스 정류장</p>}
             </div>
             <div>
-              <p className="mb-[34px]">{address}</p>
-              <p className="mb-[34px]">{phone}</p>
+              <p className="mb-[33px]">{address}</p>
+              <p className="mb-[33px]">{phone}</p>
               <p>추가 예정</p>
+              {stations.length > 0 && (
+                <div className="mt-[33px]">
+                  {stations.map(station => {
+                    return (
+                      <div className="flex">
+                        <DirectionsBusIcon className="mr-1" />
+                        <p>
+                          {station.stationName} - {station.distance}m
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             <div onClick={mapClickHandler}>
               <MapIcon className="cursor-pointer" fontSize="large" />
