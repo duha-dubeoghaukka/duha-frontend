@@ -52,7 +52,7 @@ const DayItem = () => {
   const addBookMarkCourseHandler = () => {
     if (dayCourse.length >= 10) {
       alert("코스등록은 하루에 10개까지 가능합니다.");
-    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addspot`);
+    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addbookmarkspot`);
   };
 
   const addNearByCourseHandler = () => {
@@ -108,7 +108,7 @@ const DayItem = () => {
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
         <div className="flex justify-center">
-          <div className="mt-4 mb-6 flex justify-start overflow-x-scroll pb-4">
+          <div className="my-2 flex justify-start overflow-x-scroll pb-4">
             {courses.map(course => {
               return (
                 <div
