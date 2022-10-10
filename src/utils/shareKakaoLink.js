@@ -1,5 +1,4 @@
 export const shareKakao = (route, title) => {
-  console.log("route", route);
   if (window.Kakao) {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {
