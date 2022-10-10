@@ -34,7 +34,7 @@ const AddNearByItem = ({ data, lastCourseName }) => {
       className="p-[15px] group bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md cursor-pointer flex justify-between items-start hover:brightness-95 transition-all"
     >
       <div className="group-hover:brightness-95">
-        <div className="mb-[4px] flex items-center">
+        <div className="mb-[4px] flex flex-col items-start">
           <p className="font-bold text-[12px] md:text-[14px]">[{newCategory}] </p>
           <p className="font-bold text-[14px] md:text-[16px]">{name}</p>
         </div>
