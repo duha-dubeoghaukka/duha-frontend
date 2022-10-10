@@ -23,6 +23,8 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isAutoCompleteFocused, setIsAutoCompleteFocused] = useState(false);
+  const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
@@ -40,6 +42,30 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
+  };
+  const keyPressHandler = event => {
+    const key = event.key;
+    switch (key) {
+      case "ArrowDown":
+        if (searchResults.length > 0) {
+          const length = searchResults.length;
+          if (!isAutoCompleteFocused) {
+            setIsAutoCompleteFocused(true);
+            setSelectedAutoComplete(0);
+          } else {
+            setSelectedAutoComplete(previousSelectedAutoComplete => Math.min(length - 1, previousSelectedAutoComplete + 1));
+          }
+        }
+        break;
+      case "ArrowUp":
+        if (searchResults.length > 0) {
+          setIsAutoCompleteFocused(true);
+          setSelectedAutoComplete(previousSelectedAutoComplete => Math.max(0, previousSelectedAutoComplete - 1));
+        }
+        break;
+      default:
+        break;
+    }
   };
   useEffect(() => {
     setCurrentSpotPage(1);
@@ -102,7 +128,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             })}
           </select>
         </div>
-        <div className="mb-[16px]">
+        <div className="mb-[16px]" onKeyDown={keyPressHandler}>
           <SearchField
             setSearchMode={setSearchMode}
             sendResults={sendResults}
@@ -113,8 +139,15 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           />
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
-              {searchResults.map(result => {
-                return <AutoComplete key={result.name} data={result} selectAutoComplete={selectAutoComplete} />;
+              {searchResults.map((result, index) => {
+                return (
+                  <AutoComplete
+                    key={result.name}
+                    data={result}
+                    selectAutoComplete={selectAutoComplete}
+                    isSelected={selectedAutoComplete === index}
+                  />
+                );
               })}
             </div>
           )}
