@@ -14,7 +14,6 @@ export const shareKakao = (route, title) => {
         link: {
           mobileWebUrl: route,
           webUrl: route
-          // androidExecParams: "test"
         }
       },
       buttons: [
