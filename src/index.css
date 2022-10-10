@@ -4,28 +4,28 @@
 
 @layer components {
   .btn-primary {
-    @apply py-4 bg-green1 text-white1 font-semibold rounded-lg shadow-md w-[385px] md:w-[500px];
+    @apply py-4 bg-green1 text-white1 font-semibold rounded-lg shadow-md w-full md:w-[500px];
   }
   .btn-primary-sm {
-    @apply py-4 bg-green1 text-white1 font-semibold rounded-lg shadow-md w-[345px] md:w-[500px];
+    @apply py-4 bg-green1 text-white1 font-semibold rounded-lg shadow-md w-full md:w-[500px];
   }
   .btn-white {
-    @apply py-4 bg-white1 text-black2 font-semibold rounded-lg shadow-md w-[385px] md:w-[500px];
+    @apply py-4 bg-white1 text-black2 font-semibold rounded-lg shadow-md w-full md:w-[500px];
   }
   .btn-kakao {
-    @apply py-4 bg-[#FFCF54] text-black2 font-semibold rounded-lg shadow-md w-[385px] md:w-[500px];
+    @apply py-4 bg-[#FFCF54] text-black2 font-semibold rounded-lg shadow-md w-full md:w-[500px];
   }
   .input {
-    @apply border-b border-green1 text-black1 mx-auto px-4 h-14 w-[385px] md:w-[500px] focus:outline-none placeholder-gray-500 text-gray-600
+    @apply border-b border-green1 text-black1 mx-auto px-4 h-14 w-full md:w-[500px] focus:outline-none placeholder-gray-500 text-gray-600
   }
   .input-helper{
-    @apply w-[385px] md:w-[500px] mx-auto text-sm mt-2 text-red-400
+    @apply w-full md:w-[500px] mx-auto text-sm mt-2 text-red-400
   }
   .password-icon{
     @apply absolute top-4 right-4 text-green1 cursor-pointer
   }
   .course-layout{
-    @apply w-[385px] md:w-[600px] h-fit mx-auto bg-white1 rounded-lg md:px-[50px] md:py-[35px] px-[20px] py-[20px] shadow-lg
+    @apply w-full md:w-[600px] h-fit mx-auto bg-white1 rounded-lg md:px-[50px] md:py-[35px] px-[20px] py-[20px] shadow-lg
   }
 }
 
