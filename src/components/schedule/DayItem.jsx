@@ -52,7 +52,7 @@ const DayItem = () => {
   const addBookMarkCourseHandler = () => {
     if (dayCourse.length >= 10) {
       alert("코스등록은 하루에 10개까지 가능합니다.");
-    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addspot`);
+    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addbookmarkspot`);
   };
 
   const addNearByCourseHandler = () => {
@@ -107,20 +107,22 @@ const DayItem = () => {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
-        <div className="mt-4 mb-6 flex justify-center">
-          {courses.map(course => {
-            return (
-              <div
-                key={course.courseId}
-                className="text-green1 font-bold text-lg px-4 cursor-pointer"
-                onClick={() => {
-                  onClickDay(course.day);
-                }}
-              >
-                Day{course.day}
-              </div>
-            );
-          })}
+        <div className="flex justify-center">
+          <div className="my-2 flex justify-start overflow-x-scroll pb-4">
+            {courses.map(course => {
+              return (
+                <div
+                  key={course.courseId}
+                  className="text-green1 font-bold text-lg px-4 cursor-pointer"
+                  onClick={() => {
+                    onClickDay(course.day);
+                  }}
+                >
+                  Day{course.day}
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className="course-layout">
           {dayCourse.length > 0 && (
@@ -129,7 +131,10 @@ const DayItem = () => {
             </div>
           )}
           <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={currentDay} />
-          <div className="text-xs text-gray-400 text-center">코스를 추가해 보세요. 코스는 하루에 10개까지 추가할 수 있어요!</div>
+          <div className="text-xs text-gray-400 text-center">
+            <p>코스를 추가해 보세요.</p>
+            <p>하루에 10개까지 추가할 수 있어요!</p>
+          </div>
           <div>
             <div className="flex">
               <button className="btn-primary-sm py-3 mt-4 w-1/2 text-sm mr-1" onClick={addCourseHandler}>

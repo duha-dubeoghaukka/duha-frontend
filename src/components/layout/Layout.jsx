@@ -124,7 +124,7 @@ const Layout = props => {
           <PersonIcon />
         </Link>
       </div>
-      <div className="md:w-[600px] mx-auto pt-20 px-[24px] md:px-0 md:mb-10">{children}</div>
+      <div className="w-full md:w-[600px] max-w-[600px] mx-auto pt-16 px-4 md:px-0 md:mb-10">{children}</div>
     </div>
   );
 };
