@@ -13,9 +13,16 @@ const DayItem = () => {
   const [dayCourse, setDayCourse] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
-  const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const id = localStorage.getItem("id");
+  const lastCourse = dayCourse.at(-1);
+
+  if (lastCourse) {
+    const [name, latitude, longitude] = [lastCourse.name, lastCourse.latitude, lastCourse.longitude];
+    sessionStorage.setItem("name", name);
+    sessionStorage.setItem("latitude", latitude);
+    sessionStorage.setItem("longitude", longitude);
+  }
 
   const onClickDay = day => {
     const clickDay = _.find(courses, { day: day });
@@ -40,6 +47,18 @@ const DayItem = () => {
     if (dayCourse.length >= 10) {
       alert("코스등록은 하루에 10개까지 가능합니다.");
     } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addspot`);
+  };
+
+  const addBookMarkCourseHandler = () => {
+    if (dayCourse.length >= 10) {
+      alert("코스등록은 하루에 10개까지 가능합니다.");
+    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addspot`);
+  };
+
+  const addNearByCourseHandler = () => {
+    if (dayCourse.length >= 10) {
+      alert("코스등록은 하루에 10개까지 가능합니다.");
+    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addnearbyspot`);
   };
 
   useEffect(() => {
@@ -104,28 +123,28 @@ const DayItem = () => {
           })}
         </div>
         <div className="course-layout">
-          {/* 지도 토글 기능 : 일단 보류
-          <button
-              onClick={() => {
-                setToggle(!toggle);
-              }}
-              className="text-white1 text-sm font-bold bg-green1 px-2 py-1 rounded-md"
-            >
-              {toggle ? "지도" : "닫기"}
-            </button> */}
-          {!toggle && (
-            <>
-              {dayCourse.length > 0 && (
-                <div className="bg-gray-200 md:h-[350px] h-[250px] mb-4 md:mb-6 shadow-md rounded-lg">
-                  <MapContainer dayCourse={dayCourse} />
-                </div>
-              )}
-            </>
+          {dayCourse.length > 0 && (
+            <div className="bg-gray-200 md:h-[350px] h-[250px] mb-4 md:mb-6 shadow-md rounded-lg">
+              <MapContainer dayCourse={dayCourse} />
+            </div>
           )}
           <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={currentDay} />
-          <button className="btn-primary-sm py-3 mt-4" onClick={addCourseHandler}>
-            코스 추가
-          </button>
+          <div className="text-xs text-gray-400 text-center">코스를 추가해 보세요. 코스는 하루에 10개까지 추가할 수 있어요!</div>
+          <div>
+            <div className="flex">
+              <button className="btn-primary-sm py-3 mt-4 w-1/2 text-sm mr-1" onClick={addCourseHandler}>
+                코스 검색
+              </button>
+              <button className="btn-primary-sm py-3 mt-4 w-1/2 text-sm ml-1" onClick={addBookMarkCourseHandler}>
+                즐겨찾기 목록
+              </button>
+            </div>
+            {dayCourse.length > 0 && (
+              <button className="btn-primary-sm py-3 mt-4 w-full text-sm" onClick={addNearByCourseHandler}>
+                {lastCourse && lastCourse.name}부터 가까운 여행지 확인
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </DragDropContext>

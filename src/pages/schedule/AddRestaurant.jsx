@@ -92,7 +92,7 @@ const AddRestaurant = () => {
         </div>
         <div className="mb-0">
           {currentRestaurants.map(restaurant => {
-            return <AddCourseItem key={restaurant.id} data={restaurant} category="맛집" counter={counter} setCounter={setCounter} />;
+            return <AddCourseItem key={restaurant.id} data={restaurant} category="맛집" />;
           })}
         </div>
         <div className="flex justify-center">
