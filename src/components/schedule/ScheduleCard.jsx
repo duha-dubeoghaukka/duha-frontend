@@ -63,26 +63,38 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   };
 
   return (
-    <div className="w-full h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row justify-between items-center px-4">
-      <div
-        onClick={() => {
-          navigate(`${id}/1`);
-          setItem();
-        }}
-      >
-        <div className="flex flex-col">
-          <span className="font-semibold">
-            {nights + "박" + allDays + "일" + " "}
-            {title}
-          </span>
-          <span className="mt-2 font-light text-sm">
-            {startDate}~{endDate}
-          </span>
-        </div>
+    <div
+      onClick={() => {
+        navigate(`${id}/1`);
+        setItem();
+      }}
+      className="w-full md:w-4/5 md:mx-auto h-28 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4"
+    >
+      <div className="flex flex-col">
+        <span className="font-semibold">
+          {nights + "박" + allDays + "일" + " "}
+          {title}
+        </span>
+        <span className="mt-2 font-light text-sm">
+          {startDate}~{endDate}
+        </span>
       </div>
+
       <div className="">
-        <ModeEditOutlineOutlinedIcon className="cursor-pointer" onClick={() => onUpdate(id)} />
-        <DeleteOutlineIcon className="ml-1 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
+        <ModeEditOutlineOutlinedIcon
+          className="cursor-pointer"
+          onClick={e => {
+            e.stopPropagation();
+            onUpdate(id);
+          }}
+        />
+        <DeleteOutlineIcon
+          className="ml-1 cursor-pointer"
+          onClick={e => {
+            e.stopPropagation();
+            onDeleteSchedule(id);
+          }}
+        />
       </div>
     </div>
   );
