@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import InsertLinkOutlinedIcon from "@mui/icons-material/InsertLinkOutlined";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import useChange from "../../hooks/useChange";
 
-function Modal({ modalHandler }) {
+function Modal({ modalHandler, route }) {
+  const [isCopied, changeCopied] = useChange();
+
   return (
     <>
       <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -12,14 +16,17 @@ function Modal({ modalHandler }) {
             <div className="mt-2 ">
               <CloseOutlinedIcon className="cursor-pointer" onClick={() => modalHandler()} />
               <div className="mt-1 text-center sm:ml-4 sm:text-left">
-                <h4 className="text-lg font-semibold text-gray-800">공유하기</h4>
+                <h4 className="text-lg font-semibold text-black1 text-lg">공유하기</h4>
+                {isCopied ? <p className="mt-2 text-black1">링크 복사가 완료되었습니다.</p> : null}
                 <div className="flex flex-row m-7 place-content-center space-x-11">
                   <button>
                     <img className="w-12 h-12" src={`${process.env.PUBLIC_URL}/assets/KakaoLogo.png`} alt={"Kakao Logo"} />
                   </button>
-                  <div className="w-12 h-12 rounded-full bg-[#454545]">
-                    <InsertLinkOutlinedIcon className="m-3" sx={{ color: "#F6F6F6" }} />
-                  </div>
+                  <CopyToClipboard text={route} onCopy={() => changeCopied()}>
+                    <button className="w-12 h-12 rounded-full bg-[#454545]">
+                      <InsertLinkOutlinedIcon className="m-3" sx={{ color: "#F6F6F6" }} />
+                    </button>
+                  </CopyToClipboard>
                 </div>
               </div>
             </div>

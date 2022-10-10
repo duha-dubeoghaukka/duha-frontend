@@ -8,7 +8,6 @@ import { __getSchedules, __deleteSchedule } from "../../redux/modules/schedules"
 import { useSelector } from "react-redux";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import ShareIcon from "@mui/icons-material/Share";
-import { color } from "@mui/system";
 import useChange from "../../hooks/useChange";
 import ShowModal from "../modal/ShowModal";
 
@@ -67,9 +66,8 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
     navigate(`/schedule/update/${id}`, { state: [title, startDate, endDate, isPublic] });
   };
 
-  const onShareLink = () => {
-    console.log("test");
-  };
+  const url = process.env.REACT_APP_URL;
+  const uri = `${url}/schedule/${id}/1`;
 
   return (
     <div className="w-96 h-32 bg-white1 rounded-md shadow-lg mt-5 flex flex-row">
@@ -95,7 +93,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
           <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
           <span className="text-xs text-green1">일정 공유</span>
         </div>
-        <ShowModal show={isModal} modalHandler={ModalHandler} />
+        <ShowModal show={isModal} modalHandler={ModalHandler} route={uri} />
       </div>
       <div className="flex flex-row mt-5">
         <ModeEditOutlineOutlinedIcon className="mt-5 cursor-pointer" onClick={() => onUpdate(id)} />
