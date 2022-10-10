@@ -74,7 +74,7 @@ const LogInForm = () => {
           required
         />
         {validEmailCheck && <p className="input-helper">이메일 형식으로 입력해주세요</p>}
-        <div className="relative w-[385px] md:w-[500px] mx-auto mt-2">
+        <div className="relative w-full md:w-[500px] mx-auto mt-2">
           <input
             type={isHidden ? "password" : "text"}
             placeholder="비밀번호"

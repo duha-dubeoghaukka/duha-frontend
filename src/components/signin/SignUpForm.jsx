@@ -73,7 +73,7 @@ const SignUpForm = () => {
     <div className="w-full md:w-[600px] mx-auto">
       <form className="flex flex-col my-10" onSubmit={handleSubmit(onSubmit)}>
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" alt={"Logo"} />
-        <div className="relative w-[385px] md:w-[500px] mx-auto">
+        <div className="relative w-full md:w-[500px] mx-auto">
           <input type="text" placeholder="이메일" className="input mt-2" {...register("email")} />
           {/* <button
             className="absolute top-6 right-4 font-semibold text-green1 disabled:opacity-50"
@@ -84,18 +84,15 @@ const SignUpForm = () => {
           </button> */}
         </div>
         <p className="input-helper">{errors.email?.message}</p>
-        <div className="relative w-[385px] md:w-[500px] mx-auto">
+        <div className="relative w-full md:w-[500px] mx-auto">
           <input type="text" placeholder="닉네임" className="input mt-2" {...register("nickname")} />
-          {/* <button className="absolute top-6 right-4 font-semibold text-green1 disabled:opacity-50" onClick={handlenicknameDuplicateCheck}>
-            중복확인
-          </button> */}
         </div>
         <p className="input-helper">{errors.nickname?.message}</p>
-        <div className="relative w-[385px] md:w-[500px] mx-auto">
+        <div className="relative w-full md:w-[500px] mx-auto">
           <input name="password" type="password" className="input mt-2" placeholder="비밀번호" {...register("password")} />
         </div>
         {errors.password && <p className="input-helper">{errors.password.message}</p>}
-        <div className="relative w-[385px] md:w-[500px] mx-auto">
+        <div className="relative w-full md:w-[500px] mx-auto">
           <input
             name="confirmPassword"
             type="password"
