@@ -113,7 +113,7 @@ const Layout = props => {
           </div>
         </div>
       )}
-      <div className="fixed bottom-0 md:invisible h-[83px] bg-white1 w-full flex justify-around items-center">
+      <div className="fixed bottom-0 md:invisible h-fit py-3 bg-white text-gray-700 w-full flex justify-around items-center rounded-lg z-10">
         <Link to="/">
           <HomeIcon fontSize="large" className="cursor-pointer" />
         </Link>

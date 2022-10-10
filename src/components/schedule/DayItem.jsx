@@ -88,7 +88,7 @@ const DayItem = () => {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
-        <div className="mt-4 mb-6 flex flex-wrap justify-center">
+        <div className="mt-4 mb-6 flex justify-center">
           {courses.map(course => {
             return (
               <div
