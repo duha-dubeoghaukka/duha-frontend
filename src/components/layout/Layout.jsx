@@ -113,15 +113,15 @@ const Layout = props => {
           </div>
         </div>
       )}
-      <div className="fixed bottom-0 md:invisible h-fit py-3 bg-white text-gray-700 w-full flex justify-around items-center rounded-lg z-10">
+      <div className="fixed bottom-0 md:invisible h-fit pt-3 pb-6 bg-white text-gray-700 w-full flex justify-around items-center rounded-lg z-10">
         <Link to="/">
-          <HomeIcon fontSize="large" className="cursor-pointer" />
+          <HomeIcon />
         </Link>
         <Link to="/schedule">
-          <CalendarMonthIcon fontSize="large" className="cursor-pointer" />
+          <CalendarMonthIcon />
         </Link>
         <Link to="/mypage/favorites/list">
-          <PersonIcon fontSize="large" className="cursor-pointer" />
+          <PersonIcon />
         </Link>
       </div>
       <div className="md:w-[600px] mx-auto pt-20 px-[24px] md:px-0 md:mb-10">{children}</div>
