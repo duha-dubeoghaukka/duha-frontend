@@ -86,9 +86,6 @@ const SignUpForm = () => {
         <p className="input-helper">{errors.email?.message}</p>
         <div className="relative w-full md:w-[500px] mx-auto">
           <input type="text" placeholder="닉네임" className="input mt-2" {...register("nickname")} />
-          {/* <button className="absolute top-6 right-4 font-semibold text-green1 disabled:opacity-50" onClick={handlenicknameDuplicateCheck}>
-            중복확인
-          </button> */}
         </div>
         <p className="input-helper">{errors.nickname?.message}</p>
         <div className="relative w-full md:w-[500px] mx-auto">
