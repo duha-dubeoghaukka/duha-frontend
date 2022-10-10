@@ -66,8 +66,8 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
     navigate(`/schedule/update/${id}`, { state: [title, startDate, endDate, isPublic] });
   };
 
-  const url = process.env.REACT_APP_URL;
-  const uri = `${url}/schedule/${id}/1`;
+  // const url = process.env.REACT_APP_URL;
+  // const uri = `${url}/schedule/${id}/1`;
 
   return (
     <div className="w-96 h-32 bg-white1 rounded-md shadow-lg mt-5 flex flex-row">
@@ -89,11 +89,11 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
             </span>
           </div>
         </div>
-        <div className="cursor-pointer" onClick={() => ModalHandler()}>
+        {/* <div className="cursor-pointer" onClick={() => ModalHandler()}>
           <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
           <span className="text-xs text-green1">일정 공유</span>
         </div>
-        <ShowModal show={isModal} modalHandler={ModalHandler} route={uri} />
+        <ShowModal show={isModal} modalHandler={ModalHandler} route={uri} title={title} /> */}
       </div>
       <div className="flex flex-row mt-5">
         <ModeEditOutlineOutlinedIcon className="mt-5 cursor-pointer" onClick={() => onUpdate(id)} />
