@@ -15,7 +15,7 @@
     "import/extensions": "off",
     "prefer-template": "off",
     "eol-last": ["error", "always"],
-    "prettier/prettier": "error"
-    // "parser": "babel-eslint"
+    "prettier/prettier": "error",
+    "parser": "babel-eslint"
   }
 }

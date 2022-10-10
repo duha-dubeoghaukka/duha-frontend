@@ -27,6 +27,16 @@ export const __deleteSchedule = createAsyncThunk("deleteSchedule", async (payloa
   }
 });
 
+export const __editSchedule = createAsyncThunk("editSchedule", async (payload, thunkAPI) => {
+  try {
+    const { id, editData } = payload;
+    const { data } = await api.put(`/auth/trip/${id}`, editData);
+    return thunkAPI.fulfillWithValue(data);
+  } catch (err) {
+    return thunkAPI.rejectWithValue(err.response);
+  }
+});
+
 export const schedules = createSlice({
   name: "schedules",
   initialState,
@@ -50,11 +60,18 @@ export const schedules = createSlice({
         alert(action.payload[0].message);
       }
     },
+    [__editSchedule.fulfilled]: (state, action) => {
+      state.isLoding = false;
+    },
     [__getSchedules.rejected]: (state, action) => {
       state.isLoding = false;
       state.error = action.payload;
     },
     [__deleteSchedule.rejected]: (state, action) => {
+      state.isLoding = false;
+      state.error = action.payload;
+    },
+    [__editSchedule.rejected]: (state, action) => {
       state.isLoding = false;
       state.error = action.payload;
     }
