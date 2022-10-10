@@ -28,17 +28,15 @@ const AddCourseItem = ({ data, category }) => {
   return (
     <div
       onClick={itemClickHandler}
-      className="p-[15px] group bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md cursor-pointer flex justify-between items-center hover:brightness-95 transition-all"
+      className="p-[15px] group bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md cursor-pointer flex justify-between items-start hover:brightness-95 transition-all"
     >
-      <div className="pl-[5px] md:pl-[50px] group-hover:brightness-95">
-        <div className="mb-[4px]">
-          <p className="font-bold text-[20px]">{name}</p>
+      <div className="group-hover:brightness-95">
+        <div className="mb-[4px] flex items-center">
+          <p className="font-bold text-[14px] md:text-[16px]">{name}</p>
+          <p className="text-[12px]">{region}</p>
         </div>
         <div>
           <p className="text-[12px]">{description}</p>
-        </div>
-        <div className="mb-[16px]">
-          <p className="text-[12px]">{region}</p>
         </div>
         <div className="flex items-center">
           <FavoriteRoundedIcon sx={{ color: "red" }} className="mr-[3px]" />

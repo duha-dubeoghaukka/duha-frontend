@@ -63,16 +63,15 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   };
 
   return (
-    <div className="w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row">
+    <div className="w-full h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row justify-between items-center px-4">
       <div
-        className="pr-32"
         onClick={() => {
           navigate(`${id}/1`);
           setItem();
         }}
       >
-        <div className="flex flex-col m-5 ">
-          <span className="mt-2	font-semibold">
+        <div className="flex flex-col">
+          <span className="font-semibold">
             {nights + "박" + allDays + "일" + " "}
             {title}
           </span>
@@ -81,9 +80,9 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
           </span>
         </div>
       </div>
-      <div className="flex flex-row mt-5 ">
-        <ModeEditOutlineOutlinedIcon className="mt-5 cursor-pointer" onClick={() => onUpdate(id)} />
-        <DeleteOutlineIcon className="mt-5 ml-1 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
+      <div className="">
+        <ModeEditOutlineOutlinedIcon className="cursor-pointer" onClick={() => onUpdate(id)} />
+        <DeleteOutlineIcon className="ml-1 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
       </div>
     </div>
   );
