@@ -70,6 +70,7 @@ function Registration() {
   };
 
   const changeDate = e => {
+    console.log("aa", e);
     const startDateFormat = moment(e[0]).format("YYYY/MM/DD");
     const endDateFormat = moment(e[1]).format("YYYY/MM/DD");
 
@@ -87,11 +88,20 @@ function Registration() {
     }
   }, []);
 
+  const newDate = new Date(startDate);
+  console.log("new", newDate);
+
   return (
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
       <div className="grid place-items-center h-screen">
         <div className="flex w-72 flex-col gap-4 h-screen">
-          <Calendar onChange={changeDate} selectRange={true} formatDay={(locale, date) => moment(date).format("DD")} />
+          <Calendar
+            onChange={changeDate}
+            selectRange={true}
+            formatDay={(locale, date) => moment(date).format("DD")}
+            // value={newDate}
+            // activeStartDate={newDate}
+          />
           <input
             type="text"
             className="w-full p-2 text-sm border-b-2 border-green1 outline-none opacity-70 my-5 bg-transparent"
