@@ -9,6 +9,8 @@ import { useSelector } from "react-redux";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import ShareIcon from "@mui/icons-material/Share";
 import { color } from "@mui/system";
+import useChange from "../../hooks/useChange";
+import ShowModal from "../modal/ShowModal";
 
 function ScheduleCard() {
   const dispatch = useDispatch();
@@ -55,6 +57,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   const allDays = newDate[1];
 
   const navigate = useNavigate();
+  const [isModal, ModalHandler] = useChange();
 
   const setItem = () => {
     localStorage.setItem("id", id);
@@ -88,10 +91,11 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
             </span>
           </div>
         </div>
-        <div className=" cursor-pointer" onClick={() => onShareLink()}>
+        <div className="cursor-pointer" onClick={() => ModalHandler()}>
           <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
           <span className="text-xs text-green1">일정 공유</span>
         </div>
+        <ShowModal show={isModal} modalHandler={ModalHandler} />
       </div>
       <div className="flex flex-row mt-5">
         <ModeEditOutlineOutlinedIcon className="mt-5 cursor-pointer" onClick={() => onUpdate(id)} />
