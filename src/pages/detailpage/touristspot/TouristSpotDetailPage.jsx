@@ -17,6 +17,7 @@ import { api } from "../../../api/api";
 import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import processInfo from "../../../utils/processInfo";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
@@ -64,7 +65,8 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations } = spot;
+    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info } = spot;
+    const processedInfo = processInfo(info);
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="flex items-center mb-3">
@@ -109,17 +111,20 @@ const TouristSpotDetailPage = () => {
           </div>
         )}
         <div className="mb-[20px]">
-          <div className="flex justify-between align-top px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
-            <div className="flex-shrink-0 min-w-[90px]">
-              <p className="mb-[26px] text-[20px]">주소</p>
-              <p className="mb-[26px] text-[20px]">전화번호</p>
-              <p className="text-[20px]">영업정보</p>
-              {stations.length > 0 && <p className="text-[20px] mt-[26px]">가까운 버스 정류장</p>}
+          <div className="px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
+            <div className="flex items-center">
+              <p className="mb-[26px] text-[20px] w-[100px]">주소</p>
+              <p className="mb-[26px]">{address}</p>
+              <div onClick={mapClickHandler} className="flex-grow-[1] flex flex-row-reverse">
+                <MapIcon className="cursor-pointer" fontSize="large" />
+              </div>
             </div>
-            <div className="flex-grow-0 flex-shrink overflow-hidden">
-              <p className="mb-[34px] whitespace-nowrap overflow-hidden overflow-ellipsis">{address}</p>
-              <p className="mb-[33px]">{phone}</p>
-              <p>추가 예정</p>
+            <div className="flex items-center">
+              <p className="text-[20px] w-[100px]">전화번호</p>
+              <p>{phone}</p>
+            </div>
+            <div className="flex">
+              {stations.length > 0 && <p className="text-[20px] mt-[26px] mr-3">가까운 버스 정류장</p>}
               {stations.length > 0 && (
                 <div className="mt-[33px]">
                   {stations
@@ -139,9 +144,21 @@ const TouristSpotDetailPage = () => {
                 </div>
               )}
             </div>
-            <div onClick={mapClickHandler} className="flex-grow-[1] flex flex-row-reverse">
-              <MapIcon className="cursor-pointer" fontSize="large" />
-            </div>
+            {processedInfo.length > 0 && (
+              <div className="mt-[26px] flex">
+                <p className="text-[20px] w-[100px] flex-shrink-0">영업정보</p>
+                <div className="grid gap-3">
+                  {processedInfo.map(info => {
+                    return (
+                      <div key={info.title}>
+                        <p className="text-[17px]">{info.title}</p>
+                        <p className="text-[14px]">{info.content}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div>
