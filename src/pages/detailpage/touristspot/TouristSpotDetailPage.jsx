@@ -67,11 +67,6 @@ const TouristSpotDetailPage = () => {
     const spot = data.data.data;
     const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info } = spot;
     const processedInfo = processInfo(info);
-    const { admissionFee, amenities, averageTime, openingHours, detailInfo } = processedInfo;
-    let isInfoFilled = true;
-    if (!detailInfo) {
-      isInfoFilled = false;
-    }
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="flex items-center mb-3">
@@ -149,40 +144,18 @@ const TouristSpotDetailPage = () => {
                 </div>
               )}
             </div>
-            {isInfoFilled && (
-              <div className="flex mt-[26px]">
+            {processedInfo.length > 0 && (
+              <div className="mt-[26px] flex">
                 <p className="text-[20px] w-[100px] flex-shrink-0">영업정보</p>
                 <div className="grid gap-3">
-                  {detailInfo && (
-                    <div>
-                      <p className="text-[17px]">상세정보</p>
-                      <p className="text-[14px]">{detailInfo}</p>
-                    </div>
-                  )}
-                  {openingHours && (
-                    <div>
-                      <p className="text-[17px]">영업시간</p>
-                      <p className="text-[14px]">{openingHours}</p>
-                    </div>
-                  )}
-                  {admissionFee && (
-                    <div>
-                      <p className="text-[17px]">입장료</p>
-                      <p className="text-[14px]">{admissionFee}</p>
-                    </div>
-                  )}
-                  {averageTime && (
-                    <div>
-                      <p className="text-[17px]">평균소요시간</p>
-                      <p className="text-[14px]">{averageTime}</p>
-                    </div>
-                  )}
-                  {amenities && (
-                    <div>
-                      <p className="text-[17px]">편의시설</p>
-                      <p className="text-[14px]">{amenities}</p>
-                    </div>
-                  )}
+                  {processedInfo.map(info => {
+                    return (
+                      <div key={info.title}>
+                        <p className="text-[17px]">{info.title}</p>
+                        <p className="text-[14px]">{info.content}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             )}
