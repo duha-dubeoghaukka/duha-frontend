@@ -23,7 +23,6 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [isAutoCompleteFocused, setIsAutoCompleteFocused] = useState(false);
   const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
@@ -44,29 +43,51 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     setSearchMode(true);
   };
   const keyPressHandler = event => {
-    const key = event.key;
-    switch (key) {
-      case "ArrowDown":
-        if (searchResults.length > 0) {
-          const length = searchResults.length;
-          if (!isAutoCompleteFocused) {
-            setIsAutoCompleteFocused(true);
-            setSelectedAutoComplete(0);
-          } else {
-            setSelectedAutoComplete(previousSelectedAutoComplete => Math.min(length - 1, previousSelectedAutoComplete + 1));
-          }
-        }
-        break;
-      case "ArrowUp":
-        if (searchResults.length > 0) {
-          setIsAutoCompleteFocused(true);
+    const length = searchResults.length;
+    if (length > 0) {
+      switch (event.keyCode) {
+        case 40:
+          setSelectedAutoComplete(previousSelectedAutoComplete => Math.min(length - 1, previousSelectedAutoComplete + 1));
+          console.dir("ArrowDown triggered");
+          break;
+        case 38:
           setSelectedAutoComplete(previousSelectedAutoComplete => Math.max(0, previousSelectedAutoComplete - 1));
-        }
-        break;
-      default:
-        break;
+          console.dir("ArrowUp triggered");
+          break;
+        case 13:
+          setAutoCompletedInput(searchResults[selectedAutoComplete].name);
+          break;
+        default:
+          break;
+      }
     }
   };
+  useEffect(() => {
+    setSearchResults(previousSearchResults => {
+      return previousSearchResults.map((result, index) => {
+        if (index === selectedAutoComplete) {
+          result.isFocused = true;
+        } else {
+          result.isFocused = false;
+        }
+        return result;
+      });
+    });
+  }, [selectedAutoComplete]);
+  useEffect(() => {
+    if (selectedAutoComplete === 0) {
+      setSearchResults(previousSearchResults => {
+        return previousSearchResults.map((result, index) => {
+          if (index === 0) {
+            result.isFocused = true;
+          } else {
+            result.isFocused = false;
+          }
+          return result;
+        });
+      });
+    }
+  }, [searchResults]);
   useEffect(() => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
@@ -139,14 +160,9 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           />
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
-              {searchResults.map((result, index) => {
+              {searchResults.map(result => {
                 return (
-                  <AutoComplete
-                    key={result.name}
-                    data={result}
-                    selectAutoComplete={selectAutoComplete}
-                    isSelected={selectedAutoComplete === index}
-                  />
+                  <AutoComplete key={result.name} data={result} selectAutoComplete={selectAutoComplete} isSelected={result.isFocused} />
                 );
               })}
             </div>

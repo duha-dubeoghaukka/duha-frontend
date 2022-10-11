@@ -4,7 +4,6 @@ const AutoComplete = ({ data, selectAutoComplete, isSelected }) => {
     selectAutoComplete(name);
   };
   if (isSelected) {
-    console.dir(`${isSelected} for ${data.name}`);
     return (
       <div className="py-0.5 cursor-pointer hover:bg-green1 bg-blue-900 p-5 py-[8px]" onClick={autoCompleteClickHandler}>
         <p className="text-white1">{name}</p>
