@@ -42,9 +42,11 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
         return result;
       })
     );
+    setSelectedAutoComplete(() => 0);
   };
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
+    setSelectedAutoComplete(() => 0);
     setSearchResults([]);
   };
   const sendSearchedResults = results => {
