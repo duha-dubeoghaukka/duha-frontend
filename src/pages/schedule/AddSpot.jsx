@@ -11,6 +11,7 @@ import { arraySplitter } from "../../utils/arraySplitter";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link, useParams } from "react-router-dom";
 import AddCourseItem from "../../components/schedule/AddCourseItem";
+import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
 
 const AddSpot = () => {
   const { tripId, day, currentCourseId } = useParams();
@@ -46,23 +47,25 @@ const AddSpot = () => {
     const numberOfPages = splittedSpots.length;
     const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
     const currentSpots = splittedSpots[currentSpotPage - 1];
+    const scrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+    };
 
     return (
       <Layout title="일정 등록" highlight={"schedule/create"}>
-        <div className="mb-[48px]">
-          <ul className="flex flex-row justify-around">
-            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addspot`} className="font-bold text-2xl text-green1 cursor-pointer">
+        <div className="my-3">
+          <ul className="flex justify-around font-bold text-base md:text-lg">
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addspot`} className="text-green1">
               관광
             </Link>
-            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addrestaurant`} className="font-bold text-2xl cursor-pointer">
-              맛집
-            </Link>
-            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addaccommodation`} className="font-bold text-2xl cursor-pointer">
-              숙소
-            </Link>
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addrestaurant`}>맛집</Link>
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addaccommodation`}>숙소</Link>
           </ul>
         </div>
-        <div className="mb-[43px]">
+        <div className="my-3">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} />;
@@ -78,14 +81,14 @@ const AddSpot = () => {
           </select>
         </div>
         <div className="mb-3">
-          <p className="font-bold">총 {filteredSpots.length}건이 검색되었습니다.</p>
+          <p className="font-bold text-sm">총 {filteredSpots.length}건이 검색되었습니다.</p>
         </div>
-        <div className="mb-0">
+        <div>
           {currentSpots.map(spot => {
             return <AddCourseItem key={spot.id} data={spot} category="관광지" />;
           })}
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-start overflow-x-scroll pb-3">
           {pages.map(page => {
             if (page === currentSpotPage) {
               return (
@@ -108,6 +111,7 @@ const AddSpot = () => {
             }
           })}
         </div>
+        <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer md:visible invisible" onClick={scrollToTop} />
       </Layout>
     );
   }

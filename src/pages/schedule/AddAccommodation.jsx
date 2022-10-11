@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { api } from "../../api/api";
 import AddCourseItem from "../../components/schedule/AddCourseItem";
+import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
 
 const AddAccommodation = () => {
   const { tripId, day, currentCourseId } = useParams();
@@ -52,27 +53,18 @@ const AddAccommodation = () => {
         behavior: "smooth"
       });
     };
-    const counter = undefined;
-    const setCounter = () => {};
     return (
       <Layout title="일정 등록" highlight={"schedule/create"}>
-        <div className="mb-[48px]">
-          <ul className="flex flex-row justify-around">
-            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addspot`} className="font-bold text-2xl cursor-pointer">
-              관광
-            </Link>
-            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addrestaurant`} className="font-bold text-2xl cursor-pointer">
-              맛집
-            </Link>
-            <Link
-              to={`/schedule/${tripId}/${day}/${currentCourseId}/addaccommodation`}
-              className="font-bold text-2xl text-green1 cursor-pointer"
-            >
+        <div className="my-3">
+          <ul className="flex justify-around font-bold text-base md:text-lg">
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addspot`}>관광</Link>
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addrestaurant`}>맛집</Link>
+            <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addaccommodation`} className="text-green1">
               숙소
             </Link>
           </ul>
         </div>
-        <div className="mb-[43px]">
+        <div className="my-3">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} />;
@@ -88,11 +80,11 @@ const AddAccommodation = () => {
           </select>
         </div>
         <div className="mb-3">
-          <p className="font-bold">총 {filteredAccommodations.length}건이 검색되었습니다.</p>
+          <p className="font-bold text-sm">총 {filteredAccommodations.length}건이 검색되었습니다.</p>
         </div>
-        <div className="mb-0">
+        <div>
           {currentAccommodations.map(accommodation => {
-            return <AddCourseItem key={accommodation.id} data={accommodation} category="숙소" counter={counter} setCounter={setCounter} />;
+            return <AddCourseItem key={accommodation.id} data={accommodation} category="숙소" />;
           })}
         </div>
         <div className="flex justify-center">
@@ -118,9 +110,7 @@ const AddAccommodation = () => {
             }
           })}
         </div>
-        <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
-          <p>최상단으로 이동</p>
-        </div>
+        <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer md:visible invisible" onClick={scrollToTop} />
       </Layout>
     );
   }

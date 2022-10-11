@@ -75,10 +75,10 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   }, [isModal]);
 
   return (
-    <div className="w-96 h-32 bg-white1 rounded-md shadow-lg mt-5 flex flex-row">
+    <div className="w-full md:w-4/5 md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4">
       <div className="flex flex-col mt-5 ml-5 mb-2">
         <div
-          className="pr-32 h-24"
+          className=""
           onClick={() => {
             navigate(`${id}/1`);
             setItem();
@@ -94,15 +94,27 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
             </span>
           </div>
         </div>
-        <div className="cursor-pointer" onClick={() => ModalHandler()}>
+        <div className="cursor-pointer mt-3" onClick={() => ModalHandler()}>
           <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
           <span className="text-xs text-green1">일정 공유</span>
         </div>
         <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
       </div>
-      <div className="flex flex-row mt-5">
-        <ModeEditOutlineOutlinedIcon className="mt-5 cursor-pointer" onClick={() => onUpdate(id)} />
-        <DeleteOutlineIcon className="mt-5 ml-1 cursor-pointer" onClick={() => onDeleteSchedule(id)} />
+      <div className="">
+        <ModeEditOutlineOutlinedIcon
+          className="cursor-pointer"
+          onClick={e => {
+            e.stopPropagation();
+            onUpdate(id);
+          }}
+        />
+        <DeleteOutlineIcon
+          className="ml-1 cursor-pointer"
+          onClick={e => {
+            e.stopPropagation();
+            onDeleteSchedule(id);
+          }}
+        />
       </div>
     </div>
   );

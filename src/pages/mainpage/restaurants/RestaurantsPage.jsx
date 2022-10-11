@@ -23,6 +23,7 @@ const RestaurantsPage = () => {
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
   const { regionSelection, restaurantPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentRestaurantPage, setCurrentRestaurantPage } = restaurantPageSelection;
@@ -31,16 +32,59 @@ const RestaurantsPage = () => {
     setCurrentRestaurantPage(1);
   };
   const sendResults = results => {
-    setSearchResults(results);
+    setSearchResults(
+      results.map((result, index) => {
+        if (index === 0) {
+          result.isFocused = true;
+        } else {
+          result.isFocused = false;
+        }
+        return result;
+      })
+    );
+    setSelectedAutoComplete(() => 0);
   };
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
+    setSelectedAutoComplete(() => 0);
     setSearchResults([]);
   };
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
   };
+  const keyPressHandler = event => {
+    const length = searchResults.length;
+    if (length > 0) {
+      switch (event.keyCode) {
+        case 40:
+          setSelectedAutoComplete(previousSelectedAutoComplete => Math.min(length - 1, previousSelectedAutoComplete + 1));
+          break;
+        case 38:
+          setSelectedAutoComplete(previousSelectedAutoComplete => Math.max(0, previousSelectedAutoComplete - 1));
+          break;
+        case 13:
+          setAutoCompletedInput(() => searchResults[selectedAutoComplete].name);
+          setSelectedAutoComplete(() => 0);
+          setSearchResults([]);
+          break;
+        default:
+          break;
+      }
+    }
+  };
+  useEffect(() => {
+    setSearchResults(previousSearchResults => {
+      return previousSearchResults.map((result, index) => {
+        if (index === selectedAutoComplete) {
+          result.isFocused = true;
+        } else {
+          result.isFocused = false;
+        }
+        return result;
+      });
+    });
+  }, [selectedAutoComplete]);
   useEffect(() => {
     setCurrentRestaurantPage(1);
     setSelectedRegion("전체");
@@ -104,7 +148,7 @@ const RestaurantsPage = () => {
             })}
           </select>
         </div>
-        <div className="mb-[16px]">
+        <div className="mb-[16px]" onKeyDown={keyPressHandler}>
           <SearchField
             setSearchMode={setSearchMode}
             sendResults={sendResults}
@@ -116,7 +160,9 @@ const RestaurantsPage = () => {
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
               {searchResults.map(result => {
-                return <AutoComplete key={result.name} data={result} selectAutoComplete={selectAutoComplete} />;
+                return (
+                  <AutoComplete key={result.name} data={result} selectAutoComplete={selectAutoComplete} isSelected={result.isFocused} />
+                );
               })}
             </div>
           )}
