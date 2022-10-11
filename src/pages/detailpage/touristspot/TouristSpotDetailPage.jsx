@@ -128,7 +128,7 @@ const TouristSpotDetailPage = () => {
                     })
                     .map(station => {
                       return (
-                        <div className="flex">
+                        <div className="flex" key={station.stationName}>
                           <DirectionsBusIcon className="mr-1" />
                           <p>
                             {station.stationName} - {station.distance}m
