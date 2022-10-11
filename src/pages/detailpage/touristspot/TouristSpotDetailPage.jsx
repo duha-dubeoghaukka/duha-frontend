@@ -17,6 +17,7 @@ import { api } from "../../../api/api";
 import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
+import processInfo from "../../../utils/processInfo";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
@@ -64,7 +65,10 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations } = spot;
+    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info } = spot;
+    const processedInfo = processInfo(info);
+    const { admissionFee, amenities, averageTime, detailInfo, openingHours } = processedInfo;
+    console.dir(processedInfo);
     return (
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="flex items-center mb-3">
@@ -141,6 +145,41 @@ const TouristSpotDetailPage = () => {
                     })}
                 </div>
               )}
+            </div>
+            <div className="flex mt-[26px]">
+              <p className="text-[20px] w-[100px] flex-shrink-0">영업정보</p>
+              <div className="grid gap-3">
+                {detailInfo && (
+                  <div>
+                    <p className="text-[17px]">상세정보</p>
+                    <p className="text-[14px]">{detailInfo}</p>
+                  </div>
+                )}
+                {openingHours && (
+                  <div>
+                    <p className="text-[17px]">영업시간</p>
+                    <p className="text-[14px]">{openingHours}</p>
+                  </div>
+                )}
+                {admissionFee && (
+                  <div>
+                    <p className="text-[17px]">입장료</p>
+                    <p className="text-[14px]">{admissionFee}</p>
+                  </div>
+                )}
+                {averageTime && (
+                  <div>
+                    <p className="text-[17px]">평균소요시간</p>
+                    <p className="text-[14px]">{averageTime}</p>
+                  </div>
+                )}
+                {amenities && (
+                  <div>
+                    <p className="text-[17px]">편의시설</p>
+                    <p className="text-[14px]">{amenities}</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
