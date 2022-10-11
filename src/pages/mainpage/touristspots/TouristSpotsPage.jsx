@@ -48,11 +48,9 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
       switch (event.keyCode) {
         case 40:
           setSelectedAutoComplete(previousSelectedAutoComplete => Math.min(length - 1, previousSelectedAutoComplete + 1));
-          console.dir("ArrowDown triggered");
           break;
         case 38:
           setSelectedAutoComplete(previousSelectedAutoComplete => Math.max(0, previousSelectedAutoComplete - 1));
-          console.dir("ArrowUp triggered");
           break;
         case 13:
           setAutoCompletedInput(searchResults[selectedAutoComplete].name);
@@ -74,20 +72,6 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
       });
     });
   }, [selectedAutoComplete]);
-  useEffect(() => {
-    if (selectedAutoComplete === 0) {
-      setSearchResults(previousSearchResults => {
-        return previousSearchResults.map((result, index) => {
-          if (index === 0) {
-            result.isFocused = true;
-          } else {
-            result.isFocused = false;
-          }
-          return result;
-        });
-      });
-    }
-  }, [searchResults]);
   useEffect(() => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
