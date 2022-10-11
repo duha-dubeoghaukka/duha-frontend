@@ -75,10 +75,10 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   }, [isModal]);
 
   return (
-    <div className="w-full md:w-4/5 md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4">
-      <div className="flex flex-col mt-5 ml-5 mb-2">
+    <div className="w-full md:w-3/5 md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4">
+      <div className="flex flex-col mt-5 ml-5 mb-2 w-full">
         <div
-          className=""
+          className="h-20"
           onClick={() => {
             navigate(`${id}/1`);
             setItem();
@@ -94,13 +94,19 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
             </span>
           </div>
         </div>
-        <div className="cursor-pointer mt-3" onClick={() => ModalHandler()}>
+        <div
+          className="cursor-pointer w-1/5"
+          onClick={e => {
+            e.stopPropagation();
+            ModalHandler();
+          }}
+        >
           <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
           <span className="text-xs text-green1">일정 공유</span>
         </div>
         <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
       </div>
-      <div className="">
+      <div className="w-16">
         <ModeEditOutlineOutlinedIcon
           className="cursor-pointer"
           onClick={e => {
