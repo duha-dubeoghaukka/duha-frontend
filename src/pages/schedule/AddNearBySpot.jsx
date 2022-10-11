@@ -30,12 +30,12 @@ const AddNearBySpot = () => {
   return (
     <Layout title="일정 등록" highlight={"schedule/create"}>
       {nearByCourse.length > 0 ? (
-        <div className="font-semibold text-sm text-center mb-4">
-          {lastCourseName}부터 500m내에 있는 여행지 {nearByCourse.length}건이 검색되었습니다.
+        <div className="font-semibold text-sm text-center py-4">
+          {lastCourseName}부터 가까운 여행지 {nearByCourse.length}건이 검색되었습니다.
         </div>
       ) : (
         <div>
-          <div className="font-semibold text-sm text-center mb-4">{lastCourseName}부터 500m내에 있는 여행지가 없습니다.</div>
+          <div className="font-semibold text-sm text-center mb-4">{lastCourseName}부터 가까운 여행지가 없습니다.</div>
           <div className="flex justify-center items-center">
             <button
               onClick={() => {

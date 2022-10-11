@@ -108,7 +108,7 @@ const DayItem = () => {
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
         <div className="flex justify-center">
-          <div className="my-2 flex justify-start overflow-x-scroll pb-4">
+          <div className="flex justify-start overflow-x-scroll py-4">
             {courses.map(course => {
               return (
                 <div
@@ -136,6 +136,11 @@ const DayItem = () => {
             <p>하루에 10개까지 추가할 수 있어요!</p>
           </div>
           <div>
+            {dayCourse.length > 0 && (
+              <button className="btn-primary-sm py-3 mt-4 w-full text-sm" onClick={addNearByCourseHandler}>
+                {lastCourse && lastCourse.name}부터 가까운 여행지 확인
+              </button>
+            )}
             <div className="flex">
               <button className="btn-primary-sm py-3 mt-4 w-1/2 text-sm mr-1" onClick={addCourseHandler}>
                 코스 검색
@@ -144,11 +149,6 @@ const DayItem = () => {
                 즐겨찾기 목록
               </button>
             </div>
-            {dayCourse.length > 0 && (
-              <button className="btn-primary-sm py-3 mt-4 w-full text-sm" onClick={addNearByCourseHandler}>
-                {lastCourse && lastCourse.name}부터 가까운 여행지 확인
-              </button>
-            )}
           </div>
         </div>
       </div>
