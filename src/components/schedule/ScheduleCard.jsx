@@ -7,6 +7,9 @@ import { useDispatch } from "react-redux";
 import { __getSchedules, __deleteSchedule } from "../../redux/modules/schedules";
 import { useSelector } from "react-redux";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import ShareIcon from "@mui/icons-material/Share";
+import useChange from "../../hooks/useChange";
+import ShowModal from "../modal/ShowModal";
 
 function ScheduleCard() {
   const dispatch = useDispatch();
@@ -53,6 +56,8 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   const allDays = newDate[1];
 
   const navigate = useNavigate();
+  const [isModal, ModalHandler] = useChange();
+  const [routeUrl, setRouteUrl] = useState();
 
   const setItem = () => {
     localStorage.setItem("id", id);
@@ -62,24 +67,39 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
     navigate(`/schedule/update/${id}`, { state: [title, startDate, endDate, isPublic] });
   };
 
-  return (
-    <div
-      onClick={() => {
-        navigate(`${id}/1`);
-        setItem();
-      }}
-      className="w-full md:w-4/5 md:mx-auto h-28 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4"
-    >
-      <div className="flex flex-col">
-        <span className="font-semibold">
-          {nights + "박" + allDays + "일" + " "}
-          {title}
-        </span>
-        <span className="mt-2 font-light text-sm">
-          {startDate}~{endDate}
-        </span>
-      </div>
+  const url = process.env.REACT_APP_URL;
+  const uri = `${url}/schedule/${id}/1`;
 
+  useEffect(() => {
+    isModal === true ? setRouteUrl(uri) : null;
+  }, [isModal]);
+
+  return (
+    <div className="w-full md:w-4/5 md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4">
+      <div className="flex flex-col mt-5 ml-5 mb-2">
+        <div
+          className=""
+          onClick={() => {
+            navigate(`${id}/1`);
+            setItem();
+          }}
+        >
+          <div className="flex flex-col">
+            <span className="mt-2	font-semibold">
+              {nights + "박" + allDays + "일" + " "}
+              {title}
+            </span>
+            <span className="mt-2 font-light text-sm">
+              {startDate}~{endDate}
+            </span>
+          </div>
+        </div>
+        <div className="cursor-pointer mt-3" onClick={() => ModalHandler()}>
+          <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
+          <span className="text-xs text-green1">일정 공유</span>
+        </div>
+        <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
+      </div>
       <div className="">
         <ModeEditOutlineOutlinedIcon
           className="cursor-pointer"

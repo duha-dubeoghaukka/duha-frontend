@@ -22,6 +22,7 @@
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-calendar": "^3.9.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.36.0",
     "react-icons": "^4.4.0",
@@ -43,8 +44,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "aws" : "aws s3 sync ./build s3://dduha --profile=clonecoding",
-    "deploy" : "yarn build && yarn aws"
+    "aws": "aws s3 sync ./build s3://dduha --profile=clonecoding",
+    "deploy": "yarn build && yarn aws"
   },
   "eslintConfig": {
     "extends": [
