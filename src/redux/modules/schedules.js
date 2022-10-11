@@ -55,7 +55,6 @@ export const schedules = createSlice({
     [__deleteSchedule.fulfilled]: (state, action) => {
       if (action.payload[0].isSuccess) {
         state.schedules = state.schedules.filter(item => item.id !== action.payload[1]);
-        alert("삭제가 완료되었습니다.");
       } else {
         alert(action.payload[0].message);
       }
