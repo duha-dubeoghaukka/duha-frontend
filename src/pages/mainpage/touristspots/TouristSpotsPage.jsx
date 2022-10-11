@@ -32,7 +32,16 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     setCurrentSpotPage(1);
   };
   const sendResults = results => {
-    setSearchResults(results);
+    setSearchResults(
+      results.map((result, index) => {
+        if (index === 0) {
+          result.isFocused = true;
+        } else {
+          result.isFocused = false;
+        }
+        return result;
+      })
+    );
   };
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
@@ -54,6 +63,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           break;
         case 13:
           setAutoCompletedInput(searchResults[selectedAutoComplete].name);
+          setSearchResults([]);
           break;
         default:
           break;
