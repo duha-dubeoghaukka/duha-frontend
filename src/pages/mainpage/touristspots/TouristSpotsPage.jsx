@@ -62,7 +62,8 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
           setSelectedAutoComplete(previousSelectedAutoComplete => Math.max(0, previousSelectedAutoComplete - 1));
           break;
         case 13:
-          setAutoCompletedInput(searchResults[selectedAutoComplete].name);
+          setAutoCompletedInput(() => searchResults[selectedAutoComplete].name);
+          setSelectedAutoComplete(() => 0);
           setSearchResults([]);
           break;
         default:

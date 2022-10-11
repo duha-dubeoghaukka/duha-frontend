@@ -67,8 +67,13 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
     }
     setUserInput(event.target.value);
   };
+  const keyDownHandler = event => {
+    if (event.keyCode === 13) {
+      searchHandler();
+    }
+  };
   return (
-    <div className="relative">
+    <div className="relative" onKeyDown={keyDownHandler}>
       <input
         placeholder={`${placeHolderMapper[category]} 검색하세요...`}
         type="text"
