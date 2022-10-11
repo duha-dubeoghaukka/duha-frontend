@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { DateCalculation, DateDiff } from "../../utils/dateCalculation";
 import Spinner from "../Spinner/Spinner";
@@ -57,6 +57,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
 
   const navigate = useNavigate();
   const [isModal, ModalHandler] = useChange();
+  const [routeUrl, setRouteUrl] = useState();
 
   const setItem = () => {
     localStorage.setItem("id", id);
@@ -66,8 +67,12 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
     navigate(`/schedule/update/${id}`, { state: [title, startDate, endDate, isPublic] });
   };
 
-  // const url = process.env.REACT_APP_URL;
-  // const uri = `${url}/schedule/${id}/1`;
+  const url = process.env.REACT_APP_URL;
+  const uri = `${url}/schedule/${id}/1`;
+
+  useEffect(() => {
+    isModal === true ? setRouteUrl(uri) : null;
+  }, [isModal]);
 
   return (
     <div className="w-96 h-32 bg-white1 rounded-md shadow-lg mt-5 flex flex-row">
@@ -89,11 +94,11 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
             </span>
           </div>
         </div>
-        {/* <div className="cursor-pointer" onClick={() => ModalHandler()}>
+        <div className="cursor-pointer" onClick={() => ModalHandler()}>
           <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
           <span className="text-xs text-green1">일정 공유</span>
         </div>
-        <ShowModal show={isModal} modalHandler={ModalHandler} route={uri} title={title} /> */}
+        <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
       </div>
       <div className="flex flex-row mt-5">
         <ModeEditOutlineOutlinedIcon className="mt-5 cursor-pointer" onClick={() => onUpdate(id)} />

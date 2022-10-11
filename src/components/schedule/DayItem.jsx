@@ -8,14 +8,15 @@ import MapContainer from "../../components/map/MapContainer";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const DayItem = () => {
-  const { day } = useParams();
+  const { tripId, day } = useParams();
   const [courses, setCourses] = useState(null);
   const [dayCourse, setDayCourse] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
   const [toggle, setToggle] = useState(false);
   const navigate = useNavigate();
-  const id = localStorage.getItem("id");
+  // const id = localStorage.getItem("id");
+  const id = tripId;
 
   const onClickDay = day => {
     const clickDay = _.find(courses, { day: day });
