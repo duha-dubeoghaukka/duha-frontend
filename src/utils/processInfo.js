@@ -1,7 +1,11 @@
 const processInfo = info => {
   const splitter = (string, title) => {
-    const content = string.split(title)[1];
-    return content.split("=====")[0];
+    if (string.includes(title)) {
+      const content = string.split(title)[1];
+      return content.split("=====")[0];
+    } else {
+      return null;
+    }
   };
   const detailInfo = splitter(info, "=====상세 정보===");
   const openingHours = splitter(info, "=====이용 시간===");
