@@ -51,6 +51,7 @@ const Forecast = () => {
         {dailyForecasts.map((forecast, index) => {
           return (
             <ForecastItem
+              key={index}
               day={tomorrow + index}
               minTemperature={Math.round(minMaxTemperatures[index].minTemperature)}
               maxTemperature={Math.round(minMaxTemperatures[index].maxTemperature)}
