@@ -3,19 +3,24 @@ import { useQuery } from "react-query";
 import axios from "axios";
 import Spinner from "../../components/Spinner/Spinner";
 import getTomorrow from "../../utils/getTomorrow";
+import coordinates from "../../utils/coordinates";
+import { useEffect } from "react";
 
-const Forecast = () => {
+const Forecast = ({ currentRegion }) => {
   const url = "https://api.openweathermap.org/data/2.5/forecast";
-  const { error, isLoading, data } = useQuery("forecast", () => {
+  const { error, isLoading, data, refetch } = useQuery("forecast", () => {
     return axios.get(url, {
       params: {
         appid: process.env.REACT_APP_OPEN_WEATHER_API_KEY,
-        lat: 33.2721,
-        lon: 126.3221,
+        lat: coordinates[currentRegion].latitude,
+        lon: coordinates[currentRegion].longitude,
         units: "metric"
       }
     });
   });
+  useEffect(() => {
+    refetch();
+  }, [currentRegion]);
   if (isLoading) {
     return <Spinner />;
   }

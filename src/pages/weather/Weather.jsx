@@ -68,7 +68,7 @@ const Weather = () => {
             <div>
               <p className="font-bold text-white1 text-[18px]">풍속 {Math.round(windSpeed)}m/s</p>
             </div>
-            <Forecast />
+            <Forecast currentRegion={currentRegion} />
           </div>
         </div>
       </Layout>
