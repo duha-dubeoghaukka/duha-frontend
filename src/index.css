@@ -16,29 +16,30 @@
     @apply py-4 bg-[#FFCF54] text-black2 font-semibold rounded-lg shadow-md w-full md:w-[500px];
   }
   .input {
-    @apply border-b border-green1 text-black1 mx-auto px-4 h-14 w-full md:w-[500px] focus:outline-none placeholder-gray-500 text-gray-600
+    @apply border-b border-green1 text-black1 mx-auto px-4 h-14 w-full md:w-[500px] focus:outline-none placeholder-gray-500 text-gray-600;
   }
-  .input-helper{
-    @apply w-full md:w-[500px] mx-auto text-sm mt-2 text-red-400
+  .input-helper {
+    @apply w-full md:w-[500px] mx-auto text-sm mt-2 text-red-400;
   }
-  .password-icon{
-    @apply absolute top-4 right-4 text-green1 cursor-pointer
+  .password-icon {
+    @apply absolute top-4 right-4 text-green1 cursor-pointer;
   }
-  .course-layout{
-    @apply w-full md:w-[600px] h-fit mx-auto bg-white1 rounded-lg md:px-[50px] md:py-[35px] px-[20px] py-[20px] shadow-lg
+  .course-layout {
+    @apply w-full md:w-[600px] h-fit mx-auto bg-white1 rounded-lg md:px-[50px] md:py-[35px] px-[20px] py-[20px] shadow-lg;
+  }
+  .register-card-layout {
+    @apply w-full  md:w-fit md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4;
   }
 }
 
 body {
   margin: 0;
-  font-family:'Noto Sans KR', sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Noto Sans KR", sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
