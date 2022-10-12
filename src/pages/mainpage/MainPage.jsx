@@ -31,8 +31,8 @@ function MainPage() {
 
   return (
     <Layout isLoggedIn={false} title="메인 페이지" highlight={"mainpage/home"}>
-      <div className="grid place-items-center h-full">
-        <div className="flex flex-row mt-10 mb-5">
+      <div className="h-full">
+        <div className="flex justify-center flex-row mt-10 mb-5">
           {temperature ? (
             <>
               <span className="m-3 font-medium text-lg text-black2">현재 제주 날씨는</span>
@@ -43,7 +43,9 @@ function MainPage() {
             <Spinner />
           )}
         </div>
-        <HomeCard />
+        <div className="flex justify-center">
+          <HomeCard />
+        </div>
       </div>
     </Layout>
   );

@@ -28,7 +28,10 @@
     @apply w-full md:w-[600px] h-fit mx-auto bg-white1 rounded-lg md:px-[50px] md:py-[35px] px-[20px] py-[20px] shadow-lg;
   }
   .register-card-layout {
-    @apply w-full  md:w-fit md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4;
+    @apply w-full md:w-fit md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4;
+  }
+  .card-layout {
+    @apply w-full md:w-[350px] mx-auto h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row hover:bg-green1;
   }
 }
 
