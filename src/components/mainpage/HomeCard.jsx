@@ -1,6 +1,7 @@
 import React from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Link, useNavigate } from "react-router-dom";
+import Card from "../card/Card";
 
 function HomeCard() {
   const data = [
@@ -22,14 +23,14 @@ function HomeCard() {
     },
     {
       title: "물 때 알아보기",
-      route: ""
+      route: "/tide"
     }
   ];
 
   return (
     <div className="h-screen">
       {data.map((item, index) => {
-        return <HomeCardComponent key={index} title={item.title} route={item.route} />;
+        return <Card key={index} title={item.title} route={item.route} />;
       })}
     </div>
   );

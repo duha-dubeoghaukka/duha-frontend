@@ -22,8 +22,8 @@ function ShareCard() {
   if (data && status === "success") {
     const schedules = data.data.data;
     return (
-      <div className="grid place-items-center h-screen">
-        <span className="m-5 font-normal text-lg">다른 뚜벅이들의 제주 일정을 참고해보세요!</span>
+      <div className="h-full">
+        <span className="mt-10 mb-5 font-normal text-lg text-black2 flex justify-center">다른 뚜벅이들의 제주 일정을 참고해보세요!</span>
         {schedules?.map(item => {
           return <ShareCardComponent key={item.id} item={item} refetchQuery={refetchQuery} />;
         })}
@@ -59,22 +59,21 @@ function ShareCardComponent({ item, refetchQuery }) {
     }
   };
   return (
-    <div className="relative mt-5 ">
-      <Link
-        to={`/schedule/share/detail/${id}`}
-        className="group w-96 h-28 bg-white1 rounded-md shadow-lg flex flex-row hover:bg-green1 cursor-pointer"
-      >
-        <div className="flex space-x-20">
-          <div className="flex flex-col m-6 p-3 w-48">
-            <span className="font-bold group-hover:text-white1">{title}</span>
-            <span className="mt-2	font-base text-xs group-hover:text-white1">
-              {startAt}-{endAt}
-            </span>
+    <div className="grid place-content-center">
+      <div className="relative mt-5">
+        <Link to={`/schedule/share/detail/${id}`} className="group share-card-layout">
+          <div className="flex justify-center">
+            <div className="flex justify-center flex-col ml-5">
+              <span className="font-bold group-hover:text-white1">{title}</span>
+              <span className="mt-2	font-base text-xs group-hover:text-white1">
+                {startAt}-{endAt}
+              </span>
+            </div>
           </div>
+        </Link>
+        <div>
+          <ShareCardBookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
         </div>
-      </Link>
-      <div>
-        <ShareCardBookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
       </div>
     </div>
   );

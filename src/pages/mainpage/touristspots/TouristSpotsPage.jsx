@@ -117,7 +117,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     };
     return (
       <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
-        <div className="mb-[48px]">
+        <div className="mb-[48px] mt-10">
           <ul className="flex flex-row justify-around">
             <Link to="/spots" className="font-bold text-2xl text-green1 cursor-pointer">
               관광

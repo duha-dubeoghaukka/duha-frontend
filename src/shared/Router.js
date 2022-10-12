@@ -29,6 +29,7 @@ import AddAccommodation from "../pages/schedule/AddAccommodation";
 import EditUserInfoPage from "../pages/user/EditUserInfoPage";
 import AddNearBySpot from "../pages/schedule/AddNearBySpot";
 import AddBookMarkSpot from "../pages/schedule/AddBookMarkSpot";
+import Tide from "../pages/tide/Tide";
 
 const Router = () => {
   return (
@@ -63,6 +64,7 @@ const Router = () => {
         <Route path="/schedule/share" element={<ShareSchedulePage />} />
         <Route path="/schedule/share/detail/:id" element={<ShareDetailPage />} />
         <Route path="/mypage/user/edit" element={<EditUserInfoPage />} />
+        <Route path="/tide" element={<Tide />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

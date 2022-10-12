@@ -104,7 +104,7 @@ function EditUserInfoForm() {
   return (
     <div className="w-full h-full">
       <div className="flex flex-col">
-        <p className="mt-5 mb-3 mx-auto text-xl text-black2 font-semibold">회원 정보 변경</p>
+        <p className="mt-10 mx-auto text-xl text-black2 font-medium">회원 정보 변경</p>
         <img className="w-56 mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
         <div className="w-[345px] md:w-[500px] mx-auto">
           <input className="input m-3" placeholder="닉네임" name="nickname" value={nickName} onChange={onChangeNickName} />
