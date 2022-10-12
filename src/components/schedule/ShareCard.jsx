@@ -22,7 +22,7 @@ function ShareCard() {
   if (data && status === "success") {
     const schedules = data.data.data;
     return (
-      <div className="grid place-items-center h-screen">
+      <div className="grid place-items-center h-full">
         <span className="mt-10 mb-5 font-normal text-lg">다른 뚜벅이들의 제주 일정을 참고해보세요!</span>
         {schedules?.map(item => {
           return <ShareCardComponent key={item.id} item={item} refetchQuery={refetchQuery} />;
