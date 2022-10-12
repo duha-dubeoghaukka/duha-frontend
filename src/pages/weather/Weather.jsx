@@ -5,22 +5,26 @@ import { useQuery } from "react-query";
 import Spinner from "../../components/Spinner/Spinner";
 import mapWeatherCode from "../../utils/mapWeatherCode";
 import Backdrop from "./Backdrop";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RegionButton from "../../components/weather/RegionButton";
+import coordinates from "../../utils/coordinates";
 
 const Weather = () => {
   const url = "https://api.openweathermap.org/data/2.5/weather";
   const [currentRegion, setCurrentRegion] = useState("jeju");
-  const { error, isLoading, data } = useQuery("ultraShortTermWeather", () => {
+  const { error, isLoading, data, refetch } = useQuery("ultraShortTermWeather", () => {
     return axios.get(url, {
       params: {
         appid: process.env.REACT_APP_OPEN_WEATHER_API_KEY,
         units: "metric",
-        lat: 33.2721,
-        lon: 126.3221
+        lat: coordinates[currentRegion].latitude,
+        lon: coordinates[currentRegion].longitude
       }
     });
   });
+  useEffect(() => {
+    refetch();
+  }, [currentRegion]);
   if (isLoading) {
     return <Spinner />;
   }
