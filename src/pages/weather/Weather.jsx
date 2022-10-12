@@ -5,9 +5,12 @@ import { useQuery } from "react-query";
 import Spinner from "../../components/Spinner/Spinner";
 import mapWeatherCode from "../../utils/mapWeatherCode";
 import Backdrop from "./Backdrop";
+import { useState } from "react";
+import RegionButton from "../../components/weather/RegionButton";
 
 const Weather = () => {
   const url = "https://api.openweathermap.org/data/2.5/weather";
+  const [currentRegion, setCurrentRegion] = useState("jeju");
   const { error, isLoading, data } = useQuery("ultraShortTermWeather", () => {
     return axios.get(url, {
       params: {
@@ -35,6 +38,12 @@ const Weather = () => {
       <Layout isLoggedIn={false} title={"날씨"} highlight={"mainpage/weather"}>
         <div className="relative h-[100vh]">
           <Backdrop code={weatherCode} />
+          <div className="absolute top-5 w-full flex justify-around z-10">
+            <RegionButton regionName="제주시" isActive={currentRegion === "jeju"} />
+            <RegionButton regionName="성산포" isActive={currentRegion === "seongsanpo"} />
+            <RegionButton regionName="서귀포시" isActive={currentRegion === "seogwipo"} />
+            <RegionButton regionName="모슬포" isActive={currentRegion === "moseulpo"} />
+          </div>
           <div className="absolute w-full h-full top-0 left-0 flex flex-col items-center justify-center">
             <div>
               <p className="font-bold text-white1 text-[32px]">제주시</p>
