@@ -95,7 +95,7 @@ const DayItem = () => {
     });
     try {
       const { data } = await api.post(`/auth/trip/course`, {
-        courseId: id,
+        courseId: currentCourseId,
         courseDetails: [...editData]
       });
       if (!data.isSuccess) alert(data.message);
