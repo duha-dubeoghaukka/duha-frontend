@@ -8,15 +8,19 @@ const TodayTide = ({ tide }) => {
       {tide &&
         tide.map(item => {
           return (
-            <div key={item.date} className="bg-white1 rounded-md shadow-md p-2 mx-4">
-              <div className="">
-                <div>{item.date}</div>
+            <div key={item.date} className="bg-white1 rounded-md shadow-md px-10 py-2 mx-2">
+              <div className="flex flex-col items-center">
+                <div className="font-bold my-2">{item.date}</div>
                 <div className="">
                   {item.tide.map(day => {
                     return (
-                      <div key={day.time} className="flex items-center">
-                        <div>{day.code == "고조" ? <TrendingUpOutlinedIcon /> : <TrendingDownOutlinedIcon />}</div>
-                        <div>
+                      <div key={day.time} className="flex justify-between items-center py-2 first:border-t-2 border-b-2 last:border-none">
+                        {day.code === "고조" ? (
+                          <div className="px-3 py-1 text-rose-600 text-sm font-semibold">고</div>
+                        ) : (
+                          <div className="px-3 py-1 text-blue-600 text-sm font-semibold">저</div>
+                        )}
+                        <div className="px-5">
                           <div>{day.time.substring(0, 5)}</div>
                           <div>{day.level}m</div>
                         </div>
