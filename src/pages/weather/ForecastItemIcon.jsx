@@ -7,56 +7,56 @@ import TornadoIcon from "@mui/icons-material/Tornado";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import CloudIcon from "@mui/icons-material/Cloud";
 
-const ForecastItemIcon = code => {
+const ForecastItemIcon = ({ code }) => {
   const weatherCondition = parseWeatherCode(code);
   switch (weatherCondition) {
     case "thunderstorm":
-      return <ThunderstormIcon />;
+      return <ThunderstormIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "drizzle":
-      return <UmbrellaIcon />;
+      return <UmbrellaIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "rain":
-      return <UmbrellaIcon />;
+      return <UmbrellaIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "snow":
-      return <AcUnitIcon />;
+      return <AcUnitIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "mist":
-      return <AirIcon />;
+      return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "smoke":
-      return <AirIcon />;
+      return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "haze":
-      return <AirIcon />;
+      return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "dust":
-      return <AirIcon />;
+      return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "fog":
-      return <AirIcon />;
+      return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "sand":
-      return <AirIcon />;
+      return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "ash":
-      return <AirIcon />;
+      return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "squall":
-      return <UmbrellaIcon />;
+      return <UmbrellaIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "tornado":
-      return <TornadoIcon />;
+      return <TornadoIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "clear":
-      return <WbSunnyIcon />;
+      return <WbSunnyIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     case "clouds":
-      return <CloudIcon />;
+      return <CloudIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
     default:
-      return <WbSunnyIcon />;
+      return <WbSunnyIcon fontSize="large" sx={{ color: "#FFF" }} />;
       break;
   }
 };

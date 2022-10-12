@@ -49,7 +49,7 @@ const parseWeatherCode = code => {
       }
       break;
     case "8":
-      const thirdDigit = code.slice(2, 1);
+      const thirdDigit = code.slice(2);
       switch (thirdDigit) {
         case "0":
           return "clear";
