@@ -2,6 +2,7 @@ import ForecastItem from "./ForecastItem";
 import { useQuery } from "react-query";
 import axios from "axios";
 import Spinner from "../../components/Spinner/Spinner";
+import getTomorrow from "../../utils/getTomorrow";
 
 const Forecast = () => {
   const url = "https://api.openweathermap.org/data/2.5/forecast";
@@ -23,28 +24,42 @@ const Forecast = () => {
   }
   if (data) {
     const forecasts = data.data.list;
-    const minForecasts = forecasts.filter(forecast => {
-      return forecast.dt_txt.includes("06:00:00");
+    const tomorrow = getTomorrow();
+    const dailyForecasts = [];
+    for (let i = tomorrow; i < tomorrow + 4; i++) {
+      const filtered = forecasts.filter(forecast => {
+        return forecast.dt_txt.slice(8, 10) === i.toString().padStart(2, "0");
+      });
+      dailyForecasts.push(filtered);
+    }
+    const minMaxTemperatures = dailyForecasts.map(forecast => {
+      const temperatures = forecast.map(item => {
+        return item.main.temp;
+      });
+      const minTemperature = Math.min(...temperatures);
+      const maxTemperature = Math.max(...temperatures);
+      return {
+        minTemperature,
+        maxTemperature
+      };
     });
-    const maxForecasts = forecasts.filter(forecast => {
-      return forecast.dt_txt.includes("15:00:00");
+    const weatherConditions = dailyForecasts.map(dailyForecast => {
+      return dailyForecast[4].weather[0].id.toString();
     });
     return (
       <div className="grid grid-cols-4 gap-5 mt-5">
-        {minForecasts.map((forecast, index) => {
+        {dailyForecasts.map((forecast, index) => {
           return (
             <ForecastItem
-              key={forecast.dt}
-              day={forecast.dt_txt.slice(8, 10)}
-              minTemperature={forecast.main.temp}
-              maxTemperature={maxForecasts[index].main.temp}
-              weatherCode={maxForecasts[index].weather[0].id.toString()}
+              day={tomorrow + index}
+              minTemperature={Math.round(minMaxTemperatures[index].minTemperature)}
+              maxTemperature={Math.round(minMaxTemperatures[index].maxTemperature)}
+              weatherCode={weatherConditions[index]}
             />
           );
         })}
       </div>
     );
-    // forecastData.main.humidity, temp_min, temp_max, .weather[0].id
   }
 };
 
