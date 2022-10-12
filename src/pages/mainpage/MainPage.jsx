@@ -31,7 +31,7 @@ function MainPage() {
 
   return (
     <Layout isLoggedIn={false} title="메인 페이지" highlight={"mainpage/home"}>
-      <div className="grid place-items-center h-screen">
+      <div className="grid place-items-center h-full">
         <div className="flex flex-row mt-10 mb-5">
           {temperature ? (
             <>
