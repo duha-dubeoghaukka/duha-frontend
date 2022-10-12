@@ -1,7 +1,6 @@
 import React from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function HomeCard() {
   const data = [
@@ -19,7 +18,7 @@ function HomeCard() {
     },
     {
       title: "날씨 더 알아보기",
-      route: ""
+      route: "/weather"
     },
     {
       title: "물 때 알아보기",
@@ -38,7 +37,6 @@ function HomeCard() {
 
 function HomeCardComponent({ title, route }) {
   const navigate = useNavigate();
-
   return (
     <Link to={route} className="group w-96 h-28 bg-white1 rounded-md shadow-lg mt-5 flex flex-row hover:bg-green1">
       <div className="flex space-x-20">

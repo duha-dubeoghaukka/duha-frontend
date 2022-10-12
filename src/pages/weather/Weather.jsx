@@ -46,7 +46,7 @@ const Weather = () => {
       <Layout isLoggedIn={false} title={"날씨"} highlight={"mainpage/weather"}>
         <div className="relative h-[100vh]">
           <Backdrop code={weatherCode} />
-          <div className="absolute top-3 left-3">
+          <div className="absolute top-3 left-3 z-[5]">
             <div className="flex items-center mb-3">
               <WestIcon className="mr-3" onClick={() => navigate(-1)} />
               <p className="text-[16px] text-black1">뒤로 가기</p>
