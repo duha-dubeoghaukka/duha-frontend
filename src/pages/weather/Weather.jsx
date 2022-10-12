@@ -8,6 +8,7 @@ import Backdrop from "./Backdrop";
 import { useEffect, useState } from "react";
 import RegionButton from "../../components/weather/RegionButton";
 import coordinates from "../../utils/coordinates";
+import mapRegions from "../../utils/mapRegions";
 
 const Weather = () => {
   const url = "https://api.openweathermap.org/data/2.5/weather";
@@ -50,7 +51,7 @@ const Weather = () => {
           </div>
           <div className="absolute w-full h-full top-0 left-0 flex flex-col items-center justify-center">
             <div>
-              <p className="font-bold text-white1 text-[32px]">제주시</p>
+              <p className="font-bold text-white1 text-[32px]">{mapRegions[currentRegion]}</p>
             </div>
             <div>
               <p className="font-bold text-white1 text-[72px]">{Math.round(temperature)}ºC</p>
