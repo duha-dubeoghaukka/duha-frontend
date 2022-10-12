@@ -15,11 +15,9 @@ const TodayTide = ({ tide }) => {
                   {item.tide.map(day => {
                     return (
                       <div key={day.time} className="flex justify-between items-center py-2 first:border-t-2 border-b-2 last:border-none">
-                        {day.code === "고조" ? (
-                          <div className="px-3 py-1 text-rose-600 text-sm font-semibold">고</div>
-                        ) : (
-                          <div className="px-3 py-1 text-blue-600 text-sm font-semibold">저</div>
-                        )}
+                        <div className="px-3 py-1 text-sm font-semibold">
+                          {day.code === "고조" ? <div className="text-rose-600">고조</div> : <div className="text-blue-600">저</div>}
+                        </div>
                         <div className="px-5">
                           <div>{day.time.substring(0, 5)}</div>
                           <div>{day.level}m</div>
