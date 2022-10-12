@@ -118,7 +118,7 @@ const AccommodationsPage = () => {
     const setCounter = () => {};
     return (
       <Layout isLoggedIn={false} title="숙소" highlight={"mainpage/accommodations"}>
-        <div className="mb-[48px]">
+        <div className="mb-[48px] mt-10">
           <ul className="flex flex-row justify-around">
             <Link to="/spots" className="font-bold text-2xl cursor-pointer">
               관광

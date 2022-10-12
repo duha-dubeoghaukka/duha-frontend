@@ -23,7 +23,7 @@ function ShareCard() {
     const schedules = data.data.data;
     return (
       <div className="grid place-items-center h-screen">
-        <span className="m-5 font-normal text-lg">다른 뚜벅이들의 제주 일정을 참고해보세요!</span>
+        <span className="mt-10 mb-5 font-normal text-lg">다른 뚜벅이들의 제주 일정을 참고해보세요!</span>
         {schedules?.map(item => {
           return <ShareCardComponent key={item.id} item={item} refetchQuery={refetchQuery} />;
         })}
@@ -59,7 +59,7 @@ function ShareCardComponent({ item, refetchQuery }) {
     }
   };
   return (
-    <div className="relative mt-5 ">
+    <div className="relative mt-5">
       <Link
         to={`/schedule/share/detail/${id}`}
         className="group w-96 h-28 bg-white1 rounded-md shadow-lg flex flex-row hover:bg-green1 cursor-pointer"
