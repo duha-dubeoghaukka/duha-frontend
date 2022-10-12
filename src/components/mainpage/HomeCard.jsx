@@ -21,7 +21,7 @@ function HomeCard() {
     },
     {
       title: "물 때 알아보기",
-      route: ""
+      route: "/tide"
     }
   ];
 
