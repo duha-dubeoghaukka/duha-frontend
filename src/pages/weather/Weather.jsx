@@ -1,4 +1,5 @@
 import Layout from "../../components/layout/Layout";
+import Forecast from "./Forecast";
 
 const Weather = () => {
   // const url = "https://api.openweathermap.org/data/2.5/weather";
@@ -57,6 +58,7 @@ const Weather = () => {
           <div>
             <p className="font-bold text-white1 text-[18px]">풍속 3m/s</p>
           </div>
+          <Forecast />
         </div>
       </div>
     </Layout>
