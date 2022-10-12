@@ -9,8 +9,11 @@ import { useEffect, useState } from "react";
 import RegionButton from "../../components/weather/RegionButton";
 import coordinates from "../../utils/coordinates";
 import mapRegions from "../../utils/mapRegions";
+import WestIcon from "@mui/icons-material/West";
+import { useNavigate } from "react-router-dom";
 
 const Weather = () => {
+  const navigate = useNavigate();
   const url = "https://api.openweathermap.org/data/2.5/weather";
   const [currentRegion, setCurrentRegion] = useState("jeju");
   const { error, isLoading, data, refetch } = useQuery("ultraShortTermWeather", () => {
@@ -43,7 +46,13 @@ const Weather = () => {
       <Layout isLoggedIn={false} title={"날씨"} highlight={"mainpage/weather"}>
         <div className="relative h-[100vh]">
           <Backdrop code={weatherCode} />
-          <div className="absolute top-5 w-full flex justify-around z-10">
+          <div className="absolute top-3 left-3">
+            <div className="flex items-center mb-3">
+              <WestIcon className="mr-3" onClick={() => navigate(-1)} />
+              <p className="text-[16px] text-black1">뒤로 가기</p>
+            </div>
+          </div>
+          <div className="absolute top-12 w-full flex justify-around z-[5]">
             <RegionButton regionName="제주시" isActive={currentRegion === "jeju"} setCurrentRegion={setCurrentRegion} />
             <RegionButton regionName="성산포" isActive={currentRegion === "seongsanpo"} setCurrentRegion={setCurrentRegion} />
             <RegionButton regionName="서귀포시" isActive={currentRegion === "seogwipo"} setCurrentRegion={setCurrentRegion} />
