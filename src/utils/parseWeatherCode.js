@@ -44,6 +44,7 @@ const parseWeatherCode = code => {
           return "tornado";
           break;
         default:
+          return "clear";
           break;
       }
       break;
@@ -59,6 +60,7 @@ const parseWeatherCode = code => {
       }
       break;
     default:
+      return "clear";
       break;
   }
 };
