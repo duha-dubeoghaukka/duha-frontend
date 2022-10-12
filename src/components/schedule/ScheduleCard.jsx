@@ -75,7 +75,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   }, [isModal]);
 
   return (
-    <div className="w-full md:w-3/5 md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4">
+    <div className="w-full h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4">
       <div className="flex flex-col mt-5 ml-5 mb-2 w-full">
         <div
           className="h-20"
