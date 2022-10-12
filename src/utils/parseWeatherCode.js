@@ -14,7 +14,7 @@ const parseWeatherCode = code => {
       return "snow";
       break;
     case "7":
-      const secondDigit = code.slice(1, 1);
+      const secondDigit = code.slice(1, 2);
       switch (secondDigit) {
         case "0":
           return "mist";
