@@ -70,7 +70,6 @@ function Registration() {
   };
 
   const changeDate = e => {
-    console.log("aa", e);
     const startDateFormat = moment(e[0]).format("YYYY/MM/DD");
     const endDateFormat = moment(e[1]).format("YYYY/MM/DD");
 
@@ -88,20 +87,11 @@ function Registration() {
     }
   }, []);
 
-  const newDate = new Date(startDate);
-  console.log("new", newDate);
-
   return (
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
-      <div className="grid place-items-center h-screen">
+      <div className="grid place-items-center h-screen mt-10">
         <div className="flex w-72 flex-col gap-4 h-screen">
-          <Calendar
-            onChange={changeDate}
-            selectRange={true}
-            formatDay={(locale, date) => moment(date).format("DD")}
-            // value={newDate}
-            // activeStartDate={newDate}
-          />
+          <Calendar onChange={changeDate} selectRange={true} formatDay={(locale, date) => moment(date).format("DD")} />
           <input
             type="text"
             className="w-full p-2 text-sm border-b-2 border-green1 outline-none opacity-70 my-5 bg-transparent"
@@ -124,8 +114,8 @@ function Registration() {
             value={value}
             onChange={onChangeHandler}
           />
-          <div className="flex flex-row  space-x-24">
-            <p className="text-sm">일정을 다른사람과 공유합니다.</p>
+          <div className="flex flex-row space-x-20 mb-3">
+            <p className="text-sm ml-2">일정을 다른사람과 공유합니다.</p>
             <input type="checkbox" checked={isChecked || ""} name="checked" onChange={handleClick} />
           </div>
           {state ? (

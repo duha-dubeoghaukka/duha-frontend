@@ -30,9 +30,9 @@ function FavoriteCoursePage() {
 
   return (
     <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
-      <div className="grid place-items-center">
-        <span className="m-10 font-medium text-xl">
-          {tripData?.length ? `${nickName}님이 즐겨찾기하신 일정을 확인해보세요!` : `일정 즐겨찾기를 추가해보세요!`}
+      <div className="grid place-items-center mt-10 mb-10">
+        <span className="font-medium text-lg text-black2">
+          {tripData?.length ? `${nickName}님이 즐겨찾기한 일정입니다!` : `일정 즐겨찾기를 추가해보세요!`}
         </span>
         <div className="h-screen">
           {tripData ? (

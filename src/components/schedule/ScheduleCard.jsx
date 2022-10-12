@@ -75,16 +75,16 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   }, [isModal]);
 
   return (
-    <div className="w-full h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center px-4">
-      <div className="flex flex-col mt-5 ml-5 mb-2 w-full">
+    <div className="register-card-layout">
+      <div className="flex flex-col mt-2 ml-3 mb-2">
         <div
-          className="h-20"
+          className="h-20 w-72 bg-white1"
           onClick={() => {
             navigate(`${id}/1`);
             setItem();
           }}
         >
-          <div className="flex flex-col">
+          <div className="flex flex-col mt-3">
             <span className="mt-2	font-semibold">
               {nights + "박" + allDays + "일" + " "}
               {title}
@@ -95,7 +95,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
           </div>
         </div>
         <div
-          className="cursor-pointer w-1/5"
+          className="cursor-pointer w-2/5"
           onClick={e => {
             e.stopPropagation();
             ModalHandler();
