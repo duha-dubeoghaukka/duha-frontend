@@ -26,9 +26,9 @@ function FavoriteSpotsPage() {
 
   return (
     <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
-      <div className="grid place-items-center m-10">
-        <span className="font-medium text-xl">
-          {spotData?.length ? `${nickName}님이 즐겨찾기하신 관광지 목록을 확인해보세요!` : `관광지 즐겨찾기를 추가해보세요!`}
+      <div className="grid place-items-center mt-10 mb-10">
+        <span className="font-medium text-lg text-black2">
+          {spotData?.length ? `${nickName}님이 즐겨찾기한 관광지입니다!` : `관광지 즐겨찾기를 추가해보세요!`}
         </span>
       </div>
       {spotData ? (
