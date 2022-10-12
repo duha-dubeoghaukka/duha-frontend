@@ -39,10 +39,10 @@ const Weather = () => {
         <div className="relative h-[100vh]">
           <Backdrop code={weatherCode} />
           <div className="absolute top-5 w-full flex justify-around z-10">
-            <RegionButton regionName="제주시" isActive={currentRegion === "jeju"} />
-            <RegionButton regionName="성산포" isActive={currentRegion === "seongsanpo"} />
-            <RegionButton regionName="서귀포시" isActive={currentRegion === "seogwipo"} />
-            <RegionButton regionName="모슬포" isActive={currentRegion === "moseulpo"} />
+            <RegionButton regionName="제주시" isActive={currentRegion === "jeju"} setCurrentRegion={setCurrentRegion} />
+            <RegionButton regionName="성산포" isActive={currentRegion === "seongsanpo"} setCurrentRegion={setCurrentRegion} />
+            <RegionButton regionName="서귀포시" isActive={currentRegion === "seogwipo"} setCurrentRegion={setCurrentRegion} />
+            <RegionButton regionName="모슬포" isActive={currentRegion === "moseulpo"} setCurrentRegion={setCurrentRegion} />
           </div>
           <div className="absolute w-full h-full top-0 left-0 flex flex-col items-center justify-center">
             <div>
