@@ -26,10 +26,10 @@ const Forecast = () => {
   // forecastData.main.humidity, temp_min, temp_max, .weather[0].id
   return (
     <div className="grid grid-cols-4 gap-5">
-      <ForecastItem />
-      <ForecastItem />
-      <ForecastItem />
-      <ForecastItem />
+      <ForecastItem day={13} minTemperature={18} maxTemperature={27} weatherCode={800} />
+      <ForecastItem day={14} minTemperature={18} maxTemperature={27} weatherCode={800} />
+      <ForecastItem day={15} minTemperature={18} maxTemperature={27} weatherCode={800} />
+      <ForecastItem day={16} minTemperature={18} maxTemperature={27} weatherCode={800} />
     </div>
   );
   // }
