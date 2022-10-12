@@ -25,8 +25,9 @@ const Forecast = () => {
   if (data) {
     const forecasts = data.data.list;
     const tomorrow = getTomorrow();
+    const today = new Date().getDate();
     const dailyForecasts = [];
-    for (let i = tomorrow; i < tomorrow + 4; i++) {
+    for (let i = today; i < today + 5; i++) {
       const filtered = forecasts.filter(forecast => {
         return forecast.dt_txt.slice(8, 10) === i.toString().padStart(2, "0");
       });
@@ -47,12 +48,12 @@ const Forecast = () => {
       return dailyForecast[4].weather[0].id.toString();
     });
     return (
-      <div className="grid grid-cols-4 gap-5 mt-5">
+      <div className="grid grid-cols-5 gap-5 mt-5">
         {dailyForecasts.map((forecast, index) => {
           return (
             <ForecastItem
               key={index}
-              day={tomorrow + index}
+              day={today + index}
               minTemperature={Math.round(minMaxTemperatures[index].minTemperature)}
               maxTemperature={Math.round(minMaxTemperatures[index].maxTemperature)}
               weatherCode={weatherConditions[index]}

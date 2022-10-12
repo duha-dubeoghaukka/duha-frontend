@@ -3,6 +3,7 @@ import Forecast from "./Forecast";
 import axios from "axios";
 import { useQuery } from "react-query";
 import Spinner from "../../components/Spinner/Spinner";
+import parseWeatherCode from "../../utils/parseWeatherCode";
 
 const Weather = () => {
   const url = "https://api.openweathermap.org/data/2.5/weather";
@@ -26,7 +27,7 @@ const Weather = () => {
     const weatherData = data.data;
     const feelsLikeTemperature = weatherData.main.feels_like;
     const humidity = weatherData.main.humidity;
-    const temperature = weatherData.main.temperature;
+    const temperature = weatherData.main.temp;
     const minTemperature = weatherData.main.temp_min;
     const maxTemperature = weatherData.main.temp_max;
     const weatherCode = weatherData.weather[0].id;
@@ -42,24 +43,19 @@ const Weather = () => {
               <p className="font-bold text-white1 text-[32px]">제주시</p>
             </div>
             <div>
-              <p className="font-bold text-white1 text-[72px]">12ºC</p>
+              <p className="font-bold text-white1 text-[72px]">{Math.round(temperature)}ºC</p>
             </div>
             <div>
-              <p className="font-bold text-white1 text-[24px]">체감 10ºC</p>
+              <p className="font-bold text-white1 text-[24px]">체감 {Math.round(feelsLikeTemperature)}ºC</p>
             </div>
             <div>
-              <p className="font-bold text-white1 text-[24px]">맑음</p>
-            </div>
-            <div className="grid grid-cols-[1fr_15px_1fr]">
-              <p className="text-center text-blue-600 font-bold text-[24px]">최저 9ºC</p>
-              <p className="font-bold text-[24px] text-white1">/</p>
-              <p className="text-center text-red-600 font-bold text-[24px]">최고 18ºC</p>
+              <p className="font-bold text-white1 text-[24px]">{parseWeatherCode(weatherCode.toString())}</p>
             </div>
             <div>
-              <p className="font-bold text-white1 text-[18px]">습도 56%</p>
+              <p className="font-bold text-white1 text-[18px]">습도 {humidity}%</p>
             </div>
             <div>
-              <p className="font-bold text-white1 text-[18px]">풍속 3m/s</p>
+              <p className="font-bold text-white1 text-[18px]">풍속 {Math.round(windSpeed)}m/s</p>
             </div>
             <Forecast />
           </div>
