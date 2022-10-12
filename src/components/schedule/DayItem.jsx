@@ -8,15 +8,13 @@ import MapContainer from "../../components/map/MapContainer";
 import { DragDropContext } from "react-beautiful-dnd";
 
 const DayItem = () => {
-  const { tripId, day } = useParams();
+  const { day } = useParams();
   const [courses, setCourses] = useState(null);
   const [dayCourse, setDayCourse] = useState([]);
   const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
   const navigate = useNavigate();
-  // const id = localStorage.getItem("id");
-  const id = tripId;
-
+  const id = localStorage.getItem("id");
   const lastCourse = dayCourse.at(-1);
 
   if (lastCourse) {
@@ -110,7 +108,7 @@ const DayItem = () => {
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
         <div className="flex justify-center">
-          <div className="flex justify-start overflow-x-scroll py-4">
+          <div className="my-2 flex justify-start overflow-x-scroll pb-4">
             {courses.map(course => {
               return (
                 <div
