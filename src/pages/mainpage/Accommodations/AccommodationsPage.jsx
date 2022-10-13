@@ -14,6 +14,7 @@ import { api } from "../../../api/api";
 import SearchField from "../../../components/search/SearchField";
 import AutoComplete from "../../../components/search/AutoComplete";
 import { DirectionsBusFilledOutlined } from "@mui/icons-material";
+import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
 
 const AccommodationsPage = () => {
   const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedAccommodations"], () => {
@@ -118,36 +119,18 @@ const AccommodationsPage = () => {
     const setCounter = () => {};
     return (
       <Layout isLoggedIn={false} title="숙소" highlight={"mainpage/accommodations"}>
-        <div className="mb-[48px] mt-10">
-          <ul className="flex flex-row justify-around">
-            <Link to="/spots" className="font-bold text-2xl cursor-pointer">
-              관광
-            </Link>
-            <Link to="/restaurants" className="font-bold text-2xl cursor-pointer">
-              맛집
-            </Link>
-            <Link to="/accommodations" className="font-bold text-2xl cursor-pointer text-green1">
-              숙소
-            </Link>
-          </ul>
+        <div className="flex justify-around my-4 text-lg font-bold">
+          <Link to="/spots" className="text-gray-500">
+            관광
+          </Link>
+          <Link to="/restaurants" className="text-gray-500">
+            맛집
+          </Link>
+          <Link to="/accommodations" className="text-green1">
+            숙소
+          </Link>
         </div>
-        <div className="mb-[16px]">
-          <ul className="hidden md:flex flex-row justify-between">
-            {regionNames.map(region => {
-              return <RegionButton key={region.name} {...region} />;
-            })}
-          </ul>
-          <select
-            value={selectedRegion}
-            onChange={selectChangeHandler}
-            className="pl-3 text-[16px] block md:hidden w-full h-[43px] text-black1 font-bold rounded-lg border-black1 border-solid border-2"
-          >
-            {regionNames.map(region => {
-              return <option key={region.name}>{region.name}</option>;
-            })}
-          </select>
-        </div>
-        <div className="mb-[16px]" onKeyDown={keyPressHandler}>
+        <div className="mb-2 md:mb-4" onKeyDown={keyPressHandler}>
           <SearchField
             setSearchMode={setSearchMode}
             sendResults={sendResults}
@@ -166,14 +149,30 @@ const AccommodationsPage = () => {
             </div>
           )}
         </div>
-        <div className="flex items-center mb-3">
+        <div className="mb-2 md:mb-5">
+          <ul className="hidden md:flex justify-between">
+            {regionNames.map(region => {
+              return <RegionButton key={region.name} {...region} />;
+            })}
+          </ul>
+          <select
+            value={selectedRegion}
+            onChange={selectChangeHandler}
+            className="px-3 md:hidden w-full h-[43px] text-gray-500 rounded-lg border-gray-500 border-solid border-2"
+          >
+            {regionNames.map(region => {
+              return <option key={region.name}>{region.name}</option>;
+            })}
+          </select>
+        </div>
+        <div className="flex justify-start items-center mb-2">
           <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
-          <p className="font-bold text-green1">버스 정류장이 300m 반경 이내에 존재하는 항목.</p>
+          <p className="font-semibold text-green1 text-sm md:test-base">버스 정류장이 300m 반경 이내에 존재하는 항목</p>
         </div>
         {searchMode ? (
           <div>
-            <div className="mb-3">
-              <p className="font-bold">총 {searchedResults.length}건이 검색되었습니다.</p>
+            <div className="mb-2">
+              <p className="text-sm">총 {searchedResults.length}건이 검색되었습니다</p>
             </div>
             <div>
               {searchedResults.map(result => {
@@ -183,22 +182,22 @@ const AccommodationsPage = () => {
           </div>
         ) : (
           <div>
-            <div className="mb-3">
-              <p className="font-bold">총 {filteredAccommodations.length}건이 검색되었습니다.</p>
+            <div className="mb-2">
+              <p className="text-sm">총 {filteredAccommodations.length}건이 검색되었습니다</p>
             </div>
-            <div className="mb-0">
+            <div>
               {currentAccommodations.map(accommodation => {
                 return (
                   <Item key={accommodation.id} data={accommodation} category={"accommodation"} counter={counter} setCounter={setCounter} />
                 );
               })}
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-start overflow-x-scroll pb-2">
               {pages.map(page => {
                 if (page === currentAccommodationPage) {
                   return (
                     <div key={page} className="mr-1">
-                      <p>{page}</p>
+                      <p className="font-medium">{page}</p>
                     </div>
                   );
                 } else {
@@ -210,7 +209,7 @@ const AccommodationsPage = () => {
                         setCurrentAccommodationPage(page);
                       }}
                     >
-                      <p className="underline text-sky-500">{page}</p>
+                      <p className="text-gray-500">{page}</p>
                     </div>
                   );
                 }
@@ -218,9 +217,7 @@ const AccommodationsPage = () => {
             </div>
           </div>
         )}
-        <div className="flex justify-center cursor-pointer text-sky-500 underline" onClick={scrollToTop}>
-          <p>최상단으로 이동</p>
-        </div>
+        <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer hidden md:block" onClick={scrollToTop} />
       </Layout>
     );
   }

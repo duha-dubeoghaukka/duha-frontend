@@ -75,18 +75,14 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
   return (
     <div className="relative" onKeyDown={keyDownHandler}>
       <input
-        placeholder={`${placeHolderMapper[category]} 검색하세요...`}
+        placeholder={`${placeHolderMapper[category]} 검색 해보세요`}
         type="text"
         value={userInput}
         onChange={handleUserInput}
-        className="w-full border-green1 border-solid border-2 rounded-lg p-2 px-5 text-black1"
+        className="w-full border-green1 border-solid border-2 rounded-lg p-2 px-5 text-black1 focus:outline-none"
+        autoFocus
       />
-      <SearchIcon
-        fontSize="large"
-        sx={{ color: "rgb(125, 171, 120)" }}
-        className="absolute right-3 top-[4px] cursor-pointer"
-        onClick={searchHandler}
-      />
+      <SearchIcon sx={{ color: "rgb(125, 171, 120)" }} className="absolute right-3 top-2.5 cursor-pointer" onClick={searchHandler} />
     </div>
   );
 };

@@ -6,14 +6,14 @@ const Bookmark = ({ bookmarked, bookmarkHandler }) => {
     <div>
       {bookmarked ? (
         <StarRoundedIcon
-          className="absolute top-1 right-1 cursor-pointer hover:scale-125"
+          className="absolute top-1 left-1 cursor-pointer hover:scale-125"
           fontSize="large"
           sx={{ color: "#ffd740" }}
           onClick={bookmarkHandler}
         />
       ) : (
         <StarOutlineRoundedIcon
-          className="absolute top-1 right-1 cursor-pointer hover:scale-125"
+          className="absolute top-1 left-1 cursor-pointer hover:scale-125"
           fontSize="large"
           sx={{ color: "#ffd740" }}
           onClick={bookmarkHandler}

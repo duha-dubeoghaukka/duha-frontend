@@ -37,18 +37,18 @@ const AddNearByItem = ({ data, lastCourseName }) => {
         <img loading="lazy" className="w-full h-full object-cover object-center rounded-md" src={thumbnailUrl} alt={name} />
       </div>
       <div className="group-hover:brightness-95 ml-2 md:ml-4">
-        <div className="mb-[4px] flex flex-col items-start">
-          <p className="text-[12px] md:text-[14px]">{category}</p>
-          <p className="font-bold text-[14px] md:text-[16px]">{name}</p>
+        <div className="mb-1 flex flex-col items-start">
+          <p className="text-xs md:text-sm">{category}</p>
+          <p className="font-bold text-sm md:text-base">{name}</p>
         </div>
         <div className="flex items-center my-1">
           <RoomOutlinedIcon fontSize="small" className="text-gray-600" />
-          <p className="text-[12px] md:text-[14px]">
+          <p className="text-xs md:text-sm">
             {lastCourseName}부터 {distance}m
           </p>
         </div>
         <div>
-          <p className="text-[12px] text-gray-600">{description}</p>
+          <p className="text-xs text-gray-600">{description}</p>
         </div>
       </div>
     </div>

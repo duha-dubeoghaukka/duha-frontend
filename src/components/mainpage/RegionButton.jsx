@@ -14,21 +14,15 @@ const RegionButton = ({ name }) => {
     setSelectedRegion(name);
   };
   if (selectedRegion === name) {
-    return (
-      <div>
-        <p className="bg-green1 cursor-pointer w-[70px] h-[43px] rounded-xl text-white1 font-bold text-[14px] shadow-md flex justify-center items-center">
-          {name}
-        </p>
-      </div>
-    );
+    return <p className="bg-green1 cursor-pointer px-4 py-2 rounded-full text-white font-semibold text-sm shadow-md">{name}</p>;
   } else {
     return (
-      <div
+      <p
         onClick={clickRegionHandler}
-        className="cursor-pointer transition-all hover:brightness-95 w-[70px] h-[43px] text-[14px] flex justify-center items-center bg-white1 rounded-lg font-bold shadow-md cursor-pointer"
+        className="border-2 border-green1 cursor-pointer px-4 py-2 rounded-full font-semibold text-sm hover:bg-green1 hover:text-white transition-all ease-in-out"
       >
-        <p className="text-black1">{name}</p>
-      </div>
+        {name}
+      </p>
     );
   }
 };
