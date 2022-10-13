@@ -1,6 +1,4 @@
 import React from "react";
-import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
-import TrendingDownOutlinedIcon from "@mui/icons-material/TrendingDownOutlined";
 
 const TodayTide = ({ tide }) => {
   return (
