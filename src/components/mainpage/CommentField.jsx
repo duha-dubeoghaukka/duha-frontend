@@ -13,9 +13,9 @@ const CommentField = ({ comment, setComment, commentRegisterHandler, enterHandle
     <div className="grid grid-cols-[1fr_80px] gap-3" onKeyDown={keyDownHandler}>
       <input
         type="text"
-        className="border-green1 border-2 rounded-lg p-2 pl-5 text-black1 disabled:border-gray-200 disabled:bg-gray-200 placeholder:text-white disabled:placeholder:text-black1 disabled:cursor-not-allowed"
+        className="border-green1 border-2 rounded-lg p-2 pl-5 text-black1 disabled:border-gray-200 disabled:bg-gray-200 placeholder:text-green1 disabled:placeholder:text-black1 disabled:cursor-not-allowed"
         value={comment}
-        placeholder="로그인 후에 댓글 입력이 가능합니다."
+        placeholder={checkIsLoggedIn() ? "댓글을 입력해주세요" : "로그인 후에 댓글 입력이 가능합니다."}
         onChange={commentChangeHandler}
         disabled={!checkIsLoggedIn()}
       />
