@@ -45,7 +45,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "aws": "aws s3 sync ./build s3://dduha --profile=clonecoding",
-    "deploy": "yarn build && yarn aws"
+    "invalidate": "aws cloudfront create-invalidation --profile=clonecoding --distribution-id E139SJSZQZE1RR --paths /*",
+    "deploy": "yarn build && yarn aws && yarn invalidate"
   },
   "eslintConfig": {
     "extends": [

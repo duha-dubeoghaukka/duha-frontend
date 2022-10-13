@@ -8,6 +8,7 @@ export const api = axios.create({
   },
   withCredentials: true
 });
+// 배포 서버 주소 https://dduha.shop
 
 // 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
 api.interceptors.request.use(function (config) {
@@ -73,10 +74,3 @@ export const userInfoAPIs = {
     return api.get(`/member/email?code=${data}`);
   }
 };
-
-export const instance = axios.create({
-  baseURL: "http://43.201.5.53:8080/",
-  headers: {
-    "Content-Type": "application/json"
-  }
-});

@@ -1,6 +1,4 @@
 import React from "react";
-import TrendingUpOutlinedIcon from "@mui/icons-material/TrendingUpOutlined";
-import TrendingDownOutlinedIcon from "@mui/icons-material/TrendingDownOutlined";
 
 const TodayTide = ({ tide }) => {
   return (
@@ -14,7 +12,7 @@ const TodayTide = ({ tide }) => {
                 <div className="">
                   {item.tide.map(day => {
                     return (
-                      <div key={day.time} className="flex justify-between items-center py-2 first:border-t-2 border-b-2 last:border-none">
+                      <div key={day.time} className="flex justify-between items-center py-2 border-t-2">
                         <div className="px-3 py-1 text-sm font-semibold">
                           {day.code === "고조" ? <div className="text-rose-600">고</div> : <div className="text-blue-600">저</div>}
                         </div>

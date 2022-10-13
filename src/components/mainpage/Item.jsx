@@ -45,40 +45,37 @@ const Item = ({ data, setCounter, category }) => {
     }
   };
   return (
-    <div className="p-[15px] group bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md cursor-pointer flex justify-between items-center hover:brightness-95 transition-all">
-      <div className="pl-[5px] md:pl-[50px] group-hover:brightness-95" onClick={itemClickHandler}>
-        <div className="mb-[4px]">
-          <p className="font-bold text-[20px]">{name}</p>
+    <div
+      onClick={itemClickHandler}
+      className="p-2 md:p-4 group bg-white1 rounded-md mb-4 shadow-md cursor-pointer flex justify-start items-start hover:brightness-95 transition-all"
+    >
+      <div className="w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative mr-2">
+        <img loading="lazy" className="w-full h-full object-cover object-center rounded-md" src={thumbnailUrl} alt={name} />
+        <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
+      </div>
+      <div>
+        <div className="mb-1 flex items-center justify-start">
+          <p className="font-bold text-sm md:text-lg">{name}</p>
+          {hasNearStation && (
+            <DirectionsBusFilledOutlinedIcon
+              fontSize="medium"
+              sx={{
+                color: "rgb(116, 175, 115)"
+              }}
+              className=""
+            />
+          )}
         </div>
-        <div>
-          <p className="text-[12px]">{description}</p>
+        <div className="hidden md:block">
+          <p className="text-xs">{region}</p>
         </div>
-        <div className="mb-[16px]">
-          <p className="text-[12px]">{region}</p>
+        <div className="mb-2">
+          <p className="text-xs">{description}</p>
         </div>
         <div className="flex items-center">
           <FavoriteRoundedIcon sx={{ color: "red" }} className="mr-[3px]" />
-          <p className="text-[12px]">{likeNum}</p>
+          <p className="text-xs">{likeNum}</p>
         </div>
-      </div>
-      <div className="ml-3 w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative">
-        <img
-          loading="lazy"
-          className="w-full h-full object-cover object-center rounded-xl"
-          src={thumbnailUrl}
-          alt={name}
-          onClick={itemClickHandler}
-        />
-        <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
-        {hasNearStation && (
-          <DirectionsBusFilledOutlinedIcon
-            fontSize="large"
-            sx={{
-              color: "rgb(116, 175, 115)"
-            }}
-            className="absolute bottom-1 right-1"
-          />
-        )}
       </div>
     </div>
   );
