@@ -50,7 +50,7 @@ const Forecast = ({ currentRegion }) => {
       };
     });
     const weatherConditions = dailyForecasts.map(dailyForecast => {
-      return dailyForecast[4].weather[0].id.toString();
+      return dailyForecast[0].weather[0].id.toString();
     });
     return (
       <div className="grid grid-cols-5 gap-5 mt-5">
