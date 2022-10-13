@@ -4,7 +4,7 @@ import { useState } from "react";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { api } from "../../api/api";
 
-const Comments = ({ category, id, refetchComments }) => {
+const Comments = ({ category, id, refetchComments, comments, commentDeleteHandler }) => {
   const [comment, setComment] = useState("");
   const commentRegisterHandler = () => {
     setComment("");
@@ -27,7 +27,7 @@ const Comments = ({ category, id, refetchComments }) => {
   return (
     <div>
       <CommentField comment={comment} setComment={setComment} commentRegisterHandler={commentRegisterHandler} />
-      <CommentList />
+      <CommentList comments={comments} commentDeleteHandler={commentDeleteHandler} />
     </div>
   );
 };

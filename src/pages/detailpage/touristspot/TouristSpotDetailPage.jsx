@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
-import ReviewItem from "../../../components/mainpage/ReviewItem";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -186,17 +185,13 @@ const TouristSpotDetailPage = () => {
             </div>
           </div>
         </div>
-        <Comments category={"touristspot"} id={spotID} refetchComments={refetchComments} />
-        <div className="mt-3">
-          <div className="bg-white1 rounded-md px-5 md:px-10 py-3 md:py-5">
-            <p className="text-base md:text-lg font-semibold">리뷰</p>
-            <div className="grid gap-[44px]">
-              {reviews.map(review => {
-                return <ReviewItem key={review.id} data={review} commentDeleteHandler={commentDeleteHandler} />;
-              })}
-            </div>
-          </div>
-        </div>
+        <Comments
+          category={"touristspot"}
+          id={spotID}
+          refetchComments={refetchComments}
+          comments={reviews}
+          commentDeleteHandler={commentDeleteHandler}
+        />
         {isMapModalOpen && (
           <div>
             <div className="fixed top-0 left-0 z-10 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
