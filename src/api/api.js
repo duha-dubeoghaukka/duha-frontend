@@ -62,6 +62,9 @@ export const mypageAPIs = {
 export const userInfoAPIs = {
   editUserInfo: data => {
     return api.put(`/auth/member/modify`, data);
+  },
+  deleteUser: data => {
+    return api.delete(`/auth/member/delete`, { data: data });
   }
 };
 
