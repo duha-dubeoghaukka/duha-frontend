@@ -65,6 +65,12 @@ export const userInfoAPIs = {
   },
   deleteUser: data => {
     return api.delete(`/auth/member/delete`, { data: data });
+  },
+  emailLink: data => {
+    return api.post(`/member/emailConfirm`, data);
+  },
+  getUserEmail: data => {
+    return api.get(`/member/email?code=${data}`);
   }
 };
 

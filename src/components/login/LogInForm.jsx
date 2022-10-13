@@ -5,6 +5,8 @@ import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined
 import { api } from "../../api/api";
 import { KAKAO_AUTH_URI } from "../../utils/socialLoginUtils/kakao";
 import { GOOGLE_AUTH_URI } from "../../utils/socialLoginUtils/google";
+import useChange from "../../hooks/useChange";
+import ShowEmailModal from "../modal/ShowEmailModal";
 
 const LogInForm = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -14,6 +16,7 @@ const LogInForm = () => {
 
   const navigate = useNavigate();
   const isToken = localStorage.getItem("authorization");
+  const [isModal, modalHandler] = useChange();
 
   const handleHide = () => setIsHidden(!isHidden);
 
@@ -115,13 +118,19 @@ const LogInForm = () => {
             Google 계정으로 시작하기
           </a>
         </button>
-        <p className="mx-auto my-4 text-gray-600">
-          계정이 없으신가요?{" "}
-          <Link to="/signup" className="font-bold">
-            회원가입
-          </Link>
-        </p>
       </form>
+      <div className="flex flex-row justify-center">
+        <p className=" text-gray-600">계정이 없으신가요?</p>
+        <button
+          className="font-bold"
+          onClick={() => {
+            modalHandler();
+          }}
+        >
+          회원가입
+        </button>
+        <ShowEmailModal show={isModal} modalHandler={modalHandler} />
+      </div>
     </div>
   );
 };
