@@ -1,11 +1,16 @@
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 
-const CommentField = ({ comment, setComment, commentRegisterHandler }) => {
+const CommentField = ({ comment, setComment, commentRegisterHandler, enterHandler }) => {
+  const keyDownHandler = event => {
+    if (event.keyCode === 13) {
+      commentRegisterHandler();
+    }
+  };
   const commentChangeHandler = event => {
     setComment(event.target.value);
   };
   return (
-    <div className="grid grid-cols-[1fr_80px] gap-3">
+    <div className="grid grid-cols-[1fr_80px] gap-3" onKeyDown={keyDownHandler}>
       <input
         type="text"
         className="border-green1 border-2 rounded-lg p-2 pl-5 text-black1 disabled:border-gray-200 disabled:bg-gray-200 placeholder:text-white disabled:placeholder:text-black1 disabled:cursor-not-allowed"
