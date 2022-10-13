@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
-import ReviewItem from "../../../components/mainpage/ReviewItem";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -18,6 +17,7 @@ import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import RestaurantDetailBookmark from "./RestaurantDetailBookmark";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
+import Comments from "../../../components/mainpage/Comments";
 
 const RestaurantDetailPage = () => {
   const navigate = useNavigate();
@@ -37,6 +37,23 @@ const RestaurantDetailPage = () => {
   };
   const backdropClickHandler = () => {
     setIsMapModalOpen(false);
+  };
+  const refetchComments = () => {
+    refetch();
+  };
+  const commentDeleteHandler = id => {
+    if (!checkIsLoggedIn()) {
+      alert("로그인 후에 삭제가 가능합니다.");
+    } else {
+      api
+        .delete(`/auth/restaurant/review/${id}`)
+        .then(response => {
+          refetch();
+        })
+        .catch(error => {
+          alert(error);
+        });
+    }
   };
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
@@ -161,18 +178,13 @@ const RestaurantDetailPage = () => {
             )}
           </div>
         </div>
-        <div>
-          <div className="p-[32px] bg-white1 rounded-lg">
-            <div className="mb-[24px]">
-              <h3 className="text-[26px]">리뷰</h3>
-            </div>
-            <div className="grid gap-[44px]">
-              {reviews.map(review => {
-                return <ReviewItem key={review.id} data={review} />;
-              })}
-            </div>
-          </div>
-        </div>
+        <Comments
+          category={"restaurant"}
+          id={restaurantID}
+          refetchComments={refetchComments}
+          comments={reviews}
+          commentDeleteHandler={commentDeleteHandler}
+        />
         {isMapModalOpen && (
           <div>
             <div className="fixed top-0 left-0 z-10 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
