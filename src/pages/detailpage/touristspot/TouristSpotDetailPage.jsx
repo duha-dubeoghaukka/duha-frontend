@@ -39,6 +39,9 @@ const TouristSpotDetailPage = () => {
   const backdropClickHandler = () => {
     setIsMapModalOpen(false);
   };
+  const refetchComments = () => {
+    refetch();
+  };
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
@@ -169,7 +172,7 @@ const TouristSpotDetailPage = () => {
             </div>
           </div>
         </div>
-        <Comments category={"touristspot"} id={spotID} />
+        <Comments category={"touristspot"} id={spotID} refetchComments={refetchComments} />
         <div>
           <div className="bg-white1 rounded-md px-5 md:px-10 py-3 md:py-5">
             <p className="text-base md:text-lg font-semibold">리뷰</p>

@@ -4,9 +4,10 @@ import { useState } from "react";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { api } from "../../api/api";
 
-const Comments = ({ category, id }) => {
+const Comments = ({ category, id, refetchComments }) => {
   const [comment, setComment] = useState("");
   const commentRegisterHandler = () => {
+    setComment("");
     const whitespaceRegex = new RegExp(/^\s*$/);
     const isOnlyWhitespace = whitespaceRegex.test(comment);
     const isEmpty = comment.length === 0;
@@ -16,7 +17,7 @@ const Comments = ({ category, id }) => {
           review: comment
         })
         .then(response => {
-          console.dir(response);
+          refetchComments();
         })
         .catch(error => {
           alert(error);
