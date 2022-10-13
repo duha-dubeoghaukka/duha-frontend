@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 import { useContext, useEffect } from "react";
 import GlobalState from "../../shared/GlobalState";
 import { useQuery } from "react-query";
-import { instance } from "../../api/api";
+import { api } from "../../api/api";
 import { removeDuplicates } from "../../utils/removeDuplicates";
 import { filterItems } from "../../utils/filterItems";
 import { arraySplitter } from "../../utils/arraySplitter";
@@ -16,7 +16,7 @@ import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined
 const AddSpot = () => {
   const { tripId, day, currentCourseId } = useParams();
   const { isLoading, error, data } = useQuery(["touristSpots"], () => {
-    return instance.get("/touristspot");
+    return api.get("/touristspot");
   });
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
