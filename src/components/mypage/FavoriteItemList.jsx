@@ -49,7 +49,7 @@ function FavoriteItemList() {
   }, []);
 
   return (
-    <div className="h-screen">
+    <div className="h-full">
       {isData ? (
         data.map((item, index) => {
           return <Card key={index} title={item.title} route={item.route} />;
