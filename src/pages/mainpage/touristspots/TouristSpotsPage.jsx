@@ -28,10 +28,12 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
   const { regionSelection, spotPageSelection } = useContext(GlobalState);
   const { selectedRegion, setSelectedRegion } = regionSelection;
   const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
+
   const selectChangeHandler = event => {
     setSelectedRegion(event.target.value);
     setCurrentSpotPage(1);
   };
+
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
@@ -45,15 +47,18 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     );
     setSelectedAutoComplete(() => 0);
   };
+
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
     setSelectedAutoComplete(() => 0);
     setSearchResults([]);
   };
+
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
   };
+
   const keyPressHandler = event => {
     const length = searchResults.length;
     if (length > 0) {
@@ -74,6 +79,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
       }
     }
   };
+
   useEffect(() => {
     setSearchResults(previousSearchResults => {
       return previousSearchResults.map((result, index) => {
@@ -86,15 +92,18 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
       });
     });
   }, [selectedAutoComplete]);
+
   useEffect(() => {
     setCurrentSpotPage(1);
     setSelectedRegion("전체");
   }, []);
+
   useEffect(() => {
     setSearchMode(false);
     setAutoCompletedInput("");
     refetch();
   }, [regionSelection, currentSpotPage]);
+
   if (isLoading || isFetching || status === "loading") {
     return <Spinner />;
   }

@@ -1,11 +1,12 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
+import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 
 const AddCourseItem = ({ data, category }) => {
   const { tripId, currentCourseId, day } = useParams();
   const navigate = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl } = data;
+  const { id, name, description, region, likeNum, thumbnailUrl, hasNearStation } = data;
 
   const itemClickHandler = async () => {
     try {
@@ -28,21 +29,34 @@ const AddCourseItem = ({ data, category }) => {
   return (
     <div
       onClick={itemClickHandler}
-      className="p-[15px] group bg-white1 md:p-[20px] rounded-xl mb-[32px] shadow-md cursor-pointer flex justify-between items-start hover:brightness-95 transition-all"
+      className="p-2 md:p-4 group bg-white1 rounded-md mb-4 shadow-md cursor-pointer flex justify-start items-start hover:brightness-95 transition-all"
     >
+      <div className="w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative mr-2">
+        <img loading="lazy" className="w-full h-full object-cover object-center rounded-md" src={thumbnailUrl} alt={name} />
+      </div>
       <div className="group-hover:brightness-95">
-        <div className="mb-[4px] flex flex-col items-start">
-          <p className="font-bold text-[14px] md:text-[16px]">{name}</p>
-          <p className="text-[12px]">{region}</p>
-          <p className="text-[12px]">{description}</p>
+        <div className="mb-1 flex items-center justify-start">
+          <p className="font-bold text-sm md:text-lg">{name}</p>
+          {hasNearStation && (
+            <DirectionsBusFilledOutlinedIcon
+              fontSize="medium"
+              sx={{
+                color: "rgb(116, 175, 115)"
+              }}
+              className=""
+            />
+          )}
+        </div>
+        <div className="hidden md:block">
+          <p className="text-xs">{region}</p>
+        </div>
+        <div className="mb-2">
+          <p className="text-xs">{description}</p>
         </div>
         <div className="flex items-center">
           <FavoriteRoundedIcon sx={{ color: "red" }} className="mr-[3px]" />
-          <p className="text-[12px]">{likeNum}</p>
+          <p className="text-xs">{likeNum}</p>
         </div>
-      </div>
-      <div className="ml-3 w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative">
-        <img loading="lazy" className="w-full h-full object-cover object-center rounded-xl" src={thumbnailUrl} alt={name} />
       </div>
     </div>
   );

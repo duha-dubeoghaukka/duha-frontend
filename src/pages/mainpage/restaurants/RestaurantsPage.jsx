@@ -86,15 +86,18 @@ const RestaurantsPage = () => {
       });
     });
   }, [selectedAutoComplete]);
+
   useEffect(() => {
     setCurrentRestaurantPage(1);
     setSelectedRegion("전체");
   }, []);
+
   useEffect(() => {
     setSearchMode(false);
     setAutoCompletedInput("");
     refetch();
   }, [regionSelection, currentRestaurantPage]);
+
   if (isLoading || isFetching || status === "loading") {
     return <Spinner />;
   }
