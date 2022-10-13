@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
-import ReviewItem from "../ReviewItem";
+import ReviewItem from "../../../components/mainpage/ReviewItem";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -18,6 +18,7 @@ import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
+import Comments from "../../../components/mainpage/Comments";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
@@ -37,6 +38,23 @@ const TouristSpotDetailPage = () => {
   };
   const backdropClickHandler = () => {
     setIsMapModalOpen(false);
+  };
+  const refetchComments = () => {
+    refetch();
+  };
+  const commentDeleteHandler = id => {
+    if (!checkIsLoggedIn()) {
+      alert("로그인 후에 삭제가 가능합니다.");
+    } else {
+      api
+        .delete(`/auth/touristspot/review/${id}`)
+        .then(response => {
+          refetch();
+        })
+        .catch(error => {
+          alert(error);
+        });
+    }
   };
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
@@ -168,12 +186,13 @@ const TouristSpotDetailPage = () => {
             </div>
           </div>
         </div>
-        <div>
+        <Comments category={"touristspot"} id={spotID} refetchComments={refetchComments} />
+        <div className="mt-3">
           <div className="bg-white1 rounded-md px-5 md:px-10 py-3 md:py-5">
             <p className="text-base md:text-lg font-semibold">리뷰</p>
             <div className="grid gap-[44px]">
               {reviews.map(review => {
-                return <ReviewItem key={review.id} data={review} />;
+                return <ReviewItem key={review.id} data={review} commentDeleteHandler={commentDeleteHandler} />;
               })}
             </div>
           </div>

@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
-import ReviewItem from "../ReviewItem";
+import ReviewItem from "../../../components/mainpage/ReviewItem";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../../../components/Spinner/Spinner";
