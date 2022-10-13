@@ -12,7 +12,7 @@ function CertificationModal({ modalHandler, category }) {
           <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
             <div className="mt-2 ">
               <CloseOutlinedIcon className="cursor-pointer" onClick={() => modalHandler()} />
-              <div className="mt-1 text-center">{category === "회원탈퇴" ? <InputPassword /> : <InputEmail />}</div>
+              <div className="mt-1 text-center">{category === "회원탈퇴" ? <InputPassword /> : <InputEmail category={category} />}</div>
             </div>
           </div>
         </div>

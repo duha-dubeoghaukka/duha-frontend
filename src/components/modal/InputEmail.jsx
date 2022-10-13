@@ -1,24 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { userInfoAPIs } from "../../api/api";
 import useInput from "../../hooks/useInput";
 
-function InputEmail() {
+function InputEmail({ category }) {
+  console.log("category", category);
   const [email, setEmail, onChangeEmail] = useInput();
+  useEffect(() => {}, [category]);
 
   const onEmailLink = () => {
     let data = {
       email
     };
-    userInfoAPIs
-      .emailLink(data)
-      .then(res => {
-        if (res.data.isSuccess) {
-          alert("회원가입 링크가 해당 이메일로 전송되었습니다.");
-        } else {
-          alert(res.data.message);
-        }
-      })
-      .catch(err => console.log("err", err.response));
+    if (category === "email") {
+      userInfoAPIs
+        .emailLink(data)
+        .then(res => {
+          if (res.data.isSuccess) {
+            alert("회원가입 링크가 해당 이메일로 전송되었습니다.");
+          } else {
+            alert(res.data.message);
+          }
+        })
+        .catch(err => console.log("err", err.response));
+    } else if (category === "findPassword") {
+      userInfoAPIs
+        .findPassword(data)
+        .then(res => {
+          if (res.data.isSuccess) {
+            alert("비밀번호 재설정 링크가 해당 이메일로 전송되었습니다.");
+          } else {
+            alert(res.data.message);
+          }
+        })
+        .catch(err => console.log("err", err.response));
+    }
   };
   return (
     <>
