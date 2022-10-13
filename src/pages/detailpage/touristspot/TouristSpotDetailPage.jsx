@@ -18,6 +18,7 @@ import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
+import Comments from "../../../components/mainpage/Comments";
 
 const TouristSpotDetailPage = () => {
   const navigate = useNavigate();
@@ -168,6 +169,7 @@ const TouristSpotDetailPage = () => {
             </div>
           </div>
         </div>
+        <Comments category={"touristSpot"} />
         <div>
           <div className="bg-white1 rounded-md px-5 md:px-10 py-3 md:py-5">
             <p className="text-base md:text-lg font-semibold">리뷰</p>
