@@ -32,20 +32,16 @@ function MainPage() {
   return (
     <Layout isLoggedIn={false} title="메인 페이지" highlight={"mainpage/home"}>
       <div className="h-full">
-        <div className="flex justify-center flex-row mt-10 mb-5">
-          {temperature ? (
-            <>
-              <span className="m-3 font-medium text-lg text-black2">현재 제주 날씨는</span>
-              <div>{selectIcon}</div>
-              <span className="m-3 font-medium text-lg text-black2">{currentTemperature}°C</span>
-            </>
-          ) : (
-            <Spinner />
-          )}
-        </div>
-        <div className="flex justify-center">
-          <HomeCard />
-        </div>
+        {temperature ? (
+          <div className="flex justify-center items-center mt-3 md:mt-5 font-semibold md:text-lg text-black2">
+            <span>현재 제주 날씨는</span>
+            <div>{selectIcon}</div>
+            <span>{currentTemperature}°C</span>
+          </div>
+        ) : (
+          <Spinner />
+        )}
+        <HomeCard />
       </div>
     </Layout>
   );
