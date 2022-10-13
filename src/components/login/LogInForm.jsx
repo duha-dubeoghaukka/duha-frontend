@@ -140,9 +140,9 @@ const LogInForm = () => {
             resetPasswordModalHandler();
           }}
         >
-          비밀번호 재설정
+          비밀번호 찾기
         </button>
-        <ShowEmailModal show={isResetPasswordModal} modalHandler={resetPasswordModalHandler} category={"resetPassword"} />
+        <ShowEmailModal show={isResetPasswordModal} modalHandler={resetPasswordModalHandler} category={"findPassword"} />
       </div>
     </div>
   );
