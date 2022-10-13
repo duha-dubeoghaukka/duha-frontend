@@ -5,7 +5,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import useChange from "../../hooks/useChange";
 import { shareKakao } from "../../utils/shareKakaoLink";
 
-function Modal({ modalHandler, route, title }) {
+function LinkModal({ modalHandler, route, title }) {
   const [isCopied, changeCopied] = useChange();
 
   useEffect(() => {
@@ -46,4 +46,4 @@ function Modal({ modalHandler, route, title }) {
   );
 }
 
-export default Modal;
+export default LinkModal;

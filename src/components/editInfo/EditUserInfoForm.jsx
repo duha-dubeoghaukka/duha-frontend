@@ -2,10 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
 import decodeToken from "../../utils/decodeToken";
 import { userInfoAPIs } from "../../api/api";
+import useChange from "../../hooks/useChange";
+import ShowEmailModal from "../modal/ShowEmailModal";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
   const userNickName = decodeToken(token);
+
+  const [isModal, modalHandler] = useChange();
 
   const [nickName, setNickName, onChangeNickName] = useInput();
   const [currentPassword, setCurrentPassword] = useState();
@@ -102,14 +106,14 @@ function EditUserInfoForm() {
   }, []);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full md:w-[600px] mx-auto">
       <div className="flex flex-col">
         <p className="mt-10 mx-auto text-xl text-black2 font-medium">회원 정보 변경</p>
-        <img className="w-56 mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
-        <div className="w-[345px] md:w-[500px] mx-auto">
-          <input className="input m-3" placeholder="닉네임" name="nickname" value={nickName} onChange={onChangeNickName} />
+        <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
+        <div className="relative w-full md:w-[500px] mx-auto">
+          <input className="input mt-2" placeholder="닉네임" name="nickname" value={nickName} onChange={onChangeNickName} />
           <input
-            className="input m-3"
+            className="input mt-2"
             placeholder="기존 비밀번호"
             name="currentpassword"
             value={currentPassword || ""}
@@ -117,7 +121,7 @@ function EditUserInfoForm() {
             type="password"
           />
           <input
-            className="input m-3"
+            className="input mt-2"
             placeholder="새 비밀번호"
             name="newpassword"
             value={newPassword || ""}
@@ -126,7 +130,7 @@ function EditUserInfoForm() {
           />
           <p className="input-helper ml-4">{isNewPasswrord ? passwordMessage : passwordMessage}</p>
           <input
-            className="input m-3"
+            className="input mt-2"
             placeholder="비밀번호 확인"
             name="checkpassword"
             value={checkPassword || ""}
@@ -135,12 +139,13 @@ function EditUserInfoForm() {
           />
           <p className="input-helper ml-4">{isCheckPassword ? checkPasswordMessage : checkPasswordMessage}</p>
           <div className="ml-3 mt-3">
-            <button className="btn-primary mb-3" onClick={() => onSubmit()}>
+            <button className="btn-primary mt-3 mb-3" onClick={() => onSubmit()}>
               <p>변경 완료</p>
             </button>
-            <button className="btn-white">
+            <button className="btn-white" onClick={() => modalHandler()}>
               <p>회원탈퇴</p>
             </button>
+            <ShowEmailModal show={isModal} modalHandler={modalHandler} category={"회원탈퇴"} />
           </div>
         </div>
       </div>

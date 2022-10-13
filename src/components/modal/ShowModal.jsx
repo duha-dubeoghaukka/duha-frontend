@@ -1,8 +1,8 @@
 import React from "react";
-import Modal from "./Modal";
+import LinkModal from "./LinkModal";
 
 function ShowModal({ show, modalHandler, route, title }) {
-  return <>{show ? <Modal modalHandler={modalHandler} route={route} title={title} /> : null}</>;
+  return <>{show ? <LinkModal modalHandler={modalHandler} route={route} title={title} /> : null}</>;
 }
 
 export default ShowModal;
