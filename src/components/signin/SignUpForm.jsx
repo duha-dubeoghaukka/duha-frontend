@@ -1,13 +1,14 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { api } from "../../api/api";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { api, userInfoAPIs } from "../../api/api";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { getCode } from "../../utils/getCode";
 
 const SignupSchema = yup.object().shape({
-  email: yup.string().email("이메일 형식으로 입력해주세요").required("이메일은 필수값입니다"),
+  // email: yup.string().email("이메일 형식으로 입력해주세요").required("이메일은 필수값입니다"),
   nickname: yup.string().min(2, "2글자 이상으로 입력해주세요").required("닉네임은 필수값입니다"),
   password: yup
     .string()
@@ -21,6 +22,23 @@ const SignupSchema = yup.object().shape({
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const code = getCode();
+  const [email, setEmail] = useState();
+
+  useEffect(() => {
+    userInfoAPIs
+      .getUserEmail(code)
+      .then(res => {
+        if (res.data.isSuccess) {
+          const email = res.data.data.email;
+          setEmail(email);
+        } else {
+          alert(res.data.message);
+        }
+      })
+      .catch(err => console.log("err", err.response));
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -31,16 +49,17 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async singupInfo => {
-    try {
-      const { data } = await api.post("/member/emailcheck", {
-        email: singupInfo.email
-      });
-      if (!data.isSuccess) {
-        return alert(data.message);
-      }
-    } catch (error) {
-      throw new Error(error);
-    }
+    // 이메일 인증 절차를 거쳤기 때문에 중복 확인 주석처리
+    // try {
+    //   const { data } = await api.post("/member/emailcheck", {
+    //     email: singupInfo.email
+    //   });
+    //   if (!data.isSuccess) {
+    //     return alert(data.message);
+    //   }
+    // } catch (error) {
+    //   throw new Error(error);
+    // }
 
     try {
       const { data } = await api.post("/member/nicknamecheck", {
@@ -55,7 +74,7 @@ const SignUpForm = () => {
 
     try {
       const { data } = await api.post("/member/signup", {
-        email: singupInfo.email,
+        email: email,
         nickname: singupInfo.nickname,
         password: singupInfo.password
       });
@@ -74,7 +93,7 @@ const SignUpForm = () => {
       <form className="flex flex-col my-10" onSubmit={handleSubmit(onSubmit)}>
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" alt={"Logo"} />
         <div className="relative w-full md:w-[500px] mx-auto">
-          <input type="text" placeholder="이메일" className="input mt-2" {...register("email")} />
+          <input type="text" className="input mt-2 disabled:bg-transparent" name="email" value={email || ""} disabled />
           {/* <button
             className="absolute top-6 right-4 font-semibold text-green1 disabled:opacity-50"
             onClick={handleEmailDuplicateCheck}
