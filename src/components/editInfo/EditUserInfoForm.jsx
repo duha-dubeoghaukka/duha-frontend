@@ -2,10 +2,14 @@ import React, { useCallback, useEffect, useState } from "react";
 import useInput from "../../hooks/useInput";
 import decodeToken from "../../utils/decodeToken";
 import { userInfoAPIs } from "../../api/api";
+import useChange from "../../hooks/useChange";
+import ShowEmailModal from "../modal/ShowEmailModal";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
   const userNickName = decodeToken(token);
+
+  const [isModal, modalHandler] = useChange();
 
   const [nickName, setNickName, onChangeNickName] = useInput();
   const [currentPassword, setCurrentPassword] = useState();
@@ -138,9 +142,10 @@ function EditUserInfoForm() {
             <button className="btn-primary mt-3 mb-3" onClick={() => onSubmit()}>
               <p>변경 완료</p>
             </button>
-            <button className="btn-white">
+            <button className="btn-white" onClick={() => modalHandler()}>
               <p>회원탈퇴</p>
             </button>
+            <ShowEmailModal show={isModal} modalHandler={modalHandler} category={"회원탈퇴"} />
           </div>
         </div>
       </div>
