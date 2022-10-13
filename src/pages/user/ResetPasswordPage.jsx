@@ -1,13 +1,13 @@
 import React from "react";
+import ResetPasswordForm from "../../components/form/ResetPasswordForm";
 import Layout from "../../components/layout/Layout";
-import EditUserInfoForm from "../../components/form/EditUserInfoForm";
 
-function EditUserInfoPage() {
+function ResetPasswordPage() {
   return (
     <Layout title="마이페이지" highlight={"mypage/edit"}>
-      <EditUserInfoForm />
+      <ResetPasswordForm />
     </Layout>
   );
 }
 
-export default EditUserInfoPage;
+export default ResetPasswordPage;
