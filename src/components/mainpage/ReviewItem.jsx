@@ -1,8 +1,11 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const ReviewItem = ({ data }) => {
-  const { review, reviewer } = data;
+const ReviewItem = ({ data, commentDeleteHandler }) => {
+  const { review, reviewer, id } = data;
+  const deleteClickHandler = () => {
+    commentDeleteHandler(id);
+  };
   return (
     <div className="flex justify-between">
       <div>
@@ -19,7 +22,7 @@ const ReviewItem = ({ data }) => {
         </div>
       </div>
       <div>
-        <div className="cursor-pointer">
+        <div className="cursor-pointer" onClick={deleteClickHandler}>
           <DeleteIcon fontSize="large" />
         </div>
       </div>

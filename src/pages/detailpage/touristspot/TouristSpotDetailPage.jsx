@@ -42,6 +42,20 @@ const TouristSpotDetailPage = () => {
   const refetchComments = () => {
     refetch();
   };
+  const commentDeleteHandler = id => {
+    if (!checkIsLoggedIn()) {
+      alert("로그인 후에 삭제가 가능합니다.");
+    } else {
+      api
+        .delete(`/auth/touristspot/review/${id}`)
+        .then(response => {
+          refetch();
+        })
+        .catch(error => {
+          alert(error);
+        });
+    }
+  };
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
@@ -178,7 +192,7 @@ const TouristSpotDetailPage = () => {
             <p className="text-base md:text-lg font-semibold">리뷰</p>
             <div className="grid gap-[44px]">
               {reviews.map(review => {
-                return <ReviewItem key={review.id} data={review} />;
+                return <ReviewItem key={review.id} data={review} commentDeleteHandler={commentDeleteHandler} />;
               })}
             </div>
           </div>
