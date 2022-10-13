@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
-import ReviewItem from "../ReviewItem";
+import ReviewItem from "../../../components/mainpage/ReviewItem";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -173,7 +173,7 @@ const TouristSpotDetailPage = () => {
           </div>
         </div>
         <Comments category={"touristspot"} id={spotID} refetchComments={refetchComments} />
-        <div>
+        <div className="mt-3">
           <div className="bg-white1 rounded-md px-5 md:px-10 py-3 md:py-5">
             <p className="text-base md:text-lg font-semibold">리뷰</p>
             <div className="grid gap-[44px]">
