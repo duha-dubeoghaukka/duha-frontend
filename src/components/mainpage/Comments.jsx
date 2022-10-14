@@ -27,7 +27,7 @@ const Comments = ({ category, id, refetchComments, comments, commentDeleteHandle
   return (
     <div>
       <CommentField comment={comment} setComment={setComment} commentRegisterHandler={commentRegisterHandler} />
-      <CommentList comments={comments} commentDeleteHandler={commentDeleteHandler} />
+      <CommentList comments={comments} commentDeleteHandler={commentDeleteHandler} category={category} refetchComments={refetchComments} />
     </div>
   );
 };
