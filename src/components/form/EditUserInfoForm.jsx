@@ -4,10 +4,13 @@ import decodeToken from "../../utils/decodeToken";
 import { userInfoAPIs } from "../../api/api";
 import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
+import { routingLoginPage } from "../../utils/routingLoginPage";
+import { useNavigate } from "react-router-dom";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
   const userNickName = decodeToken(token);
+  const navigate = useNavigate();
 
   const [isModal, modalHandler] = useChange();
 
@@ -24,6 +27,10 @@ function EditUserInfoForm() {
   //message
   const [passwordMessage, setPasswordMessage] = useState();
   const [checkPasswordMessage, setCheckPasswordMessage] = useState();
+
+  useEffect(() => {
+    routingLoginPage(navigate);
+  }, []);
 
   const onChangeCurrentPassword = e => {
     const currentPasswordValue = e.target.value;
