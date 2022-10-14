@@ -5,6 +5,8 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuIcon from "@mui/icons-material/Menu";
 import decodeToken from "../../utils/decodeToken";
+import useChange from "../../hooks/useChange";
+import ShowEmailModal from "../modal/ShowEmailModal";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +14,7 @@ const Layout = props => {
   const [greaterCategory, category] = highlight.split("/");
 
   const navigate = useNavigate();
+  const [isSignupModal, signupModalHandler] = useChange();
 
   // 로컬스토리지 토큰 확인
   const token = localStorage.getItem("authorization");
@@ -44,11 +47,12 @@ const Layout = props => {
           <button
             className="font-semibold text-sm md:text-base text-white1 mx-4"
             onClick={() => {
-              navigate("/signup");
+              signupModalHandler();
             }}
           >
             {!token && "회원가입"}
           </button>
+          <ShowEmailModal show={isSignupModal} modalHandler={signupModalHandler} category={"email"} />
         </div>
       </div>
       {isOpen && (
