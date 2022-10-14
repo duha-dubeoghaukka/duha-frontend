@@ -61,16 +61,16 @@ const SignUpForm = () => {
     //   throw new Error(error);
     // }
 
-    try {
-      const { data } = await api.post("/member/nicknamecheck", {
-        nickname: singupInfo.nickname
-      });
-      if (!data.isSuccess) {
-        return alert(data.message);
-      }
-    } catch (error) {
-      throw new Error(error);
-    }
+    // try {
+    //   const { data } = await api.post("/member/nicknamecheck", {
+    //     nickname: singupInfo.nickname
+    //   });
+    //   if (!data.isSuccess) {
+    //     return alert(data.message);
+    //   }
+    // } catch (error) {
+    //   throw new Error(error);
+    // }
 
     try {
       const { data } = await api.post("/member/signup", {
