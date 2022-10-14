@@ -51,6 +51,11 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
     setIsEditMode(false);
     setEditedComment(review);
   };
+  const keyDownHandler = event => {
+    if (event.keyCode === 13) {
+      editHandler();
+    }
+  };
   return (
     <div>
       <div className="flex justify-between">
@@ -82,7 +87,7 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
       </div>
       {isEditMode && (
         <div>
-          <div className="grid grid-cols-[1fr_80px_80px] gap-2">
+          <div className="grid grid-cols-[1fr_80px_80px] gap-2" onKeyDown={keyDownHandler}>
             <input
               type="text"
               className="p-2 px-5 border-green1 border-2 rounded-lg text-black1"
