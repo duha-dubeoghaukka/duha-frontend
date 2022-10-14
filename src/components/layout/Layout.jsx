@@ -4,6 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import decodeToken from "../../utils/decodeToken";
 import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
@@ -36,6 +37,10 @@ const Layout = props => {
         <button className="mx-2 text-white1 hidden md:block" onClick={() => setIsOpen(!isOpen)}>
           <MenuIcon />
         </button>
+        <div className="md:hidden mx-4 cursor-pointer flex" onClick={() => navigate(-1)}>
+          <ChevronLeftIcon sx={{ color: "#FFF" }} />
+          <p className="text-white1 font-bold ml-2">뒤로 가기</p>
+        </div>
         <p className="font-semibold text-sm md:text-base text-white1 md:hidden mx-4">
           {nickName ? `반가워요, ${nickName}뚜벅러님!` : `반가워요, 익명의 뚜벅러님!`}
         </p>
