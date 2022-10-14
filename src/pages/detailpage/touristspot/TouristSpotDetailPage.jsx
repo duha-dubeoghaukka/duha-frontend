@@ -88,7 +88,7 @@ const TouristSpotDetailPage = () => {
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="md:hidden flex justify-between items-center">
           <div className="flex items-center">
-            <p className="font-bold text-sm md:text-xl">{name}</p>
+            <p className="font-bold text-sm md:text-xl">📷 {name}</p>
           </div>
           <div className="flex items-center">
             <FavoriteRoundedIcon sx={{ color: "red" }} />
@@ -97,7 +97,7 @@ const TouristSpotDetailPage = () => {
           </div>
         </div>
         <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
-          <p className="font-bold text-base md:text-xl">{name}</p>
+          <p className="font-bold text-base md:text-xl">📷 {name}</p>
           <div className="flex items-center">
             <FavoriteRoundedIcon sx={{ color: "red" }} />
             <p className="ml-0.5">{likeNum}</p>

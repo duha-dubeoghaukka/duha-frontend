@@ -88,7 +88,7 @@ const AccommodationDetailPage = () => {
       <Layout isLoggedIn={false} title="숙소 상세" highlight="mainpage/accommodations">
         <div className="md:hidden flex justify-between items-center">
           <div className="flex items-center">
-            <p className="font-bold text-sm md:text-xl">{name}</p>
+            <p className="font-bold text-sm md:text-xl">🛏 {name}</p>
           </div>
           <div className="flex items-center">
             <FavoriteRoundedIcon sx={{ color: "red" }} />
@@ -97,7 +97,7 @@ const AccommodationDetailPage = () => {
           </div>
         </div>
         <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
-          <p className="font-bold text-base md:text-xl">{name}</p>
+          <p className="font-bold text-base md:text-xl">🛏 {name}</p>
           <div className="flex items-center">
             <FavoriteRoundedIcon sx={{ color: "red" }} />
             <p className="ml-0.5">{likeNum}</p>
