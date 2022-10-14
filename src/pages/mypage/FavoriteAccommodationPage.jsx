@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
-import CategoryItem from "../../components/mypage/CategoryItem";
 import Spinner from "../../components/Spinner/Spinner";
 import decodeToken from "../../utils/decodeToken";
+import Item from "../../components/mainpage/Item";
 
 function FavoriteAccommodationPage() {
   const [accommodationData, setAccommodationData] = useState();
   const navigate = useNavigate();
   const token = localStorage.getItem("authorization");
   const nickName = decodeToken(token);
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     mypageAPIs
@@ -33,7 +34,7 @@ function FavoriteAccommodationPage() {
       </div>
       {accommodationData ? (
         accommodationData?.map(item => {
-          return <CategoryItem key={item.id} item={item} category={`accommodations`} />;
+          return <Item key={item.id} data={item} counter={counter} setCounter={setCounter} category={`accommodation`} />;
         })
       ) : (
         <Spinner />
