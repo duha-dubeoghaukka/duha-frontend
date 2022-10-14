@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { userInfoAPIs } from "../../api/api";
 import { getCode } from "../../utils/getCode";
 
@@ -15,17 +16,9 @@ function ResetPasswordForm() {
   const [checkPasswordMessage, setCheckPasswordMessage] = useState();
 
   const code = getCode();
+  const navigation = useNavigate();
 
-  useEffect(() => {
-    // userInfoAPIs
-    //   .getUserEmail({ data: "password", code: code })
-    //   .then(res => {
-    //     if (!res.data.isSuccess) {
-    //       alert(res.data.message);
-    //     }
-    //   })
-    //   .catch(err => console.log("err", err.response));
-  }, []);
+  useEffect(() => {}, []);
 
   const onChangeNewPassword = useCallback(e => {
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
@@ -53,9 +46,32 @@ function ResetPasswordForm() {
     }
   };
 
-  const onSubmit = () => {};
-
-  useEffect(() => {}, []);
+  const onSubmit = () => {
+    // 비밀번호 & 비밀번호 확인을 다 입력한 경우 -> 비밀번호와 비밀번호 확인이 같은지
+    // 비밀번호만 입력했을 경우
+    // 비밀번호 확인만 입력했을 경우
+    if (isNewPasswrord && isCheckPassword) {
+      let data = {
+        password: newPassword,
+        code
+      };
+      userInfoAPIs
+        .resetPassword(data)
+        .then(res => {
+          if (res.data.isSuccess) {
+            alert("비밀번호 재설정이 완료되었습니다.");
+            navigation(-1);
+          } else {
+            alert(res.data.message);
+          }
+        })
+        .catch(err => console.log("err", err.response));
+    } else if (isNewPasswrord && !isCheckPassword) {
+      alert("비밀번호를 확인하세요");
+    } else if (!isNewPasswrord) {
+      alert("새로운 비밀번호를 입력하세요");
+    }
+  };
 
   return (
     <div className="w-full md:w-[600px] mx-auto">
