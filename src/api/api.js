@@ -75,6 +75,9 @@ export const userInfoAPIs = {
   },
   getUserEmail: data => {
     return api.get(`/member/email?code=${data}`);
+  },
+  resetPassword: data => {
+    return api.post(`/member/resetPassword`, data);
   }
 };
 
