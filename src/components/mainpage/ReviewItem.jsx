@@ -49,6 +49,7 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
   };
   const cancelEditHandler = () => {
     setIsEditMode(false);
+    setEditedComment(review);
   };
   return (
     <div>
@@ -86,6 +87,7 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
               type="text"
               className="p-2 px-5 border-green1 border-2 rounded-lg text-black1"
               value={editedComment}
+              placeholder="댓글을 수정하세요"
               onChange={editedCommentChangeHandler}
             />
             <button className="bg-green1 rounded-lg text-white1 font-bold cursor-pointer hover:brightness-90" onClick={editHandler}>
