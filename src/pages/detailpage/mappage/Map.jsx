@@ -35,7 +35,7 @@ const Map = ({ address }) => {
   };
   return (
     <div className="relative">
-      <div id="map" className="w-[500px] h-[500px] rounded-lg">
+      <div id="map" className="w-[80vw] h-[80vw] md:w-[500px] md:h-[500px] rounded-lg">
         {validity || (
           <div className="w-full h-full bg-white1 rounded-lg p-5">
             <p className="text-black1 font-bold text-[26px] text-center">지도 정보가 존재하지 않습니다.</p>
