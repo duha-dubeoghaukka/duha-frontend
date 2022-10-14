@@ -108,7 +108,7 @@ const DayItem = () => {
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div>
         <div className="flex justify-center">
-          <div className="my-2 flex justify-start overflow-x-scroll pb-4">
+          <div className="my-2 flex justify-start overflow-x-scroll pb-4 pt-2">
             {courses.map(course => {
               return (
                 <div
@@ -118,7 +118,7 @@ const DayItem = () => {
                     onClickDay(course.day);
                   }}
                 >
-                  Day{course.day}
+                  <div className="border-b-2 pb-1 border-white hover:border-green1 transition ease-in-out">Day{course.day}</div>
                 </div>
               );
             })}

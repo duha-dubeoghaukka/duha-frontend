@@ -130,7 +130,7 @@ const Layout = props => {
         <Link to="/">
           <HomeIcon />
         </Link>
-        <Link to="/schedule">
+        <Link to="/scheduleinfo">
           <CalendarMonthIcon />
         </Link>
         <Link to="/mypage">

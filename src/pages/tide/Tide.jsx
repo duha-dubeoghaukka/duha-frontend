@@ -7,7 +7,7 @@ const Tide = () => {
   const [tide, setTide] = useState(null);
 
   return (
-    <Layout title="물 때 정보" highlight={"schedule/create"}>
+    <Layout title="물 때 정보" highlight={"mainpage/info"}>
       <Region tide={tide} setTide={setTide} />
       <WeeklyTide tide={tide} setTide={setTide} />
     </Layout>

@@ -19,7 +19,6 @@ const AddBookMarkSpot = () => {
         data: { data }
       } = await api.get(`/course/bookmark`);
       setMyCourse(data);
-      console.log(data);
     } catch (error) {
       throw new Error(error);
     }

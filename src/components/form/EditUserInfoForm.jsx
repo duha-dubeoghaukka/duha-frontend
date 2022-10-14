@@ -67,7 +67,6 @@ function EditUserInfoForm() {
   const onSubmit = () => {
     // 닉네임만 변경
     if (nickName && !isCurrentPassword) {
-      console.log("닉네임 변경");
       let data = {
         nickname: nickName
       };
@@ -94,12 +93,10 @@ function EditUserInfoForm() {
       userInfoAPIs
         .editUserInfo(data)
         .then(res => {
-          console.log("res", res.data);
           if (!res.data.isSuccess) {
             alert(res.data.message);
           } else {
             alert("회원 정보 수정이 완료되었습니다.");
-            console.log("res", res.headers.authorization);
             localStorage.removeItem("authorization");
             localStorage.setItem("authorization", res.headers.authorization);
           }
