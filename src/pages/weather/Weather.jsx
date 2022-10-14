@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import RegionButton from "../../components/weather/RegionButton";
 import coordinates from "../../utils/coordinates";
 import mapRegions from "../../utils/mapRegions";
-import WestIcon from "@mui/icons-material/West";
 import { useNavigate } from "react-router-dom";
 
 const Weather = () => {
@@ -43,15 +42,9 @@ const Weather = () => {
     const weatherCode = weatherData.weather[0].id;
     const windSpeed = weatherData.wind.speed;
     return (
-      <Layout isLoggedIn={false} title={"날씨"} highlight={"mainpage/weather"}>
+      <Layout isLoggedIn={false} title={"날씨"} highlight={"mainpage/weather"} isFullWidth={true}>
         <div className="relative h-[100vh]">
           <Backdrop code={weatherCode} />
-          <div className="absolute top-3 left-3 z-[5]">
-            <div className="flex items-center mb-3">
-              <WestIcon className="mr-3" onClick={() => navigate(-1)} />
-              <p className="text-[16px] text-black1">뒤로 가기</p>
-            </div>
-          </div>
           <div className="absolute top-12 w-full flex justify-around z-[5]">
             <RegionButton regionName="제주시" isActive={currentRegion === "jeju"} setCurrentRegion={setCurrentRegion} />
             <RegionButton regionName="성산포" isActive={currentRegion === "seongsanpo"} setCurrentRegion={setCurrentRegion} />

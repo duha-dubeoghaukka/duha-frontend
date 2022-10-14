@@ -11,7 +11,7 @@ import ShowEmailModal from "../modal/ShowEmailModal";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
-  const { children, title, highlight } = props;
+  const { children, title, highlight, isFullWidth = false } = props;
   const [greaterCategory, category] = highlight.split("/");
 
   const navigate = useNavigate();
@@ -142,7 +142,11 @@ const Layout = props => {
           <PersonIcon />
         </Link>
       </div>
-      <div className="w-full md:w-[600px] max-w-[600px] mx-auto pt-16 px-4 md:px-0 md:mb-10 mb-20">{children}</div>
+      {isFullWidth ? (
+        <div className="w-full md:w-[600px] mx-auto pt-16 md:px-0 md:mb-10">{children}</div>
+      ) : (
+        <div className="w-full md:w-[600px] max-w-[600px] mx-auto pt-16 px-4 md:px-0 md:mb-10 mb-20">{children}</div>
+      )}
     </div>
   );
 };
