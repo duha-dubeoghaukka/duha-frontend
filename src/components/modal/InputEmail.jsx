@@ -3,8 +3,8 @@ import { userInfoAPIs } from "../../api/api";
 import useInput from "../../hooks/useInput";
 
 function InputEmail({ category }) {
-  console.log("category", category);
   const [email, setEmail, onChangeEmail] = useInput();
+
   useEffect(() => {}, [category]);
 
   const onEmailLink = () => {
