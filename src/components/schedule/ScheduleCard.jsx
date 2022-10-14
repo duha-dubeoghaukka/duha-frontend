@@ -75,7 +75,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   }, [isModal]);
 
   return (
-    <div className="group register-card-layout">
+    <div className="register-card-layout">
       <div className="flex flex-col mt-2 ml-3 mb-2">
         <div
           className="h-20 w-72 bg-white1"
