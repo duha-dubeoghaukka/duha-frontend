@@ -60,45 +60,46 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
     <div>
       <div className="flex justify-between">
         <div>
-          <div className="flex items-center mb-[24px]">
-            <div className="mr-[16px]">
+          <div className="flex items-center mb-2 md:mb-4">
+            <div className="mr-2 md:mr-4">
               <AccountCircleIcon fontSize="large" />
             </div>
             <div>
-              <p className="text-[16px]">{reviewer}</p>
+              <p>{reviewer}</p>
             </div>
           </div>
           {isEditMode || (
-            <div>
-              <p className="text-[16px]">{review}</p>
+            <div className="bg-white shadow-md p-2 rounded-md">
+              <p className="text-sm md:text-base">{review}</p>
             </div>
           )}
         </div>
         {isAuthor && (
           <div className="flex">
             <div className="cursor-pointer" onClick={editClickHandler}>
-              <ModeEditOutlineOutlinedIcon fontSize="large" />
+              <ModeEditOutlineOutlinedIcon fontSize="medium" />
             </div>
             <div className="cursor-pointer" onClick={deleteClickHandler}>
-              <DeleteOutlineIcon fontSize="large" />
+              <DeleteOutlineIcon fontSize="medium" />
             </div>
           </div>
         )}
       </div>
       {isEditMode && (
         <div>
-          <div className="grid grid-cols-[1fr_80px_80px] gap-2" onKeyDown={keyDownHandler}>
+          <div className="grid grid-cols-6 gap-2" onKeyDown={keyDownHandler}>
             <input
               type="text"
-              className="p-2 px-5 border-green1 border-2 rounded-lg text-black1"
+              className="col-span-4 p-2 px-5 border-green1 border-2 rounded-md text-black1 focus:outline-none"
               value={editedComment}
               placeholder="댓글을 수정하세요"
               onChange={editedCommentChangeHandler}
+              autoFocus
             />
-            <button className="bg-green1 rounded-lg text-white1 font-bold cursor-pointer hover:brightness-90" onClick={editHandler}>
+            <button className="bg-green1 rounded-md text-white1 text-sm font-semibold hover:brightness-90" onClick={editHandler}>
               수정
             </button>
-            <button className="bg-red-400 rounded-lg text-white1 font-bold cursor-pointer hover:brightness-90" onClick={cancelEditHandler}>
+            <button className="bg-red-400 rounded-md text-white1 text-sm font-semibold hover:brightness-90" onClick={cancelEditHandler}>
               취소
             </button>
           </div>
