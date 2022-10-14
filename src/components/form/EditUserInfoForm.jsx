@@ -111,7 +111,7 @@ function EditUserInfoForm() {
         <p className="mt-10 mx-auto text-xl text-black2 font-medium">회원 정보 변경</p>
         <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
         <div className="relative w-full md:w-[500px] mx-auto">
-          <input className="input mt-2" placeholder="닉네임" name="nickname" value={nickName} onChange={onChangeNickName} />
+          <input className="input mt-2 font-bold" placeholder="닉네임" name="nickname" value={nickName} onChange={onChangeNickName} />
           <input
             className="input mt-2"
             placeholder="기존 비밀번호"
