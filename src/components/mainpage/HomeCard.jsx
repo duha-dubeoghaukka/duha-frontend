@@ -18,12 +18,8 @@ function HomeCard() {
       route: `/accommodations`
     },
     {
-      title: "날씨 더 알아보기",
-      route: "/weather"
-    },
-    {
-      title: "물 때 알아보기",
-      route: "/tide"
+      title: "정보",
+      route: "/info"
     }
   ];
 

@@ -31,6 +31,9 @@ import AddNearBySpot from "../pages/schedule/AddNearBySpot";
 import AddBookMarkSpot from "../pages/schedule/AddBookMarkSpot";
 import Tide from "../pages/tide/Tide";
 import ResetPasswordPage from "../pages/user/ResetPasswordPage";
+import Info from "../pages/menu/Info";
+import ScheduleInfo from "../pages/menu/ScheduleInfo";
+import MypageInfo from "../pages/menu/MypageInfo";
 
 const Router = () => {
   return (
@@ -67,6 +70,9 @@ const Router = () => {
         <Route path="/mypage/user/edit" element={<EditUserInfoPage />} />
         <Route path="/tide" element={<Tide />} />
         <Route path="/reset/password" element={<ResetPasswordPage />} />
+        <Route path="/info" element={<Info />} />
+        <Route path="/scheduleinfo" element={<ScheduleInfo />} />
+        <Route path="/mypage" element={<MypageInfo />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

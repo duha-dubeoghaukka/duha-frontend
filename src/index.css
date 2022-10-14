@@ -31,10 +31,16 @@
     @apply w-full md:w-fit md:mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex justify-between items-center cursor-pointer;
   }
   .card-layout {
-    @apply w-80 md:w-[385px] mx-auto h-28 bg-white1 rounded-md shadow-lg mt-5 flex items-center justify-between px-10 hover:bg-green1;
+    @apply w-full max-w-[385px] md:w-[385px] mx-auto h-28 bg-white1 rounded-md shadow-lg mt-5 flex items-center justify-between px-10 hover:brightness-95;
   }
   .share-card-layout {
     @apply w-80 md:w-[400px] mx-auto h-28 bg-white1 rounded-md shadow-lg flex flex-row hover:bg-green1 cursor-pointer;
+  }
+  .card {
+    @apply w-full max-w-[385px] md:w-[385px] mx-auto h-28 bg-white1 rounded-md shadow-lg mt-5 flex items-center justify-between px-10 hover:brightness-95;
+  }
+  .card-content {
+    @apply font-bold text-black2 text-sm md:text-lg
   }
 }
 

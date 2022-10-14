@@ -12,10 +12,10 @@ function FavoritesListPage() {
   }, []);
 
   return (
-    <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
+    <Layout isLoggedIn={false} title="즐겨찾기 목록" highlight={"mypage/favorites"}>
       <div className="h-full">
         <img className="w-[250px] mx-auto mt-10 mb-5" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} alt={"Logo"} />
-        <div className="flex justify-center">
+        <div>
           <FavoriteItemList />
         </div>
       </div>
