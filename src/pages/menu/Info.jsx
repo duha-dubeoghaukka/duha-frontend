@@ -14,7 +14,7 @@ const Info = () => {
         <div className="card-content">물 때 알아보기</div>
         <NavigateNextIcon />
       </Link>
-      <Link to="/" className="card">
+      <Link to="/information" className="card">
         <div className="card-content">뚜벅이를 위한 서비스</div>
         <NavigateNextIcon />
       </Link>
