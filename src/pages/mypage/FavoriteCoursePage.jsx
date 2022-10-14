@@ -2,12 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
-import CategoryItem from "../../components/mypage/CategoryItem";
-import { ShareCardComponent } from "../../components/schedule/ShareCard";
 import decodeToken from "../../utils/decodeToken";
-import { useQuery } from "react-query";
 import Spinner from "../../components/Spinner/Spinner";
-import { api } from "../../api/api";
 import TripItem from "../../components/mypage/TripItem";
 
 function FavoriteCoursePage() {
