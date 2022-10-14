@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import decodeToken from "../../utils/decodeToken";
@@ -25,10 +25,19 @@ function FavoriteCoursePage() {
   }, []);
 
   return (
-    <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
+    <Layout isLoggedIn={false} title="즐겨찾기 목록" highlight={"mypage/favorites"}>
       <div className="grid place-items-center mt-10 mb-10">
-        <span className="font-medium text-lg text-black2">
-          {tripData?.length ? `${nickName}님이 즐겨찾기한 일정입니다!` : `일정 즐겨찾기를 추가해보세요!`}
+        <span className="font-semibold md:text-lg text-black2">
+          {tripData?.length ? (
+            `${nickName}님이 즐겨찾기한 일정`
+          ) : (
+            <div className="flex flex-col items-center">
+              <div className="mb-6">즐겨찾기를 추가해보세요!</div>
+              <Link to="/schedule/share" className="animate-bounce bg-green1 text-white px-3 py-1 rounded-md text-base shadow-md">
+                일정 보러가기
+              </Link>
+            </div>
+          )}
         </span>
         <div className="h-screen">
           {tripData ? (

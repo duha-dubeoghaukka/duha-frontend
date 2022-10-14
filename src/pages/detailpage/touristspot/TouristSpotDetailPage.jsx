@@ -88,8 +88,7 @@ const TouristSpotDetailPage = () => {
       <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
         <div className="md:hidden flex justify-between items-center">
           <div className="flex items-center">
-            <WestIcon onClick={() => navigate(-1)} className="mr-1" />
-            <p className="font-bold text-sm md:text-xl">{name}</p>
+            <p className="font-bold text-sm md:text-xl">📷 {name}</p>
           </div>
           <div className="flex items-center">
             <FavoriteRoundedIcon sx={{ color: "red" }} />
@@ -98,7 +97,7 @@ const TouristSpotDetailPage = () => {
           </div>
         </div>
         <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
-          <p className="font-bold text-base md:text-xl">{name}</p>
+          <p className="font-bold text-base md:text-xl">📷 {name}</p>
           <div className="flex items-center">
             <FavoriteRoundedIcon sx={{ color: "red" }} />
             <p className="ml-0.5">{likeNum}</p>
@@ -129,12 +128,7 @@ const TouristSpotDetailPage = () => {
             })}
           </Swiper>
         </div>
-        {/* {description && (
-          <div className="mb-3">
-            <p className="text-black1">{description}</p>
-          </div>
-        )} */}
-        <div className="mb-[20px]">
+        <div className="mb-2 md:mb-4">
           <div className="px-5 md:px-10 py-3 md:py-5 border-green1 border-2 rounded-md flex flex-col items-start">
             <div className="w-full mb-1 md:mb-2">
               <div className="flex items-center justify-between">

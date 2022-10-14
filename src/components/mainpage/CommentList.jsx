@@ -12,7 +12,7 @@ const CommentList = ({ comments, commentDeleteHandler, category, refetchComments
               <p className="text-center text-black1">아직 댓글이 존재하지 않습니다.</p>
             </div>
           ) : (
-            <div className="grid gap-[44px]">
+            <div className="grid gap-4">
               {comments.map(comment => {
                 return (
                   <ReviewItem

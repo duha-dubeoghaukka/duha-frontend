@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { api } from "../../api/api";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 
 const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
@@ -47,8 +48,9 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
                       </div>
                     </div>
                     <div>
+                      <DragIndicatorIcon className="text-gray-700" />
                       <DeleteOutlineIcon
-                        className="cursor-pointer"
+                        className="cursor-pointer text-gray-700"
                         onClick={() => {
                           deleteCourse(course.detailId, course.category);
                         }}

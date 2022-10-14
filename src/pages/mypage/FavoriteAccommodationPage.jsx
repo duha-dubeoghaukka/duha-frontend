@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import Spinner from "../../components/Spinner/Spinner";
@@ -26,10 +26,19 @@ function FavoriteAccommodationPage() {
   }, []);
 
   return (
-    <Layout isLoggedIn={false} title="마이페이지" highlight={"mypage/favorites"}>
-      <div className="grid place-items-center mt-10 mb-10">
-        <span className="font-medium text-lg text-black2">
-          {accommodationData?.length ? `${nickName}님이 즐겨찾기한 숙소입니다!` : `숙소 즐겨찾기를 추가해보세요!`}
+    <Layout isLoggedIn={false} title="즐겨찾기 목록" highlight={"mypage/favorites"}>
+      <div className="grid place-items-center m-5 md:m-10">
+        <span className="font-semibold md:text-lg text-black2">
+          {accommodationData?.length ? (
+            `${nickName}님이 즐겨찾기한 숙소`
+          ) : (
+            <div className="flex flex-col items-center">
+              <div className="mb-6">즐겨찾기를 추가해보세요!</div>
+              <Link to="/accommodations" className="animate-bounce bg-green1 text-white px-3 py-1 rounded-md text-base shadow-md">
+                숙소 보러가기
+              </Link>
+            </div>
+          )}
         </span>
       </div>
       {accommodationData ? (

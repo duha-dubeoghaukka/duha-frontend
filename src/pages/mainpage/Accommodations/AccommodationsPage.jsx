@@ -192,28 +192,30 @@ const AccommodationsPage = () => {
                 );
               })}
             </div>
-            <div className="flex justify-start overflow-x-scroll pb-2">
-              {pages.map(page => {
-                if (page === currentAccommodationPage) {
-                  return (
-                    <div key={page} className="mr-1">
-                      <p className="font-medium">{page}</p>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div
-                      key={page}
-                      className="mr-1 cursor-pointer"
-                      onClick={() => {
-                        setCurrentAccommodationPage(page);
-                      }}
-                    >
-                      <p className="text-gray-500">{page}</p>
-                    </div>
-                  );
-                }
-              })}
+            <div className="flex justify-center">
+              <div className="flex justify-start overflow-x-scroll pb-2">
+                {pages.map(page => {
+                  if (page === currentAccommodationPage) {
+                    return (
+                      <div key={page} className="mr-1">
+                        <p className="font-medium">{page}</p>
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        key={page}
+                        className="mr-1 cursor-pointer"
+                        onClick={() => {
+                          setCurrentAccommodationPage(page);
+                        }}
+                      >
+                        <p className="text-gray-500">{page}</p>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
             </div>
           </div>
         )}

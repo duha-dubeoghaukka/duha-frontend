@@ -1,5 +1,5 @@
 import Layout from "../../components/layout/Layout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { api } from "../../api/api";
 import { useEffect, useState } from "react";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
@@ -19,7 +19,6 @@ const AddBookMarkSpot = () => {
         data: { data }
       } = await api.get(`/course/bookmark`);
       setMyCourse(data);
-      console.log(data);
     } catch (error) {
       throw new Error(error);
     }
@@ -33,21 +32,15 @@ const AddBookMarkSpot = () => {
     <Layout title="일정 등록" highlight={"schedule/create"}>
       {myCourse.length > 0 ? (
         <div className="font-semibold text-sm text-center py-4">
-          {nickName && `${nickName}뚜벅러님이 즐겨찾기한 ${myCourse.length}건이 검색되었습니다.`}
+          {nickName && `${nickName}뚜벅러님이 즐겨찾기한 ${myCourse.length}건이 검색되었습니다`}
         </div>
       ) : (
-        <div>
-          <div className="font-semibold text-sm text-center mb-4">즐겨찾기한 목록이 없습니다.</div>
-          <div className="flex justify-center items-center">
-            <button
-              onClick={() => {
-                navigate(-1);
-              }}
-              className="font-semibold text-sm text-center px-4 py-2 rounded-lg mx-2"
-            >
-              <ArrowBackOutlinedIcon />
-              돌아가기
-            </button>
+        <div className="my-4">
+          <div className="flex flex-col items-center font-semibold">
+            <div className="text-center mb-6">즐겨찾기한 목록이 없습니다</div>
+            <Link to="/spots" className="animate-bounce bg-green1 text-white px-3 py-1 rounded-md text-sm shadow-md">
+              관광지 보러가기
+            </Link>
           </div>
         </div>
       )}

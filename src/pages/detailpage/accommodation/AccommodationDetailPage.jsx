@@ -86,21 +86,27 @@ const AccommodationDetailPage = () => {
     const processedInfo = processInfo(info);
     return (
       <Layout isLoggedIn={false} title="숙소 상세" highlight="mainpage/accommodations">
-        <div className="flex items-center mb-3">
-          <WestIcon className="mr-3" onClick={() => navigate(-1)} />
-          <p className="text-[16px] text-black1">뒤로 가기</p>
-        </div>
-        <div className="flex justify-between mb-[20px]">
+        <div className="md:hidden flex justify-between items-center">
           <div className="flex items-center">
-            <h2 className="font-bold text-[26px] mr-3">{name}</h2>
-            <FavoriteRoundedIcon sx={{ color: "red" }} />
-            <p className="text-[16px] ml-1">{likeNum}</p>
+            <p className="font-bold text-sm md:text-xl">🛏 {name}</p>
           </div>
-          <AccommodationDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          <div className="flex items-center">
+            <FavoriteRoundedIcon sx={{ color: "red" }} />
+            <p className="ml-0.5 text-sm">{likeNum}</p>
+            <AccommodationDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          </div>
         </div>
-        <div>
+        <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
+          <p className="font-bold text-base md:text-xl">🛏 {name}</p>
+          <div className="flex items-center">
+            <FavoriteRoundedIcon sx={{ color: "red" }} />
+            <p className="ml-0.5">{likeNum}</p>
+            <AccommodationDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          </div>
+        </div>
+        <div className="mb-2 md:mb-4">
           <Swiper
-            className="h-[335px] mb-[20px] flex justify-center items-center rounded-lg"
+            className="h-72 md:h-96 rounded-md"
             modules={[Pagination, Autoplay]}
             autoplay={{
               delay: 2500,
@@ -122,37 +128,47 @@ const AccommodationDetailPage = () => {
             })}
           </Swiper>
         </div>
-        {description && (
-          <div className="mb-3">
-            <p className="text-black1">{description}</p>
-          </div>
-        )}
-        <div className="mb-[20px]">
-          <div className="px-[25px] py-[36px] border-green1 border-[1px] rounded-lg">
-            <div className="flex items-center">
-              <p className="mb-[26px] text-[20px] w-[100px]">주소</p>
-              <p className="mb-[26px]">{address}</p>
-              <div onClick={mapClickHandler} className="flex-grow-[1] flex flex-row-reverse">
-                <MapIcon className="cursor-pointer" fontSize="large" />
+        <div className="mb-2 md:mb-4">
+          <div className="px-5 md:px-10 py-3 md:py-5 border-green1 border-2 rounded-md flex flex-col items-start">
+            <div className="w-full mb-1 md:mb-2">
+              <div className="flex items-center justify-between">
+                <p className="text-base md:text-lg font-semibold">주소</p>
+                <MapIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
               </div>
+              <p className="text-sm text-gray-700">{address}</p>
             </div>
-            <div className="flex items-center">
-              <p className="text-[20px] w-[100px]">전화번호</p>
-              <p>{phone}</p>
+            <div className="mb-1 md:mb-2">
+              <p className="text-base md:text-lg font-semibold">전화번호</p>
+              <p className="text-sm text-gray-700">{phone}</p>
             </div>
-            <div className="flex">
-              {stations.length > 0 && <p className="text-[20px] mt-[26px] mr-3">가까운 버스 정류장</p>}
+            {processedInfo.length > 0 && (
+              <div className="mb-1 md:mb-2">
+                <p className="text-base md:text-lg font-semibold">영업정보</p>
+                <div>
+                  {processedInfo.map(info => {
+                    return (
+                      <div key={info.title} className="mb-2">
+                        <p className="font-semibold text-sm">{info.title}</p>
+                        <p className="text-sm text-gray-700">{info.content}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+            <div className="mb-1 md:mb-2">
+              {stations.length > 0 && <p className="text-base md:text-lg font-semibold">가까운 버스 정류장</p>}
               {stations.length > 0 && (
-                <div className="mt-[33px]">
+                <div>
                   {stations
                     .sort((a, b) => {
                       return a.distance - b.distance;
                     })
                     .map(station => {
                       return (
-                        <div className="flex" key={station.stationName}>
+                        <div className="flex items-center" key={station.stationName}>
                           <DirectionsBusIcon className="mr-1" />
-                          <p>
+                          <p className="text-sm text-gray-700">
                             {station.stationName} - {station.distance}m
                           </p>
                         </div>
@@ -161,21 +177,6 @@ const AccommodationDetailPage = () => {
                 </div>
               )}
             </div>
-            {processedInfo.length > 0 && (
-              <div className="mt-[26px] flex">
-                <p className="text-[20px] w-[100px] flex-shrink-0">영업정보</p>
-                <div className="grid gap-3">
-                  {processedInfo.map(info => {
-                    return (
-                      <div key={info.title}>
-                        <p className="text-[17px]">{info.title}</p>
-                        <p className="text-[14px]">{info.content}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
           </div>
         </div>
         <Comments
