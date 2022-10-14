@@ -4,11 +4,13 @@ import EditIcon from "@mui/icons-material/Edit";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import decodeToken from "../../utils/decodeToken";
 import { useState } from "react";
+import { api } from "../../api/api";
 
-const ReviewItem = ({ data, commentDeleteHandler }) => {
+const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const { review, reviewer, id } = data;
   let isAuthor = false;
+  const [editedComment, setEditedComment] = useState(review);
   if (checkIsLoggedIn()) {
     const token = localStorage.getItem("authorization");
     const currentUser = decodeToken(token);
@@ -21,6 +23,29 @@ const ReviewItem = ({ data, commentDeleteHandler }) => {
   };
   const editClickHandler = () => {
     setIsEditMode(true);
+  };
+  const editedCommentChangeHandler = event => {
+    setEditedComment(event.target.value);
+  };
+  const editHandler = () => {
+    const whitespaceRegex = new RegExp(/^\s*$/);
+    const isOnlyWhitespace = whitespaceRegex.test(editedComment);
+    const isEmpty = editedComment.length === 0;
+    if (!isOnlyWhitespace && !isEmpty) {
+      api
+        .put(`/auth/${category}/review/${id}`, {
+          review: editedComment
+        })
+        .then(response => {
+          refetchComments();
+          setIsEditMode(false);
+        })
+        .catch(error => {
+          alert(error);
+        });
+    } else {
+      setEditedComment("");
+    }
   };
   return (
     <div>
@@ -54,8 +79,15 @@ const ReviewItem = ({ data, commentDeleteHandler }) => {
       {isEditMode && (
         <div>
           <div className="grid grid-cols-[1fr_80px] gap-3">
-            <input type="text" className="p-2 px-5 border-green1 border-2 rounded-lg text-black1" />
-            <button className="bg-green1 rounded-lg text-white1 font-bold cursor-pointer hover:brightness-90">수정</button>
+            <input
+              type="text"
+              className="p-2 px-5 border-green1 border-2 rounded-lg text-black1"
+              value={editedComment}
+              onChange={editedCommentChangeHandler}
+            />
+            <button className="bg-green1 rounded-lg text-white1 font-bold cursor-pointer hover:brightness-90" onClick={editHandler}>
+              수정
+            </button>
           </div>
         </div>
       )}
