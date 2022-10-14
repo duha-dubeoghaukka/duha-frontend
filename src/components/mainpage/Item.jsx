@@ -23,7 +23,8 @@ const Item = ({ data, setCounter, category }) => {
         break;
     }
   };
-  const bookmarkHandler = () => {
+  const bookmarkHandler = event => {
+    event.stopPropagation();
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
       api
