@@ -47,6 +47,9 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
       setEditedComment("");
     }
   };
+  const cancelEditHandler = () => {
+    setIsEditMode(false);
+  };
   return (
     <div>
       <div className="flex justify-between">
@@ -78,7 +81,7 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
       </div>
       {isEditMode && (
         <div>
-          <div className="grid grid-cols-[1fr_80px] gap-3">
+          <div className="grid grid-cols-[1fr_80px_80px] gap-2">
             <input
               type="text"
               className="p-2 px-5 border-green1 border-2 rounded-lg text-black1"
@@ -87,6 +90,9 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
             />
             <button className="bg-green1 rounded-lg text-white1 font-bold cursor-pointer hover:brightness-90" onClick={editHandler}>
               수정
+            </button>
+            <button className="bg-red-400 rounded-lg text-white1 font-bold cursor-pointer hover:brightness-90" onClick={cancelEditHandler}>
+              취소
             </button>
           </div>
         </div>
