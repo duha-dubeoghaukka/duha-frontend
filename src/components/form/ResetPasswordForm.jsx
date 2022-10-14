@@ -60,7 +60,7 @@ function ResetPasswordForm() {
         .then(res => {
           if (res.data.isSuccess) {
             alert("비밀번호 재설정이 완료되었습니다.");
-            navigation(-1);
+            navigation(`/login`);
           } else {
             alert(res.data.message);
           }
