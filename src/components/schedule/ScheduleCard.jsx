@@ -106,7 +106,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
         </div>
         <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
       </div>
-      <div className="w-16">
+      <div className="w-14 flex flex-row ">
         <ModeEditOutlineOutlinedIcon
           className="cursor-pointer"
           onClick={e => {

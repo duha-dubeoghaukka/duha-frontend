@@ -14,7 +14,7 @@ function ScheduleRegisterPage() {
 
   return (
     <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
-      <div className="h-full grid place-content-center">
+      <div className="grid place-content-center">
         <div className="flex justify-center mt-10 mb-5">
           <span className="mr-3 font-medium text-lg text-black2">새 일정 만들기</span>
           <AddCircleIcon
