@@ -1,6 +1,6 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
+import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import decodeToken from "../../utils/decodeToken";
 import { useState } from "react";
@@ -77,10 +77,10 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
         {isAuthor && (
           <div className="flex">
             <div className="cursor-pointer" onClick={editClickHandler}>
-              <EditIcon fontSize="large" />
+              <ModeEditOutlineOutlinedIcon fontSize="large" />
             </div>
             <div className="cursor-pointer" onClick={deleteClickHandler}>
-              <DeleteIcon fontSize="large" />
+              <DeleteOutlineIcon fontSize="large" />
             </div>
           </div>
         )}
