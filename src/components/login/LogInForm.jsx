@@ -16,7 +16,8 @@ const LogInForm = () => {
 
   const navigate = useNavigate();
   const isToken = localStorage.getItem("authorization");
-  const [isModal, modalHandler] = useChange();
+  const [isSignupModal, signupModalHandler] = useChange();
+  const [isResetPasswordModal, resetPasswordModalHandler] = useChange();
 
   const handleHide = () => setIsHidden(!isHidden);
 
@@ -122,14 +123,26 @@ const LogInForm = () => {
       <div className="flex flex-row justify-center">
         <p className=" text-gray-600">계정이 없으신가요?</p>
         <button
-          className="font-bold"
+          className="font-bold ml-2"
           onClick={() => {
-            modalHandler();
+            signupModalHandler();
           }}
         >
           회원가입
         </button>
-        <ShowEmailModal show={isModal} modalHandler={modalHandler} />
+        <ShowEmailModal show={isSignupModal} modalHandler={signupModalHandler} category={"email"} />
+      </div>
+      <div className="flex flex-row justify-center mt-2">
+        <p className=" text-gray-600">비밀번호가 생각나지 않나요?</p>
+        <button
+          className="font-bold ml-2"
+          onClick={() => {
+            resetPasswordModalHandler();
+          }}
+        >
+          비밀번호 찾기
+        </button>
+        <ShowEmailModal show={isResetPasswordModal} modalHandler={resetPasswordModalHandler} category={"findPassword"} />
       </div>
     </div>
   );
