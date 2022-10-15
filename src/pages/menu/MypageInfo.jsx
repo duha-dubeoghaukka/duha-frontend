@@ -1,9 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Layout from "../../components/layout/Layout";
+import { routingLoginPage } from "../../utils/routingLoginPage";
 
 const MypageInfo = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    routingLoginPage(navigate);
+  }, []);
+
   return (
     <Layout title="마이 페이지" highlight={"mypage"}>
       <Link to="/mypage/favorites/list" className="card">
