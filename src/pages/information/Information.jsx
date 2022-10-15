@@ -1,11 +1,26 @@
 import Layout from "../../components/layout/Layout";
 import { useState } from "react";
+import Transportation from "./Transportation";
+import CallTaxi from "./CallTaxi";
+import Porter from "./Porter";
 
 const Information = () => {
   const [category, setCategory] = useState("transportation");
   const categoryClickHandler = category => {
     setCategory(category);
   };
+  let content;
+  switch (category) {
+    case "transportation":
+      content = <Transportation />;
+      break;
+    case "calltaxi":
+      content = <CallTaxi />;
+      break;
+    case "porter":
+      content = <Porter />;
+      break;
+  }
   return (
     <Layout isLoggedIn={false} title={"뚜벅이를 위한 서비스"} highlight={"mainpage/info"}>
       <div className="flex justify-around mt-8">
@@ -30,6 +45,7 @@ const Information = () => {
           짐배달
         </p>
       </div>
+      <div>{content}</div>
     </Layout>
   );
 };
