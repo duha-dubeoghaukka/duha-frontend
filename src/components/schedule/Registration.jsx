@@ -88,7 +88,7 @@ function Registration() {
   }, []);
 
   return (
-    <Layout isLoggedIn={false} title="일정 등록" highlight={"schedule/create"}>
+    <Layout isLoggedIn={false} title="일정" highlight={"schedule/create"}>
       <div className="grid place-items-center h-screen mt-10">
         <div className="flex w-72 flex-col gap-4 h-screen">
           <Calendar onChange={changeDate} selectRange={true} formatDay={(locale, date) => moment(date).format("DD")} />
