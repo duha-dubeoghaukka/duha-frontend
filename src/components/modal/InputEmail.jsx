@@ -49,7 +49,7 @@ function InputEmail({ category }) {
   return (
     <>
       <h4 className="text-lg font-semibold text-black1 text-lg">이메일 인증</h4>
-      <div className="border border-green1 h-14 mt-5 mb-5">
+      <div className="border border-green1 h-14 mt-5 mb-8">
         <div className="flex flex-row justify-between  h-full">
           <input
             className="ml-2 w-4/5 focus:outline-none"
