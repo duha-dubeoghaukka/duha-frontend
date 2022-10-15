@@ -33,24 +33,25 @@ const Layout = props => {
 
   return (
     <div>
-      <div className="fixed w-full py-5 bg-green1 z-20 flex justify-between md:grid md:grid-cols-4 md:justify-items-center">
-        <button className="mx-2 text-white1 hidden md:block" onClick={() => setIsOpen(!isOpen)}>
-          <MenuIcon />
-        </button>
-        <div className="md:hidden mx-4 cursor-pointer flex" onClick={() => navigate(-1)}>
-          <ChevronLeftIcon sx={{ color: "#FFF" }} />
-          <p className="text-white1 font-bold ml-2">뒤로 가기</p>
+      <div className="fixed w-full py-5 bg-green1 z-20 flex justify-around md:grid md:grid-cols-4 md:justify-items-center">
+        <div className="flex items-center">
+          <button className="mx-2 text-white1 hidden md:block" onClick={() => setIsOpen(!isOpen)}>
+            <MenuIcon />
+          </button>
+          <div className="md:hidden cursor-pointer" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon sx={{ color: "#FFF" }} />
+          </div>
+          <p className="font-semibold text-sm md:text-base text-white1 md:hidden">
+            {nickName ? `반가워요, ${nickName}뚜벅러님!` : `반가워요, 익명의 뚜벅러님!`}
+          </p>
         </div>
-        <p className="font-semibold text-sm md:text-base text-white1 md:hidden mx-4">
-          {nickName ? `반가워요, ${nickName}뚜벅러님!` : `반가워요, 익명의 뚜벅러님!`}
-        </p>
         <h1 className="text-white1 font-semibold text-base hidden md:block col-span-2">{title}</h1>
         <div className="flex">
           <button className="font-semibold text-sm md:text-base text-white1 mx-4" onClick={loginHandler}>
             {token ? "로그아웃" : "로그인"}
           </button>
           <button
-            className="font-semibold text-sm md:text-base text-white1 mx-4"
+            className="font-semibold text-sm md:text-base text-white1"
             onClick={() => {
               signupModalHandler();
             }}

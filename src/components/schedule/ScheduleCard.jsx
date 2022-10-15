@@ -7,9 +7,9 @@ import { useDispatch } from "react-redux";
 import { __getSchedules, __deleteSchedule } from "../../redux/modules/schedules";
 import { useSelector } from "react-redux";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import ShareIcon from "@mui/icons-material/Share";
 import useChange from "../../hooks/useChange";
 import ShowModal from "../modal/ShowModal";
+import IosShareIcon from "@mui/icons-material/IosShare";
 
 function ScheduleCard() {
   const dispatch = useDispatch();
@@ -75,53 +75,50 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   }, [isModal]);
 
   return (
-    <div className="register-card-layout">
-      <div className="flex flex-col mt-2 ml-3 mb-2">
-        <div
-          className="h-20 w-72 bg-white1"
-          onClick={() => {
-            navigate(`${id}/1`);
-            setItem();
-          }}
-        >
-          <div className="flex flex-col mt-3">
-            <span className="mt-2	font-semibold">
+    <div>
+      <div
+        className="card"
+        onClick={() => {
+          navigate(`${id}/1`);
+          setItem();
+        }}
+      >
+        <div className="flex items-center">
+          <IosShareIcon
+            className="cursor-pointer mr-2"
+            onClick={e => {
+              e.stopPropagation();
+              ModalHandler();
+            }}
+          />
+          <div>
+            <p className="mt-2	font-semibold">
               {nights + "박" + allDays + "일" + " "}
               {title}
-            </span>
-            <span className="mt-2 font-light text-sm">
+            </p>
+            <p className="font-light text-sm">
               {startDate}~{endDate}
-            </span>
+            </p>
           </div>
         </div>
-        <div
-          className="cursor-pointer w-2/5"
-          onClick={e => {
-            e.stopPropagation();
-            ModalHandler();
-          }}
-        >
-          <ShareIcon className="mr-1" sx={{ fontSize: 15, color: "#7FB77E" }} />
-          <span className="text-xs text-green1">일정 공유</span>
+        <div>
+          <ModeEditOutlineOutlinedIcon
+            className="cursor-pointer"
+            onClick={e => {
+              e.stopPropagation();
+              onUpdate(id);
+            }}
+          />
+          <DeleteOutlineIcon
+            className="cursor-pointer"
+            onClick={e => {
+              e.stopPropagation();
+              onDeleteSchedule(id);
+            }}
+          />
         </div>
-        <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
       </div>
-      <div className="w-14 flex flex-row ">
-        <ModeEditOutlineOutlinedIcon
-          className="cursor-pointer"
-          onClick={e => {
-            e.stopPropagation();
-            onUpdate(id);
-          }}
-        />
-        <DeleteOutlineIcon
-          className="ml-1 cursor-pointer"
-          onClick={e => {
-            e.stopPropagation();
-            onDeleteSchedule(id);
-          }}
-        />
-      </div>
+      <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
     </div>
   );
 }
