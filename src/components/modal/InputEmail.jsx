@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { userInfoAPIs } from "../../api/api";
 import useInput from "../../hooks/useInput";
 
 function InputEmail({ category }) {
   const [email, setEmail, onChangeEmail] = useInput();
+  const [message, setMessage] = useState();
 
   useEffect(() => {}, [category]);
 
@@ -12,33 +13,43 @@ function InputEmail({ category }) {
       email
     };
     if (category === "email") {
-      userInfoAPIs
-        .emailLink(data)
-        .then(res => {
-          if (res.data.isSuccess) {
-            alert("회원가입 링크가 해당 이메일로 전송되었습니다.");
-          } else {
-            alert(res.data.message);
-          }
-        })
-        .catch(err => console.log("err", err.response));
+      if (email === "") {
+        setMessage("이메일을 입력하세요");
+      } else {
+        userInfoAPIs
+          .emailLink(data)
+          .then(res => {
+            if (res.data.isSuccess) {
+              setMessage("회원가입 링크가 이메일로 전송되었습니다.");
+            } else {
+              setMessage(res.data.message);
+            }
+          })
+          .catch(err => {
+            setMessage("이메일 인증이 실패했습니다.");
+          });
+      }
     } else if (category === "findPassword") {
-      userInfoAPIs
-        .findPassword(data)
-        .then(res => {
-          if (res.data.isSuccess) {
-            alert("비밀번호 재설정 링크가 해당 이메일로 전송되었습니다.");
-          } else {
-            alert(res.data.message);
-          }
-        })
-        .catch(err => console.log("err", err.response));
+      if (email === "") {
+        setMessage("이메일을 입력하세요");
+      } else {
+        userInfoAPIs
+          .findPassword(data)
+          .then(res => {
+            if (res.data.isSuccess) {
+              setMessage("비밀번호 재설정 링크가 이메일로 전송되었습니다.");
+            } else {
+              setMessage(res.data.message);
+            }
+          })
+          .catch(err => console.log("err", err.response));
+      }
     }
   };
   return (
     <>
       <h4 className="text-lg font-semibold text-black1 text-lg">이메일 인증</h4>
-      <div className="border border-green1 h-14 mt-5 mb-5">
+      <div className="border border-green1 h-14 mt-5 mb-8">
         <div className="flex flex-row justify-between  h-full">
           <input
             className="ml-2 w-4/5 focus:outline-none"
@@ -51,6 +62,7 @@ function InputEmail({ category }) {
             인증하기
           </button>
         </div>
+        <p className="input-helper">{message}</p>
       </div>
     </>
   );
