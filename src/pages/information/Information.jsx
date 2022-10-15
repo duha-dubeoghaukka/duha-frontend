@@ -2,7 +2,7 @@ import Layout from "../../components/layout/Layout";
 import { useState } from "react";
 import Transportation from "./transportation/Transportation";
 import CallTaxi from "./calltaxi/CallTaxi";
-import Porter from "./Porter";
+import Porter from "./porter/Porter";
 
 const Information = () => {
   const [category, setCategory] = useState("transportation");
