@@ -23,7 +23,7 @@ const Information = () => {
   }
   return (
     <Layout isLoggedIn={false} title={"뚜벅이를 위한 서비스"} highlight={"mainpage/info"}>
-      <div className="flex justify-around mt-8">
+      <div className="flex justify-around my-8">
         <p
           className={`cursor-pointer font-bold text-lg ${
             category === "transportation" ? "text-green1" : "text-black1 hover:brightness-[5]"

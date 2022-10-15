@@ -39,7 +39,6 @@ const Layout = props => {
         </button>
         <div className="md:hidden mx-4 cursor-pointer flex" onClick={() => navigate(-1)}>
           <ChevronLeftIcon sx={{ color: "#FFF" }} />
-          <p className="text-white1 font-bold ml-2">뒤로 가기</p>
         </div>
         <p className="font-semibold text-sm md:text-base text-white1 md:hidden mx-4">
           {nickName ? `반가워요, ${nickName}뚜벅러님!` : `반가워요, 익명의 뚜벅러님!`}
