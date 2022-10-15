@@ -22,7 +22,7 @@ const Transportation = () => {
     return (
       <div>
         {transportations.map(transportation => {
-          return <TransportationItem key={transportation.name} data={transportation} />;
+          return <TransportationItem key={transportation.name} transportation={transportation} />;
         })}
       </div>
     );
