@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
-import { api } from "../../api/api";
-import Spinner from "../../components/Spinner/Spinner";
+import { api } from "../../../api/api";
+import Spinner from "../../../components/Spinner/Spinner";
 import TransportationItem from "./TransportationItem";
 
 const Transportation = () => {
