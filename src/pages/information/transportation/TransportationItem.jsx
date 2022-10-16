@@ -34,7 +34,7 @@ const TransportationItem = ({ transportation }) => {
   // }
   return (
     <div
-      className="border-2 border-green1 rounded-lg mb-3 p-3 grid grid-cols-[1fr_160px] cursor-pointer hover:brightness-90"
+      className="border-2 border-green1 rounded-lg mb-3 p-3 grid md:grid-cols-[1fr_160px] cursor-pointer hover:brightness-75"
       onClick={() => {
         window.location.href = address;
       }}
@@ -44,7 +44,7 @@ const TransportationItem = ({ transportation }) => {
         <p className="text-black1 text-sm">{description}</p>
         <p className="text-gray-500 text-sm">{address}</p>
       </div>
-      <div className="flex-shrink-0 ml-3">
+      <div className="ml-3 hidden md:block">
         <img src={imageURL} alt={title} className="rounded-lg h-full object-cover" />
       </div>
     </div>
