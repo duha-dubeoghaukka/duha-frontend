@@ -14,7 +14,6 @@ const DayItem = () => {
   const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
   const navigate = useNavigate();
-  // const id = localStorage.getItem("id");
   const lastCourse = dayCourse.at(-1);
   const id = tripId;
 

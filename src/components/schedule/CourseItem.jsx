@@ -42,12 +42,12 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
                       <div className="bg-green1 rounded-full w-12 h-12 text-center font-bold text-lg text-white1 pt-[10px]">
                         {index + 1}
                       </div>
-                      <div className="my-2 ml-9">
+                      <div className="my-2 ml-2 md:ml-9">
                         <div className="font-semibold text-sm">{course.category}</div>
                         <div className="font-bold md:text-base text-sm">{course.name}</div>
                       </div>
                     </div>
-                    <div>
+                    <div className="flex">
                       <DragIndicatorIcon className="text-gray-700" />
                       <DeleteOutlineIcon
                         className="cursor-pointer text-gray-700"
