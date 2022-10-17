@@ -65,7 +65,7 @@ const LogInForm = () => {
   };
 
   return (
-    <div className="w-full md:w-[600px] mx-auto">
+    <div className="w-full md:w-[600px] mx-auto mt-5 md:mt-10">
       <form className="flex flex-col" onSubmit={handleSubmit}>
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" alt={"Logo"} />
         <input

@@ -90,7 +90,7 @@ const SignUpForm = () => {
 
   return (
     <div className="w-full md:w-[600px] mx-auto">
-      <form className="flex flex-col my-10" onSubmit={handleSubmit(onSubmit)}>
+      <form className="flex flex-col mt-5 md:mt-10" onSubmit={handleSubmit(onSubmit)}>
         <img src="https://i.ibb.co/sHHr4Dj/2.png" className="w-[284px] mx-auto" alt={"Logo"} />
         <div className="relative w-full md:w-[500px] mx-auto">
           <input type="text" className="input mt-2 disabled:bg-transparent" name="email" value={email || ""} disabled />
