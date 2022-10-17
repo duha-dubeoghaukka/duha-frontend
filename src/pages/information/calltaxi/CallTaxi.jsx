@@ -15,7 +15,6 @@ const CallTaxi = () => {
     });
   });
   const [currentRegion, setCurrentRegion] = useState("전체");
-  const regionClickHandler = () => {};
   if (isLoading) {
     return <Spinner />;
   }
@@ -24,17 +23,32 @@ const CallTaxi = () => {
   }
   if (data) {
     const callTaxis = data.data.data[0].info;
+    const filteredTaxis = callTaxis.filter(callTaxi => {
+      if (currentRegion === "전체") {
+        return true;
+      } else {
+        return currentRegion.includes(callTaxi.region);
+      }
+    });
     return (
       <div>
         <div className="flex justify-around mb-5">
           {regionNames.map(region => {
             return (
-              <CallTaxiRegionButton regionName={region.name} isActive={region.name === currentRegion} setCurrentRegion={setCurrentRegion} />
+              <CallTaxiRegionButton
+                key={region.name}
+                regionName={region.name}
+                isActive={currentRegion === region.name}
+                setCurrentRegion={setCurrentRegion}
+              />
             );
           })}
         </div>
+        <div className="mb-3">
+          <p className="text-black1 font-bold">총 {filteredTaxis.length} 건이 검색되었습니다.</p>
+        </div>
         <div>
-          {callTaxis.map(taxi => {
+          {filteredTaxis.map(taxi => {
             return <CallTaxiItem key={taxi.name} data={taxi} />;
           })}
         </div>
