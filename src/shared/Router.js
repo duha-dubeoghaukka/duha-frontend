@@ -35,6 +35,7 @@ import Info from "../pages/menu/Info";
 import ScheduleInfo from "../pages/menu/ScheduleInfo";
 import MypageInfo from "../pages/menu/MypageInfo";
 import Information from "../pages/information/Information";
+import Credits from "../pages/credits/Credits";
 
 const Router = () => {
   return (
@@ -75,6 +76,7 @@ const Router = () => {
         <Route path="/info" element={<Info />} />
         <Route path="/scheduleinfo" element={<ScheduleInfo />} />
         <Route path="/mypage" element={<MypageInfo />} />
+        <Route path="/credits" element={<Credits />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

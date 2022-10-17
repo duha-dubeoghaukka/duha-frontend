@@ -12,7 +12,7 @@ const MypageInfo = () => {
   }, []);
 
   return (
-    <Layout title="마이 페이지" highlight={"mypage"}>
+    <Layout title="마이 페이지" highlight={"mypage"} isFooterFixed={true}>
       <Link to="/mypage/favorites/list" className="card">
         <div className="card-content">즐겨찾기한 목록</div>
         <NavigateNextIcon />
