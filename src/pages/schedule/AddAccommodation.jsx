@@ -127,7 +127,7 @@ const AddAccommodation = () => {
     };
 
     return (
-      <Layout title="일정 등록" highlight={"schedule/create"}>
+      <Layout title="일정 관리" highlight={"schedule/create"}>
         <div className="flex justify-around my-4 text-lg font-bold">
           <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addspot`} className="text-gray-500">
             관광
