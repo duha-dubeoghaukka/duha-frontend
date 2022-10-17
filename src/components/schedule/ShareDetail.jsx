@@ -27,9 +27,13 @@ function ShareDetail() {
     });
   }, []);
 
+  console.log("firstDayData", activeDay);
+
   if (!courseItem) return <Spinner />;
 
   const onClickDay = day => {
+    setDay(day);
+
     if (day) {
       setActiveDay(true);
       const data = courseItem.filter(item => item.day === day);
@@ -48,13 +52,44 @@ function ShareDetail() {
   return (
     <>
       <div className="mt-4 mb-6 flex justify-center">
-        {courseItem?.map(item => {
-          return (
-            <div key={item.courseId} className="text-green1 font-bold text-lg px-4 cursor-pointer" onClick={() => onClickDay(item.day)}>
-              Day{item.day}
-            </div>
-          );
-        })}
+        <div className="my-2 flex justify-start overflow-x-scroll pb-4 pt-2">
+          {courseItem?.map(item => {
+            return (
+              <div key={item?.courseId} className="font-bold text-lg px-4 cursor-pointer">
+                <>
+                  {!activeDay ? (
+                    1 === item.day ? (
+                      <div
+                        className="border-b-2 pb-1 border-green1 text-green1 transition ease-in-out"
+                        onClick={() => onClickDay(item.day)}
+                      >
+                        Day{item.day}
+                      </div>
+                    ) : (
+                      <div
+                        className="border-b-2 pb-1 border-white text-gray-400 hover:border-gray-400 transition ease-in-out"
+                        onClick={() => onClickDay(item.day)}
+                      >
+                        Day{item.day}
+                      </div>
+                    )
+                  ) : day == item.day ? (
+                    <div className="border-b-2 pb-1 border-green1 text-green1 transition ease-in-out" onClick={() => onClickDay(item.day)}>
+                      Day{item.day}
+                    </div>
+                  ) : (
+                    <div
+                      className="border-b-2 pb-1 border-white text-gray-400 hover:border-gray-400 transition ease-in-out"
+                      onClick={() => onClickDay(item.day)}
+                    >
+                      Day{item.day}
+                    </div>
+                  )}
+                </>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <div className="course-layout">
         {activeDay
