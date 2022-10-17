@@ -35,8 +35,6 @@ function EditUserInfoForm() {
     noneChange();
   }, []);
 
-  console.log(isDisabled);
-
   const noneChange = () => {
     if (!isNickName && !currentPassword && !newPassword && !checkPassword) {
       setIsDisabled(true);
