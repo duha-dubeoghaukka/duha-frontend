@@ -119,6 +119,9 @@ const LogInForm = () => {
         <a className="ml-2">Google 계정으로 시작하기</a>
       </button>
       <div className="flex flex-row justify-center">
+        <p className="text-xs text-black2">Google 로그인은 Chrome 환경에서 이용해주세요</p>
+      </div>
+      <div className="flex flex-row justify-center">
         <p className="text-gray-600 mt-5">계정이 없으신가요?</p>
         <button
           className="font-bold ml-2 mt-5"
