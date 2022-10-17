@@ -6,6 +6,7 @@ import ShowEmailModal from "../modal/ShowEmailModal";
 import { routingLoginPage } from "../../utils/routingLoginPage";
 import { useNavigate } from "react-router-dom";
 import checkLoginPlatform from "../../utils/checkLoginPlatform";
+import EditInfoSocialLogin from "./EditInfoSocialLogin";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
@@ -173,54 +174,65 @@ function EditUserInfoForm() {
     <div className="w-full md:w-[600px] mx-auto">
       <div className="flex flex-col">
         <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
-        <div className="relative w-full md:w-[500px] mx-auto">
-          <input className="input mt-2 font-bold" placeholder="닉네임" name="nickname" value={nickName || ""} onChange={onChangeNickName} />
-          {!loginPlatform === "KAKAO" && loginPlatform === "GOOGLE" ? (
-            <>
-              <input
-                className="input mt-2"
-                placeholder="기존 비밀번호"
-                name="currentpassword"
-                value={currentPassword || ""}
-                onChange={onChangeCurrentPassword}
-                type="password"
-              />
-              <input
-                className="input mt-2"
-                placeholder="새 비밀번호"
-                name="newpassword"
-                value={newPassword || ""}
-                onChange={onChangeNewPassword}
-                type="password"
-              />
-              <p className="input-helper ml-4">{isNewPasswrord ? passwordMessage : passwordMessage}</p>
-              <input
-                className="input mt-2"
-                placeholder="비밀번호 확인"
-                name="checkpassword"
-                value={checkPassword || ""}
-                onChange={onChangeCheckPassword}
-                type="password"
-              />
-              <p className="input-helper ml-4">{checkPasswordMessage}</p>
-            </>
-          ) : (
-            console.log("asdf")
-          )}
-          <div className="ml-3 mt-3">
-            <button
-              className="btn-primary mt-3 mb-3 disabled:bg-[#B1D7B4]"
-              onClick={() => onSubmit()}
-              disabled={isDisabled && !(isNewPasswrord && isCheckPassword)}
-            >
-              <p>변경 완료</p>
-            </button>
-            <button className="btn-white" onClick={() => modalHandler()}>
-              <p>회원탈퇴</p>
-            </button>
-            <ShowEmailModal show={isModal} modalHandler={modalHandler} category={"회원탈퇴"} />
+        {loginPlatform === "KAKAO" || loginPlatform === "GOOGLE" ? (
+          <EditInfoSocialLogin
+            nickName={nickName}
+            isNickName={isNickName}
+            onSubmit={onSubmit}
+            onChangeNickName={onChangeNickName}
+            isModal={isModal}
+            modalHandler={modalHandler}
+          />
+        ) : (
+          <div className="relative w-full md:w-[500px] mx-auto">
+            <input
+              className="input mt-2 font-bold"
+              placeholder="닉네임"
+              name="nickname"
+              value={nickName || ""}
+              onChange={onChangeNickName}
+            />
+            <input
+              className="input mt-2"
+              placeholder="기존 비밀번호"
+              name="currentpassword"
+              value={currentPassword || ""}
+              onChange={onChangeCurrentPassword}
+              type="password"
+            />
+            <input
+              className="input mt-2"
+              placeholder="새 비밀번호"
+              name="newpassword"
+              value={newPassword || ""}
+              onChange={onChangeNewPassword}
+              type="password"
+            />
+            <p className="input-helper ml-4">{isNewPasswrord ? passwordMessage : passwordMessage}</p>
+            <input
+              className="input mt-2"
+              placeholder="비밀번호 확인"
+              name="checkpassword"
+              value={checkPassword || ""}
+              onChange={onChangeCheckPassword}
+              type="password"
+            />
+            <p className="input-helper ml-4">{checkPasswordMessage}</p>
+            <div className="ml-3 mt-3">
+              <button
+                className="btn-primary mt-3 mb-3 disabled:bg-[#B1D7B4]"
+                onClick={() => onSubmit()}
+                disabled={isDisabled && !(isNewPasswrord && isCheckPassword)}
+              >
+                <p>변경 완료</p>
+              </button>
+              <button className="btn-white" onClick={() => modalHandler()}>
+                <p>회원탈퇴</p>
+              </button>
+              <ShowEmailModal show={isModal} modalHandler={modalHandler} category={"회원탈퇴"} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
