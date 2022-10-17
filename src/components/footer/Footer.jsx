@@ -9,7 +9,7 @@ const Footer = ({ isFixed = false }) => {
     );
   } else {
     return (
-      <div className="my-5">
+      <div className="mt-5 mb-[80px] md:mb-[20px]">
         <FooterContent />
       </div>
     );
