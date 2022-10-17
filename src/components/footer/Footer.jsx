@@ -3,23 +3,28 @@ import { Link } from "react-router-dom";
 const Footer = ({ isFixed = false }) => {
   if (isFixed) {
     return (
-      <div className="flex flex-col justify-center items-center fixed bottom-5 left-[50%] translate-x-[-50%]">
-        <p className="text-gray-500 text-sm">Copyright 2022. 뚜벅하우까 All rights reserved.</p>
-        <Link to="/credits" className="text-blue-600 text-sm hover:underline">
-          출처 및 저작권자
-        </Link>
+      <div className="fixed bottom-[80px] md:bottom-5 left-[50%] translate-x-[-50%] w-full">
+        <FooterContent />
       </div>
     );
   } else {
     return (
-      <div className="flex flex-col justify-center items-center my-5">
-        <p className="text-gray-500 text-sm">Copyright 2022. 뚜벅하우까 All rights reserved.</p>
-        <Link to="/credits" className="text-blue-600 text-sm hover:underline">
-          출처 및 저작권자
-        </Link>
+      <div className="my-5">
+        <FooterContent />
       </div>
     );
   }
+};
+
+const FooterContent = () => {
+  return (
+    <div className="flex flex-col justify-center items-center">
+      <p className="text-gray-500 text-xs md:text-sm">Copyright 2022. 뚜벅하우까 All rights reserved.</p>
+      <Link to="/credits" className="text-blue-600 text-xs md:text-sm hover:underline">
+        출처 및 저작권자
+      </Link>
+    </div>
+  );
 };
 
 export default Footer;
