@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useState } from "react";
-import useInput from "../../hooks/useInput";
 import decodeToken from "../../utils/decodeToken";
 import { userInfoAPIs } from "../../api/api";
 import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
 import { routingLoginPage } from "../../utils/routingLoginPage";
 import { useNavigate } from "react-router-dom";
+import { current } from "@reduxjs/toolkit";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
@@ -117,6 +117,14 @@ function EditUserInfoForm() {
           alert(message);
           localStorage.removeItem("authorization");
           localStorage.setItem("authorization", res.headers.authorization);
+          setCurrentPassword("");
+          setNewPassword("");
+          setCheckPassword("");
+          setCheckPasswordMessage("");
+          setIsCurrentPassword(false);
+          setIsNewPassword(false);
+          setIsCheckPassword(false);
+          setIsDisabled(true);
         }
       })
       .catch(err => console.log(err));
@@ -142,13 +150,20 @@ function EditUserInfoForm() {
           newPassword
         };
         editInfo(data, "회원 정보 수정이 완료되었습니다.");
-        setIsDisabled(true);
       } else if (isNewPasswrord && !isCheckPassword) {
         alert("비밀번호를 확인해주세요");
       } else if (!isNewPasswrord && isCheckPassword) {
         alert("새 비밀번호를 다시 입력해주세요");
       } else {
         alert("새 비밀번호 입력 및 비밀번호를 확인하세요");
+        setIsDisabled(true);
+      }
+    }
+
+    // 새 비밀번호 & 비밀번호 확인을 입력 -> 기존 비밀번호 입력x
+    if (isNewPasswrord && isCheckPassword) {
+      if (!isCurrentPassword) {
+        alert("기존 비밀번호를 입력하세요");
         setIsDisabled(true);
       }
     }
