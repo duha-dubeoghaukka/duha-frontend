@@ -3,8 +3,12 @@ const CallTaxiRegionButton = ({ regionName, isActive, setCurrentRegion }) => {
     setCurrentRegion(regionName);
   };
   return (
-    <div className="cursor-pointer hover:brightness-90" onClick={regionClickHandler}>
-      {isActive ? <p className="text-green1 font-bold">{regionName}</p> : <p className="text-black1 font-bold">{regionName}</p>}
+    <div onClick={regionClickHandler}>
+      {isActive ? (
+        <p className="text-green1 font-bold">{regionName}</p>
+      ) : (
+        <p className="text-black1 font-bold cursor-pointer hover:brightness-[3]">{regionName}</p>
+      )}
     </div>
   );
 };
