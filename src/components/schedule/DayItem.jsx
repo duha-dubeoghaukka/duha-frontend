@@ -9,11 +9,11 @@ import { DragDropContext } from "react-beautiful-dnd";
 
 const DayItem = () => {
   const { tripId, day } = useParams();
-  const [courses, setCourses] = useState(null);
+  const [courses, setCourses] = useState([]);
   const [dayCourse, setDayCourse] = useState([]);
-  const [currentDay, setCurrentDay] = useState(1);
   const [currentCourseId, setCurrentCourseId] = useState();
   const navigate = useNavigate();
+  // const id = localStorage.getItem("id");
   const lastCourse = dayCourse.at(-1);
   const id = tripId;
 
@@ -23,14 +23,6 @@ const DayItem = () => {
     sessionStorage.setItem("latitude", latitude);
     sessionStorage.setItem("longitude", longitude);
   }
-
-  const onClickDay = day => {
-    const clickDay = _.find(courses, { day: day });
-    setDayCourse(clickDay.courseDetails);
-    setCurrentDay(clickDay.day);
-    setCurrentCourseId(clickDay.courseId);
-    navigate(`/schedule/${id}/${day}`);
-  };
 
   const fetchData = async () => {
     try {
@@ -46,19 +38,19 @@ const DayItem = () => {
   const addCourseHandler = () => {
     if (dayCourse.length >= 10) {
       alert("코스등록은 하루에 10개까지 가능합니다.");
-    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addspot`);
+    } else navigate(`/schedule/${id}/${day}/${currentCourseId}/addspot`);
   };
 
   const addBookMarkCourseHandler = () => {
     if (dayCourse.length >= 10) {
       alert("코스등록은 하루에 10개까지 가능합니다.");
-    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addbookmarkspot`);
+    } else navigate(`/schedule/${id}/${day}/${currentCourseId}/addbookmarkspot`);
   };
 
   const addNearByCourseHandler = () => {
     if (dayCourse.length >= 10) {
       alert("코스등록은 하루에 10개까지 가능합니다.");
-    } else navigate(`/schedule/${id}/${currentDay}/${currentCourseId}/addnearbyspot`);
+    } else navigate(`/schedule/${id}/${day}/${currentCourseId}/addnearbyspot`);
   };
 
   useEffect(() => {
@@ -66,8 +58,11 @@ const DayItem = () => {
   }, []);
 
   useEffect(() => {
-    if (courses?.length > 1) onClickDay(Number(day));
-  }, [courses]);
+    if (!courses.length) return;
+    const clickDay = _.find(courses, { day: Number(day) });
+    setDayCourse(clickDay.courseDetails);
+    setCurrentCourseId(clickDay.courseId);
+  }, [day, courses]);
 
   if (!courses) return <Spinner />;
 
@@ -115,7 +110,8 @@ const DayItem = () => {
                   key={course.courseId}
                   className="font-bold text-lg px-4 cursor-pointer"
                   onClick={() => {
-                    onClickDay(course.day);
+                    // onClickDay(course.day);
+                    navigate(`/schedule/${id}/${course.day}`);
                   }}
                 >
                   {day == course.day ? (
@@ -136,7 +132,7 @@ const DayItem = () => {
               <MapContainer dayCourse={dayCourse} />
             </div>
           )}
-          <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={currentDay} />
+          <CourseItem dayCourse={dayCourse} setDayCourse={setDayCourse} currentDay={day} />
           <div className="text-xs text-gray-400 text-center">
             <p>코스를 추가해 보세요.</p>
             <p>하루에 10개까지 추가할 수 있어요!</p>
