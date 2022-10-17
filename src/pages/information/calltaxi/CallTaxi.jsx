@@ -32,7 +32,7 @@ const CallTaxi = () => {
     });
     return (
       <div>
-        <div className="flex justify-around mb-5">
+        <div className="justify-around mb-5 hidden md:flex">
           {regionNames.map(region => {
             return (
               <CallTaxiRegionButton
@@ -43,6 +43,17 @@ const CallTaxi = () => {
               />
             );
           })}
+        </div>
+        <div className="block md:hidden mb-5">
+          <select
+            value={currentRegion}
+            onChange={event => setCurrentRegion(event.target.value)}
+            className="w-full border-2 border-green1 p-2 px-3 rounded-lg"
+          >
+            {regionNames.map(region => {
+              return <option key={region.name}>{region.name}</option>;
+            })}
+          </select>
         </div>
         <div className="mb-3">
           <p className="text-black1 font-bold">총 {filteredTaxis.length} 건이 검색되었습니다.</p>
