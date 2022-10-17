@@ -12,7 +12,7 @@ const SignupSchema = yup.object().shape({
   nickname: yup.string().min(2, "2글자 이상으로 입력해주세요").required("닉네임은 필수값입니다"),
   password: yup
     .string()
-    .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/, "영문/숫자 조합 4글자 이상으로 입력해주세요")
+    .matches(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d~!@#$%^&*()+|=]{8,}$/, "영문/숫자 조합 8글자 이상으로 입력해주세요")
     .required("비밀번호는 필수값입니다"),
   confirmPassword: yup
     .string()
