@@ -28,7 +28,7 @@ const AddNearBySpot = () => {
   }, []);
 
   return (
-    <Layout title="일정 등록" highlight={"schedule/create"}>
+    <Layout title="일정 관리" highlight={"schedule/create"}>
       {nearByCourse.length > 0 ? (
         <div className="font-semibold text-sm text-center py-4">
           {lastCourseName}부터 가까운 여행지 {nearByCourse.length}건이 검색되었습니다.

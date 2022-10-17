@@ -4,7 +4,7 @@ import DayItem from "../../components/schedule/DayItem";
 
 const AddCourse = () => {
   return (
-    <Layout title="일정 등록" highlight={"schedule/create"}>
+    <Layout title="일정 관리" highlight={"schedule/create"}>
       <DayItem />
     </Layout>
   );

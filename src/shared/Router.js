@@ -34,6 +34,7 @@ import ResetPasswordPage from "../pages/user/ResetPasswordPage";
 import Info from "../pages/menu/Info";
 import ScheduleInfo from "../pages/menu/ScheduleInfo";
 import MypageInfo from "../pages/menu/MypageInfo";
+import Information from "../pages/information/Information";
 
 const Router = () => {
   return (
@@ -47,6 +48,7 @@ const Router = () => {
         <Route path="/restaurants/:restaurantID" element={<RestaurantDetailPage />} />
         <Route path="/accommodations/:accommodationID" element={<AccommodationDetailPage />} />
         <Route path="/weather" element={<Weather />} />
+        <Route path="/information" element={<Information />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/schedule" element={<ScheduleRegisterPage />} />

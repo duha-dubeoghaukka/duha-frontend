@@ -84,13 +84,6 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
         }}
       >
         <div className="flex items-center">
-          <IosShareIcon
-            className="cursor-pointer mr-2"
-            onClick={e => {
-              e.stopPropagation();
-              ModalHandler();
-            }}
-          />
           <div>
             <p className="mt-2	font-semibold">
               {nights + "박" + allDays + "일" + " "}
@@ -102,6 +95,13 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
           </div>
         </div>
         <div>
+          <IosShareIcon
+            className="cursor-pointer"
+            onClick={e => {
+              e.stopPropagation();
+              ModalHandler();
+            }}
+          />
           <ModeEditOutlineOutlinedIcon
             className="cursor-pointer"
             onClick={e => {
