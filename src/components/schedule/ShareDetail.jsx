@@ -27,8 +27,6 @@ function ShareDetail() {
     });
   }, []);
 
-  console.log("firstDayData", activeDay);
-
   if (!courseItem) return <Spinner />;
 
   const onClickDay = day => {
