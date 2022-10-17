@@ -5,12 +5,14 @@ import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
 import { routingLoginPage } from "../../utils/routingLoginPage";
 import { useNavigate } from "react-router-dom";
-import { current } from "@reduxjs/toolkit";
+import checkLoginPlatform from "../../utils/checkLoginPlatform";
 
 function EditUserInfoForm() {
   const token = localStorage.getItem("authorization");
   const userNickName = decodeToken(token);
   const navigate = useNavigate();
+  const loginPlatform = checkLoginPlatform(token);
+  console.log("platform", loginPlatform === "KAKAO");
 
   const [isModal, modalHandler] = useChange();
 
@@ -44,10 +46,6 @@ function EditUserInfoForm() {
   const onChangeNickName = e => {
     setNickName(e.target.value);
     setIsNickName(true);
-    // 수정해야할 부분, 비
-    if (e.target.value) {
-      console.log("zz", isCheckPassword, isCurrentPassword);
-    }
     setIsDisabled(false);
   };
 
@@ -177,32 +175,38 @@ function EditUserInfoForm() {
         <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
         <div className="relative w-full md:w-[500px] mx-auto">
           <input className="input mt-2 font-bold" placeholder="닉네임" name="nickname" value={nickName || ""} onChange={onChangeNickName} />
-          <input
-            className="input mt-2"
-            placeholder="기존 비밀번호"
-            name="currentpassword"
-            value={currentPassword || ""}
-            onChange={onChangeCurrentPassword}
-            type="password"
-          />
-          <input
-            className="input mt-2"
-            placeholder="새 비밀번호"
-            name="newpassword"
-            value={newPassword || ""}
-            onChange={onChangeNewPassword}
-            type="password"
-          />
-          <p className="input-helper ml-4">{isNewPasswrord ? passwordMessage : passwordMessage}</p>
-          <input
-            className="input mt-2"
-            placeholder="비밀번호 확인"
-            name="checkpassword"
-            value={checkPassword || ""}
-            onChange={onChangeCheckPassword}
-            type="password"
-          />
-          <p className="input-helper ml-4">{checkPasswordMessage}</p>
+          {!loginPlatform === "KAKAO" && loginPlatform === "GOOGLE" ? (
+            <>
+              <input
+                className="input mt-2"
+                placeholder="기존 비밀번호"
+                name="currentpassword"
+                value={currentPassword || ""}
+                onChange={onChangeCurrentPassword}
+                type="password"
+              />
+              <input
+                className="input mt-2"
+                placeholder="새 비밀번호"
+                name="newpassword"
+                value={newPassword || ""}
+                onChange={onChangeNewPassword}
+                type="password"
+              />
+              <p className="input-helper ml-4">{isNewPasswrord ? passwordMessage : passwordMessage}</p>
+              <input
+                className="input mt-2"
+                placeholder="비밀번호 확인"
+                name="checkpassword"
+                value={checkPassword || ""}
+                onChange={onChangeCheckPassword}
+                type="password"
+              />
+              <p className="input-helper ml-4">{checkPasswordMessage}</p>
+            </>
+          ) : (
+            console.log("asdf")
+          )}
           <div className="ml-3 mt-3">
             <button
               className="btn-primary mt-3 mb-3 disabled:bg-[#B1D7B4]"
