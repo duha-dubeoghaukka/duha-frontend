@@ -104,7 +104,7 @@ const Layout = props => {
               </div>
               <div className="flex flex-col ml-8">
                 <Link to="/schedule" className={`${category === "create" && "text-green1 font-bold"} hover:font-bold`}>
-                  일정 등록
+                  일정 관리
                 </Link>
                 <Link to="/schedule/share" className={`${category === "share" && "text-green1 font-bold"} hover:font-bold`}>
                   일정 공유

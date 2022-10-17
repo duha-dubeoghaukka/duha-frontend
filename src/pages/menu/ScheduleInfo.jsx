@@ -14,7 +14,7 @@ const ScheduleInfo = () => {
   return (
     <Layout title="일정" highlight={"schedule"}>
       <Link to="/schedule" className="card">
-        <div className="card-content">일정 등록</div>
+        <div className="card-content">일정 관리</div>
         <NavigateNextIcon />
       </Link>
       <Link to="/schedule/share" className="card">

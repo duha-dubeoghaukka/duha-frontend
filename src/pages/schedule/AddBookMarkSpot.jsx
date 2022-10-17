@@ -29,7 +29,7 @@ const AddBookMarkSpot = () => {
   }, []);
 
   return (
-    <Layout title="일정 등록" highlight={"schedule/create"}>
+    <Layout title="일정 관리" highlight={"schedule/create"}>
       {myCourse.length > 0 ? (
         <div className="font-semibold text-sm text-center py-4">
           {nickName && `${nickName}뚜벅러님이 즐겨찾기한 ${myCourse.length}건이 검색되었습니다`}
