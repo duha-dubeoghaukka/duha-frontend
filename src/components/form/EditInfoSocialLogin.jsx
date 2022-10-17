@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import ShowEmailModal from "../modal/ShowEmailModal";
+import React from "react";
 
 function EditInfoSocialLogin({ nickName, isNickName, onSubmit, onChangeNickName }) {
   return (

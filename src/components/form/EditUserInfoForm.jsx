@@ -13,7 +13,6 @@ function EditUserInfoForm() {
   const userNickName = decodeToken(token);
   const navigate = useNavigate();
   const loginPlatform = checkLoginPlatform(token);
-  console.log("platform", loginPlatform === "KAKAO");
 
   const [isModal, modalHandler] = useChange();
 
