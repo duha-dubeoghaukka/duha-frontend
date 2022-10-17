@@ -4,7 +4,7 @@ import EditUserInfoForm from "../../components/form/EditUserInfoForm";
 
 function EditUserInfoPage() {
   return (
-    <Layout title="마이페이지" highlight={"mypage/edit"}>
+    <Layout title="마이페이지" highlight={"mypage/edit"} isFooterFixed={true}>
       <EditUserInfoForm />
     </Layout>
   );
