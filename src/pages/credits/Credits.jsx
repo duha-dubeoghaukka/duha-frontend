@@ -25,6 +25,12 @@ const Credits = () => {
           <li className="text-sm text-black1">날씨: OpenWeather API</li>
         </ul>
       </div>
+      <div className="mb-3 text-center">
+        <p className="text-black1 text-lg font-bold mb-1">문의</p>
+        <a href="mailto:ddubeoghaukka@gmail.com" target="_blank" className="text-blue-600 hover:underline">
+          ddubeoghaukka@gmail.com
+        </a>
+      </div>
       <div className="text-center mt-5">
         <p className="text-black1 text-xl font-bold mb-2">😍 만든 사람들 😍</p>
         <ul>
