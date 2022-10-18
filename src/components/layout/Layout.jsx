@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
@@ -12,7 +12,7 @@ import Footer from "../footer/Footer";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
-  const { children, title, highlight, isFullWidth = false } = props;
+  const { children, title, highlight, isFullWidth = false, isFooterFixed } = props;
   const [greaterCategory, category] = highlight.split("/");
   const navigate = useNavigate();
   const [isSignupModal, signupModalHandler] = useChange();
@@ -28,10 +28,6 @@ const Layout = props => {
       navigate("/login");
     }
   };
-  const [isFixed, setIsFixed] = useState(false);
-  useEffect(() => {
-    setIsFixed(document.body.clientHeight < window.innerHeight);
-  }, [document.body.clientHeight]);
   const nickName = decodeToken(token);
 
   return (
@@ -151,7 +147,7 @@ const Layout = props => {
       ) : (
         <div className="w-full md:w-[600px] max-w-[600px] mx-auto pt-16 px-4 md:px-0 md:mb-10 mb-20">{children}</div>
       )}
-      <Footer isFixed={isFixed} />
+      <Footer isFixed={isFooterFixed} />
     </div>
   );
 };

@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 
 const Footer = ({ isFixed }) => {
-  if (isFixed) {
-    return (
-      <div className="fixed bottom-[80px] md:bottom-5 left-[50%] translate-x-[-50%] w-full">
-        <FooterContent />
-      </div>
-    );
-  } else {
-    return (
-      <div className="mt-5 mb-[80px] md:mb-[20px]">
-        <FooterContent />
-      </div>
-    );
-  }
+  // if (isFixed) {
+  //   return (
+  //     <div className="fixed bottom-[80px] md:bottom-5 left-[50%] translate-x-[-50%] w-full">
+  //       <FooterContent />
+  //     </div>
+  //   );
+  // } else {
+  return (
+    <div className="mt-5 mb-[80px] md:mb-[20px]">
+      <FooterContent />
+    </div>
+  );
+  // }
 };
 
 const FooterContent = () => {

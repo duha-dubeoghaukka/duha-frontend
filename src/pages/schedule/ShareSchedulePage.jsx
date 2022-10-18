@@ -12,7 +12,7 @@ function ShareSchedulePage() {
   }, []);
 
   return (
-    <Layout isLoggedIn={false} title="일정 공유" highlight={"schedule/share"} isFooterFixed={true}>
+    <Layout isLoggedIn={false} title="일정 공유" highlight={"schedule/share"} isFooterFixed={false}>
       <ShareCard />
     </Layout>
   );
