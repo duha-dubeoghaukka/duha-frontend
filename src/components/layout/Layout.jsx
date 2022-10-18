@@ -19,11 +19,11 @@ const Layout = props => {
   const [isSignupModal, signupModalHandler] = useChange();
 
   // 로컬스토리지 토큰 확인
-  const token = localStorage.getItem("authorization");
+  const token = sessionStorage.getItem("authorization");
   const loginHandler = () => {
     if (token) {
-      localStorage.removeItem("authorization");
-      localStorage.removeItem("refresh-token");
+      sessionStorage.removeItem("authorization");
+      sessionStorage.removeItem("refresh-token");
       navigate("/");
     } else {
       navigate("/login");

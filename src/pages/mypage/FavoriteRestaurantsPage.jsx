@@ -9,7 +9,7 @@ import Item from "../../components/mainpage/Item";
 function FavoriteRestaurantsPage() {
   const [restaurantData, setRestaurantData] = useState();
   const navigate = useNavigate();
-  const token = localStorage.getItem("authorization");
+  const token = sessionStorage.getItem("authorization");
   const nickName = decodeToken(token);
   const [counter, setCounter] = useState(0);
 

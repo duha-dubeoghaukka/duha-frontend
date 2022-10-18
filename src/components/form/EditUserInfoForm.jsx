@@ -9,7 +9,7 @@ import checkLoginPlatform from "../../utils/checkLoginPlatform";
 import EditInfoSocialLogin from "./EditInfoSocialLogin";
 
 function EditUserInfoForm() {
-  const token = localStorage.getItem("authorization");
+  const token = sessionStorage.getItem("authorization");
   const userNickName = decodeToken(token);
   const navigate = useNavigate();
   const loginPlatform = checkLoginPlatform(token);
@@ -111,8 +111,8 @@ function EditUserInfoForm() {
           alert(res.data.message);
         } else {
           alert(message);
-          localStorage.removeItem("authorization");
-          localStorage.setItem("authorization", res.headers.authorization);
+          sessionStorage.removeItem("authorization");
+          sessionStorage.setItem("authorization", res.headers.authorization);
           setCurrentPassword("");
           setNewPassword("");
           setCheckPassword("");

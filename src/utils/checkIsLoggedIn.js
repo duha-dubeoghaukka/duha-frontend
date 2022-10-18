@@ -1,5 +1,5 @@
 const checkIsLoggedIn = () => {
-  const auth = localStorage.getItem("authorization");
+  const auth = sessionStorage.getItem("authorization");
   return !!auth;
 };
 
