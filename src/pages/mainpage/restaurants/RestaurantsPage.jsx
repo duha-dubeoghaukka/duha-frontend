@@ -170,7 +170,7 @@ const RestaurantsPage = () => {
           <div>
             <div>
               {items.map(item => {
-                return <Item key={item.id} data={item} category={"restaurant"} counter={counter} setCounter={setCounter} />;
+                return <Item key={item.id} data={item} category={"restaurant"} />;
               })}
             </div>
           </div>

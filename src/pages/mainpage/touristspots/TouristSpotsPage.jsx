@@ -14,7 +14,7 @@ import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined
 import scrollToTop from "../../../utils/scrollToTop";
 import Pagination from "../../../components/mainpage/Pagination";
 
-const TouristSpotsPage = ({ counter, setCounter }) => {
+const TouristSpotsPage = () => {
   const { isLoading, error, data, refetch } = useQuery(["touristSpots"], () => {
     if (currentRegion === "전체") {
       return api.get(`/touristspot?page=${currentPage}`);
