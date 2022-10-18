@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Footer = ({ isFixed = false }) => {
+const Footer = ({ isFixed }) => {
   if (isFixed) {
     return (
       <div className="fixed bottom-[80px] md:bottom-5 left-[50%] translate-x-[-50%] w-full">
