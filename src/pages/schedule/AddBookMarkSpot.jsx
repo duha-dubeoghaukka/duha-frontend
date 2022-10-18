@@ -9,7 +9,7 @@ const AddBookMarkSpot = () => {
   const [myCourse, setMyCourse] = useState([]);
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("authorization");
+  const token = sessionStorage.getItem("authorization");
   const nickName = decodeToken(token);
 
   const fetchData = async () => {

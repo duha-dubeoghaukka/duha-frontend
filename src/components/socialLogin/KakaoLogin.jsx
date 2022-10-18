@@ -12,8 +12,8 @@ const KakaoLogin = props => {
   useEffect(() => {
     socialLoginAPIs.kakaoLogin(code).then(res => {
       if (res.data.isSuccess) {
-        localStorage.setItem("authorization", res.headers.authorization);
-        localStorage.setItem("refresh-token", res.headers["refresh-token"]);
+        sessionStorage.setItem("authorization", res.headers.authorization);
+        sessionStorage.setItem("refresh-token", res.headers["refresh-token"]);
         alert("카카오 로그인이 완료되었습니다!");
         navigate(`/`);
       }

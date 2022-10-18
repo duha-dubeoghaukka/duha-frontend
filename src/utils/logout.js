@@ -1,4 +1,4 @@
 export const logout = () => {
-  localStorage.removeItem("authorization");
-  localStorage.removeItem("refresh-token");
+  sessionStorage.removeItem("authorization");
+  sessionStorage.removeItem("refresh-token");
 };

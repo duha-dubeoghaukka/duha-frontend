@@ -9,7 +9,7 @@ import TripItem from "../../components/mypage/TripItem";
 function FavoriteCoursePage() {
   const [tripData, setTripData] = useState();
   const navigate = useNavigate();
-  const token = localStorage.getItem("authorization");
+  const token = sessionStorage.getItem("authorization");
   const nickName = decodeToken(token);
 
   useEffect(() => {

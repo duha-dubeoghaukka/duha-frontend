@@ -60,7 +60,7 @@ function ScheduleCardComponent({ title, startDate, endDate, id, isPublic, onDele
   const [routeUrl, setRouteUrl] = useState();
 
   const setItem = () => {
-    localStorage.setItem("id", id);
+    sessionStorage.setItem("id", id);
   };
 
   const onUpdate = id => {

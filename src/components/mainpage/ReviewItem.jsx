@@ -12,7 +12,7 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
   let isAuthor = false;
   const [editedComment, setEditedComment] = useState(review);
   if (checkIsLoggedIn()) {
-    const token = localStorage.getItem("authorization");
+    const token = sessionStorage.getItem("authorization");
     const currentUser = decodeToken(token);
     if (currentUser === reviewer) {
       isAuthor = true;
