@@ -1,12 +1,8 @@
 import regionNames from "../../../utils/regionNames.js";
 import RegionButton from "../../../components/mainpage/RegionButton";
 import Layout from "../../../components/layout/Layout";
-import { useContext, useEffect, useState } from "react";
-import GlobalState from "../../../shared/GlobalState";
+import { useEffect, useState } from "react";
 import Item from "../../../components/mainpage/Item";
-import { removeDuplicates } from "../../../utils/removeDuplicates";
-import { filterItems } from "../../../utils/filterItems";
-import { arraySplitter } from "../../../utils/arraySplitter";
 import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -15,23 +11,28 @@ import SearchField from "../../../components/search/SearchField";
 import AutoComplete from "../../../components/search/AutoComplete";
 import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import scrollToTop from "../../../utils/scrollToTop";
+import Pagination from "../../../components/mainpage/Pagination";
 
 const AccommodationsPage = () => {
-  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedAccommodations"], () => {
-    return api.get("/accommodation");
+  const { isLoading, error, data, refetch } = useQuery(["bookmarkedAccommodations"], () => {
+    if (currentRegion === "전체") {
+      return api.get(`/accommodation?page=${currentPage}`);
+    } else {
+      return api.get(`/accommodation?page=${currentPage}&region=${currentRegion}`);
+    }
   });
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentRegion, setCurrentRegion] = useState("제주시내");
+  useEffect(() => {
+    refetch();
+    scrollToTop();
+  }, [currentRegion, currentPage]);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
-  const { regionSelection, accommodationPageSelection } = useContext(GlobalState);
-  const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentAccommodationPage, setCurrentAccommodationPage } = accommodationPageSelection;
-  const selectChangeHandler = event => {
-    setSelectedRegion(event.target.value);
-    setCurrentAccommodationPage(1);
-  };
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
@@ -52,6 +53,10 @@ const AccommodationsPage = () => {
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
+  };
+  const changeCurrentRegion = regionName => {
+    setCurrentPage(0);
+    setCurrentRegion(regionName);
   };
   const keyPressHandler = event => {
     const length = searchResults.length;
@@ -85,40 +90,17 @@ const AccommodationsPage = () => {
       });
     });
   }, [selectedAutoComplete]);
-  useEffect(() => {
-    setCurrentAccommodationPage(1);
-    setSelectedRegion("전체");
-  }, []);
-  useEffect(() => {
-    setSearchMode(false);
-    setAutoCompletedInput("");
-    refetch();
-  }, [regionSelection, currentAccommodationPage]);
-  if (isLoading || isFetching || status === "loading") {
+  if (isLoading) {
     return <Spinner />;
   }
-  if (error || status === "error") {
+  if (error) {
     return <div>{error}</div>;
   }
-  if (data && status === "success" && isFetching === false) {
-    const accommodations = data.data.data;
-    const processedAccommodations = removeDuplicates(accommodations);
-    const sortedAccommodations = processedAccommodations.sort((a, b) => b.likeNum - a.likeNum);
-    const filteredAccommodations = filterItems(sortedAccommodations, selectedRegion);
-    const splittedAccommodations = arraySplitter(filteredAccommodations);
-    const numberOfPages = splittedAccommodations.length;
-    const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentAccommodations = splittedAccommodations[currentAccommodationPage - 1];
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
-    const counter = undefined;
-    const setCounter = () => {};
+  if (data) {
+    const items = data.data.data.list;
+    const totalNumberOfPages = data.data.data.totalPages;
     return (
-      <Layout isLoggedIn={false} title="숙소" highlight={"mainpage/accommodations"}>
+      <Layout title="숙소" highlight={"mainpage/accommodations"}>
         <div className="flex justify-around my-4 text-lg font-bold">
           <Link to="/spots" className="text-gray-500">
             관광
@@ -136,7 +118,7 @@ const AccommodationsPage = () => {
             sendResults={sendResults}
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
-            region={selectedRegion}
+            region={currentRegion}
             category="accommodations"
           />
           {searchResults && (
@@ -152,18 +134,9 @@ const AccommodationsPage = () => {
         <div className="mb-2 md:mb-5">
           <ul className="hidden md:flex justify-between">
             {regionNames.map(region => {
-              return <RegionButton key={region.name} {...region} />;
+              return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
             })}
           </ul>
-          <select
-            value={selectedRegion}
-            onChange={selectChangeHandler}
-            className="px-3 md:hidden w-full h-[43px] text-gray-500 rounded-lg border-gray-500 border-solid border-2"
-          >
-            {regionNames.map(region => {
-              return <option key={region.name}>{region.name}</option>;
-            })}
-          </select>
         </div>
         <div className="flex justify-start items-center mb-2">
           <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
@@ -176,49 +149,20 @@ const AccommodationsPage = () => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"accommodation"} />;
+                return <Item key={result.id} data={result} category={"accommodation"} />;
               })}
             </div>
           </div>
         ) : (
           <div>
-            <div className="mb-2">
-              <p className="text-sm">총 {filteredAccommodations.length}건이 검색되었습니다</p>
-            </div>
             <div>
-              {currentAccommodations.map(accommodation => {
-                return (
-                  <Item key={accommodation.id} data={accommodation} category={"accommodation"} counter={counter} setCounter={setCounter} />
-                );
+              {items.map(item => {
+                return <Item key={item.id} data={item} category={"accommodation"} />;
               })}
-            </div>
-            <div className="flex justify-center">
-              <div className="flex justify-start overflow-x-scroll pb-2">
-                {pages.map(page => {
-                  if (page === currentAccommodationPage) {
-                    return (
-                      <div key={page} className="mr-1">
-                        <p className="font-medium">{page}</p>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={page}
-                        className="mr-1 cursor-pointer"
-                        onClick={() => {
-                          setCurrentAccommodationPage(page);
-                        }}
-                      >
-                        <p className="text-gray-500">{page}</p>
-                      </div>
-                    );
-                  }
-                })}
-              </div>
             </div>
           </div>
         )}
+        <Pagination currentPage={currentPage} numberOfPages={totalNumberOfPages} setCurrentPage={setCurrentPage} />
         <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer hidden md:block" onClick={scrollToTop} />
       </Layout>
     );
