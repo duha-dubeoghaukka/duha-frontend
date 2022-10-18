@@ -1,12 +1,8 @@
 import regionNames from "../../../utils/regionNames.js";
 import RegionButton from "../../../components/mainpage/RegionButton";
 import Layout from "../../../components/layout/Layout";
-import { useContext, useEffect, useState } from "react";
-import GlobalState from "../../../shared/GlobalState";
+import { useEffect, useState } from "react";
 import Item from "../../../components/mainpage/Item";
-import { removeDuplicates } from "../../../utils/removeDuplicates";
-import { filterItems } from "../../../utils/filterItems";
-import { arraySplitter } from "../../../utils/arraySplitter";
 import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -15,23 +11,24 @@ import SearchField from "../../../components/search/SearchField";
 import AutoComplete from "../../../components/search/AutoComplete";
 import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import scrollToTop from "../../../utils/scrollToTop";
+import Pagination from "../../../components/mainpage/Pagination";
 
 const RestaurantsPage = () => {
-  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedRestaurants"], () => {
+  const { isLoading, error, data, refetch } = useQuery(["restaurants"], () => {
     return api.get("/restaurant");
   });
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentRegion, setCurrentRegion] = useState("전체");
+  useEffect(() => {
+    refetch();
+    scrollToTop();
+  }, [currentRegion, currentPage]);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
-  const { regionSelection, restaurantPageSelection } = useContext(GlobalState);
-  const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentRestaurantPage, setCurrentRestaurantPage } = restaurantPageSelection;
-  const selectChangeHandler = event => {
-    setSelectedRegion(event.target.value);
-    setCurrentRestaurantPage(1);
-  };
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
@@ -53,6 +50,10 @@ const RestaurantsPage = () => {
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
+  };
+  const changeCurrentRegion = regionName => {
+    setCurrentPage(0);
+    setCurrentRegion(regionName);
   };
   const keyPressHandler = event => {
     const length = searchResults.length;
@@ -86,43 +87,20 @@ const RestaurantsPage = () => {
       });
     });
   }, [selectedAutoComplete]);
-
-  useEffect(() => {
-    setCurrentRestaurantPage(1);
-    setSelectedRegion("전체");
-  }, []);
-
-  useEffect(() => {
-    setSearchMode(false);
-    setAutoCompletedInput("");
-    refetch();
-  }, [regionSelection, currentRestaurantPage]);
-
-  if (isLoading || isFetching || status === "loading") {
+  const selectChangeHandler = event => {
+    setCurrentRegion(event.target.value);
+  };
+  if (isLoading) {
     return <Spinner />;
   }
-  if (error || status === "error") {
+  if (error) {
     return <div>{error}</div>;
   }
-  if (data && status === "success" && isFetching === false) {
-    const restaurants = data.data.data;
-    const processedRestaurants = removeDuplicates(restaurants);
-    const sortedRestaurants = processedRestaurants.sort((a, b) => b.likeNum - a.likeNum);
-    const filteredRestaurants = filterItems(sortedRestaurants, selectedRegion);
-    const splittedRestaurants = arraySplitter(filteredRestaurants);
-    const numberOfPages = splittedRestaurants.length;
-    const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentRestaurants = splittedRestaurants[currentRestaurantPage - 1];
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
-    const counter = undefined;
-    const setCounter = () => {};
+  if (data) {
+    const items = data.data.data.list;
+    const totalNumberOfPages = data.data.data.totalPages;
     return (
-      <Layout isLoggedIn={false} title="맛집" highlight={"mainpage/restaurants"}>
+      <Layout title="맛집" highlight={"mainpage/restaurants"}>
         <div className="flex justify-around my-4 text-lg font-bold">
           <Link to="/spots" className="text-gray-500">
             관광
@@ -140,7 +118,7 @@ const RestaurantsPage = () => {
             sendResults={sendResults}
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
-            region={selectedRegion}
+            region={currentRegion}
             category="restaurants"
           />
           {searchResults && (
@@ -156,7 +134,7 @@ const RestaurantsPage = () => {
         <div className="mb-2 md:mb-5">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
-              return <RegionButton key={region.name} {...region} />;
+              return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
             })}
           </ul>
           <select
@@ -186,41 +164,14 @@ const RestaurantsPage = () => {
           </div>
         ) : (
           <div>
-            <div className="mb-2">
-              <p className="text-sm">총 {filteredRestaurants.length}건이 검색되었습니다</p>
-            </div>
             <div>
-              {currentRestaurants.map(restaurant => {
-                return <Item key={restaurant.id} data={restaurant} category={"restaurant"} counter={counter} setCounter={setCounter} />;
+              {items.map(item => {
+                return <Item key={item.id} data={item} category={"restaurant"} counter={counter} setCounter={setCounter} />;
               })}
-            </div>
-            <div className="flex justify-center">
-              <div className="flex justify-start overflow-x-scroll pb-2">
-                {pages.map(page => {
-                  if (page === currentRestaurantPage) {
-                    return (
-                      <div key={page} className="mr-1">
-                        <p className="font-medium">{page}</p>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={page}
-                        className="mr-1 cursor-pointer"
-                        onClick={() => {
-                          setCurrentRestaurantPage(page);
-                        }}
-                      >
-                        <p className="text-gray-500">{page}</p>
-                      </div>
-                    );
-                  }
-                })}
-              </div>
             </div>
           </div>
         )}
+        <Pagination currentPage={currentPage} numberOfPages={totalNumberOfPages} setCurrentPage={setCurrentPage} />
         <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer hidden md:block" onClick={scrollToTop} />
       </Layout>
     );

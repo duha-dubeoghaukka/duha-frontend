@@ -15,7 +15,7 @@ import scrollToTop from "../../../utils/scrollToTop";
 import Pagination from "../../../components/mainpage/Pagination";
 
 const AccommodationsPage = () => {
-  const { isLoading, error, data, refetch } = useQuery(["bookmarkedAccommodations"], () => {
+  const { isLoading, error, data, refetch } = useQuery(["accommodations"], () => {
     if (currentRegion === "전체") {
       return api.get(`/accommodation?page=${currentPage}`);
     } else {
@@ -23,7 +23,7 @@ const AccommodationsPage = () => {
     }
   });
   const [currentPage, setCurrentPage] = useState(0);
-  const [currentRegion, setCurrentRegion] = useState("제주시내");
+  const [currentRegion, setCurrentRegion] = useState("전체");
   useEffect(() => {
     refetch();
     scrollToTop();
@@ -48,6 +48,7 @@ const AccommodationsPage = () => {
   };
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
+    setSelectedAutoComplete(() => 0);
     setSearchResults([]);
   };
   const sendSearchedResults = results => {
@@ -90,6 +91,9 @@ const AccommodationsPage = () => {
       });
     });
   }, [selectedAutoComplete]);
+  const selectChangeHandler = event => {
+    setCurrentRegion(event.target.value);
+  };
   if (isLoading) {
     return <Spinner />;
   }
@@ -137,6 +141,15 @@ const AccommodationsPage = () => {
               return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
             })}
           </ul>
+          <select
+            value={currentRegion}
+            onChange={selectChangeHandler}
+            className="px-3 md:hidden w-full h-[43px] text-gray-500 rounded-lg border-gray-500 border-solid border-2"
+          >
+            {regionNames.map(region => {
+              return <option key={region.name}>{region.name}</option>;
+            })}
+          </select>
         </div>
         <div className="flex justify-start items-center mb-2">
           <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
