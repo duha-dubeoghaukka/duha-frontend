@@ -29,7 +29,7 @@ const Credits = () => {
         <p className="text-black1 text-xl font-bold mb-2">😍 만든 사람들 😍</p>
         <ul>
           <li>
-            <Member content={"이다정(프로젝트 리더/총괄) - 백엔드 파트 담당"} githubURL={"https://github.com/dajeong09"} />
+            <Member content={"이다정(프로젝트 리더) - 백엔드 파트 담당"} githubURL={"https://github.com/dajeong09"} />
             <Member content={"박세은(프로젝트 부리더) - 프론트엔드 파트 담당"} githubURL={"https://github.com/marksenee"} />
             <Member content={"이수민 - 백엔드 파트 담당"} githubURL={"https://github.com/sooominnn"} />
             <Member content={"임연주 - 프론트엔드 파트 담당"} githubURL={"https://github.com/yeondooo"} />
