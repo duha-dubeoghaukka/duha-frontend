@@ -15,7 +15,6 @@ import KakaoLogin from "../components/socialLogin/KakaoLogin";
 import GoogleLogin from "../components/socialLogin/GoogleLogin";
 import ShareSchedulePage from "../pages/schedule/ShareSchedulePage";
 import ShareDetailPage from "../pages/schedule/ShareDetailPage";
-import TouristSpotsPageContainer from "../pages/mainpage/touristspots/TouristSpotsPageContainer";
 import FavoriteCoursePage from "../pages/mypage/FavoriteCoursePage";
 import FavoriteSpotsPage from "../pages/mypage/FavoriteSpotsPage";
 import FavoriteRestaurantsPage from "../pages/mypage/FavoriteRestaurantsPage";
