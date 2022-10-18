@@ -16,7 +16,11 @@ import Pagination from "../../../components/mainpage/Pagination";
 
 const RestaurantsPage = () => {
   const { isLoading, error, data, refetch } = useQuery(["restaurants"], () => {
-    return api.get("/restaurant");
+    if (currentRegion === "전체") {
+      return api.get(`/restaurant?page=${currentPage}`);
+    } else {
+      return api.get(`/restaurant?page=${currentPage}&region=${currentRegion}`);
+    }
   });
   const [currentPage, setCurrentPage] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("전체");
@@ -138,7 +142,7 @@ const RestaurantsPage = () => {
             })}
           </ul>
           <select
-            value={selectedRegion}
+            value={currentRegion}
             onChange={selectChangeHandler}
             className="px-3 md:hidden w-full h-[43px] text-gray-500 rounded-lg border-gray-500 border-solid border-2"
           >
@@ -158,7 +162,7 @@ const RestaurantsPage = () => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"restaurant"} />;
+                return <Item key={result.id} data={result} category={"restaurant"} />;
               })}
             </div>
           </div>

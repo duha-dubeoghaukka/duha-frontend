@@ -1,12 +1,8 @@
 import regionNames from "../../../utils/regionNames.js";
 import RegionButton from "../../../components/mainpage/RegionButton";
 import Layout from "../../../components/layout/Layout";
-import { useContext, useEffect, useState } from "react";
-import GlobalState from "../../../shared/GlobalState";
+import { useEffect, useState } from "react";
 import Item from "../../../components/mainpage/Item";
-import { removeDuplicates } from "../../../utils/removeDuplicates";
-import { filterItems } from "../../../utils/filterItems";
-import { arraySplitter } from "../../../utils/arraySplitter";
 import Spinner from "../../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
@@ -15,25 +11,28 @@ import SearchField from "../../../components/search/SearchField";
 import AutoComplete from "../../../components/search/AutoComplete";
 import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import scrollToTop from "../../../utils/scrollToTop";
+import Pagination from "../../../components/mainpage/Pagination";
 
 const TouristSpotsPage = ({ counter, setCounter }) => {
-  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedTouristSpots"], () => {
-    return api.get("/touristspot");
+  const { isLoading, error, data, refetch } = useQuery(["touristSpots"], () => {
+    if (currentRegion === "전체") {
+      return api.get(`/touristspot?page=${currentPage}`);
+    } else {
+      return api.get(`/touristspot?page=${currentPage}&region=${currentRegion}`);
+    }
   });
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentRegion, setCurrentRegion] = useState("전체");
+  useEffect(() => {
+    refetch();
+    scrollToTop();
+  }, [currentRegion, currentPage]);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
-  const { regionSelection, spotPageSelection } = useContext(GlobalState);
-  const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentSpotPage, setCurrentSpotPage } = spotPageSelection;
-
-  const selectChangeHandler = event => {
-    setSelectedRegion(event.target.value);
-    setCurrentSpotPage(1);
-  };
-
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
@@ -47,18 +46,19 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
     );
     setSelectedAutoComplete(() => 0);
   };
-
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
     setSelectedAutoComplete(() => 0);
     setSearchResults([]);
   };
-
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
   };
-
+  const changeCurrentRegion = regionName => {
+    setCurrentPage(0);
+    setCurrentRegion(regionName);
+  };
   const keyPressHandler = event => {
     const length = searchResults.length;
     if (length > 0) {
@@ -79,7 +79,6 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
       }
     }
   };
-
   useEffect(() => {
     setSearchResults(previousSearchResults => {
       return previousSearchResults.map((result, index) => {
@@ -92,41 +91,20 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
       });
     });
   }, [selectedAutoComplete]);
-
-  useEffect(() => {
-    setCurrentSpotPage(1);
-    setSelectedRegion("전체");
-  }, []);
-
-  useEffect(() => {
-    setSearchMode(false);
-    setAutoCompletedInput("");
-    refetch();
-  }, [regionSelection, currentSpotPage]);
-
-  if (isLoading || isFetching || status === "loading") {
+  const selectChangeHandler = event => {
+    setCurrentRegion(event.target.value);
+  };
+  if (isLoading) {
     return <Spinner />;
   }
-  if (error || status === "error") {
+  if (error) {
     return <div>{error}</div>;
   }
-  if (data && status === "success" && isFetching === false) {
-    const spots = data.data.data;
-    const processedSpots = removeDuplicates(spots);
-    const sortedSpots = processedSpots.sort((a, b) => b.likeNum - a.likeNum);
-    const filteredSpots = filterItems(sortedSpots, selectedRegion);
-    const splittedSpots = arraySplitter(filteredSpots);
-    const numberOfPages = splittedSpots.length;
-    const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentSpots = splittedSpots[currentSpotPage - 1];
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
+  if (data) {
+    const items = data.data.data.list;
+    const totalNumberOfPages = data.data.data.totalPages;
     return (
-      <Layout isLoggedIn={false} title="관광지" highlight={"mainpage/spots"}>
+      <Layout title="관광지" highlight={"mainpage/spots"}>
         <div className="flex justify-around my-4 text-lg font-bold">
           <Link to="/spots" className="text-green1">
             관광
@@ -144,7 +122,7 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             sendResults={sendResults}
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
-            region={selectedRegion}
+            region={currentRegion}
             category="touristSpots"
           />
           {searchResults && (
@@ -160,11 +138,11 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
         <div className="mb-2 md:mb-5">
           <ul className="hidden md:flex justify-between">
             {regionNames.map(region => {
-              return <RegionButton key={region.name} {...region} />;
+              return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
             })}
           </ul>
           <select
-            value={selectedRegion}
+            value={currentRegion}
             onChange={selectChangeHandler}
             className="px-3 md:hidden w-full h-[43px] text-gray-500 rounded-lg border-gray-500 border-solid border-2"
           >
@@ -184,47 +162,20 @@ const TouristSpotsPage = ({ counter, setCounter }) => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+                return <Item key={result.id} data={result} category={"touristspot"} />;
               })}
             </div>
           </div>
         ) : (
           <div>
-            <div className="mb-2">
-              <p className="text-sm">총 {filteredSpots.length}건이 검색되었습니다</p>
-            </div>
             <div>
-              {currentSpots.map(spot => {
-                return <Item key={spot.id} data={spot} counter={counter} setCounter={setCounter} category={"touristspot"} />;
+              {items.map(item => {
+                return <Item key={item.id} data={item} category={"touristspot"} />;
               })}
-            </div>
-            <div className="flex justify-center">
-              <div className="flex justify-start overflow-x-scroll pb-2">
-                {pages.map(page => {
-                  if (page === currentSpotPage) {
-                    return (
-                      <div key={page} className="mr-1">
-                        <p className="font-medium">{page}</p>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={page}
-                        className="mr-1 cursor-pointer"
-                        onClick={() => {
-                          setCurrentSpotPage(page);
-                        }}
-                      >
-                        <p className="text-gray-500">{page}</p>
-                      </div>
-                    );
-                  }
-                })}
-              </div>
             </div>
           </div>
         )}
+        <Pagination currentPage={currentPage} numberOfPages={totalNumberOfPages} setCurrentPage={setCurrentPage} />
         <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer hidden md:block" onClick={scrollToTop} />
       </Layout>
     );
