@@ -8,10 +8,11 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import decodeToken from "../../utils/decodeToken";
 import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
+import Footer from "../footer/Footer";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
-  const { children, title, highlight, isFullWidth = false } = props;
+  const { children, title, highlight, isFullWidth = false, isFooterFixed } = props;
   const [greaterCategory, category] = highlight.split("/");
 
   const navigate = useNavigate();
@@ -148,6 +149,7 @@ const Layout = props => {
       ) : (
         <div className="w-full md:w-[600px] max-w-[600px] mx-auto pt-16 px-4 md:px-0 md:mb-10 mb-20">{children}</div>
       )}
+      <Footer isFixed={isFooterFixed} />
     </div>
   );
 };

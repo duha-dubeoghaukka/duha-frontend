@@ -1,8 +1,7 @@
 import Layout from "../../components/layout/Layout";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
 import { useEffect, useState } from "react";
-import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import AddBookrMarkItem from "../../components/schedule/AddBookrMarkItem";
 import decodeToken from "../../utils/decodeToken";
 
@@ -29,7 +28,7 @@ const AddBookMarkSpot = () => {
   }, []);
 
   return (
-    <Layout title="일정 관리" highlight={"schedule/create"}>
+    <Layout title="일정 관리" highlight={"schedule/create"} isFooterFixed={true}>
       {myCourse.length > 0 ? (
         <div className="font-semibold text-sm text-center py-4">
           {nickName && `${nickName}뚜벅러님이 즐겨찾기한 ${myCourse.length}건이 검색되었습니다`}

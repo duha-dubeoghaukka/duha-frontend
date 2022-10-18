@@ -5,7 +5,7 @@ import Layout from "../../components/layout/Layout";
 
 const Info = () => {
   return (
-    <Layout title="정보" highlight={"mainpage/info"}>
+    <Layout title="정보" highlight={"mainpage/info"} isFooterFixed={true}>
       <Link to="/weather" className="card">
         <div className="card-content">날씨 더 알아보기</div>
         <NavigateNextIcon />

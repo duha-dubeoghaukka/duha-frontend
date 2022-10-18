@@ -12,7 +12,7 @@ const ScheduleInfo = () => {
   }, []);
 
   return (
-    <Layout title="일정" highlight={"schedule"}>
+    <Layout title="일정" highlight={"schedule"} isFooterFixed={true}>
       <Link to="/schedule" className="card">
         <div className="card-content">일정 관리</div>
         <NavigateNextIcon />

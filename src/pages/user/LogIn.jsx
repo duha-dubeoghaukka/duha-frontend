@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 
 const LogIn = () => {
   return (
-    <Layout title="로그인" highlight={""}>
+    <Layout title="로그인" highlight={""} isFooterFixed={true}>
       <LogInForm />
     </Layout>
   );

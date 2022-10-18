@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import decodeToken from "../../utils/decodeToken";
@@ -25,7 +25,7 @@ function FavoriteCoursePage() {
   }, []);
 
   return (
-    <Layout isLoggedIn={false} title="즐겨찾기 목록" highlight={"mypage/favorites"}>
+    <Layout isLoggedIn={false} title="즐겨찾기 목록" highlight={"mypage/favorites"} isFooterFixed={true}>
       <div className="grid place-items-center mt-10 mb-10">
         <span className="font-semibold md:text-lg text-black2">
           {tripData?.length ? (
