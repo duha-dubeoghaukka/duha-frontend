@@ -35,11 +35,12 @@ const RestaurantsPage = () => {
   const [currentRegion, setCurrentRegion] = useState("전체");
   useEffect(() => {
     setCurrentPage(0);
+    refetch();
   }, [isNearBusStopChecked]);
   useEffect(() => {
     refetch();
     scrollToTop();
-  }, [currentRegion, currentPage, isNearBusStopChecked]);
+  }, [currentRegion, currentPage]);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
