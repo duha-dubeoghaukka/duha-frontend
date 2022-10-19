@@ -52,9 +52,9 @@ const MapContainer = ({ dayCourse }) => {
         height: "100%",
         borderRadius: "0.5rem"
       }}
-      level={3} // 지도의 확대 레벨
+      level={5} // 지도의 확대 레벨
     >
-      <Polyline path={[data]} strokeWeight={5} strokeColor={"#7FB77E"} strokeOpacity={1} strokeStyle={"shortdash"} />
+      <Polyline path={[data]} strokeWeight={3} strokeColor={"#ff8800"} strokeOpacity={1} strokeStyle={"shortdash"} />
       {mapData.map(item => (
         <EventMarkerContainer key={item.detailId} position={item.latlng} name={item.name} />
       ))}
