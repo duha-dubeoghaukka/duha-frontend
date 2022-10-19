@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { DateCalculation, DateDiff } from "../../utils/dateCalculation";
-import Spinner from "../Spinner/Spinner";
+import NonLayoutSpinner from "../Spinner/NonLayoutSpinner";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { __getSchedules, __deleteSchedule } from "../../redux/modules/schedules";
@@ -28,7 +28,7 @@ function ScheduleCard() {
   return (
     <>
       {!schedules ? (
-        <Spinner />
+        <NonLayoutSpinner />
       ) : (
         schedules?.map(item => {
           return (
