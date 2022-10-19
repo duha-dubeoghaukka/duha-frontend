@@ -39,8 +39,8 @@
   .card-content {
     @apply font-bold text-black2 text-sm md:text-lg;
   }
-  .main-card {
-    @apply w-full max-w-[219px] md:w-[219px] mx-auto h-32 bg-white1 rounded-md shadow-lg mt-5 flex items-center  hover:brightness-95;
+  .main-weather {
+    @apply w-[300px] md:w-[500px] mx-auto h-16 flex justify-center  items-center  bg-[#ffffff] rounded-md shadow-lg shadow-[#eeeeee] mt-5 mb-5 font-semibold md:text-lg text-black2;
   }
 }
 
