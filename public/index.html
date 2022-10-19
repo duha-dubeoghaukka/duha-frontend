@@ -4,22 +4,25 @@
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>뚜벅하우까</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-  <link rel="favicon" href="./favicon.ico">
-  <meta property="og:title" content="뚜벅 하우까" /> 
-  <meta property="og:url" content="https://dduha.site" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://i.ibb.co/sHHr4Dj/2.png" /> 
-  <meta property="og:description" content="제주도를 여행할 뚜벅이를 위한 웹서비스 입니다" />
+  <link href="./favicon.ico" rel="favicon">
+  <meta content="뚜벅 하우까" property="og:title" />
+  <meta content="https://dduha.site" property="og:url" />
+  <meta content="website" property="og:type" />
+  <meta content="https://i.ibb.co/sHHr4Dj/2.png" property="og:image" />
+  <meta content="제주도를 여행할 뚜벅이를 위한 웹서비스 입니다" property="og:description" />
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-4KN4LGGSGS"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-4KN4LGGSGS');
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag("js", new Date());
+    gtag("config", "G-4KN4LGGSGS");
   </script>
 </head>
 <body>
@@ -27,7 +30,7 @@
 <script
   src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=%REACT_APP_NAVER_MAPS_API_KEY%&submodules=geocoder"
   type="text/javascript"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAOMAP_API_KEY%"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=%REACT_APP_KAKAOMAP_API_KEY%" type="text/javascript"></script>
 <div id="root"></div>
 <!--
   This HTML file is a template.
