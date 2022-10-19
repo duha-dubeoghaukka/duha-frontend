@@ -35,13 +35,14 @@ import ScheduleInfo from "../pages/menu/ScheduleInfo";
 import MypageInfo from "../pages/menu/MypageInfo";
 import Information from "../pages/information/Information";
 import Credits from "../pages/credits/Credits";
+import TouristSpotsPage from "../pages/mainpage/touristspots/TouristSpotsPage";
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
-        <Route path="/spots" element={<TouristSpotsPageContainer />} />
+        <Route path="/spots" element={<TouristSpotsPage />} />
         <Route path="/restaurants" element={<RestaurantsPage />} />
         <Route path="/accommodations" element={<AccommodationsPage />} />
         <Route path="/spots/:spotID" element={<TouristSpotDetailPage />} />
