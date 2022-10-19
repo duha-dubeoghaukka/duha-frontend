@@ -135,7 +135,7 @@ const Layout = props => {
         <Link to="/">
           <HomeIcon />
         </Link>
-        <Link to="/scheduleinfo">
+        <Link to="/schedule">
           <CalendarMonthIcon />
         </Link>
         <Link to="/mypage">
