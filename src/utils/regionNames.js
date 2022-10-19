@@ -20,7 +20,7 @@ const regionNames = [
     romanization: "Seogwipo"
   },
   {
-    name: "우도&성산&표션",
+    name: "우도&성산&표선",
     romanization: "Udo & Seongsan & Pyoseon"
   },
   {
