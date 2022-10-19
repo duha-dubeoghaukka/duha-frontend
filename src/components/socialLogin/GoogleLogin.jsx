@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { socialLoginAPIs } from "../../api/api";
+import { setCookie } from "../../shared/Cookie";
 
 const GoogleLogin = props => {
   const href = window.location.href;
@@ -11,8 +12,8 @@ const GoogleLogin = props => {
   useEffect(() => {
     socialLoginAPIs.googleLogin(code).then(res => {
       if (res.data.isSuccess) {
-        sessionStorage.setItem("authorization", res.headers.authorization);
-        sessionStorage.setItem("refresh-token", res.headers["refresh-token"]);
+        setCookie("authorization", res.headers.authorization);
+        setCookie("refresh-token", res.headers["refresh-token"]);
         alert("구글 로그인이 완료되었습니다!");
         navigate(`/`);
       }

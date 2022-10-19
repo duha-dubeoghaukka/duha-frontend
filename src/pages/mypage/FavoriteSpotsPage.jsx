@@ -5,11 +5,12 @@ import Layout from "../../components/layout/Layout";
 import Spinner from "../../components/Spinner/Spinner";
 import decodeToken from "../../utils/decodeToken";
 import Item from "../../components/mainpage/Item";
+import { getCookie } from "../../shared/Cookie";
 
 function FavoriteSpotsPage() {
   const [spotData, setSpotData] = useState();
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("authorization");
+  const token = getCookie("authorization");
   const nickName = decodeToken(token);
   const [counter, setCounter] = useState(0);
 

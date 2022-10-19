@@ -4,12 +4,13 @@ import { api } from "../../api/api";
 import { useEffect, useState } from "react";
 import AddBookrMarkItem from "../../components/schedule/AddBookrMarkItem";
 import decodeToken from "../../utils/decodeToken";
+import { getCookie } from "../../shared/Cookie";
 
 const AddBookMarkSpot = () => {
   const [myCourse, setMyCourse] = useState([]);
   const navigate = useNavigate();
 
-  const token = sessionStorage.getItem("authorization");
+  const token = getCookie("authorization");
   const nickName = decodeToken(token);
 
   const fetchData = async () => {
