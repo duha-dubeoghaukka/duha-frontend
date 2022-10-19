@@ -101,7 +101,7 @@ const AccommodationsPage = () => {
     return <div>{error}</div>;
   }
   if (data) {
-    const items = data.data.data.list;
+    const items = data.data.data;
     const totalNumberOfPages = data.data.data.totalPages;
     return (
       <Layout title="숙소" highlight={"mainpage/accommodations"}>
