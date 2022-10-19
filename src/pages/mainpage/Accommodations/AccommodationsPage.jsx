@@ -100,7 +100,7 @@ const AccommodationsPage = () => {
     });
   }, []);
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner title={"숙소"} />;
   }
   if (error) {
     return <div>{error}</div>;

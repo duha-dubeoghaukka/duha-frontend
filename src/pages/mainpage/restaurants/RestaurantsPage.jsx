@@ -100,7 +100,7 @@ const RestaurantsPage = () => {
     });
   }, []);
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner title="맛집" />;
   }
   if (error) {
     return <div>{error}</div>;

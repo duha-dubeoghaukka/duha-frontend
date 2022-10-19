@@ -100,13 +100,12 @@ const TouristSpotsPage = () => {
     });
   }, []);
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner title="관광지" />;
   }
   if (error) {
     return <div>{error}</div>;
   }
   if (data) {
-    console.dir(data);
     const items = data.data.data;
     const totalNumberOfPages = data.data.data.totalPages;
     return (
