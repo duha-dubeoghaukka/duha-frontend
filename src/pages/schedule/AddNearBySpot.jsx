@@ -34,7 +34,7 @@ const AddNearBySpot = () => {
           {lastCourseName}부터 가까운 여행지 {nearByCourse.length}건이 검색되었습니다.
         </div>
       ) : (
-        <div>
+        <div className="py-4">
           <div className="font-semibold text-sm text-center mb-4">{lastCourseName}부터 가까운 여행지가 없습니다.</div>
           <div className="flex justify-center items-center">
             <button

@@ -5,11 +5,12 @@ import Layout from "../../components/layout/Layout";
 import decodeToken from "../../utils/decodeToken";
 import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
 import TripItem from "../../components/mypage/TripItem";
+import { getCookie } from "../../shared/Cookie";
 
 function FavoriteCoursePage() {
   const [tripData, setTripData] = useState();
   const navigate = useNavigate();
-  const token = sessionStorage.getItem("authorization");
+  const token = getCookie("authorization");
   const nickName = decodeToken(token);
 
   useEffect(() => {

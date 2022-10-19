@@ -1,4 +1,6 @@
+import { deleteCookie } from "../shared/Cookie";
+
 export const logout = () => {
-  sessionStorage.removeItem("authorization");
-  sessionStorage.removeItem("refresh-token");
+  deleteCookie("authorization");
+  deleteCookie("refresh-token");
 };

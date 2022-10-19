@@ -7,9 +7,10 @@ import { routingLoginPage } from "../../utils/routingLoginPage";
 import { useNavigate } from "react-router-dom";
 import checkLoginPlatform from "../../utils/checkLoginPlatform";
 import EditInfoSocialLogin from "./EditInfoSocialLogin";
+import { getCookie, deleteCookie, setCookie } from "../../shared/Cookie";
 
 function EditUserInfoForm() {
-  const token = sessionStorage.getItem("authorization");
+  const token = getCookie("authorization");
   const userNickName = decodeToken(token);
   const navigate = useNavigate();
   const loginPlatform = checkLoginPlatform(token);
@@ -111,8 +112,8 @@ function EditUserInfoForm() {
           alert(res.data.message);
         } else {
           alert(message);
-          sessionStorage.removeItem("authorization");
-          sessionStorage.setItem("authorization", res.headers.authorization);
+          deleteCookie("authorization");
+          setCookie("authorization", res.headers.authorization);
           setCurrentPassword("");
           setNewPassword("");
           setCheckPassword("");

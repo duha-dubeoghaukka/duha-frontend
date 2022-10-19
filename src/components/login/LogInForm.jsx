@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { api } from "../../api/api";
@@ -7,6 +7,7 @@ import { KAKAO_AUTH_URI } from "../../utils/socialLoginUtils/kakao";
 import { GOOGLE_AUTH_URI } from "../../utils/socialLoginUtils/google";
 import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
+import { setCookie, getCookie } from "../../shared/Cookie";
 
 const LogInForm = () => {
   const [isHidden, setIsHidden] = useState(true);
@@ -15,7 +16,7 @@ const LogInForm = () => {
   const [validEmailCheck, setValidEmailCheck] = useState(false);
 
   const navigate = useNavigate();
-  const isToken = sessionStorage.getItem("authorization");
+  const isToken = getCookie("authorization");
   const [isSignupModal, signupModalHandler] = useChange();
   const [isResetPasswordModal, resetPasswordModalHandler] = useChange();
 
@@ -45,8 +46,8 @@ const LogInForm = () => {
       });
       if (response.data.isSuccess) {
         alert("로그인 되었습니다. 메인페이지로 이동합니다.");
-        sessionStorage.setItem("authorization", response.headers.authorization);
-        sessionStorage.setItem("refresh-token", response.headers["refresh-token"]);
+        setCookie("refresh-token", response.headers["refresh-token"]);
+        setCookie("authorization", response.headers.authorization);
         navigate("/");
       } else {
         alert(response.data.message);

@@ -9,6 +9,7 @@ import decodeToken from "../../utils/decodeToken";
 import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
 import Footer from "../footer/Footer";
+import { getCookie, deleteCookie } from "../../shared/Cookie";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,11 +19,11 @@ const Layout = props => {
   const [isSignupModal, signupModalHandler] = useChange();
 
   // 로컬스토리지 토큰 확인
-  const token = sessionStorage.getItem("authorization");
+  const token = getCookie("authorization");
   const loginHandler = () => {
     if (token) {
-      sessionStorage.removeItem("authorization");
-      sessionStorage.removeItem("refresh-token");
+      deleteCookie("authorization");
+      deleteCookie("refresh-token");
       navigate("/");
     } else {
       navigate("/login");
