@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 import HomeCard from "../../components/mainpage/HomeCard";
 import { weatherIcon } from "../../utils/weatherIcon";
 import { weatherTemperature } from "../../utils/weatherTemperature";
-import Spinner from "../../components/Spinner/Spinner";
+import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
 
 function MainPage() {
   const apiKey = process.env.REACT_APP_API_KEY;
@@ -39,7 +39,7 @@ function MainPage() {
             <span>{currentTemperature}°C</span>
           </div>
         ) : (
-          <Spinner />
+          <NonLayoutSpinner />
         )}
         <HomeCard />
       </div>
