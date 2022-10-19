@@ -9,10 +9,8 @@ import { useEffect, useState } from "react";
 import RegionButton from "../../components/weather/RegionButton";
 import coordinates from "../../utils/coordinates";
 import mapRegions from "../../utils/mapRegions";
-import { useNavigate } from "react-router-dom";
 
 const Weather = () => {
-  const navigate = useNavigate();
   const url = "https://api.openweathermap.org/data/2.5/weather";
   const [currentRegion, setCurrentRegion] = useState("jeju");
   const { error, isLoading, data, refetch } = useQuery("ultraShortTermWeather", () => {
