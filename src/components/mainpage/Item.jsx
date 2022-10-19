@@ -61,7 +61,7 @@ const Item = ({ data, setCounter, category }) => {
             <DirectionsBusFilledOutlinedIcon
               fontSize="medium"
               sx={{
-                color: "rgb(116, 175, 115)"
+                color: "rgb(242, 132, 50)"
               }}
               className=""
             />
