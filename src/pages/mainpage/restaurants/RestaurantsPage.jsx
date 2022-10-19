@@ -106,7 +106,7 @@ const RestaurantsPage = () => {
     return <div>{error}</div>;
   }
   if (data) {
-    const items = data.data.data;
+    const items = data.data.data.list;
     const totalNumberOfPages = data.data.data.totalPages;
     return (
       <Layout title="맛집" highlight={"mainpage/restaurants"}>
