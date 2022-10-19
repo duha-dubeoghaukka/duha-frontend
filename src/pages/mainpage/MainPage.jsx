@@ -33,7 +33,7 @@ function MainPage() {
     <Layout isLoggedIn={false} title="메인 페이지" highlight={"mainpage/home"} isFooterFixed={false}>
       <div className="h-full">
         {temperature ? (
-          <div className="flex justify-center items-center mt-3 md:mt-5 font-semibold md:text-lg text-black2">
+          <div className="main-weather">
             <span>현재 제주 날씨는</span>
             <div>{selectIcon}</div>
             <span>{currentTemperature}°C</span>
