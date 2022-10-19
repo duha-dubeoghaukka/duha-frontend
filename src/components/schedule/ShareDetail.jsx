@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { scheduleAPIs } from "../../api/api";
 import MapContainer from "../map/MapContainer";
-import Spinner from "../Spinner/Spinner";
+import NonLayoutSpinner from "../Spinner/NonLayoutSpinner";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import { sortBy } from "lodash";
 
@@ -27,7 +27,7 @@ function ShareDetail() {
     });
   }, []);
 
-  if (!courseItem) return <Spinner />;
+  if (!courseItem) return <NonLayoutSpinner />;
 
   const onClickDay = day => {
     setDay(day);

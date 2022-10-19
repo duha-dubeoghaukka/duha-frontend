@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
-import Spinner from "../../components/Spinner/Spinner";
+import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
 import decodeToken from "../../utils/decodeToken";
 import Item from "../../components/mainpage/Item";
 import { getCookie } from "../../shared/Cookie";
@@ -47,7 +47,7 @@ function FavoriteAccommodationPage() {
           return <Item key={item.id} data={item} counter={counter} setCounter={setCounter} category={`accommodation`} />;
         })
       ) : (
-        <Spinner />
+        <NonLayoutSpinner />
       )}
     </Layout>
   );

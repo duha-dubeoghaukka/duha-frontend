@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { mypageAPIs } from "../../api/api";
 import Layout from "../../components/layout/Layout";
 import decodeToken from "../../utils/decodeToken";
-import Spinner from "../../components/Spinner/Spinner";
+import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
 import TripItem from "../../components/mypage/TripItem";
 import { getCookie } from "../../shared/Cookie";
 
@@ -46,7 +46,7 @@ function FavoriteCoursePage() {
               return <TripItem key={item.id} item={item} />;
             })
           ) : (
-            <Spinner />
+            <NonLayoutSpinner />
           )}
         </div>
       </div>
