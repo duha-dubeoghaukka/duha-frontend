@@ -94,6 +94,11 @@ const TouristSpotsPage = () => {
   const selectChangeHandler = event => {
     setCurrentRegion(event.target.value);
   };
+  useEffect(() => {
+    document.body.addEventListener("click", () => {
+      setSearchResults([]);
+    });
+  }, []);
   if (isLoading) {
     return <Spinner />;
   }
@@ -101,6 +106,7 @@ const TouristSpotsPage = () => {
     return <div>{error}</div>;
   }
   if (data) {
+    console.dir(data);
     const items = data.data.data;
     const totalNumberOfPages = data.data.data.totalPages;
     return (

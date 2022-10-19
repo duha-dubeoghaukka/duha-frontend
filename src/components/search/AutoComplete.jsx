@@ -1,6 +1,6 @@
 const AutoComplete = ({ data, selectAutoComplete, isSelected }) => {
   const { name } = data;
-  const autoCompleteClickHandler = () => {
+  const autoCompleteClickHandler = event => {
     selectAutoComplete(name);
   };
   if (isSelected) {

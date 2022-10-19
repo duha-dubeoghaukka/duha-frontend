@@ -94,6 +94,11 @@ const AccommodationsPage = () => {
   const selectChangeHandler = event => {
     setCurrentRegion(event.target.value);
   };
+  useEffect(() => {
+    document.body.addEventListener("click", () => {
+      setSearchResults([]);
+    });
+  }, []);
   if (isLoading) {
     return <Spinner />;
   }
