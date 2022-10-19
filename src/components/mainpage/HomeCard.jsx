@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../card/Card";
+import MainCategoryCard from "../card/MainCategoryCard";
 import { Grid } from "@material-ui/core";
 
 function HomeCard() {
@@ -63,13 +64,13 @@ function HomeCard() {
         <p className="ml-8 mb-5 mt-5 md:ml-[55px] text-[18px] text-black2">뚜벅하우까 정보</p>
         <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
           {informationCategory.map((item, index) => {
-            return <Card key={index} item={item} />;
+            return <MainCategoryCard key={index} item={item} />;
           })}
         </Grid>
         <p className="ml-8 mb-5 mt-5 md:ml-[55px] text-[18px] text-black2">일정</p>
         <Grid container spacing={2} direction="row" justifyContent="center" alignItems="center">
           {scheduleCategory.map((item, index) => {
-            return <Card key={index} item={item} />;
+            return <MainCategoryCard key={index} item={item} />;
           })}
         </Grid>
       </div>
