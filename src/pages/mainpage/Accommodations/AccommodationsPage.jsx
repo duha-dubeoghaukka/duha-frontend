@@ -16,18 +16,21 @@ import Pagination from "../../../components/mainpage/Pagination";
 
 const AccommodationsPage = () => {
   const { isLoading, error, data, refetch } = useQuery(["accommodations"], () => {
-    if (currentRegion === "전체") {
-      return api.get(`/accommodation?page=${currentPage}`);
-    } else {
-      return api.get(`/accommodation?page=${currentPage}&region=${currentRegion}`);
-    }
+    return api.get(`/accommodation`, {
+      params: {
+        page: currentPage,
+        region: currentRegion === "전체" ? null : currentRegion,
+        station: isNearBusStopChecked ? "checked" : null
+      }
+    });
   });
+  const [isNearBusStopChecked, setIsNearBusStopChecked] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("전체");
   useEffect(() => {
     refetch();
     scrollToTop();
-  }, [currentRegion, currentPage]);
+  }, [currentRegion, currentPage, isNearBusStopChecked]);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
@@ -158,7 +161,8 @@ const AccommodationsPage = () => {
         </div>
         <div className="flex justify-start items-center mb-2">
           <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
-          <p className="font-semibold text-green1 text-sm md:test-base">버스 정류장이 300m 반경 이내에 존재하는 항목</p>
+          <p className="font-semibold text-green1 text-sm md:test-base mr-3">버스 정류장이 300m 반경 이내에 존재하는 항목만 보기</p>
+          <input type="checkbox" value={isNearBusStopChecked} onChange={event => setIsNearBusStopChecked(event.target.value)} />
         </div>
         {searchMode ? (
           <div>
