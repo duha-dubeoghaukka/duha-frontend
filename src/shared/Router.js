@@ -36,6 +36,7 @@ import MypageInfo from "../pages/menu/MypageInfo";
 import Information from "../pages/information/Information";
 import Credits from "../pages/credits/Credits";
 import TouristSpotsPage from "../pages/mainpage/touristspots/TouristSpotsPage";
+import UserComments from "../pages/mypage/UserComments";
 
 const Router = () => {
   return (
@@ -71,6 +72,7 @@ const Router = () => {
         <Route path="/schedule/share" element={<ShareSchedulePage />} />
         <Route path="/schedule/share/detail/:id" element={<ShareDetailPage />} />
         <Route path="/mypage/user/edit" element={<EditUserInfoPage />} />
+        <Route path="/mypage/user/comments" element={<UserComments />} />
         <Route path="/tide" element={<Tide />} />
         <Route path="/reset/password" element={<ResetPasswordPage />} />
         <Route path="/info" element={<Info />} />
