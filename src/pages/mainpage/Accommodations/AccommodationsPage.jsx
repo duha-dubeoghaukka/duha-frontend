@@ -171,7 +171,7 @@ const AccommodationsPage = () => {
         </div>
         <div className="flex justify-start items-center mb-2">
           <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "#ECB390" }} />
-          <p className="font-semibold text-sm md:test-base mr-3 text-[#ECB390]">버스 정류장이 300m 반경 이내에 존재하는 항목만 보기</p>
+          <p className="font-semibold text-sm md:test-base mr-3 text-[#ECB390]">버스 정류장과 가까운 장소 (300m 이내)</p>
           <input type="checkbox" checked={isNearBusStopChecked} onChange={event => setIsNearBusStopChecked(event.target.checked)} />
         </div>
         {searchMode ? (
