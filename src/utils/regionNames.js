@@ -8,8 +8,8 @@ const regionNames = [
     romanization: "Downtown Jeju"
   },
   {
-    name: "애월",
-    romanization: "Aewol"
+    name: "애월&한림",
+    romanization: "Aewol & Hallim"
   },
   {
     name: "중문",
@@ -20,8 +20,8 @@ const regionNames = [
     romanization: "Seogwipo"
   },
   {
-    name: "우도&성산",
-    romanization: "Udo & Seongsan"
+    name: "우도&성산&표션",
+    romanization: "Udo & Seongsan & Pyoseon"
   },
   {
     name: "구좌&조천",
