@@ -170,8 +170,8 @@ const RestaurantsPage = () => {
           </select>
         </div>
         <div className="flex justify-start items-center mb-2">
-          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
-          <p className="font-semibold text-green1 text-sm md:test-base mr-3">버스 정류장이 300m 반경 이내에 존재하는 항목만 보기</p>
+          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "#ECB390" }} />
+          <p className="font-semibold text-[#ECB390] text-sm md:test-base mr-3">버스 정류장이 300m 반경 이내에 존재하는 항목만 보기</p>
           <input type="checkbox" checked={isNearBusStopChecked} onChange={event => setIsNearBusStopChecked(event.target.checked)} />
         </div>
         {searchMode ? (
