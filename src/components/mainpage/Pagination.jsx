@@ -19,32 +19,30 @@ const Pagination = ({ currentPage, numberOfPages, setCurrentPage }) => {
   const isFirstPage = currentPage === 0;
   const isLastPage = currentPage === numberOfPages - 1;
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center items-center">
       {!isFirstPage && (
         <div className="cursor-pointer" onClick={goFirstPage}>
-          <KeyboardDoubleArrowLeftIcon fontSize="large" />
+          <KeyboardDoubleArrowLeftIcon />
         </div>
       )}
       {!isFirstPage && (
-        <div onClick={goPreviousPage} className="flex cursor-pointer">
-          <ChevronLeftIcon fontSize="large" />
-          <p>이전</p>
+        <div onClick={goPreviousPage} className="cursor-pointer">
+          <ChevronLeftIcon />
         </div>
       )}
-      <div>
-        <p>
+      <div className="mx-3">
+        <p className="font-bold">
           {currentPage + 1} / {numberOfPages}
         </p>
       </div>
       {!isLastPage && (
-        <div onClick={goNextPage} className="flex cursor-pointer">
-          <p>다음</p>
-          <ChevronRightIcon fontSize="large" />
+        <div onClick={goNextPage} className="cursor-pointer">
+          <ChevronRightIcon />
         </div>
       )}
       {!isLastPage && (
         <div className="cursor-pointer" onClick={goLastPage}>
-          <KeyboardDoubleArrowRightIcon fontSize="large" />
+          <KeyboardDoubleArrowRightIcon />
         </div>
       )}
     </div>
