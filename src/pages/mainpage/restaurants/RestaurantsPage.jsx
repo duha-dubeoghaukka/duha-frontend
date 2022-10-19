@@ -16,10 +16,16 @@ import Pagination from "../../../components/mainpage/Pagination";
 
 const RestaurantsPage = () => {
   const { isLoading, error, data, refetch } = useQuery(["restaurants"], () => {
+    let region;
+    if (currentRegion.includes("&")) {
+      region = currentRegion.split("&")[0];
+    } else {
+      region = currentRegion;
+    }
     return api.get(`/restaurant`, {
       params: {
         page: currentPage,
-        region: currentRegion === "전체" ? null : currentRegion,
+        region: region === "전체" ? null : region,
         station: isNearBusStopChecked ? "checked" : null
       }
     });
