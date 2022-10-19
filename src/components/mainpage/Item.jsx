@@ -63,7 +63,6 @@ const Item = ({ data, setCounter, category }) => {
               sx={{
                 color: "rgb(242, 132, 50)"
               }}
-              className=""
             />
           )}
         </div>
