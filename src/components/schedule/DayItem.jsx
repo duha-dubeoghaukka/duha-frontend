@@ -6,6 +6,7 @@ import _ from "lodash";
 import Spinner from "../Spinner/Spinner";
 import MapContainer from "../../components/map/MapContainer";
 import { DragDropContext } from "react-beautiful-dnd";
+import { routingLoginPage } from "../../utils/routingLoginPage";
 
 const DayItem = () => {
   const { tripId, day } = useParams();
@@ -15,6 +16,10 @@ const DayItem = () => {
   const navigate = useNavigate();
   const lastCourse = dayCourse.at(-1);
   const id = tripId;
+
+  useEffect(() => {
+    routingLoginPage(navigate);
+  }, []);
 
   if (lastCourse) {
     const [name, latitude, longitude] = [lastCourse.name, lastCourse.latitude, lastCourse.longitude];
