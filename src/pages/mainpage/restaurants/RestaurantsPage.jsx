@@ -34,6 +34,9 @@ const RestaurantsPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("전체");
   useEffect(() => {
+    setCurrentPage(0);
+  }, [isNearBusStopChecked]);
+  useEffect(() => {
     refetch();
     scrollToTop();
   }, [currentRegion, currentPage, isNearBusStopChecked]);
