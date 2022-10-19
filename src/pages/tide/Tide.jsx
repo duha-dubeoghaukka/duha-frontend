@@ -7,7 +7,7 @@ const Tide = () => {
   const [tide, setTide] = useState(null);
 
   return (
-    <Layout title="물때 정보" highlight={"mainpage/info"} isFooterFixed={true}>
+    <Layout title="물때 정보" highlight={"mainpage/tide"} isFooterFixed={true}>
       <Region tide={tide} setTide={setTide} />
       <WeeklyTide tide={tide} setTide={setTide} />
     </Layout>

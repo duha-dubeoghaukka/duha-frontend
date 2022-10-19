@@ -87,14 +87,14 @@ const Layout = props => {
                 <Link to="/accommodations" className={`${category === "accommodations" && "text-green1 font-bold"} hover:font-bold`}>
                   숙소
                 </Link>
+                <Link to="/information" className={`${category === "info" && "text-green1 font-bold"} hover:font-bold`}>
+                  뚜벅이 서비스
+                </Link>
                 <Link to="/weather" className={`${category === "weather" && "text-green1 font-bold"} hover:font-bold`}>
                   날씨 더 보기
                 </Link>
                 <Link to="/tide" className={`${category === "tide" && "text-green1 font-bold"} hover:font-bold`}>
                   물때 더 보기
-                </Link>
-                <Link to="/information" className={`${category === "info" && "text-green1 font-bold"} hover:font-bold`}>
-                  뚜벅이 서비스
                 </Link>
               </div>
             </div>
