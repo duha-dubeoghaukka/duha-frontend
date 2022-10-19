@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getCookie } from "../shared/Cookie";
 
 export const api = axios.create({
   baseURL: "http://13.125.222.172/",
@@ -12,8 +13,8 @@ export const api = axios.create({
 
 // 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
 api.interceptors.request.use(function (config) {
-  const refreshToken = sessionStorage.getItem("refresh-token");
-  const accessToken = sessionStorage.getItem("authorization");
+  const refreshToken = getCookie("refresh-token");
+  const accessToken = getCookie("authorization");
   config.headers.common["authorization"] = `${accessToken}`;
   config.headers.common["refresh-token"] = `${refreshToken}`;
   return config;

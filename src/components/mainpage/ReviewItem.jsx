@@ -5,6 +5,7 @@ import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import decodeToken from "../../utils/decodeToken";
 import { useState } from "react";
 import { api } from "../../api/api";
+import { getCookie } from "../../shared/Cookie";
 
 const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -12,7 +13,7 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
   let isAuthor = false;
   const [editedComment, setEditedComment] = useState(review);
   if (checkIsLoggedIn()) {
-    const token = sessionStorage.getItem("authorization");
+    const token = getCookie("authorization");
     const currentUser = decodeToken(token);
     if (currentUser === reviewer) {
       isAuthor = true;

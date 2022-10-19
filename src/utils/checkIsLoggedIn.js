@@ -1,5 +1,7 @@
+import { getCookie } from "../shared/Cookie";
+
 const checkIsLoggedIn = () => {
-  const auth = sessionStorage.getItem("authorization");
+  const auth = getCookie("authorization");
   return !!auth;
 };
 
