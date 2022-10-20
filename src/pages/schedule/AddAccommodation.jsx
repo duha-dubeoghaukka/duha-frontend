@@ -1,40 +1,53 @@
 import regionNames from "../../utils/regionNames.js";
 import RegionButton from "../../components/mainpage/RegionButton";
 import Layout from "../../components/layout/Layout";
-import { useContext, useEffect, useState } from "react";
-import GlobalState from "../../shared/GlobalState";
-import { useQuery } from "react-query";
-import { api } from "../../api/api";
-import { removeDuplicates } from "../../utils/removeDuplicates";
-import { filterItems } from "../../utils/filterItems";
-import { arraySplitter } from "../../utils/arraySplitter";
+import { useEffect, useState } from "react";
+import Item from "../../components/mainpage/Item";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link, useParams } from "react-router-dom";
-import AddCourseItem from "../../components/schedule/AddCourseItem";
-import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import { useQuery } from "react-query";
+import { api } from "../../api/api";
 import SearchField from "../../components/search/SearchField";
-import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 import AutoComplete from "../../components/search/AutoComplete";
+import { DirectionsBusFilledOutlined } from "@mui/icons-material";
+import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import scrollToTop from "../../utils/scrollToTop";
+import Pagination from "../../components/mainpage/Pagination";
+import AddCourseItem from "../../components/schedule/AddCourseItem";
 
-const AddAccommodation = () => {
+const AccommodationsPage = () => {
   const { tripId, day, currentCourseId } = useParams();
-  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedAccommodations"], () => {
-    return api.get("/accommodation");
+  const { isLoading, error, data, refetch } = useQuery(["accommodations"], () => {
+    let region;
+    if (currentRegion.includes("&")) {
+      region = currentRegion.split("&")[0];
+    } else {
+      region = currentRegion;
+    }
+    return api.get(`/accommodation`, {
+      params: {
+        page: currentPage,
+        region: region === "전체" ? null : region,
+        station: isNearBusStopChecked ? "checked" : null
+      }
+    });
   });
+  const [isNearBusStopChecked, setIsNearBusStopChecked] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentRegion, setCurrentRegion] = useState("전체");
+  useEffect(() => {
+    setCurrentPage(0);
+    refetch();
+  }, [isNearBusStopChecked]);
+  useEffect(() => {
+    refetch();
+    scrollToTop();
+  }, [currentRegion, currentPage]);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
-  const { regionSelection, accommodationPageSelection } = useContext(GlobalState);
-  const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentAccommodationPage, setCurrentAccommodationPage } = accommodationPageSelection;
-
-  const selectChangeHandler = event => {
-    setSelectedRegion(event.target.value);
-    setCurrentAccommodationPage(1);
-  };
-
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
@@ -48,17 +61,19 @@ const AddAccommodation = () => {
     );
     setSelectedAutoComplete(() => 0);
   };
-
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
+    setSelectedAutoComplete(() => 0);
     setSearchResults([]);
   };
-
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
   };
-
+  const changeCurrentRegion = regionName => {
+    setCurrentPage(0);
+    setCurrentRegion(regionName);
+  };
   const keyPressHandler = event => {
     const length = searchResults.length;
     if (length > 0) {
@@ -79,7 +94,6 @@ const AddAccommodation = () => {
       }
     }
   };
-
   useEffect(() => {
     setSearchResults(previousSearchResults => {
       return previousSearchResults.map((result, index) => {
@@ -92,40 +106,23 @@ const AddAccommodation = () => {
       });
     });
   }, [selectedAutoComplete]);
-
+  const selectChangeHandler = event => {
+    setCurrentRegion(event.target.value);
+  };
   useEffect(() => {
-    setCurrentAccommodationPage(1);
-    setSelectedRegion("전체");
+    document.body.addEventListener("click", () => {
+      setSearchResults([]);
+    });
   }, []);
-
-  useEffect(() => {
-    setSearchMode(false);
-    setAutoCompletedInput("");
-    refetch();
-  }, [regionSelection, currentAccommodationPage]);
-
-  if (isLoading || isFetching || status === "loading") {
-    return <Spinner />;
+  if (isLoading) {
+    return <Spinner title={"숙소"} />;
   }
-  if (error || status === "error") {
+  if (error) {
     return <div>{error}</div>;
   }
-  if (data && status === "success" && isFetching === false) {
-    const accommodations = data.data.data;
-    const processedAccommodations = removeDuplicates(accommodations);
-    const sortedAccommodations = processedAccommodations.sort((a, b) => b.likeNum - a.likeNum);
-    const filteredAccommodations = filterItems(sortedAccommodations, selectedRegion);
-    const splittedAccommodations = arraySplitter(filteredAccommodations);
-    const numberOfPages = splittedAccommodations.length;
-    const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentAccommodations = splittedAccommodations[currentAccommodationPage - 1];
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
-
+  if (data) {
+    const items = data.data.data.list;
+    const totalNumberOfPages = data.data.data.totalPages;
     return (
       <Layout title="일정 관리" highlight={"schedule/create"}>
         <div className="flex justify-around my-4 text-lg font-bold">
@@ -145,7 +142,7 @@ const AddAccommodation = () => {
             sendResults={sendResults}
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
-            region={selectedRegion}
+            region={currentRegion}
             category="accommodations"
           />
           {searchResults && (
@@ -161,11 +158,11 @@ const AddAccommodation = () => {
         <div className="mb-2 md:mb-5">
           <ul className="hidden md:flex justify-between">
             {regionNames.map(region => {
-              return <RegionButton key={region.name} {...region} />;
+              return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
             })}
           </ul>
           <select
-            value={selectedRegion}
+            value={currentRegion}
             onChange={selectChangeHandler}
             className="px-3 md:hidden w-full h-[43px] text-gray-500 rounded-lg border-gray-500 border-solid border-2"
           >
@@ -175,8 +172,9 @@ const AddAccommodation = () => {
           </select>
         </div>
         <div className="flex justify-start items-center mb-2">
-          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
-          <p className="font-semibold text-green1 text-sm md:test-base">버스 정류장이 300m 반경 이내에 존재하는 항목</p>
+          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "#ECB390" }} />
+          <p className="font-semibold text-sm md:test-base mr-3 text-[#ECB390]">버스 정류장과 가까운 장소 (300m 이내)</p>
+          <input type="checkbox" checked={isNearBusStopChecked} onChange={event => setIsNearBusStopChecked(event.target.checked)} />
         </div>
         {searchMode ? (
           <div>
@@ -191,45 +189,18 @@ const AddAccommodation = () => {
           </div>
         ) : (
           <div>
-            <div className="mb-2">
-              <p className="text-sm">총 {filteredAccommodations.length}건이 검색되었습니다</p>
-            </div>
             <div>
-              {currentAccommodations.map(accommodation => {
-                return <AddCourseItem key={accommodation.id} data={accommodation} category="숙소" />;
+              {items.map(item => {
+                return <AddCourseItem key={item.id} data={item} category="숙소" />;
               })}
-            </div>
-            <div className="flex justify-center">
-              <div className="flex justify-start overflow-x-scroll pb-2">
-                {pages.map(page => {
-                  if (page === currentAccommodationPage) {
-                    return (
-                      <div key={page} className="mr-1">
-                        <p className="font-medium">{page}</p>
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={page}
-                        className="mr-1 cursor-pointer"
-                        onClick={() => {
-                          setCurrentAccommodationPage(page);
-                        }}
-                      >
-                        <p className="text-gray-500">{page}</p>
-                      </div>
-                    );
-                  }
-                })}
-              </div>
             </div>
           </div>
         )}
+        <Pagination currentPage={currentPage} numberOfPages={totalNumberOfPages} setCurrentPage={setCurrentPage} />
         <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer hidden md:block" onClick={scrollToTop} />
       </Layout>
     );
   }
 };
 
-export default AddAccommodation;
+export default AccommodationsPage;
