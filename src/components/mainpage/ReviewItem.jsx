@@ -60,20 +60,16 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
   return (
     <div>
       <div className="flex justify-between">
-        <div>
-          <div className="flex items-center mb-2 md:mb-4">
-            <div className="mr-2 md:mr-4">
-              <AccountCircleIcon fontSize="large" />
-            </div>
-            <div>
-              <p>{reviewer}</p>
-            </div>
+        <div className="flex items-center mb-2 md:mb-4">
+          <img src="https://i.ibb.co/yyxq0XX/001.png" alt="하르방사진" className="w-10 mr-2" />
+          <div>
+            <p className="text-xs md:text-sm font-semibold mb-1">{reviewer}</p>
+            {isEditMode || (
+              <div className="bg-white shadow-md p-2 rounded-md">
+                <p className="text-sm md:text-base">{review}</p>
+              </div>
+            )}
           </div>
-          {isEditMode || (
-            <div className="bg-white shadow-md p-2 rounded-md">
-              <p className="text-sm md:text-base">{review}</p>
-            </div>
-          )}
         </div>
         {isAuthor && (
           <div className="flex">
