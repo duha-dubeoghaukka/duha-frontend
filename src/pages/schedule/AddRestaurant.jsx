@@ -1,40 +1,53 @@
 import regionNames from "../../utils/regionNames.js";
 import RegionButton from "../../components/mainpage/RegionButton";
 import Layout from "../../components/layout/Layout";
-import { useContext, useEffect, useState } from "react";
-import GlobalState from "../../shared/GlobalState";
-import { useQuery } from "react-query";
-import { api } from "../../api/api";
-import { removeDuplicates } from "../../utils/removeDuplicates";
-import { filterItems } from "../../utils/filterItems";
-import { arraySplitter } from "../../utils/arraySplitter";
+import { useEffect, useState } from "react";
+import Item from "../../components/mainpage/Item";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link, useParams } from "react-router-dom";
-import AddCourseItem from "../../components/schedule/AddCourseItem";
-import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import { useQuery } from "react-query";
+import { api } from "../../api/api";
 import SearchField from "../../components/search/SearchField";
-import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 import AutoComplete from "../../components/search/AutoComplete";
+import { DirectionsBusFilledOutlined } from "@mui/icons-material";
+import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
+import scrollToTop from "../../utils/scrollToTop";
+import Pagination from "../../components/mainpage/Pagination";
+import AddCourseItem from "../../components/schedule/AddCourseItem";
 
-const AddRestaurant = () => {
-  const { isLoading, error, data, refetch, status, isFetching } = useQuery(["bookmarkedRestaurants"], () => {
-    return api.get("/restaurant");
+const RestaurantsPage = () => {
+  const { tripId, day, currentCourseId } = useParams();
+  const { isLoading, error, data, refetch } = useQuery(["restaurants"], () => {
+    let region;
+    if (currentRegion.includes("&")) {
+      region = currentRegion.split("&")[0];
+    } else {
+      region = currentRegion;
+    }
+    return api.get(`/restaurant`, {
+      params: {
+        page: currentPage,
+        region: region === "전체" ? null : region,
+        station: isNearBusStopChecked ? "checked" : null
+      }
+    });
   });
+  const [isNearBusStopChecked, setIsNearBusStopChecked] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [currentRegion, setCurrentRegion] = useState("전체");
+  useEffect(() => {
+    setCurrentPage(0);
+    refetch();
+  }, [isNearBusStopChecked]);
+  useEffect(() => {
+    refetch();
+    scrollToTop();
+  }, [currentRegion, currentPage]);
   const [searchedResults, setSearchedResults] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
-  const { regionSelection, restaurantPageSelection } = useContext(GlobalState);
-  const { selectedRegion, setSelectedRegion } = regionSelection;
-  const { currentRestaurantPage, setCurrentRestaurantPage } = restaurantPageSelection;
-  const { tripId, day, currentCourseId } = useParams();
-
-  const selectChangeHandler = event => {
-    setSelectedRegion(event.target.value);
-    setCurrentSpotPage(1);
-  };
-
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
@@ -48,18 +61,19 @@ const AddRestaurant = () => {
     );
     setSelectedAutoComplete(() => 0);
   };
-
   const selectAutoComplete = name => {
     setAutoCompletedInput(name);
     setSelectedAutoComplete(() => 0);
     setSearchResults([]);
   };
-
   const sendSearchedResults = results => {
     setSearchedResults(results);
     setSearchMode(true);
   };
-
+  const changeCurrentRegion = regionName => {
+    setCurrentPage(0);
+    setCurrentRegion(regionName);
+  };
   const keyPressHandler = event => {
     const length = searchResults.length;
     if (length > 0) {
@@ -80,7 +94,6 @@ const AddRestaurant = () => {
       }
     }
   };
-
   useEffect(() => {
     setSearchResults(previousSearchResults => {
       return previousSearchResults.map((result, index) => {
@@ -93,39 +106,23 @@ const AddRestaurant = () => {
       });
     });
   }, [selectedAutoComplete]);
-
+  const selectChangeHandler = event => {
+    setCurrentRegion(event.target.value);
+  };
   useEffect(() => {
-    setCurrentRestaurantPage(1);
-    setSelectedRegion("전체");
+    document.body.addEventListener("click", () => {
+      setSearchResults([]);
+    });
   }, []);
-
-  useEffect(() => {
-    setSearchMode(false);
-    setAutoCompletedInput("");
-    refetch();
-  }, [regionSelection, currentRestaurantPage]);
-
-  if (isLoading || isFetching || status === "loading") {
-    return <Spinner />;
+  if (isLoading) {
+    return <Spinner title="맛집" />;
   }
-  if (error || status === "error") {
+  if (error) {
     return <div>{error}</div>;
   }
-  if (data && status === "success" && isFetching === false) {
-    const restaurants = data.data.data;
-    const processedRestaurants = removeDuplicates(restaurants);
-    const sortedRestaurants = processedRestaurants.sort((a, b) => b.likeNum - a.likeNum);
-    const filteredRestaurants = filterItems(sortedRestaurants, selectedRegion);
-    const splittedRestaurants = arraySplitter(filteredRestaurants);
-    const numberOfPages = splittedRestaurants.length;
-    const pages = [...Array(numberOfPages).keys()].map(page => page + 1);
-    const currentRestaurants = splittedRestaurants[currentRestaurantPage - 1];
-    const scrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    };
+  if (data) {
+    const items = data.data.data.list;
+    const totalNumberOfPages = data.data.data.totalPages;
     return (
       <Layout title="일정 관리" highlight={"schedule/create"}>
         <div className="flex justify-around my-4 text-lg font-bold">
@@ -145,7 +142,7 @@ const AddRestaurant = () => {
             sendResults={sendResults}
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
-            region={selectedRegion}
+            region={currentRegion}
             category="restaurants"
           />
           {searchResults && (
@@ -158,15 +155,16 @@ const AddRestaurant = () => {
             </div>
           )}
         </div>
-        <div className="my-3">
+        <div className="mb-2 md:mb-5">
           <ul className="hidden md:flex flex-row justify-between">
             {regionNames.map(region => {
-              return <RegionButton key={region.name} {...region} />;
+              return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
             })}
           </ul>
           <select
+            value={currentRegion}
             onChange={selectChangeHandler}
-            className="pl-3 text-[16px] block md:hidden w-full h-[43px] text-black1 font-bold rounded-lg border-black1 border-solid border-2"
+            className="px-3 md:hidden w-full h-[43px] text-gray-500 rounded-lg border-gray-500 border-solid border-2"
           >
             {regionNames.map(region => {
               return <option key={region.name}>{region.name}</option>;
@@ -174,8 +172,9 @@ const AddRestaurant = () => {
           </select>
         </div>
         <div className="flex justify-start items-center mb-2">
-          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "rgb(116, 174, 115)" }} />
-          <p className="font-semibold text-green1 text-sm md:test-base">버스 정류장이 300m 반경 이내에 존재하는 항목</p>
+          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "#ECB390" }} />
+          <p className="font-semibold text-[#ECB390] text-sm md:test-base mr-3">버스 정류장과 가까운 장소 (300m 이내)</p>
+          <input type="checkbox" checked={isNearBusStopChecked} onChange={event => setIsNearBusStopChecked(event.target.checked)} />
         </div>
         {searchMode ? (
           <div>
@@ -190,43 +189,18 @@ const AddRestaurant = () => {
           </div>
         ) : (
           <div>
-            <div className="mb-2">
-              <p className="text-sm">총 {filteredRestaurants.length}건이 검색되었습니다</p>
-            </div>
             <div>
-              {currentRestaurants.map(restaurant => {
-                return <AddCourseItem key={restaurant.id} data={restaurant} category="맛집" />;
-              })}
-            </div>
-            <div className="flex justify-start overflow-x-scroll pb-2">
-              {pages.map(page => {
-                if (page === currentRestaurantPage) {
-                  return (
-                    <div key={page} className="mr-1">
-                      <p className="font-medium">{page}</p>
-                    </div>
-                  );
-                } else {
-                  return (
-                    <div
-                      key={page}
-                      className="mr-1 cursor-pointer"
-                      onClick={() => {
-                        setCurrentRestaurantPage(page);
-                      }}
-                    >
-                      <p className="text-gray-500">{page}</p>
-                    </div>
-                  );
-                }
+              {items.map(item => {
+                return <AddCourseItem key={item.id} data={item} category="맛집" />;
               })}
             </div>
           </div>
         )}
-        <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer md:visible invisible" onClick={scrollToTop} />
+        <Pagination currentPage={currentPage} numberOfPages={totalNumberOfPages} setCurrentPage={setCurrentPage} />
+        <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer hidden md:block" onClick={scrollToTop} />
       </Layout>
     );
   }
 };
 
-export default AddRestaurant;
+export default RestaurantsPage;
