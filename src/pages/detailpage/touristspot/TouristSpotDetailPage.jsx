@@ -19,7 +19,7 @@ import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
 
 const TouristSpotDetailPage = () => {
-  const navigate = useNavigate();
+  const navigator = useNavigate();
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data, refetch } = useQuery(["touristSpotDetail"], () => {
@@ -71,6 +71,7 @@ const TouristSpotDetailPage = () => {
         });
     } else {
       alert("로그인을 먼저 해주세요");
+      navigator("/login");
     }
   };
   if (isLoading) {
