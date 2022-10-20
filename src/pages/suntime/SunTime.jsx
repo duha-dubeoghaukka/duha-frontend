@@ -29,13 +29,27 @@ const SunTime = () => {
     const sunsetHour = sunsetTime.getHours();
     const sunsetMinute = sunsetTime.getMinutes();
     return (
-      <Layout title="일출/일몰 시간 보기" highlight="mainpage/suntime">
-        <p>
-          일출 시각: {sunriseHour}:{sunriseMinute}
-        </p>
-        <p>
-          일몰 시각: {sunsetHour}:{sunsetMinute}
-        </p>
+      <Layout title="일출/일몰 시간 보기" highlight="mainpage/suntime" isFullWidth={true}>
+        <div className="flex flex-col">
+          <div className="relative">
+            <img src="/assets/suntimeImages/Day.jpg" alt="Day" className="w-full h-[40vh] object-cover" />
+            <div className="text-center absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+              <p className="text-black1 font-bold text-3xl">일출</p>
+              <p className="text-black1 font-bold text-5xl">
+                {sunriseHour} : {sunriseMinute}
+              </p>
+            </div>
+          </div>
+          <div className="relative">
+            <img src="/assets/suntimeImages/Night.jpg" alt="Night" className="w-full h-[40vh] object-cover" />
+            <div className="text-center absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
+              <p className="text-white1 font-bold text-3xl">일몰</p>
+              <p className="text-white1 font-bold text-5xl">
+                {sunsetHour} : {sunsetMinute}
+              </p>
+            </div>
+          </div>
+        </div>
       </Layout>
     );
   }
