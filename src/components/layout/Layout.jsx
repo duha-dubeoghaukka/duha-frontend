@@ -71,7 +71,9 @@ const Layout = props => {
           <div className="ml-16">
             <div className="mb-4">
               <div
-                className={`flex items-center ${greaterCategory === "mainpage" && "text-green1"} hover:text-green1 transition ease-in-out`}
+                className={`flex items-center ${
+                  greaterCategory === "mainpage" && "text-green1"
+                } hover:text-green1 transition ease-in-out mb-2`}
               >
                 <HomeIcon fontSize="large" sx={{ width: "32px" }} />
                 <Link to="/" className="font-bold text-xl">
@@ -101,7 +103,9 @@ const Layout = props => {
             </div>
             <div className="mb-4">
               <div
-                className={`flex items-center ${greaterCategory === "schedule" && "text-green1"}  hover:text-green1 transition ease-in-out`}
+                className={`flex items-center ${
+                  greaterCategory === "schedule" && "text-green1"
+                }  hover:text-green1 transition ease-in-out mb-2`}
               >
                 <CalendarMonthIcon fontSize="large" sx={{ width: "32px" }} />
                 <Link to="/scheduleinfo" className="font-bold text-xl">
@@ -119,7 +123,9 @@ const Layout = props => {
             </div>
             <div>
               <div
-                className={`flex items-center ${greaterCategory === "mypage" && "text-green1"}  hover:text-green1 transition ease-in-out`}
+                className={`flex items-center ${
+                  greaterCategory === "mypage" && "text-green1"
+                }  hover:text-green1 transition ease-in-out mb-2`}
               >
                 <PersonIcon fontSize="large" sx={{ width: "32px" }} />
                 <Link to="/mypage" className="font-bold text-xl">
