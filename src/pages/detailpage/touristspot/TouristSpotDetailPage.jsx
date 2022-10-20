@@ -129,8 +129,8 @@ const TouristSpotDetailPage = () => {
           </Swiper>
         </div>
         <div className="mb-2 md:mb-4">
-          <div className="px-5 md:px-10 py-3 md:py-5 border-green1 border-2 rounded-md flex flex-col items-start">
-            <div className="w-full mb-1 md:mb-2 border-b">
+          <div className="px-5 md:px-10 py-3 md:py-5 bg-white1 rounded-md flex flex-col items-start">
+            <div className="w-full mb-1 md:mb-2 border-b rounded-md">
               <div className="flex items-center justify-between">
                 <p className="text-base md:text-lg font-semibold">주소</p>
                 <MapIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
