@@ -21,6 +21,10 @@ const MypageInfo = () => {
         <div className="card-content">회원 정보 변경</div>
         <NavigateNextIcon />
       </Link>
+      <Link to="/mypage/user/comments" className="card">
+        <div className="card-content">내가 작성한 댓글 목록</div>
+        <NavigateNextIcon />
+      </Link>
     </Layout>
   );
 };

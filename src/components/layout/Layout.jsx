@@ -9,7 +9,7 @@ import decodeToken from "../../utils/decodeToken";
 import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
 import Footer from "../footer/Footer";
-import { getCookie, deleteCookie } from "../../shared/Cookie";
+import { deleteCookie, getCookie } from "../../shared/Cookie";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -132,6 +132,9 @@ const Layout = props => {
                 </Link>
                 <Link to="/mypage/user/edit" className={`${category === "edit" && "text-green1 font-bold"} hover:font-bold`}>
                   회원 정보 변경
+                </Link>
+                <Link to="/mypage/user/comments" className={`${category === "comments" && "text-green1 font-bold"} hover:font-bold`}>
+                  내가 작성한 댓글 목록
                 </Link>
               </div>
             </div>
