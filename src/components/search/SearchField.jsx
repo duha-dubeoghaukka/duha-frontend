@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { debouncer } from "../../utils/debouncer";
 import { api } from "../../api/api";
 
-const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, region, category }) => {
+const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, region, category, isAutoCompleteVisible }) => {
   const categoryMapper = {
     touristSpots: "touristspot",
     restaurants: "restaurant",
@@ -68,7 +68,7 @@ const SearchField = ({ sendResults, autoCompletedInput, sendSearchedResults, reg
     setUserInput(event.target.value);
   };
   const keyDownHandler = event => {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && !isAutoCompleteVisible) {
       searchHandler();
     }
   };
