@@ -6,9 +6,10 @@ import Categories from "./Categories";
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
 import Spinner from "../../../components/Spinner/Spinner";
+import CommentList from "./CommentList";
 
 const UserComments = () => {
-  const { isLoading, error, data } = useQuery("userComments", () => {
+  const { isLoading, error, data, refetch } = useQuery("userComments", () => {
     switch (currentCategory) {
       case "관광":
         return api.get(`/auth/mypage/touristspotreview`);
@@ -31,6 +32,9 @@ const UserComments = () => {
       navigator("/login");
     }
   }, []);
+  useEffect(() => {
+    refetch();
+  }, [currentCategory]);
   if (isLoading) {
     return <Spinner title={"내가 작성한 댓글 목록"} />;
   }
@@ -39,10 +43,10 @@ const UserComments = () => {
   }
   if (data) {
     const comments = data.data.data;
-    console.dir(comments);
     return (
       <Layout title="내가 작성한 댓글 목록" highlight="mypage/comments">
         <Categories currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
+        <CommentList comments={comments} />
       </Layout>
     );
   }
