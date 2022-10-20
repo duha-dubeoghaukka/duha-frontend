@@ -130,7 +130,7 @@ const TouristSpotDetailPage = () => {
         </div>
         <div className="mb-2 md:mb-4">
           <div className="px-5 md:px-10 py-3 md:py-5 bg-white1 rounded-md flex flex-col items-start">
-            <div className="w-full mb-1 md:mb-2 border-b rounded-md">
+            <div className="w-full mb-1 md:mb-2 border-b">
               <div className="flex items-center justify-between">
                 <p className="text-base md:text-lg font-semibold">주소</p>
                 <MapIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
@@ -141,22 +141,10 @@ const TouristSpotDetailPage = () => {
               <p className="text-base md:text-lg font-semibold">전화번호</p>
               <p className="text-sm text-gray-700 mb-2">{phone}</p>
             </div>
-            {processedInfo.length > 0 && (
-              <div className="w-full">
-                {processedInfo.map(info => {
-                  return (
-                    <div key={info.title} className="mb-2 border-b">
-                      <p className="text-base md:text-lg font-semibold">{info.title}</p>
-                      <p className="text-sm text-gray-700 mb-2">{info.content}</p>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-            <div className="mb-1 md:mb-2">
+            <div className="mb-1 md:mb-2 border-b w-full">
               {stations.length > 0 && <p className="text-base md:text-lg font-semibold">가까운 버스 정류장</p>}
               {stations.length > 0 && (
-                <div>
+                <div className="mb-2">
                   {stations
                     .sort((a, b) => {
                       return a.distance - b.distance;
@@ -164,7 +152,7 @@ const TouristSpotDetailPage = () => {
                     .map(station => {
                       return (
                         <div className="flex items-center" key={station.stationName}>
-                          <DirectionsBusIcon className="mr-1" />
+                          <DirectionsBusIcon className="mr-1" fontSize="small" />
                           <p className="text-sm text-gray-700">
                             {station.stationName} - {station.distance}m
                           </p>
@@ -174,6 +162,18 @@ const TouristSpotDetailPage = () => {
                 </div>
               )}
             </div>
+            {processedInfo.length > 0 && (
+              <div className="w-full">
+                {processedInfo.map(info => {
+                  return (
+                    <div key={info.title} className="mb-2 border-b last:border-none">
+                      <p className="text-sm font-semibold text-">{info.title}</p>
+                      <p className="text-sm text-gray-700 mb-2">{info.content}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
         <Comments
