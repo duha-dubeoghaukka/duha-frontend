@@ -36,7 +36,7 @@ import MypageInfo from "../pages/menu/MypageInfo";
 import Information from "../pages/information/Information";
 import Credits from "../pages/credits/Credits";
 import TouristSpotsPage from "../pages/mainpage/touristspots/TouristSpotsPage";
-import UserComments from "../pages/mypage/UserComments";
+import UserComments from "../pages/mypage/usercomments/UserComments";
 
 const Router = () => {
   return (
