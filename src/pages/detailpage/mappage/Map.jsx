@@ -1,10 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import GlobalState from "../../../shared/GlobalState";
 
-const Map = ({ address }) => {
-  const { mapModal } = useContext(GlobalState);
-  const { setIsMapModalOpen } = mapModal;
+const Map = ({ address, setIsMapModalOpen }) => {
   let validity = false;
   useEffect(() => {
     naver.maps.Service.geocode({ query: address }, (status, response) => {

@@ -9,7 +9,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
-import WestIcon from "@mui/icons-material/West";
 import GlobalState from "../../../shared/GlobalState";
 import Map from "../mappage/Map";
 import { api } from "../../../api/api";
@@ -187,7 +186,7 @@ const AccommodationDetailPage = () => {
           <div>
             <div className="fixed top-0 left-0 z-10 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
             <div className="fixed z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
-              <Map address={address} name={name} />
+              <Map address={address} name={name} setIsMapModalOpen={setIsMapModalOpen} />
             </div>
           </div>
         )}
