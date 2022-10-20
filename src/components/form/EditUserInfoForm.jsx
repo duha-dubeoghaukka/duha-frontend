@@ -51,9 +51,6 @@ function EditUserInfoForm() {
   const onChangeNickName = e => {
     setNickName(e.target.value);
     checkIsKorean(e.target.value);
-    // checkIsKorean(e.target.value);
-    // setIsNickName(true);
-    // setIsDisabled(false);
   };
 
   const checkIsKorean = data => {
