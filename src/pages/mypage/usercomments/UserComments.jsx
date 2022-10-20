@@ -46,7 +46,7 @@ const UserComments = () => {
     return (
       <Layout title="내가 작성한 댓글 목록" highlight="mypage/comments">
         <Categories currentCategory={currentCategory} setCurrentCategory={setCurrentCategory} />
-        <CommentList comments={comments} />
+        <CommentList comments={comments} currentCategory={currentCategory} />
       </Layout>
     );
   }
