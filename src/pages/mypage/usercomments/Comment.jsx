@@ -15,7 +15,7 @@ const Comment = ({ comment, currentCategory }) => {
     default:
       break;
   }
-  const { reviewName, reviewedAt, review, id } = comment;
+  const { reviewName, reviewedAt, review, itemId } = comment;
   return (
     <div className="my-3">
       <div className="flex justify-between items-center">
@@ -23,7 +23,7 @@ const Comment = ({ comment, currentCategory }) => {
           <p className="text-sm text-black1">{review}</p>
         </div>
         <div className="flex flex-col items-end flex-shrink-0 ml-3">
-          <Link to={`/${category}/${id}`} className="text-black1" className="hover:underline hover:text-blue-500">
+          <Link to={`/${category}/${itemId}`} className="text-black1" className="hover:underline hover:text-blue-500">
             {reviewName}
           </Link>
           <p className="text-black1 text-xs">{reviewedAt}</p>
