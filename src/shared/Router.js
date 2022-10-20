@@ -37,6 +37,7 @@ import Information from "../pages/information/Information";
 import Credits from "../pages/credits/Credits";
 import TouristSpotsPage from "../pages/mainpage/touristspots/TouristSpotsPage";
 import UserComments from "../pages/mypage/usercomments/UserComments";
+import SunTime from "../pages/suntime/SunTime";
 
 const Router = () => {
   return (
@@ -74,6 +75,7 @@ const Router = () => {
         <Route path="/mypage/user/edit" element={<EditUserInfoPage />} />
         <Route path="/mypage/user/comments" element={<UserComments />} />
         <Route path="/tide" element={<Tide />} />
+        <Route path="/suntime" element={<SunTime />} />
         <Route path="/reset/password" element={<ResetPasswordPage />} />
         <Route path="/info" element={<Info />} />
         <Route path="/scheduleinfo" element={<ScheduleInfo />} />
