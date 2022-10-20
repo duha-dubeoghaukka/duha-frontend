@@ -141,10 +141,10 @@ const RestaurantDetailPage = () => {
               <p className="text-base md:text-lg font-semibold">전화번호</p>
               <p className="text-sm text-gray-700 mb-2">{phone}</p>
             </div>
-            <div className="mb-1 md:mb-2 w-full border-b">
+            <div className="mb-1 md:mb-2 w-full">
               {stations.length > 0 && <p className="text-base md:text-lg font-semibold">가까운 버스 정류장</p>}
               {stations.length > 0 && (
-                <div>
+                <div className="mb-2 border-b">
                   {stations
                     .sort((a, b) => {
                       return a.distance - b.distance;

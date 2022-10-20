@@ -141,17 +141,17 @@ const TouristSpotDetailPage = () => {
               <p className="text-base md:text-lg font-semibold">전화번호</p>
               <p className="text-sm text-gray-700 mb-2">{phone}</p>
             </div>
-            <div className="mb-1 md:mb-2 border-b w-full">
+            <div className="mb-1 md:mb-2 w-full">
               {stations.length > 0 && <p className="text-base md:text-lg font-semibold">가까운 버스 정류장</p>}
               {stations.length > 0 && (
-                <div className="mb-2">
+                <div className="mb-2 border-b">
                   {stations
                     .sort((a, b) => {
                       return a.distance - b.distance;
                     })
                     .map(station => {
                       return (
-                        <div className="flex items-center" key={station.stationName}>
+                        <div className="flex items-center mb-2" key={station.stationName}>
                           <DirectionsBusIcon className="mr-1" fontSize="small" />
                           <p className="text-sm text-gray-700">
                             {station.stationName} - {station.distance}m
