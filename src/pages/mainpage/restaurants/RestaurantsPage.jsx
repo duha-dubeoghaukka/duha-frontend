@@ -46,6 +46,14 @@ const RestaurantsPage = () => {
   const [autoCompletedInput, setAutoCompletedInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAutoComplete, setSelectedAutoComplete] = useState(0);
+  const [isAutoCompleteVisible, setIsAutoCompleteVisible] = useState(false);
+  useEffect(() => {
+    if (searchResults.length === 0) {
+      setIsAutoCompleteVisible(false);
+    } else {
+      setIsAutoCompleteVisible(true);
+    }
+  }, [searchResults]);
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
@@ -69,6 +77,7 @@ const RestaurantsPage = () => {
     setSearchMode(true);
   };
   const changeCurrentRegion = regionName => {
+    setSearchMode(false);
     setCurrentPage(0);
     setCurrentRegion(regionName);
   };
@@ -142,6 +151,7 @@ const RestaurantsPage = () => {
             sendSearchedResults={sendSearchedResults}
             region={currentRegion}
             category="restaurants"
+            isAutoCompleteVisible={isAutoCompleteVisible}
           />
           {searchResults && (
             <div className="absolute bg-white z-10 rounded-lg shadow-lg w-[600px] overflow-clip">
