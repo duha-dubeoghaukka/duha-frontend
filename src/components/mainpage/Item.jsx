@@ -5,6 +5,7 @@ import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { api } from "../../api/api";
 import Bookmark from "./Bookmark";
 import { useState } from "react";
+import { routingLoginPage } from "../../utils/routingLoginPage";
 
 const Item = ({ data, category }) => {
   const navigator = useNavigate();
@@ -41,7 +42,7 @@ const Item = ({ data, category }) => {
           alert(error);
         });
     } else {
-      alert("로그인을 먼저 해주세요.");
+      routingLoginPage(navigator);
     }
   };
   return (

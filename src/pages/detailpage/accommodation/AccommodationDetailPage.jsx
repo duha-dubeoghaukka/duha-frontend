@@ -18,6 +18,7 @@ import AccommodationDetailBookmark from "./AccommodationDetailBookmark";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
+import { routingLoginPage } from "../../../utils/routingLoginPage";
 
 const AccommodationDetailPage = () => {
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const AccommodationDetailPage = () => {
           alert(error);
         });
     } else {
-      alert("로그인을 먼저 해주세요");
+      routingLoginPage(navigate);
     }
   };
   if (isLoading) {
