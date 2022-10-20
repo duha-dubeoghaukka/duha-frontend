@@ -4,7 +4,7 @@ const Comment = ({ comment, currentCategory }) => {
   let category;
   switch (currentCategory) {
     case "관광":
-      category = "touristspots";
+      category = "spots";
       break;
     case "맛집":
       category = "restaurants";
