@@ -129,34 +129,19 @@ const RestaurantDetailPage = () => {
           </Swiper>
         </div>
         <div className="mb-2 md:mb-4">
-          <div className="px-5 md:px-10 py-3 md:py-5 border-green1 border-2 rounded-md flex flex-col items-start">
-            <div className="w-full mb-1 md:mb-2">
+          <div className="px-5 md:px-10 py-3 md:py-5 bg-white1 rounded-md flex flex-col items-start">
+            <div className="w-full mb-1 md:mb-2 border-b">
               <div className="flex items-center justify-between">
                 <p className="text-base md:text-lg font-semibold">주소</p>
                 <MapIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
               </div>
-              <p className="text-sm text-gray-700">{address}</p>
+              <p className="text-sm text-gray-700 mb-2">{address}</p>
             </div>
-            <div className="mb-1 md:mb-2">
+            <div className="mb-1 md:mb-2 w-full border-b">
               <p className="text-base md:text-lg font-semibold">전화번호</p>
-              <p className="text-sm text-gray-700">{phone}</p>
+              <p className="text-sm text-gray-700 mb-2">{phone}</p>
             </div>
-            {processedInfo.length > 0 && (
-              <div className="mb-1 md:mb-2">
-                <p className="text-base md:text-lg font-semibold">영업정보</p>
-                <div>
-                  {processedInfo.map(info => {
-                    return (
-                      <div key={info.title} className="mb-2">
-                        <p className="font-semibold text-sm">{info.title}</p>
-                        <p className="text-sm text-gray-700">{info.content}</p>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-            <div className="mb-1 md:mb-2">
+            <div className="mb-1 md:mb-2 w-full border-b">
               {stations.length > 0 && <p className="text-base md:text-lg font-semibold">가까운 버스 정류장</p>}
               {stations.length > 0 && (
                 <div>
@@ -166,8 +151,8 @@ const RestaurantDetailPage = () => {
                     })
                     .map(station => {
                       return (
-                        <div className="flex items-center" key={station.stationName}>
-                          <DirectionsBusIcon className="mr-1" />
+                        <div className="flex items-center mb-2" key={station.stationName}>
+                          <DirectionsBusIcon className="mr-1" fontSize="small" />
                           <p className="text-sm text-gray-700">
                             {station.stationName} - {station.distance}m
                           </p>
@@ -177,6 +162,18 @@ const RestaurantDetailPage = () => {
                 </div>
               )}
             </div>
+            {processedInfo.length > 0 && (
+              <div className="w-full">
+                {processedInfo.map(info => {
+                  return (
+                    <div key={info.title} className="mb-2 border-b last:border-none">
+                      <p className="font-semibold text-sm">{info.title}</p>
+                      <p className="text-sm text-gray-700 mb-2">{info.content}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
         <Comments
