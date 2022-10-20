@@ -135,6 +135,11 @@ const TouristSpotDetailPage = () => {
                 <p className="text-base md:text-lg font-semibold">주소</p>
                 <MapIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
               </div>
+              <p className="text-sm text-gray-700 mb-2">{address}</p>
+            </div>
+            <div className="w-full border-b mb-1 md:mb-2">
+              <p className="text-base md:text-lg font-semibold">전화번호</p>
+              <p className="text-sm text-gray-700 mb-2">{phone}</p>
             </div>
             <div className="mb-1 md:mb-2 w-full">
               {stations.length > 0 && <p className="text-base md:text-lg font-semibold">가까운 버스 정류장</p>}
