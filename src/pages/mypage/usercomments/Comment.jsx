@@ -20,9 +20,9 @@ const Comment = ({ comment, currentCategory }) => {
     <div className="my-3">
       <div className="flex justify-between items-center">
         <div className="bg-white shadow-md p-2 rounded-md inline-block">
-          <p className="text-sm text-black1 md:text-base">{review}</p>
+          <p className="text-sm text-black1">{review}</p>
         </div>
-        <div className="flex flex-col items-end">
+        <div className="flex flex-col items-end flex-shrink-0 ml-3">
           <Link to={`/${category}/${id}`} className="text-black1" className="hover:underline hover:text-blue-500">
             {reviewName}
           </Link>
