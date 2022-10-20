@@ -1,12 +1,12 @@
 import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import { useNavigate } from "react-router-dom";
-import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { api } from "../../api/api";
 import Bookmark from "./Bookmark";
 import { useState } from "react";
 import MapIcon from "@mui/icons-material/Map";
 import Map from "../../pages/detailpage/mappage/Map";
+import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 
 const Item = ({ data, category }) => {
   const navigator = useNavigate();
@@ -44,7 +44,8 @@ const Item = ({ data, category }) => {
           alert(error);
         });
     } else {
-      alert("로그인을 먼저 해주세요.");
+      alert("로그인이 필요한 서비스입니다");
+      navigator("/login");
     }
   };
   const mapClickHandler = event => {
