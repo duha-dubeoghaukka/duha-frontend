@@ -9,10 +9,12 @@ const CommentList = ({ comments }) => {
     );
   } else {
     return (
-      <div>
-        {comments.map(comment => {
-          return <Comment key={comment.id} comment={comment} />;
-        })}
+      <div className="bg-gray-200 p-3 rounded-lg">
+        {comments
+          .sort((a, b) => Date.parse(a.reviewedAt) - Date.parse(b.reviewedAt))
+          .map(comment => {
+            return <Comment key={comment.id} comment={comment} />;
+          })}
       </div>
     );
   }
