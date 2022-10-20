@@ -123,7 +123,7 @@ const TouristSpotsPage = () => {
     const items = data.data.data.list;
     const totalNumberOfPages = data.data.data.totalPages;
     return (
-      <Layout title="관광지" highlight={"mainpage/spots"}>
+      <Layout title="일정 관리" highlight={"schedule/create"}>
         <div className="flex justify-around my-4 text-lg font-bold">
           <Link to={`/schedule/${tripId}/${day}/${currentCourseId}/addspot`} className="text-green1">
             관광
