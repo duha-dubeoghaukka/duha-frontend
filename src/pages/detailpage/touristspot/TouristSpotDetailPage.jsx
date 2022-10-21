@@ -1,6 +1,5 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -12,14 +11,13 @@ import { Autoplay, Pagination } from "swiper";
 import GlobalState from "../../../shared/GlobalState";
 import Map from "../mappage/Map";
 import { api } from "../../../api/api";
-import TouristSpotDetailBookmark from "./TouristSpotDetailBookmark";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
+import Bookmark from "../../../components/mainpage/Bookmark";
 
 const TouristSpotDetailPage = () => {
-  const navigator = useNavigate();
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data, refetch } = useQuery(["touristSpotDetail"], () => {
@@ -54,26 +52,6 @@ const TouristSpotDetailPage = () => {
         });
     }
   };
-  const bookmarkHandler = () => {
-    const isLoggedIn = checkIsLoggedIn();
-    if (isLoggedIn) {
-      api
-        .get("/auth/touristspot/bookmark/" + spotID)
-        .then(response => {
-          if (response.data.isSuccess) {
-            refetch();
-          } else {
-            alert(response.data.message);
-          }
-        })
-        .catch(error => {
-          alert(error);
-        });
-    } else {
-      alert("로그인을 먼저 해주세요");
-      navigator("/login");
-    }
-  };
   if (isLoading) {
     return <Spinner />;
   }
@@ -82,26 +60,22 @@ const TouristSpotDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info, latitude, longitude } = spot;
+    const { address, name, phone, reviews, imgUrl, bookmarked, stations, info, latitude, longitude, bookmarkNum, id } = spot;
     const processedInfo = processInfo(info);
     return (
-      <Layout isLoggedIn={false} title="관광지 상세" highlight="mainpage/spots">
+      <Layout title="관광지 상세" highlight="mainpage/spots">
         <div className="md:hidden flex justify-between items-center">
           <div>
             <p className="font-bold text-sm md:text-xl">📷 {name}</p>
           </div>
-          <div className="flex items-center">
-            <FavoriteRoundedIcon sx={{ color: "red" }} />
-            <p className="ml-0.5 text-sm">{likeNum}</p>
-            <TouristSpotDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          <div className="flex items-center cursor-pointer">
+            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"touristspot"} id={id} refetchList={refetch} />
           </div>
         </div>
         <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
           <p className="font-bold text-base md:text-xl">📷 {name}</p>
-          <div className="flex items-center">
-            <FavoriteRoundedIcon sx={{ color: "red" }} />
-            <p className="ml-0.5">{likeNum}</p>
-            <TouristSpotDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          <div className="flex items-center cursor-pointer">
+            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"touristspot"} id={id} refetchList={refetch} />
           </div>
         </div>
         <div className="mb-2 md:mb-4">
