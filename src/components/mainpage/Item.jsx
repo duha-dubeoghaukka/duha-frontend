@@ -10,7 +10,7 @@ import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 
 const Item = ({ data, category }) => {
   const navigator = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked, hasNearStation } = data;
+  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked, hasNearStation, latitude, longitude } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const itemClickHandler = () => {
@@ -96,7 +96,7 @@ const Item = ({ data, category }) => {
         <div>
           <div className="fixed top-0 left-0 z-20 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
           <div className="fixed z-20 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
-            <Map address={"제주도"} name={name} setIsMapModalOpen={setIsMapModalOpen} />
+            <Map latitude={latitude} longitude={longitude} name={name} setIsMapModalOpen={setIsMapModalOpen} />
           </div>
         </div>
       )}
