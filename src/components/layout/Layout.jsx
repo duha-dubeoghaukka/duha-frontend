@@ -102,6 +102,9 @@ const Layout = props => {
                 <Link to="/tide" className={`${category === "tide" && "text-green1 font-bold"} hover:font-bold`}>
                   물때 더 보기
                 </Link>
+                <Link to="/suntime" className={`${category === "suntime" && "text-green1 font-bold"} hover:font-bold`}>
+                  일출/일몰 시간 보기
+                </Link>
               </div>
             </div>
             <div className="mb-4">
