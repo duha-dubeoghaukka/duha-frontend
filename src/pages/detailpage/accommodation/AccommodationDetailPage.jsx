@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -13,10 +12,10 @@ import GlobalState from "../../../shared/GlobalState";
 import Map from "../mappage/Map";
 import { api } from "../../../api/api";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
-import AccommodationDetailBookmark from "./AccommodationDetailBookmark";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
+import Bookmark from "../../../components/mainpage/Bookmark";
 
 const AccommodationDetailPage = () => {
   const navigator = useNavigate();
@@ -54,26 +53,6 @@ const AccommodationDetailPage = () => {
         });
     }
   };
-  const bookmarkHandler = () => {
-    const isLoggedIn = checkIsLoggedIn();
-    if (isLoggedIn) {
-      api
-        .get("/auth/accommodation/bookmark/" + accommodationID)
-        .then(response => {
-          if (response.data.isSuccess) {
-            refetch();
-          } else {
-            alert(response.data.message);
-          }
-        })
-        .catch(error => {
-          alert(error);
-        });
-    } else {
-      alert("로그인을 먼저 해주세요");
-      navigator("/login");
-    }
-  };
   if (isLoading) {
     return <Spinner />;
   }
@@ -82,26 +61,23 @@ const AccommodationDetailPage = () => {
   }
   if (data) {
     const accommodation = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info, latitude, longitude } = accommodation;
+    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, stations, info, latitude, longitude, bookmarkNum, id } =
+      accommodation;
     const processedInfo = processInfo(info);
     return (
-      <Layout isLoggedIn={false} title="숙소 상세" highlight="mainpage/accommodations">
+      <Layout title="숙소 상세" highlight="mainpage/accommodations">
         <div className="md:hidden flex justify-between items-center">
           <div className="flex items-center">
             <p className="font-bold text-sm md:text-xl">🛏 {name}</p>
           </div>
-          <div className="flex items-center">
-            <FavoriteRoundedIcon sx={{ color: "red" }} />
-            <p className="ml-0.5 text-sm">{likeNum}</p>
-            <AccommodationDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          <div className="flex items-center cursor-pointer">
+            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"accommodation"} id={id} refetchList={refetch} />
           </div>
         </div>
         <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
           <p className="font-bold text-base md:text-xl">🛏 {name}</p>
-          <div className="flex items-center">
-            <FavoriteRoundedIcon sx={{ color: "red" }} />
-            <p className="ml-0.5">{likeNum}</p>
-            <AccommodationDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          <div className="flex items-center cursor-pointer">
+            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"accommodation"} id={id} refetchList={refetch} />
           </div>
         </div>
         <div className="mb-2 md:mb-4">
