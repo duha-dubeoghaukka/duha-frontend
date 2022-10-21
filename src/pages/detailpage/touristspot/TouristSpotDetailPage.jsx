@@ -15,7 +15,6 @@ import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
-import { routingLoginPage } from "../../../utils/routingLoginPage";
 import Bookmark from "../../../components/mainpage/Bookmark";
 
 const TouristSpotDetailPage = () => {
@@ -66,16 +65,10 @@ const TouristSpotDetailPage = () => {
     const processedInfo = processInfo(info);
     return (
       <Layout title="관광지 상세" highlight="mainpage/spots">
-        <div className="md:hidden flex justify-between items-center">
+        <div className="flex justify-between items-center my-2 md:my-4">
           <div>
-            <p className="font-bold text-sm md:text-xl">📷 {name}</p>
+            <p className="font-bold md:text-xl">📷 {name}</p>
           </div>
-          <div className="flex items-center cursor-pointer">
-            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"touristspot"} id={id} refetchList={refetch} />
-          </div>
-        </div>
-        <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
-          <p className="font-bold text-base md:text-xl">📷 {name}</p>
           <div className="flex items-center cursor-pointer">
             <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"touristspot"} id={id} refetchList={refetch} />
           </div>
