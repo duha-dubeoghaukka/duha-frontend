@@ -191,7 +191,7 @@ const TouristSpotsPage = () => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} category={"touristspot"} />;
+                return <Item key={result.id} data={result} category={"touristspot"} refetchList={refetch} />;
               })}
             </div>
           </div>
@@ -199,7 +199,7 @@ const TouristSpotsPage = () => {
           <div>
             <div>
               {items.map(item => {
-                return <Item key={item.id} data={item} category={"touristspot"} />;
+                return <Item key={item.id} data={item} category={"touristspot"} refetchList={refetch} />;
               })}
             </div>
           </div>

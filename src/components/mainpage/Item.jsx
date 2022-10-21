@@ -1,17 +1,13 @@
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../api/api";
 import { useState } from "react";
 import MapIcon from "@mui/icons-material/Map";
 import Map from "../../pages/detailpage/mappage/Map";
-import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import Bookmark from "./Bookmark";
 
-const Item = ({ data, category }) => {
+const Item = ({ data, category, refetchList }) => {
   const navigator = useNavigate();
-  console.dir(data);
   const { id, name, description, region, thumbnailUrl, bookmarked, hasNearStation, latitude, longitude, bookmarkNum } = data;
-  const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const itemClickHandler = () => {
     switch (category) {
@@ -24,28 +20,6 @@ const Item = ({ data, category }) => {
       case "accommodation":
         return navigator("/accommodations/" + id);
         break;
-    }
-  };
-  const bookmarkHandler = event => {
-    event.stopPropagation();
-    const isLoggedIn = checkIsLoggedIn();
-    if (isLoggedIn) {
-      api
-        .get(`/auth/${category}/bookmark/` + id)
-        .then(response => {
-          if (response.data.isSuccess) {
-            const nextBookmarked = response.data.data.bookmarked;
-            setIsBookmarked(nextBookmarked);
-          } else {
-            alert(response.data.message);
-          }
-        })
-        .catch(error => {
-          alert(error);
-        });
-    } else {
-      alert("로그인이 필요한 서비스입니다");
-      navigator("/login");
     }
   };
   const mapClickHandler = event => {
@@ -83,7 +57,7 @@ const Item = ({ data, category }) => {
             <p className="text-xs">{description}</p>
           </div>
           <div className="flex items-center">
-            <Bookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} numberOfBookmarks={bookmarkNum} />
+            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={category} id={id} refetchList={refetchList} />
           </div>
           <div onClick={mapClickHandler}>
             <MapIcon className="cursor-pointer" fontSize="medium" />
