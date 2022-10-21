@@ -9,25 +9,29 @@ function HomeCard() {
       title: "관광",
       route: `/spots`,
       description: "제주 관광지를",
-      background: "bg-main-spot bg-cover bg-center bg-opacity-100 rounded-lg w-full h-full "
+      background: "bg-main-spot bg-cover bg-center bg-opacity-100 rounded-lg w-full h-full ",
+      none: false
     },
     {
       title: "맛집",
       route: `/restaurants`,
       description: "제주 맛집을",
-      background: "bg-main-restuarant bg-cover bg-center bg-opacity-100 rounded-lg"
+      background: "bg-main-restuarant bg-cover bg-center bg-opacity-100 rounded-lg",
+      none: false
     },
     {
       title: "숙소",
       route: `/accommodations`,
       description: "제주 숙소를",
-      background: "bg-main-accomodation bg-cover bg-center bg-opacity-100 rounded-lg"
+      background: "bg-main-accomodation bg-cover bg-center bg-opacity-100 rounded-lg",
+      none: false
     },
     {
       title: "뚜벅이 서비스",
       route: "/information",
       description: "이동수단, 콜택시, 짐배달을",
-      background: "bg-main-service bg-cover bg-center bg-opacity-100 rounded-lg"
+      background: "bg-main-service bg-cover bg-center bg-opacity-100 rounded-lg",
+      none: false
     },
     {
       title: "날씨 더 보기",
@@ -39,7 +43,22 @@ function HomeCard() {
       title: "물때 더 보기",
       route: "/tide",
       description: "제주 물때를",
-      background: "bg-main-sea bg-cover bg-center bg-opacity-100 rounded-lg"
+      background: "bg-main-sea bg-cover bg-center bg-opacity-100 rounded-lg",
+      none: false
+    },
+    {
+      title: "일출, 일몰",
+      route: "/suntime",
+      description: "제주 일출,일몰을",
+      background: "bg-main-suntime bg-cover bg-center bg-opacity-100 rounded-lg",
+      none: false
+    },
+    {
+      title: "",
+      route: "",
+      description: "",
+      background: "",
+      none: true
     }
   ];
 
