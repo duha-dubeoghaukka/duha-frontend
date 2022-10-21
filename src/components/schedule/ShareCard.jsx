@@ -2,42 +2,61 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api } from "../../api/api";
 import ShareCardBookmark from "./ShareCardBookmark";
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
 import Spinner from "../Spinner/Spinner";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
+import { useInView } from "react-intersection-observer";
+
+const fetchList = async pageParam => {
+  const res = await api.get(`/trip?page=${pageParam}`);
+  const { list, nextPage, totalPages } = res.data.data;
+  return { list, nextPage, totalPages };
+};
 
 function ShareCard() {
-  const { error, isLoading, data, refetch, status } = useQuery("shareCards", () => {
-    return api.get("/trip");
+  const { ref, inView } = useInView();
+  const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery("list", ({ pageParam = 0 }) => fetchList(pageParam), {
+    getNextPageParam: lastPage => (lastPage.nextPage <= lastPage.totalPages ? lastPage.nextPage : undefined)
   });
-  const refetchQuery = () => {
-    refetch();
-  };
-  if (isLoading || status === "loading") {
-    return <Spinner />;
-  }
-  if (error || status === "error") {
-    return <div>{error}</div>;
-  }
-  if (data && status === "success") {
-    const schedules = data.data.data;
+
+  useEffect(() => {
+    if (inView) fetchNextPage();
+  }, [inView]);
+
+  if (status === "loading")
     return (
-      <div className="h-full">
-        <span className="mt-10 mb-5 font-normal text-lg text-black2 flex justify-center">다른 뚜벅이들의 제주 일정을 참고해보세요!</span>
-        {schedules?.map(item => {
-          return <ShareCardComponent key={item.id} item={item} refetchQuery={refetchQuery} />;
-        })}
+      <div className="flex flex-col items-center justify-center mt-5">
+        <img src="https://i.ibb.co/yyxq0XX/001.png" alt="하르방사진" className="w-10 mr-2 animate-bounce" />
       </div>
     );
-  }
+  if (status === "error") return <div>error</div>;
+
+  return (
+    <div className="h-full">
+      <span className="mt-5 md:mt-10 md:mb-5 md:text-lg text-black2 font-semibold flex justify-center">
+        다른 뚜벅이들의 제주 일정을 참고해보세요!
+      </span>
+      {data?.pages.map((page, index) => (
+        <div key={index}>
+          {page.list.map(item => (
+            <ShareCardComponent key={item.id} item={item} />
+          ))}
+        </div>
+      ))}
+      {isFetchingNextPage ? (
+        <div className="flex flex-col items-center justify-center mt-5">
+          <img src="https://i.ibb.co/yyxq0XX/001.png" alt="하르방사진" className="w-10 mr-2 animate-bounce" />
+        </div>
+      ) : (
+        <div ref={ref}></div>
+      )}
+    </div>
+  );
 }
 
-function ShareCardComponent({ item, refetchQuery }) {
+function ShareCardComponent({ item }) {
   const { id, title, startAt, endAt, bookmarked } = item;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
-  useEffect(() => {
-    refetchQuery();
-  }, [isBookmarked]);
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
