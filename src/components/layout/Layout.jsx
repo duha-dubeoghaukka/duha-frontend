@@ -10,6 +10,9 @@ import useChange from "../../hooks/useChange";
 import ShowEmailModal from "../modal/ShowEmailModal";
 import Footer from "../footer/Footer";
 import { deleteCookie, getCookie } from "../../shared/Cookie";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 const Layout = props => {
   const [isOpen, setIsOpen] = useState(false);
@@ -147,15 +150,27 @@ const Layout = props => {
           </div>
         </div>
       )}
-      <div className="fixed bottom-0 md:invisible h-fit pt-3 pb-6 bg-white text-gray-700 w-full flex justify-around items-center rounded-lg z-10">
+      <div className="fixed bottom-0 md:invisible h-fit pt-3 pb-6 bg-white text-gray-700 w-full flex justify-around items-center z-10 border-t border-t-[#dbdbdb]">
         <Link to="/">
-          <HomeIcon />
+          {greaterCategory === "mainpage" ? (
+            <HomeIcon sx={{ fontSize: 28, color: "#7FB77E" }} />
+          ) : (
+            <HomeOutlinedIcon sx={{ fontSize: 28, color: "#bdbdbd" }} />
+          )}
         </Link>
         <Link to="/schedule">
-          <CalendarMonthIcon />
+          {greaterCategory === "schedule" ? (
+            <CalendarMonthIcon sx={{ fontSize: 28, color: "#7FB77E" }} />
+          ) : (
+            <CalendarMonthOutlinedIcon sx={{ fontSize: 28, color: "#bdbdbd" }} />
+          )}
         </Link>
         <Link to="/mypage">
-          <PersonIcon />
+          {greaterCategory === "mypage" ? (
+            <PersonIcon sx={{ fontSize: 28, color: "#7FB77E" }} />
+          ) : (
+            <PersonOutlineOutlinedIcon sx={{ fontSize: 28, color: "#bdbdbd" }} />
+          )}
         </Link>
       </div>
       {isFullWidth ? (
