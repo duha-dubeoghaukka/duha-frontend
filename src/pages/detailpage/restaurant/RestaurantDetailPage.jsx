@@ -61,7 +61,7 @@ const RestaurantDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, stations, info, latitude, longitude, bookmarkNum, id } = spot;
+    const { address, name, phone, reviews, imgUrl, bookmarked, stations, info, latitude, longitude, bookmarkNum, id } = spot;
     const processedInfo = processInfo(info);
     return (
       <Layout title="맛집 상세" highlight="mainpage/restaurants">
