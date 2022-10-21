@@ -191,7 +191,7 @@ const AccommodationsPage = () => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} category={"accommodation"} />;
+                return <Item key={result.id} data={result} category={"accommodation"} refetchList={refetch} />;
               })}
             </div>
           </div>
@@ -199,7 +199,7 @@ const AccommodationsPage = () => {
           <div>
             <div>
               {items.map(item => {
-                return <Item key={item.id} data={item} category={"accommodation"} />;
+                return <Item key={item.id} data={item} category={"accommodation"} refetchList={refetch} />;
               })}
             </div>
           </div>
