@@ -82,7 +82,7 @@ const AccommodationDetailPage = () => {
   }
   if (data) {
     const accommodation = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info } = accommodation;
+    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info, latitude, longitude } = accommodation;
     const processedInfo = processInfo(info);
     return (
       <Layout isLoggedIn={false} title="숙소 상세" highlight="mainpage/accommodations">
@@ -187,7 +187,7 @@ const AccommodationDetailPage = () => {
           <div>
             <div className="fixed top-0 left-0 z-10 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
             <div className="fixed z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
-              <Map address={address} name={name} setIsMapModalOpen={setIsMapModalOpen} />
+              <Map latitude={latitude} longitude={longitude} name={name} setIsMapModalOpen={setIsMapModalOpen} />
             </div>
           </div>
         )}

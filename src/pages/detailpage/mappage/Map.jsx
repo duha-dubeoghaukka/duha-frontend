@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 
-const Map = ({ address, setIsMapModalOpen, latitude, longitude }) => {
+const Map = ({ setIsMapModalOpen, latitude, longitude }) => {
   let validity = false;
   useEffect(() => {
     const map = new naver.maps.Map("map", {
