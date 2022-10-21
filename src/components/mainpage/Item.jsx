@@ -59,7 +59,7 @@ const Item = ({ data, category, refetchList }) => {
           <div className="flex items-center">
             <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={category} id={id} refetchList={refetchList} />
           </div>
-          <div onClick={mapClickHandler}>
+          <div onClick={mapClickHandler} className="inline-block">
             <MapIcon className="cursor-pointer" fontSize="medium" />
           </div>
         </div>
