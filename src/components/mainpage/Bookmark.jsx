@@ -1,24 +1,15 @@
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
 
-const Bookmark = ({ bookmarked, bookmarkHandler }) => {
+const Bookmark = ({ bookmarked, bookmarkHandler, numberOfBookmarks }) => {
   return (
-    <div>
+    <div className="flex items-center">
       {bookmarked ? (
-        <StarRoundedIcon
-          className="absolute top-1 left-1 cursor-pointer hover:scale-125"
-          fontSize="large"
-          sx={{ color: "#ffd740" }}
-          onClick={bookmarkHandler}
-        />
+        <StarRoundedIcon sx={{ color: "#ffd740" }} onClick={bookmarkHandler} />
       ) : (
-        <StarOutlineRoundedIcon
-          className="absolute top-1 left-1 cursor-pointer hover:scale-125"
-          fontSize="large"
-          sx={{ color: "#ffd740" }}
-          onClick={bookmarkHandler}
-        />
+        <StarOutlineRoundedIcon sx={{ color: "#ffd740" }} onClick={bookmarkHandler} />
       )}
+      <p className="text-black1 font-bold text-sm ml-1">{numberOfBookmarks}</p>
     </div>
   );
 };

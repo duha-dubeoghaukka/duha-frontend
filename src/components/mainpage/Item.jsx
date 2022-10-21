@@ -1,16 +1,16 @@
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
-import Bookmark from "./Bookmark";
 import { useState } from "react";
 import MapIcon from "@mui/icons-material/Map";
 import Map from "../../pages/detailpage/mappage/Map";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
+import Bookmark from "./Bookmark";
 
 const Item = ({ data, category }) => {
   const navigator = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl, bookmarked, hasNearStation, latitude, longitude } = data;
+  console.dir(data);
+  const { id, name, description, region, thumbnailUrl, bookmarked, hasNearStation, latitude, longitude, bookmarkNum } = data;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
   const [isMapModalOpen, setIsMapModalOpen] = useState(false);
   const itemClickHandler = () => {
@@ -63,7 +63,6 @@ const Item = ({ data, category }) => {
       >
         <div className="w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative mr-2">
           <img loading="lazy" className="w-full h-full object-cover object-center rounded-md" src={thumbnailUrl} alt={name} />
-          <Bookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
         </div>
         <div>
           <div className="mb-1 flex items-center justify-start">
@@ -84,11 +83,10 @@ const Item = ({ data, category }) => {
             <p className="text-xs">{description}</p>
           </div>
           <div className="flex items-center">
-            <FavoriteRoundedIcon sx={{ color: "red" }} className="mr-[3px]" />
-            <p className="text-xs">{likeNum}</p>
+            <Bookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} numberOfBookmarks={bookmarkNum} />
           </div>
-          <div>
-            <MapIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
+          <div onClick={mapClickHandler}>
+            <MapIcon className="cursor-pointer" fontSize="medium" />
           </div>
         </div>
       </div>
