@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { api } from "../../api/api";
 import ShareCardBookmark from "./ShareCardBookmark";
 import { useInfiniteQuery } from "react-query";
-import Spinner from "../Spinner/Spinner";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { useInView } from "react-intersection-observer";
+import useChange from "../../hooks/useChange";
+import IosShareIcon from "@mui/icons-material/IosShare";
+import ShareIcon from "@mui/icons-material/Share";
+import ShowModal from "../modal/ShowModal";
 
 const fetchList = async pageParam => {
   const res = await api.get(`/trip?page=${pageParam}`);
@@ -57,6 +60,17 @@ function ShareCard() {
 function ShareCardComponent({ item }) {
   const { id, title, startAt, endAt, bookmarked } = item;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
+
+  const [isModal, ModalHandler] = useChange();
+  const [routeUrl, setRouteUrl] = useState();
+
+  const url = process.env.REACT_APP_URL;
+  const uri = `${url}/schedule/share/detail/${id}`;
+
+  useEffect(() => {
+    isModal === true ? setRouteUrl(uri) : null;
+  }, [isModal]);
+
   const bookmarkHandler = () => {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
@@ -90,6 +104,18 @@ function ShareCardComponent({ item }) {
             </div>
           </div>
         </Link>
+        <div>
+          <ShareIcon
+            className="absolute top-6 right-14 cursor-pointer hover:scale-125 cursor-pointer"
+            sx={{ fontSize: "20px", color: "#757575" }}
+            onClick={e => {
+              e.stopPropagation();
+              ModalHandler();
+            }}
+          />
+        </div>
+        <ShowModal show={isModal} modalHandler={ModalHandler} route={routeUrl} title={title} />
+
         <div>
           <ShareCardBookmark bookmarked={isBookmarked} bookmarkHandler={bookmarkHandler} />
         </div>
