@@ -191,7 +191,7 @@ const RestaurantsPage = () => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} category={"restaurant"} />;
+                return <Item key={result.id} data={result} category={"restaurant"} refetchList={refetch} />;
               })}
             </div>
           </div>
@@ -199,7 +199,7 @@ const RestaurantsPage = () => {
           <div>
             <div>
               {items.map(item => {
-                return <Item key={item.id} data={item} category={"restaurant"} />;
+                return <Item key={item.id} data={item} category={"restaurant"} refetchList={refetch} />;
               })}
             </div>
           </div>

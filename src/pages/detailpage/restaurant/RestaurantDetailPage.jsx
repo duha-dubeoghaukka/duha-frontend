@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import MapIcon from "@mui/icons-material/Map";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
@@ -13,10 +12,10 @@ import GlobalState from "../../../shared/GlobalState";
 import Map from "../mappage/Map";
 import { api } from "../../../api/api";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
-import RestaurantDetailBookmark from "./RestaurantDetailBookmark";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
+import Bookmark from "../../../components/mainpage/Bookmark";
 
 const RestaurantDetailPage = () => {
   const navigator = useNavigate();
@@ -54,26 +53,6 @@ const RestaurantDetailPage = () => {
         });
     }
   };
-  const bookmarkHandler = () => {
-    const isLoggedIn = checkIsLoggedIn();
-    if (isLoggedIn) {
-      api
-        .get("/auth/restaurant/bookmark/" + restaurantID)
-        .then(response => {
-          if (response.data.isSuccess) {
-            refetch();
-          } else {
-            alert(response.data.message);
-          }
-        })
-        .catch(error => {
-          alert(error);
-        });
-    } else {
-      alert("로그인을 먼저 해주세요");
-      navigator("/login");
-    }
-  };
   if (isLoading) {
     return <Spinner />;
   }
@@ -82,26 +61,22 @@ const RestaurantDetailPage = () => {
   }
   if (data) {
     const spot = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, description, stations, info } = spot;
+    const { address, name, phone, reviews, imgUrl, bookmarked, stations, info, latitude, longitude, bookmarkNum, id } = spot;
     const processedInfo = processInfo(info);
     return (
-      <Layout isLoggedIn={false} title="맛집 상세" highlight="mainpage/restaurants">
+      <Layout title="맛집 상세" highlight="mainpage/restaurants">
         <div className="md:hidden flex justify-between items-center">
           <div className="flex items-center">
             <p className="font-bold text-sm md:text-xl">🍴 {name}</p>
           </div>
-          <div className="flex items-center">
-            <FavoriteRoundedIcon sx={{ color: "red" }} />
-            <p className="ml-0.5 text-sm">{likeNum}</p>
-            <RestaurantDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          <div className="flex items-center cursor-pointer">
+            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"restaurant"} id={id} refetchList={refetch} />
           </div>
         </div>
         <div className="justify-between items-center mb-2 md:my-4 hidden md:flex">
           <p className="font-bold text-base md:text-xl">🍴 {name}</p>
-          <div className="flex items-center">
-            <FavoriteRoundedIcon sx={{ color: "red" }} />
-            <p className="ml-0.5">{likeNum}</p>
-            <RestaurantDetailBookmark bookmarked={bookmarked} bookmarkHandler={bookmarkHandler} />
+          <div className="flex items-center cursor-pointer">
+            <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={"restaurant"} id={id} refetchList={refetch} />
           </div>
         </div>
         <div className="mb-2 md:mb-4">
@@ -187,7 +162,7 @@ const RestaurantDetailPage = () => {
           <div>
             <div className="fixed top-0 left-0 z-10 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
             <div className="fixed z-10 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
-              <Map address={address} name={name} setIsMapModalOpen={setIsMapModalOpen} />
+              <Map latitude={latitude} longitude={longitude} name={name} setIsMapModalOpen={setIsMapModalOpen} />
             </div>
           </div>
         )}
