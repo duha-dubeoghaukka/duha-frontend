@@ -18,7 +18,8 @@ module.exports = {
         "main-schedule": "url('https://i.ibb.co/5x9qhRQ/image.jpg')",
         "main-share-schedule": "url('https://i.ibb.co/N7dCWfc/image.jpg')",
         "main-weather": "url('https://i.ibb.co/kG0N6r5/image.jpg')",
-        "main-sea": "url('https://i.ibb.co/02RvLxP/image.jpg')"
+        "main-sea": "url('https://i.ibb.co/02RvLxP/image.jpg')",
+        "main-suntime": "url('https://i.ibb.co/MkkKKx9/jeju-island-gef9a74ee8-1920.jpg')"
       }
     }
   },

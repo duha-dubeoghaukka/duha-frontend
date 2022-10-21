@@ -28,10 +28,14 @@ function EditUserInfoForm() {
   const [isNewPasswrord, setIsNewPassword] = useState();
   const [isCheckPassword, setIsCheckPassword] = useState();
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isKorean, setIsKorean] = useState(false);
+  const [isEnglish, setIsEnglish] = useState(false);
 
   //message
   const [passwordMessage, setPasswordMessage] = useState();
   const [checkPasswordMessage, setCheckPasswordMessage] = useState();
+  const [checkKoreanMessage, setCheckKoreanMessage] = useState();
+  const [checkEnglishMessage, setCheckEnglishMessage] = useState();
 
   useEffect(() => {
     routingLoginPage(navigate);
@@ -46,8 +50,39 @@ function EditUserInfoForm() {
 
   const onChangeNickName = e => {
     setNickName(e.target.value);
-    setIsNickName(true);
-    setIsDisabled(false);
+    checkIsKorean(e.target.value);
+  };
+
+  const checkIsKorean = data => {
+    const regKorExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+    const regEngExp = /[a-zA-Z]/g;
+    if (regKorExp.test(data)) {
+      if (0 < data.length <= 5) {
+        setIsNickName(true);
+        setIsDisabled(false);
+        setIsKorean(true);
+        setCheckKoreanMessage("");
+      }
+      if (data.length > 5) {
+        setIsNickName(false);
+        setIsDisabled(true);
+        setIsKorean(false);
+        setCheckKoreanMessage("닉네임(한글) 5자리 미만으로 설정해주세요");
+      }
+    } else if (regEngExp.test(data)) {
+      if (0 < data.length <= 15) {
+        setIsNickName(true);
+        setIsDisabled(false);
+        setIsEnglish(true);
+        setCheckEnglishMessage("");
+      }
+      if (data.length > 15) {
+        setIsNickName(false);
+        setIsDisabled(true);
+        setIsEnglish(false);
+        setCheckEnglishMessage("닉네임(영어) 16자리 미만으로 설정해주세요");
+      }
+    }
   };
 
   const onChangeCurrentPassword = e => {
@@ -192,6 +227,8 @@ function EditUserInfoForm() {
               value={nickName || ""}
               onChange={onChangeNickName}
             />
+            <p className="input-helper ml-4">{isKorean ? checkKoreanMessage : checkKoreanMessage}</p>
+            <p className="input-helper ml-4">{isEnglish ? checkEnglishMessage : checkEnglishMessage}</p>
             <input
               className="input mt-2"
               placeholder="기존 비밀번호"

@@ -1,6 +1,7 @@
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { routingLoginPage } from "../../utils/routingLoginPage";
 import MapIcon from "@mui/icons-material/Map";
 import Map from "../../pages/detailpage/mappage/Map";
 import Bookmark from "./Bookmark";
@@ -26,6 +27,7 @@ const Item = ({ data, category, refetchList }) => {
     event.stopPropagation();
     setIsMapModalOpen(true);
   };
+
   const backdropClickHandler = () => {
     setIsMapModalOpen(false);
   };

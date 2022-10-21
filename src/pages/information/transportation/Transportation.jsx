@@ -1,8 +1,8 @@
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
-import Spinner from "../../../components/Spinner/Spinner";
 import TransportationItem from "./TransportationItem";
 import transportations from "../../../utils/transportations";
+import NonLayoutSpinner from "../../../components/Spinner/NonLayoutSpinner";
 
 const Transportation = () => {
   const { isLoading, data, error } = useQuery("transportations", () => {
@@ -13,7 +13,7 @@ const Transportation = () => {
     });
   });
   if (isLoading) {
-    return <Spinner />;
+    return <NonLayoutSpinner />;
   }
   if (error) {
     return <div>{error}</div>;

@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
-import Spinner from "../../../components/Spinner/Spinner";
 import CallTaxiItem from "./CallTaxiItem";
 import regionNames from "../../../utils/regionNames";
 import CallTaxiRegionButton from "../../../components/information/CallTaxiRegionButton";
 import { useState } from "react";
+import NonLayoutSpinner from "../../../components/Spinner/NonLayoutSpinner";
 
 const CallTaxi = () => {
   const { isLoading, data, error } = useQuery("callTaxis", () => {
@@ -16,7 +16,7 @@ const CallTaxi = () => {
   });
   const [currentRegion, setCurrentRegion] = useState("전체");
   if (isLoading) {
-    return <Spinner />;
+    return <NonLayoutSpinner />;
   }
   if (error) {
     return <div>{error}</div>;

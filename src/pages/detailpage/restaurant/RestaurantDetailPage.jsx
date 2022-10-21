@@ -15,6 +15,7 @@ import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
+import { routingLoginPage } from "../../../utils/routingLoginPage";
 import Bookmark from "../../../components/mainpage/Bookmark";
 
 const RestaurantDetailPage = () => {
@@ -53,6 +54,7 @@ const RestaurantDetailPage = () => {
         });
     }
   };
+
   if (isLoading) {
     return <Spinner />;
   }
