@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { api } from "../../../api/api";
-import Spinner from "../../../components/Spinner/Spinner";
 import PorterItem from "./PorterItem";
+import NonLayoutSpinner from "../../../components/Spinner/NonLayoutSpinner";
 
 const Porter = () => {
   const { isLoading, data, error } = useQuery("porters", () => {
@@ -12,7 +12,7 @@ const Porter = () => {
     });
   });
   if (isLoading) {
-    return <Spinner />;
+    return <NonLayoutSpinner />;
   }
   if (error) {
     return <div>{error}</div>;

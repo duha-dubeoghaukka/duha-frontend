@@ -2,13 +2,13 @@ import Layout from "../../components/layout/Layout";
 import Forecast from "./Forecast";
 import axios from "axios";
 import { useQuery } from "react-query";
-import Spinner from "../../components/Spinner/Spinner";
 import mapWeatherCode from "../../utils/mapWeatherCode";
 import Backdrop from "./Backdrop";
 import { useEffect, useState } from "react";
 import RegionButton from "../../components/weather/RegionButton";
 import coordinates from "../../utils/coordinates";
 import mapRegions from "../../utils/mapRegions";
+import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
 
 const Weather = () => {
   const url = "https://api.openweathermap.org/data/2.5/weather";
@@ -27,7 +27,7 @@ const Weather = () => {
     refetch();
   }, [currentRegion]);
   if (isLoading) {
-    return <Spinner />;
+    return <NonLayoutSpinner />;
   }
   if (error) {
     return <div>{error}</div>;

@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
 import CourseItem from "./CourseItem";
 import _ from "lodash";
-import Spinner from "../Spinner/Spinner";
+import NonLayoutSpinner from "../Spinner/NonLayoutSpinner";
 import MapContainer from "../../components/map/MapContainer";
 import { DragDropContext } from "react-beautiful-dnd";
 import { routingLoginPage } from "../../utils/routingLoginPage";
@@ -68,7 +68,7 @@ const DayItem = () => {
     setCurrentCourseId(clickDay.courseId);
   }, [day, courses]);
 
-  if (!courses) return <Spinner />;
+  if (!courses) return <NonLayoutSpinner />;
 
   const handleOnDragEnd = result => {
     // 리스트 밖으로 드랍한 경우

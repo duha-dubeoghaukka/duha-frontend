@@ -1,10 +1,10 @@
 import ForecastItem from "./ForecastItem";
 import { useQuery } from "react-query";
 import axios from "axios";
-import Spinner from "../../components/Spinner/Spinner";
 import getTomorrow from "../../utils/getTomorrow";
 import coordinates from "../../utils/coordinates";
 import { useEffect } from "react";
+import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
 
 const Forecast = ({ currentRegion }) => {
   const url = "https://api.openweathermap.org/data/2.5/forecast";
@@ -22,7 +22,7 @@ const Forecast = ({ currentRegion }) => {
     refetch();
   }, [currentRegion]);
   if (isLoading) {
-    return <Spinner />;
+    return <NonLayoutSpinner />;
   }
   if (error) {
     return <div>{error}</div>;
