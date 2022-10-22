@@ -78,7 +78,7 @@ const Layout = props => {
                   greaterCategory === "mainpage" && "text-green1"
                 } hover:text-green1 transition ease-in-out mb-2`}
               >
-                <HomeIcon fontSize="large" sx={{ width: "32px" }} />
+                <HomeIcon fontSize="medium" sx={{ width: "32px" }} />
                 <Link to="/" className="font-bold text-xl">
                   메인 페이지
                 </Link>
@@ -113,7 +113,7 @@ const Layout = props => {
                   greaterCategory === "schedule" && "text-green1"
                 }  hover:text-green1 transition ease-in-out mb-2`}
               >
-                <CalendarMonthIcon fontSize="large" sx={{ width: "32px" }} />
+                <CalendarMonthIcon fontSize="medium" sx={{ width: "30px" }} />
                 <Link to="/scheduleinfo" className="font-bold text-xl">
                   일정
                 </Link>
@@ -133,7 +133,7 @@ const Layout = props => {
                   greaterCategory === "mypage" && "text-green1"
                 }  hover:text-green1 transition ease-in-out mb-2`}
               >
-                <PersonIcon fontSize="large" sx={{ width: "32px" }} />
+                <PersonIcon fontSize="medium" sx={{ width: "32px" }} />
                 <Link to="/mypage" className="font-bold text-xl">
                   마이 페이지
                 </Link>
