@@ -115,8 +115,10 @@ function Registration() {
             onChange={onChangeHandler}
           />
           <div className="flex flex-row space-x-20 mb-3">
-            <p className="text-sm ml-2">일정을 다른사람과 공유합니다.</p>
-            <input type="checkbox" checked={isChecked || ""} name="checked" onChange={handleClick} />
+            <label htmlFor="checkbox" className="text-sm ml-2 cursor-pointer">
+              일정을 다른사람과 공유합니다.
+            </label>
+            <input id="checkbox" type="checkbox" checked={isChecked || ""} name="checked" onChange={handleClick} />
           </div>
           {state ? (
             <Button
