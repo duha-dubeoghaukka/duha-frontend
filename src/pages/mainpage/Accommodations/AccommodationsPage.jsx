@@ -13,6 +13,8 @@ import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
 import scrollToTop from "../../../utils/scrollToTop";
 import Pagination from "../../../components/mainpage/Pagination";
+import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
+import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 
 const AccommodationsPage = () => {
   const { isLoading, error, data, refetch } = useQuery(["accommodations"], () => {
@@ -163,7 +165,7 @@ const AccommodationsPage = () => {
             </div>
           )}
         </div>
-        <div className="mb-2 md:mb-5">
+        <div className="mb-2">
           <ul className="hidden md:flex justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
@@ -179,10 +181,19 @@ const AccommodationsPage = () => {
             })}
           </select>
         </div>
-        <div className="flex justify-start items-center mb-2">
-          <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "#ECB390" }} />
-          <p className="font-semibold text-sm md:test-base mr-3 text-[#ECB390]">버스 정류장과 가까운 장소 (300m 이내)</p>
-          <input type="checkbox" checked={isNearBusStopChecked} onChange={event => setIsNearBusStopChecked(event.target.checked)} />
+        <div className="w-fit mb-2 cursor-pointer">
+          <div
+            className="flex justify-start items-center"
+            onClick={() => {
+              setIsNearBusStopChecked(!isNearBusStopChecked);
+            }}
+          >
+            <DirectionsBusFilledOutlined className="mr-1" sx={{ color: "#ECB390" }} />
+            <p className="font-semibold text-sm md:test-base text-[#ECB390]">버스 정류장과 가까운 장소 (300m 이내)</p>
+            <div className="text-[#ECB390] flex">
+              {isNearBusStopChecked ? <CheckBoxOutlinedIcon fontSize="small" /> : <CheckBoxOutlineBlankOutlinedIcon fontSize="small" />}
+            </div>
+          </div>
         </div>
         {searchMode ? (
           <div>
