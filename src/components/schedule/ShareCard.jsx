@@ -6,33 +6,43 @@ import { useInfiniteQuery } from "react-query";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { useInView } from "react-intersection-observer";
 import useChange from "../../hooks/useChange";
-import IosShareIcon from "@mui/icons-material/IosShare";
 import ShareIcon from "@mui/icons-material/Share";
 import ShowModal from "../modal/ShowModal";
 
-const fetchList = async pageParam => {
-  const res = await api.get(`/trip?page=${pageParam}`);
-  const { list, nextPage, totalPages } = res.data.data;
-  return { list, nextPage, totalPages };
-};
-
 function ShareCard() {
+  const fetchList = async pageParam => {
+    const res = await api.get(`/trip?page=${pageParam}`, {
+      params: {
+        count
+      }
+    });
+    const { list, nextPage, totalPages } = res.data.data;
+    return { list, nextPage, totalPages };
+  };
+  const [count, setCount] = useState(0);
   const { ref, inView } = useInView();
-  const { data, status, fetchNextPage, isFetchingNextPage } = useInfiniteQuery("list", ({ pageParam = 0 }) => fetchList(pageParam), {
-    getNextPageParam: lastPage => (lastPage.nextPage <= lastPage.totalPages ? lastPage.nextPage : undefined)
-  });
-
+  const { data, status, fetchNextPage, isFetchingNextPage, refetch, isLoading, error, remove } = useInfiniteQuery(
+    "list",
+    ({ pageParam = 0 }) => fetchList(pageParam),
+    {
+      getNextPageParam: lastPage => (lastPage.nextPage <= lastPage.totalPages ? lastPage.nextPage : undefined)
+    }
+  );
+  useEffect(() => {
+    remove();
+    refetch();
+  }, [count]);
   useEffect(() => {
     if (inView) fetchNextPage();
   }, [inView]);
 
-  if (status === "loading")
+  if (status === "loading" || isLoading)
     return (
       <div className="flex flex-col items-center justify-center mt-5">
         <img src="https://i.ibb.co/yyxq0XX/001.png" alt="하르방사진" className="w-10 mr-2 animate-bounce" />
       </div>
     );
-  if (status === "error") return <div>error</div>;
+  if (status === "error" || error) return <div>error</div>;
 
   return (
     <div className="h-full">
@@ -42,7 +52,7 @@ function ShareCard() {
       {data?.pages.map((page, index) => (
         <div key={index}>
           {page.list.map(item => (
-            <ShareCardComponent key={item.id} item={item} />
+            <ShareCardComponent key={item.id} item={item} setCount={setCount} />
           ))}
         </div>
       ))}
@@ -57,7 +67,7 @@ function ShareCard() {
   );
 }
 
-function ShareCardComponent({ item }) {
+function ShareCardComponent({ item, setCount }) {
   const { id, title, startAt, endAt, bookmarked } = item;
   const [isBookmarked, setIsBookmarked] = useState(bookmarked);
 
@@ -75,14 +85,9 @@ function ShareCardComponent({ item }) {
     const isLoggedIn = checkIsLoggedIn();
     if (isLoggedIn) {
       api
-        .get("/auth/trip/bookmark/" + id)
+        .get(`/auth/trip/bookmark/${id}`)
         .then(response => {
-          if (response.data.isSuccess) {
-            const nextBookmarked = response.data.data.bookmarked;
-            setIsBookmarked(nextBookmarked);
-          } else {
-            alert(response.data.message);
-          }
+          setCount(previousCount => previousCount + 1);
         })
         .catch(error => {
           alert(error);
