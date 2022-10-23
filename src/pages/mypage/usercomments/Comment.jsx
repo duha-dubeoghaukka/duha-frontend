@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Comment = ({ comment, currentCategory }) => {
+  const navigator = useNavigate();
   let category;
   switch (currentCategory) {
     case "관광":
@@ -15,13 +16,14 @@ const Comment = ({ comment, currentCategory }) => {
     default:
       break;
   }
+  const clickHandler = () => {
+    navigator(`/${category}/${itemId}`);
+  };
   const { reviewName, reviewedAt, review, itemId } = comment;
   return (
-    <div className="my-3">
+    <div className="my-3 cursor-pointer group" onClick={clickHandler}>
       <div className="flex justify-between items-center mb-1">
-        <Link to={`/${category}/${itemId}`} className="text-black1" className="hover:underline hover:text-blue-500">
-          {reviewName}
-        </Link>
+        <p className="text-black1 group-hover:underline group-hover:text-blue-500">{reviewName}</p>
         <p className="text-black1 text-xs">{reviewedAt}</p>
       </div>
       <div className="bg-white1 p-2 shadow-md rounded-lg inline-block">
