@@ -1,8 +1,7 @@
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { routingLoginPage } from "../../utils/routingLoginPage";
-import MapIcon from "@mui/icons-material/Map";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import Map from "../../pages/detailpage/mappage/Map";
 import Bookmark from "./Bookmark";
 
@@ -62,7 +61,7 @@ const Item = ({ data, category, refetchList }) => {
             <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={category} id={id} refetchList={refetchList} />
           </div>
           <div onClick={mapClickHandler} className="inline-block">
-            <MapIcon className="cursor-pointer" fontSize="medium" />
+            <LocationOnOutlinedIcon className="cursor-pointer" fontSize="medium" />
           </div>
         </div>
       </div>

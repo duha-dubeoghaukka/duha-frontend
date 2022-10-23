@@ -26,9 +26,9 @@ const Bookmark = ({ bookmarked, numberOfBookmarks, category, id, refetchList }) 
   return (
     <div className="flex items-center">
       {bookmarked ? (
-        <StarRoundedIcon sx={{ color: "#ffd740" }} onClick={bookmarkHandler} />
+        <StarRoundedIcon sx={{ color: "#ffd740", fontSize: "28px" }} onClick={bookmarkHandler} />
       ) : (
-        <StarOutlineRoundedIcon sx={{ color: "#ffd740" }} onClick={bookmarkHandler} />
+        <StarOutlineRoundedIcon sx={{ color: "#ffd740", fontSize: "28px" }} onClick={bookmarkHandler} />
       )}
       <p className="text-black1 font-bold text-sm ml-1">{numberOfBookmarks}</p>
     </div>
