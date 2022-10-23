@@ -32,6 +32,7 @@ const AccommodationsPage = () => {
       }
     });
   });
+  const [isPaginationVisible, setIsPaginationVisible] = useState(true);
   const [isNearBusStopChecked, setIsNearBusStopChecked] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [currentRegion, setCurrentRegion] = useState("전체");
@@ -123,6 +124,9 @@ const AccommodationsPage = () => {
       setSearchResults([]);
     });
   }, []);
+  useEffect(() => {
+    setIsPaginationVisible(!searchMode);
+  }, [searchMode]);
   if (isLoading) {
     return <Spinner title={"숙소"} />;
   }
@@ -215,7 +219,7 @@ const AccommodationsPage = () => {
             </div>
           </div>
         )}
-        <Pagination currentPage={currentPage} numberOfPages={totalNumberOfPages} setCurrentPage={setCurrentPage} />
+        {isPaginationVisible && <Pagination currentPage={currentPage} numberOfPages={totalNumberOfPages} setCurrentPage={setCurrentPage} />}
         <ArrowCircleUpOutlinedIcon className="fixed right-5 bottom-5 cursor-pointer hidden md:block" onClick={scrollToTop} />
       </Layout>
     );
