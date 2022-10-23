@@ -31,10 +31,10 @@ const Item = ({ data, category, refetchList }) => {
     setIsMapModalOpen(false);
   };
   return (
-    <div>
+    <div className="relative">
       <div
         onClick={itemClickHandler}
-        className="p-2 md:p-4 group bg-white1 rounded-md mb-4 shadow-md cursor-pointer flex justify-start items-start hover:brightness-95 transition-all"
+        className="p-2 md:p-4 group bg-white1 rounded-md mb-4 shadow-md cursor-pointer flex hover:brightness-95 transition-all"
       >
         <div className="w-[150px] h-[120px] md:w-[220px] md:h-[150px] flex-shrink-0 relative mr-2">
           <img loading="lazy" className="w-full h-full object-cover object-center rounded-md" src={thumbnailUrl} alt={name} />
@@ -60,7 +60,7 @@ const Item = ({ data, category, refetchList }) => {
           <div className="flex items-center">
             <Bookmark bookmarked={bookmarked} numberOfBookmarks={bookmarkNum} category={category} id={id} refetchList={refetchList} />
           </div>
-          <div onClick={mapClickHandler} className="inline-block">
+          <div onClick={mapClickHandler} className="absolute right-2 bottom-2">
             <LocationOnOutlinedIcon className="cursor-pointer" fontSize="medium" />
           </div>
         </div>
