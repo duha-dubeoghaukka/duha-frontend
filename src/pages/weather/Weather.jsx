@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import mapWeatherCode from "../../utils/mapWeatherCode";
 import Backdrop from "./Backdrop";
 import { useEffect, useState } from "react";
-import RegionButton from "../../components/weather/RegionButton";
+import WeatherRegionButton from "../../components/weather/WeatherRegionButton";
 import coordinates from "../../utils/coordinates";
 import mapRegions from "../../utils/mapRegions";
 import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
@@ -44,10 +44,10 @@ const Weather = () => {
         <div className="relative h-[100vh]">
           <Backdrop code={weatherCode} />
           <div className="absolute top-12 w-full flex justify-around z-[5]">
-            <RegionButton regionName="제주시" isActive={currentRegion === "jeju"} setCurrentRegion={setCurrentRegion} />
-            <RegionButton regionName="성산포" isActive={currentRegion === "seongsanpo"} setCurrentRegion={setCurrentRegion} />
-            <RegionButton regionName="서귀포시" isActive={currentRegion === "seogwipo"} setCurrentRegion={setCurrentRegion} />
-            <RegionButton regionName="모슬포" isActive={currentRegion === "moseulpo"} setCurrentRegion={setCurrentRegion} />
+            <WeatherRegionButton regionName="제주시" isActive={currentRegion === "jeju"} setCurrentRegion={setCurrentRegion} />
+            <WeatherRegionButton regionName="성산포" isActive={currentRegion === "seongsanpo"} setCurrentRegion={setCurrentRegion} />
+            <WeatherRegionButton regionName="서귀포시" isActive={currentRegion === "seogwipo"} setCurrentRegion={setCurrentRegion} />
+            <WeatherRegionButton regionName="모슬포" isActive={currentRegion === "moseulpo"} setCurrentRegion={setCurrentRegion} />
           </div>
           <div className="absolute w-full h-full top-0 left-0 flex flex-col items-center justify-center">
             <div>

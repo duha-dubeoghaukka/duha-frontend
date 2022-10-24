@@ -1,4 +1,4 @@
-const RegionButton = ({ regionName, isActive, setCurrentRegion }) => {
+const WeatherRegionButton = ({ regionName, isActive, setCurrentRegion }) => {
   const regionClickHandler = () => {
     switch (regionName) {
       case "제주시":
@@ -33,4 +33,4 @@ const RegionButton = ({ regionName, isActive, setCurrentRegion }) => {
   }
 };
 
-export default RegionButton;
+export default WeatherRegionButton;
