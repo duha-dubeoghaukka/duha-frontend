@@ -78,8 +78,7 @@ function ShareCardComponent({ item }) {
         .get("/auth/trip/bookmark/" + id)
         .then(response => {
           if (response.data.isSuccess) {
-            const nextBookmarked = response.data.data.bookmarked;
-            setIsBookmarked(nextBookmarked);
+            setIsBookmarked(!isBookmarked);
           } else {
             alert(response.data.message);
           }
