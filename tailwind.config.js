@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -12,8 +12,8 @@ module.exports = {
       },
       backgroundImage: {
         "main-spot": "url('https://i.ibb.co/6RYFXC0/image.jpg')",
-        "main-restuarant": "url('https://i.ibb.co/MhTXbMQ/image.jpg')",
-        "main-accomodation": "url('https://i.ibb.co/ZGR6ny5/image.jpg')",
+        "main-restaurant": "url('https://i.ibb.co/MhTXbMQ/image.jpg')",
+        "main-accommodation": "url('https://i.ibb.co/ZGR6ny5/image.jpg')",
         "main-service": "url('https://i.ibb.co/x5h36pN/image.jpg')",
         "main-schedule": "url('https://i.ibb.co/5x9qhRQ/image.jpg')",
         "main-share-schedule": "url('https://i.ibb.co/N7dCWfc/image.jpg')",

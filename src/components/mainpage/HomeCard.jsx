@@ -15,14 +15,14 @@ function HomeCard() {
       title: "맛집",
       route: `/restaurants`,
       description: "제주 맛집을",
-      background: "bg-main-restuarant bg-cover bg-center bg-opacity-100 rounded-lg",
+      background: "bg-main-restaurant bg-cover bg-center bg-opacity-100 rounded-lg",
       none: false
     },
     {
       title: "숙소",
       route: `/accommodations`,
       description: "제주 숙소를",
-      background: "bg-main-accomodation bg-cover bg-center bg-opacity-100 rounded-lg",
+      background: "bg-main-accommodation bg-cover bg-center bg-opacity-100 rounded-lg",
       none: false
     },
     {

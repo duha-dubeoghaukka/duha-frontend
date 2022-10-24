@@ -1,8 +1,8 @@
 import Layout from "../../components/layout/Layout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { api } from "../../api/api";
 import { useEffect, useState } from "react";
-import AddBookrMarkItem from "../../components/schedule/AddBookrMarkItem";
+import AddBookmarkItem from "../../components/schedule/AddBookmarkItem";
 import decodeToken from "../../utils/decodeToken";
 import { getCookie } from "../../shared/Cookie";
 
@@ -45,7 +45,7 @@ const AddBookMarkSpot = () => {
       )}
       {myCourse.length > 0 &&
         myCourse.map(item => {
-          return <AddBookrMarkItem key={item.id} data={item} myCourse={myCourse} />;
+          return <AddBookmarkItem key={item.id} data={item} myCourse={myCourse} />;
         })}
     </Layout>
   );

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
 
-const AddBookMarkItem = ({ data }) => {
+const AddBookmarkItem = ({ data }) => {
   const { tripId, currentCourseId, day } = useParams();
   const navigate = useNavigate();
   const { id, name, description, thumbnailUrl } = data;
@@ -47,4 +47,4 @@ const AddBookMarkItem = ({ data }) => {
   );
 };
 
-export default AddBookMarkItem;
+export default AddBookmarkItem;

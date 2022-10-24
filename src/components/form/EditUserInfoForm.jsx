@@ -25,7 +25,7 @@ function EditUserInfoForm() {
   //check
   const [isNickName, setIsNickName] = useState(false);
   const [isCurrentPassword, setIsCurrentPassword] = useState(false);
-  const [isNewPasswrord, setIsNewPassword] = useState();
+  const [isNewPassword, setIsNewPassword] = useState();
   const [isCheckPassword, setIsCheckPassword] = useState();
   const [isDisabled, setIsDisabled] = useState(false);
   const [isKorean, setIsKorean] = useState(false);
@@ -175,16 +175,16 @@ function EditUserInfoForm() {
 
     // 둘 다 변경 or 비밀번호만 변경
     if (nickName && currentPassword) {
-      if (isNewPasswrord && isCheckPassword) {
+      if (isNewPassword && isCheckPassword) {
         let data = {
           nickname: nickName,
           currentPassword,
           newPassword
         };
         editInfo(data, "회원 정보 수정이 완료되었습니다.");
-      } else if (isNewPasswrord && !isCheckPassword) {
+      } else if (isNewPassword && !isCheckPassword) {
         alert("비밀번호를 확인해주세요");
-      } else if (!isNewPasswrord && isCheckPassword) {
+      } else if (!isNewPassword && isCheckPassword) {
         alert("새 비밀번호를 다시 입력해주세요");
       } else {
         alert("새 비밀번호 입력 및 비밀번호를 확인하세요");
@@ -193,7 +193,7 @@ function EditUserInfoForm() {
     }
 
     // 새 비밀번호 & 비밀번호 확인을 입력 -> 기존 비밀번호 입력x
-    if (isNewPasswrord && isCheckPassword) {
+    if (isNewPassword && isCheckPassword) {
       if (!isCurrentPassword) {
         alert("기존 비밀번호를 입력하세요");
         setIsDisabled(true);
@@ -245,7 +245,7 @@ function EditUserInfoForm() {
               onChange={onChangeNewPassword}
               type="password"
             />
-            <p className="input-helper ml-4">{isNewPasswrord ? passwordMessage : passwordMessage}</p>
+            <p className="input-helper ml-4">{isNewPassword ? passwordMessage : passwordMessage}</p>
             <input
               className="input mt-2"
               placeholder="비밀번호 확인"
@@ -259,7 +259,7 @@ function EditUserInfoForm() {
               <button
                 className="btn-primary mt-3 mb-3 disabled:bg-[#B1D7B4]"
                 onClick={() => onSubmit()}
-                disabled={isDisabled && !(isNewPasswrord && isCheckPassword)}
+                disabled={isDisabled && !(isNewPassword && isCheckPassword)}
               >
                 <p>변경 완료</p>
               </button>

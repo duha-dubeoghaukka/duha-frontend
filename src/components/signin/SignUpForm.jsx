@@ -48,11 +48,11 @@ const SignUpForm = () => {
     mode: "onChange"
   });
 
-  const onSubmit = async singupInfo => {
+  const onSubmit = async signUpInfo => {
     // 이메일 인증 절차를 거쳤기 때문에 중복 확인 주석처리
     // try {
     //   const { data } = await api.post("/member/emailcheck", {
-    //     email: singupInfo.email
+    //     email: signUpInfo.email
     //   });
     //   if (!data.isSuccess) {
     //     return alert(data.message);
@@ -63,7 +63,7 @@ const SignUpForm = () => {
 
     // try {
     //   const { data } = await api.post("/member/nicknamecheck", {
-    //     nickname: singupInfo.nickname
+    //     nickname: signUpInfo.nickname
     //   });
     //   if (!data.isSuccess) {
     //     return alert(data.message);
@@ -75,8 +75,8 @@ const SignUpForm = () => {
     try {
       const { data } = await api.post("/member/signup", {
         email: email,
-        nickname: singupInfo.nickname,
-        password: singupInfo.password
+        nickname: signUpInfo.nickname,
+        password: signUpInfo.password
       });
       if (!data.isSuccess) {
         return alert(data.message);

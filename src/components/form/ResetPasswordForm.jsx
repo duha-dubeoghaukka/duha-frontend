@@ -8,7 +8,7 @@ function ResetPasswordForm() {
   const [checkPassword, setCheckPassword] = useState();
 
   //check
-  const [isNewPasswrord, setIsNewPassword] = useState();
+  const [isNewPassword, setIsNewPassword] = useState();
   const [isCheckPassword, setIsCheckPassword] = useState();
 
   //message
@@ -50,7 +50,7 @@ function ResetPasswordForm() {
     // 비밀번호 & 비밀번호 확인을 다 입력한 경우 -> 비밀번호와 비밀번호 확인이 같은지
     // 비밀번호만 입력했을 경우
     // 비밀번호 확인만 입력했을 경우
-    if (isNewPasswrord && isCheckPassword) {
+    if (isNewPassword && isCheckPassword) {
       let data = {
         password: newPassword,
         code
@@ -64,9 +64,9 @@ function ResetPasswordForm() {
           }
         })
         .catch(err => alert(err.response.data.message));
-    } else if (isNewPasswrord && !isCheckPassword) {
+    } else if (isNewPassword && !isCheckPassword) {
       alert("비밀번호를 확인하세요");
-    } else if (!isNewPasswrord) {
+    } else if (!isNewPassword) {
       alert("새로운 비밀번호를 입력하세요");
     }
   };
@@ -85,7 +85,7 @@ function ResetPasswordForm() {
             onChange={onChangeNewPassword}
             type="password"
           />
-          <p className="input-helper ml-4">{isNewPasswrord ? passwordMessage : passwordMessage}</p>
+          <p className="input-helper ml-4">{isNewPassword ? passwordMessage : passwordMessage}</p>
           <input
             className="input mt-2"
             placeholder="비밀번호 확인"

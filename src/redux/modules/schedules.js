@@ -1,10 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { api } from "../../api/api";
 
 const initialState = {
   schedules: [],
-  isLoding: false,
+  isLoading: false,
   error: null
 };
 
@@ -43,13 +42,13 @@ export const schedules = createSlice({
   reducers: {},
   extraReducers: {
     [__getSchedules.pending]: (state, _) => {
-      state.isLoding = true;
+      state.isLoading = true;
     },
     [__deleteSchedule.pending]: (state, _) => {
-      state.isLoding = true;
+      state.isLoading = true;
     },
     [__getSchedules.fulfilled]: (state, action) => {
-      state.isLoding = false;
+      state.isLoading = false;
       state.schedules = action.payload;
     },
     [__deleteSchedule.fulfilled]: (state, action) => {
@@ -60,18 +59,18 @@ export const schedules = createSlice({
       }
     },
     [__editSchedule.fulfilled]: (state, _) => {
-      state.isLoding = false;
+      state.isLoading = false;
     },
     [__getSchedules.rejected]: (state, action) => {
-      state.isLoding = false;
+      state.isLoading = false;
       state.error = action.payload;
     },
     [__deleteSchedule.rejected]: (state, action) => {
-      state.isLoding = false;
+      state.isLoading = false;
       state.error = action.payload;
     },
     [__editSchedule.rejected]: (state, action) => {
-      state.isLoding = false;
+      state.isLoading = false;
       state.error = action.payload;
     }
   }
