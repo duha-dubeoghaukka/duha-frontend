@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
-import MapIcon from "@mui/icons-material/Map";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";
 import Spinner from "../../../components/Spinner/Spinner";
@@ -16,6 +15,7 @@ import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
 import Comments from "../../../components/mainpage/Comments";
 import Bookmark from "../../../components/mainpage/Bookmark";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 const RestaurantDetailPage = () => {
   const navigator = useNavigate();
@@ -103,7 +103,7 @@ const RestaurantDetailPage = () => {
             <div className="w-full mb-1 md:mb-2 border-b">
               <div className="flex items-center justify-between">
                 <p className="text-base md:text-lg font-semibold">주소</p>
-                <MapIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
+                <LocationOnOutlinedIcon onClick={mapClickHandler} className="cursor-pointer" fontSize="medium" />
               </div>
               <p className="text-sm text-gray-700 mb-2">{address}</p>
             </div>
