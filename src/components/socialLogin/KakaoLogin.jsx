@@ -11,14 +11,17 @@ const KakaoLogin = props => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socialLoginAPIs.kakaoLogin(code).then(res => {
-      if (res.data.isSuccess) {
-        setCookie("authorization", res.headers.authorization);
-        setCookie("refresh-token", res.headers["refresh-token"]);
-        alert("카카오 로그인이 완료되었습니다!");
-        navigate(`/`);
-      }
-    });
+    socialLoginAPIs
+      .kakaoLogin(code)
+      .then(res => {
+        if (res.data.code === "NULL") {
+          setCookie("authorization", res.headers.authorization);
+          setCookie("refresh-token", res.headers["refresh-token"]);
+          alert("카카오 로그인이 완료되었습니다!");
+          navigate(`/`);
+        }
+      })
+      .catch(err => alert(err.response.data.message));
   }, []);
 
   return (

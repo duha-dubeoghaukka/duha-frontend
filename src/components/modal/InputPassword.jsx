@@ -15,15 +15,13 @@ function InputPassword() {
     userInfoAPIs
       .deleteUser(data)
       .then(res => {
-        if (res.data.isSuccess) {
+        if (res.data.code === "NULL") {
           alert("회원 탈퇴가 완료되었습니다.");
           logout();
           navigate(`/`);
-        } else {
-          alert(res.data.message);
         }
       })
-      .catch(err => console.log(err.response));
+      .catch(err => alert(err.response.data.message));
   };
   return (
     <>

@@ -34,7 +34,7 @@ function FavoriteItemList() {
     mypageAPIs
       .getFavoritesNum()
       .then(res => {
-        if (res.data.isSuccess) {
+        if (res.data.code === "NULL") {
           setIsData(true);
           setFavoriteScheduleNum(res.data.data.tripBookmarkNum);
           setFavoriteSpotNum(res.data.data.touristSpotBookmarkNum);
@@ -45,7 +45,7 @@ function FavoriteItemList() {
         }
       })
       .catch(err => {
-        console.log("err", err);
+        alert(err.response.data.message);
       });
   }, []);
 

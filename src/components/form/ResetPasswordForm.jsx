@@ -58,14 +58,12 @@ function ResetPasswordForm() {
       userInfoAPIs
         .resetPassword(data)
         .then(res => {
-          if (res.data.isSuccess) {
+          if (res.data.code === "NULL") {
             alert("비밀번호 재설정이 완료되었습니다.");
             navigation(`/login`);
-          } else {
-            alert(res.data.message);
           }
         })
-        .catch(err => console.log("err", err.response));
+        .catch(err => alert(err.response.data.message));
     } else if (isNewPasswrord && !isCheckPassword) {
       alert("비밀번호를 확인하세요");
     } else if (!isNewPasswrord) {
