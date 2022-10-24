@@ -1,5 +1,5 @@
 import regionNames from "../../utils/regionNames.js";
-import RegionButton from "../../components/mainpage/RegionButton";
+import RegionButton from "../../components/mainpage/regionbutton/RegionButton";
 import Layout from "../../components/layout/Layout";
 import { useEffect, useState } from "react";
 import Spinner from "../../components/Spinner/Spinner";
