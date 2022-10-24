@@ -2,8 +2,8 @@ import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFi
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import Map from "../../pages/detailpage/mappage/Map";
 import Bookmark from "./Bookmark";
+import MapModal from "./map/MapModal";
 
 const Item = ({ data, category, refetchList }) => {
   const navigator = useNavigate();
@@ -63,12 +63,13 @@ const Item = ({ data, category, refetchList }) => {
         </div>
       </div>
       {isMapModalOpen && (
-        <div>
-          <div className="fixed top-0 left-0 z-20 w-[100vw] h-[100vh] bg-black1 opacity-50" onClick={backdropClickHandler}></div>
-          <div className="fixed z-20 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] shadow-lg">
-            <Map latitude={latitude} longitude={longitude} name={name} setIsMapModalOpen={setIsMapModalOpen} />
-          </div>
-        </div>
+        <MapModal
+          setIsMapModalOpen={setIsMapModalOpen}
+          name={name}
+          longitude={longitude}
+          latitude={latitude}
+          backdropClickHandler={backdropClickHandler}
+        />
       )}
     </div>
   );
