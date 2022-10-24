@@ -13,8 +13,6 @@ const Comment = ({ comment, currentCategory }) => {
     case "숙소":
       category = "accommodations";
       break;
-    default:
-      break;
   }
   const clickHandler = () => {
     navigator(`/${category}/${itemId}`);

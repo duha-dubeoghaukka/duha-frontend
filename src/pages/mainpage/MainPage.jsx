@@ -9,9 +9,7 @@ import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
 function MainPage() {
   const apiKey = process.env.REACT_APP_API_KEY;
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Jeju&appid=${apiKey}`;
-
   const [weather, setWeather] = useState();
-
   useEffect(() => {
     axios.get(apiUrl).then(res => {
       const weatherData = res.data;
@@ -24,11 +22,9 @@ function MainPage() {
       });
     });
   }, []);
-
   const temperature = weatherTemperature(weather?.temperatureMax, weather?.temperatureMin);
   const currentTemperature = temperature.toFixed();
   const selectIcon = weatherIcon(weather?.id);
-
   return (
     <Layout isLoggedIn={false} title="메인 페이지" highlight={"mainpage/home"} isFooterFixed={false}>
       <div className="h-full">
