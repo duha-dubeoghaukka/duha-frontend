@@ -6,7 +6,6 @@ import { useInfiniteQuery } from "react-query";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 import { useInView } from "react-intersection-observer";
 import useChange from "../../hooks/useChange";
-import IosShareIcon from "@mui/icons-material/IosShare";
 import ShareIcon from "@mui/icons-material/Share";
 import ShowModal from "../modal/ShowModal";
 
@@ -77,11 +76,7 @@ function ShareCardComponent({ item }) {
       api
         .get("/auth/trip/bookmark/" + id)
         .then(response => {
-          if (response.data.isSuccess) {
-            setIsBookmarked(!isBookmarked);
-          } else {
-            alert(response.data.message);
-          }
+          setIsBookmarked(!isBookmarked);
         })
         .catch(error => {
           alert(error);
