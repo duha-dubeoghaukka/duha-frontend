@@ -2,6 +2,7 @@ import Layout from "../../components/layout/Layout";
 import { useQuery } from "react-query";
 import Spinner from "../../components/Spinner/Spinner";
 import axios from "axios";
+import SunriseTime from "./SunriseTime";
 
 const SunTime = () => {
   const { isLoading, error, data } = useQuery("suntime", () => {
@@ -31,15 +32,7 @@ const SunTime = () => {
     return (
       <Layout title="일출/일몰 시간 보기" highlight="mainpage/suntime" isFullWidth={true}>
         <div className="flex flex-col">
-          <div className="relative">
-            <img src="/assets/suntimeImages/Sunrise.jpg" alt="Sunrise" className="w-full h-[40vh] object-cover" />
-            <div className="text-center absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
-              <p className="text-white1 font-bold text-3xl">일출</p>
-              <p className="text-white1 font-bold text-5xl">
-                {sunriseHour} : {sunriseMinute}
-              </p>
-            </div>
-          </div>
+          <SunriseTime sunriseHour={sunriseHour} sunriseMinute={sunriseMinute} />
           <div className="relative">
             <img src="/assets/suntimeImages/Sunset.jpg" alt="Sunset" className="w-full h-[40vh] object-cover" />
             <div className="text-center absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
