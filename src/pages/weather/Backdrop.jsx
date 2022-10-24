@@ -10,7 +10,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "drizzle":
       return (
         <div className="h-full relative">
@@ -18,7 +17,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "rain":
       return (
         <div className="h-full relative">
@@ -26,7 +24,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "snow":
       return (
         <div className="h-full relative">
@@ -34,7 +31,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "mist":
       return (
         <div className="h-full relative">
@@ -42,7 +38,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "smoke":
       return (
         <div className="h-full relative">
@@ -50,7 +45,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "haze":
       return (
         <div className="h-full relative">
@@ -58,7 +52,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "dust":
       return (
         <div className="h-full relative">
@@ -66,7 +59,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "fog":
       return (
         <div className="h-full relative">
@@ -74,7 +66,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "sand":
       return (
         <div className="h-full relative">
@@ -82,7 +73,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "ash":
       return (
         <div className="h-full relative">
@@ -90,7 +80,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "squall":
       return (
         <div className="h-full relative">
@@ -98,7 +87,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "tornado":
       return (
         <div className="h-full relative">
@@ -106,7 +94,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "clear":
       return (
         <div className="h-full relative">
@@ -114,7 +101,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     case "clouds":
       return (
         <div className="h-full relative">
@@ -122,7 +108,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
     default:
       return (
         <div className="h-full relative">
@@ -130,7 +115,6 @@ const Backdrop = ({ code }) => {
           <div className="absolute top-0 left-0 w-full h-full bg-black1 opacity-50"></div>
         </div>
       );
-      break;
   }
 };
 

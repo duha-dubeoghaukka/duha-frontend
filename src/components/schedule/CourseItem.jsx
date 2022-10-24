@@ -3,7 +3,7 @@ import { api } from "../../api/api";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 
 const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
   const deleteCourse = async (detailId, category) => {
@@ -25,7 +25,6 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
         throw new Error(error);
       }
     }
-    return;
   };
 
   if (dayCourse.length === 0) return <div className="mb-6 text-center font-bold text-base">{currentDay}일차에 등록된 코스가 없습니다.</div>;

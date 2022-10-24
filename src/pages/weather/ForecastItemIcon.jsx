@@ -12,52 +12,36 @@ const ForecastItemIcon = ({ code }) => {
   switch (weatherCondition) {
     case "thunderstorm":
       return <ThunderstormIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "drizzle":
       return <UmbrellaIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "rain":
       return <UmbrellaIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "snow":
       return <AcUnitIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "mist":
       return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "smoke":
       return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "haze":
       return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "dust":
       return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "fog":
       return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "sand":
       return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "ash":
       return <AirIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "squall":
       return <UmbrellaIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "tornado":
       return <TornadoIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "clear":
       return <WbSunnyIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     case "clouds":
       return <CloudIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
     default:
       return <WbSunnyIcon fontSize="large" sx={{ color: "#FFF" }} />;
-      break;
   }
 };
 

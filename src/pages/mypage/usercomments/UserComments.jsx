@@ -13,15 +13,10 @@ const UserComments = () => {
     switch (currentCategory) {
       case "관광":
         return api.get(`/auth/mypage/touristspotreview`);
-        break;
       case "맛집":
         return api.get(`/auth/mypage/restaurantreview`);
-        break;
       case "숙소":
         return api.get(`/auth/mypage/accommodationreview`);
-        break;
-      default:
-        break;
     }
   });
   const navigator = useNavigate();

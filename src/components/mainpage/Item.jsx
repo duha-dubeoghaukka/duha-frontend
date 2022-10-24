@@ -13,13 +13,10 @@ const Item = ({ data, category, refetchList }) => {
     switch (category) {
       case "touristspot":
         return navigator("/spots/" + id);
-        break;
       case "restaurant":
         return navigator("/restaurants/" + id);
-        break;
       case "accommodation":
         return navigator("/accommodations/" + id);
-        break;
     }
   };
   const mapClickHandler = event => {
