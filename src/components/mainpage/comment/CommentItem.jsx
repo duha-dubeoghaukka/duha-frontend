@@ -1,10 +1,10 @@
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
-import decodeToken from "../../utils/decodeToken";
+import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
+import decodeToken from "../../../utils/decodeToken";
 import { useState } from "react";
-import { api } from "../../api/api";
-import { getCookie } from "../../shared/Cookie";
+import { api } from "../../../api/api";
+import { getCookie } from "../../../shared/Cookie";
 
 const CommentItem = ({ data, commentDeleteHandler, category, refetchComments }) => {
   const [isEditMode, setIsEditMode] = useState(false);

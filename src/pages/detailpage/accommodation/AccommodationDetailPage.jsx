@@ -13,7 +13,7 @@ import { api } from "../../../api/api";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import processInfo from "../../../utils/processInfo";
-import Comments from "../../../components/mainpage/Comments";
+import Comments from "../../../components/mainpage/comment/Comments";
 import Bookmark from "../../../components/mainpage/Bookmark";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 

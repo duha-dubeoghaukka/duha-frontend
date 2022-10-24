@@ -1,4 +1,4 @@
-import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
+import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 
 const CommentField = ({ comment, setComment, commentRegisterHandler }) => {
   const keyDownHandler = event => {

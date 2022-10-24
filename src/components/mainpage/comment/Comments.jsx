@@ -1,8 +1,8 @@
 import CommentField from "./CommentField";
 import CommentList from "./CommentList";
 import { useState } from "react";
-import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
-import { api } from "../../api/api";
+import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
+import { api } from "../../../api/api";
 
 const Comments = ({ category, id, refetchComments, comments, commentDeleteHandler }) => {
   const [comment, setComment] = useState("");
