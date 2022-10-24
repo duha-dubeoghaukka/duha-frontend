@@ -13,15 +13,13 @@ function TripItem({ item }) {
     mypageAPIs
       .postBookMark(id)
       .then(response => {
-        if (response.data.isSuccess) {
+        if (response.data.code === "NULL") {
           const nextBookmarked = response.data.data.bookmarked;
           setIsBookmarked(nextBookmarked);
-        } else {
-          alert(response.data.message);
         }
       })
       .catch(error => {
-        alert(error);
+        alert(error.response.data.message);
       });
   };
 

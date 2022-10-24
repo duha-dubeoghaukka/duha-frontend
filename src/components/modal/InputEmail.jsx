@@ -25,8 +25,8 @@ function InputEmail({ category }) {
               setMessage(res.data.message);
             }
           })
-          .catch(() => {
-            setMessage("이메일 인증이 실패했습니다.");
+          .catch(err => {
+            setMessage(err.response.data.message);
           });
       }
     } else if (category === "findPassword") {
