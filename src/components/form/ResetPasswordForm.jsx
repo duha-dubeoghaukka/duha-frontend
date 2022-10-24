@@ -75,7 +75,7 @@ function ResetPasswordForm() {
     <div className="w-full md:w-[600px] mx-auto">
       <div className="flex flex-col">
         <p className="mt-10 mx-auto text-xl text-black2 font-medium">비밀번호 재설정</p>
-        <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
+        <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} alt="Logo" />
         <div className="relative w-full md:w-[500px] mx-auto">
           <input
             className="input mt-2"

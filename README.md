@@ -1,4 +1,4 @@
-<div align="center">
+<div>
 
 # [🌴 뚜벅하우까 🌴](https://dduha.site/)
 

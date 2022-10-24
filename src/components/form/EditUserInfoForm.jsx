@@ -7,7 +7,7 @@ import { routingLoginPage } from "../../utils/routingLoginPage";
 import { useNavigate } from "react-router-dom";
 import checkLoginPlatform from "../../utils/checkLoginPlatform";
 import EditInfoSocialLogin from "./EditInfoSocialLogin";
-import { getCookie, deleteCookie, setCookie } from "../../shared/Cookie";
+import { deleteCookie, getCookie, setCookie } from "../../shared/Cookie";
 
 function EditUserInfoForm() {
   const token = getCookie("authorization");
@@ -208,7 +208,7 @@ function EditUserInfoForm() {
   return (
     <div className="w-full md:w-[600px] mx-auto">
       <div className="flex flex-col">
-        <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} />
+        <img className="w-[284px] mt-10 mb-10 mx-auto" src={`${process.env.PUBLIC_URL}/assets/Logo.png`} alt="Logo" />
         {loginPlatform === "KAKAO" || loginPlatform === "GOOGLE" ? (
           <EditInfoSocialLogin
             nickName={nickName}
