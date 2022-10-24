@@ -12,10 +12,8 @@ export const api = axios.create({
 // 배포 서버 주소 https://dduha.shop
 
 api.interceptors.request.use(function (config) {
-  const refreshToken = getCookie("refresh-token");
   const accessToken = getCookie("authorization");
   config.headers.common["authorization"] = `${accessToken}`;
-  config.headers.common["refresh-token"] = `${refreshToken}`;
   return config;
 });
 

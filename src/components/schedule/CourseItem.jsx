@@ -9,20 +9,16 @@ const CourseItem = ({ dayCourse, setDayCourse, currentDay }) => {
   const deleteCourse = async (detailId, category) => {
     if (confirm("코스를 삭제할까요?")) {
       try {
-        const { data } = await api.delete(`/auth/course/details`, {
+        await api.delete(`/auth/course/details`, {
           data: {
             category,
             detailId
           }
         });
         const newDayCourse = dayCourse.filter(dayCourse => dayCourse.detailId !== detailId);
-        if (data.isSuccess) {
-          setDayCourse(newDayCourse);
-        } else {
-          alert(data.message);
-        }
+        setDayCourse(newDayCourse);
       } catch (error) {
-        throw new Error(error);
+        alert(error.response.data.message);
       }
     }
   };

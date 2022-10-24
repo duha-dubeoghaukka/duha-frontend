@@ -11,19 +11,15 @@ const AddNearByItem = ({ data, lastCourseName }) => {
 
   const itemClickHandler = async () => {
     try {
-      const { data } = await api.post(`/auth/course/details`, {
+      await api.post(`/auth/course/details`, {
         courseId: currentCourseId,
         category,
         detailId: id
       });
-      if (data.isSuccess) {
-        alert("코스가 저장되었습니다.");
-        navigate(`/schedule/${tripId}/${day}`);
-      } else {
-        alert(data.message);
-      }
+      alert("코스가 저장되었습니다.");
+      navigate(`/schedule/${tripId}/${day}`);
     } catch (error) {
-      throw new Error(error);
+      alert(error.response.data.message);
     }
   };
 
