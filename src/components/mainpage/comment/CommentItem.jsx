@@ -1,11 +1,10 @@
-import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import checkIsLoggedIn from "../../../utils/checkIsLoggedIn";
 import decodeToken from "../../../utils/decodeToken";
 import { useState } from "react";
 import { api } from "../../../api/api";
 import { getCookie } from "../../../shared/Cookie";
 import CommentContent from "./CommentContent";
+import CommentUtilities from "./CommentUtilities";
 
 const CommentItem = ({ data, commentDeleteHandler, category, refetchComments }) => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -67,16 +66,7 @@ const CommentItem = ({ data, commentDeleteHandler, category, refetchComments }) 
             {isEditMode || <CommentContent review={review} />}
           </div>
         </div>
-        {isAuthor && (
-          <div className="flex">
-            <div className="cursor-pointer" onClick={editClickHandler}>
-              <ModeEditOutlineOutlinedIcon fontSize="medium" />
-            </div>
-            <div className="cursor-pointer" onClick={deleteClickHandler}>
-              <DeleteOutlineIcon fontSize="medium" />
-            </div>
-          </div>
-        )}
+        {isAuthor && <CommentUtilities editClickHandler={editClickHandler} deleteClickHandler={deleteClickHandler} />}
       </div>
       {isEditMode && (
         <div>
