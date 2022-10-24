@@ -49,42 +49,16 @@ const SignUpForm = () => {
   });
 
   const onSubmit = async signUpInfo => {
-    // 이메일 인증 절차를 거쳤기 때문에 중복 확인 주석처리
-    // try {
-    //   const { data } = await api.post("/member/emailcheck", {
-    //     email: signUpInfo.email
-    //   });
-    //   if (!data.isSuccess) {
-    //     return alert(data.message);
-    //   }
-    // } catch (error) {
-    //   throw new Error(error);
-    // }
-
-    // try {
-    //   const { data } = await api.post("/member/nicknamecheck", {
-    //     nickname: signUpInfo.nickname
-    //   });
-    //   if (!data.isSuccess) {
-    //     return alert(data.message);
-    //   }
-    // } catch (error) {
-    //   throw new Error(error);
-    // }
-
     try {
-      const { data } = await api.post("/member/signup", {
+      await api.post("/member/signup", {
         email: email,
         nickname: signUpInfo.nickname,
         password: signUpInfo.password
       });
-      if (!data.isSuccess) {
-        return alert(data.message);
-      }
       alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
       navigate("/login");
     } catch (error) {
-      throw new Error(error);
+      alert(error.response.data.message);
     }
   };
 
