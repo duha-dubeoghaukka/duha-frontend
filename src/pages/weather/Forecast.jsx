@@ -29,7 +29,6 @@ const Forecast = ({ currentRegion }) => {
   }
   if (data) {
     const forecasts = data.data.list;
-    const tomorrow = getTomorrow();
     const today = new Date().getDate();
     const dailyForecasts = [];
     for (let i = today; i < today + 5; i++) {

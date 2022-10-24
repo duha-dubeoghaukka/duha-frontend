@@ -16,7 +16,7 @@ const Comments = ({ category, id, refetchComments, comments, commentDeleteHandle
         .post(`/auth/${category}/review/${id}`, {
           review: comment
         })
-        .then(response => {
+        .then(() => {
           refetchComments();
         })
         .catch(error => {

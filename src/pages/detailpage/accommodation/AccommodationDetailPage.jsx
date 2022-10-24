@@ -18,7 +18,6 @@ import Bookmark from "../../../components/mainpage/Bookmark";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 const AccommodationDetailPage = () => {
-  const navigator = useNavigate();
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data, refetch } = useQuery(["accommodationDetail"], () => {
@@ -45,7 +44,7 @@ const AccommodationDetailPage = () => {
     } else {
       api
         .delete(`/auth/accommodation/review/${id}`)
-        .then(response => {
+        .then(() => {
           refetch();
         })
         .catch(error => {
@@ -62,8 +61,7 @@ const AccommodationDetailPage = () => {
   }
   if (data) {
     const accommodation = data.data.data;
-    const { address, likeNum, name, phone, reviews, imgUrl, bookmarked, stations, info, latitude, longitude, bookmarkNum, id } =
-      accommodation;
+    const { address, name, phone, reviews, imgUrl, bookmarked, stations, info, latitude, longitude, bookmarkNum, id } = accommodation;
     const processedInfo = processInfo(info);
     return (
       <Layout title="숙소 상세" highlight="mainpage/accommodations">

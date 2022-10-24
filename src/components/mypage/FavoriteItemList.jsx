@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { mypageAPIs } from "../../api/api";
-import Spinner from "../Spinner/Spinner";
 import Card from "../card/Card";
 import NonLayoutSpinner from "../Spinner/NonLayoutSpinner";
 

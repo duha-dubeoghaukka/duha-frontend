@@ -71,7 +71,7 @@ function ShareDetail() {
                         Day{item.day}
                       </div>
                     )
-                  ) : day == item.day ? (
+                  ) : day === item.day ? (
                     <div className="border-b-2 pb-1 border-green1 text-green1 transition ease-in-out" onClick={() => onClickDay(item.day)}>
                       Day{item.day}
                     </div>

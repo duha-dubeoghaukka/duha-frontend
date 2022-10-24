@@ -1,6 +1,6 @@
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
 
-const CommentField = ({ comment, setComment, commentRegisterHandler, enterHandler }) => {
+const CommentField = ({ comment, setComment, commentRegisterHandler }) => {
   const keyDownHandler = event => {
     if (event.keyCode === 13) {
       commentRegisterHandler();

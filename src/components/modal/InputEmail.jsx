@@ -3,7 +3,7 @@ import { userInfoAPIs } from "../../api/api";
 import useInput from "../../hooks/useInput";
 
 function InputEmail({ category }) {
-  const [email, setEmail, onChangeEmail] = useInput();
+  const [email, _, onChangeEmail] = useInput();
   const [message, setMessage] = useState();
 
   useEffect(() => {}, [category]);
@@ -25,7 +25,7 @@ function InputEmail({ category }) {
               setMessage(res.data.message);
             }
           })
-          .catch(err => {
+          .catch(() => {
             setMessage("이메일 인증이 실패했습니다.");
           });
       }

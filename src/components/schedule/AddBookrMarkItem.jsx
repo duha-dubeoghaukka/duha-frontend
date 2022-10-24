@@ -1,10 +1,8 @@
 import React from "react";
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
-import RoomOutlinedIcon from "@mui/icons-material/RoomOutlined";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
 
-const AddBookMarkItem = ({ data, myCourse }) => {
+const AddBookMarkItem = ({ data }) => {
   const { tripId, currentCourseId, day } = useParams();
   const navigate = useNavigate();
   const { id, name, description, thumbnailUrl } = data;

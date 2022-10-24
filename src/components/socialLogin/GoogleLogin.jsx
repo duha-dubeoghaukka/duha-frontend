@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { socialLoginAPIs } from "../../api/api";
 import { setCookie } from "../../shared/Cookie";
 
-const GoogleLogin = props => {
-  const href = window.location.href;
+const GoogleLogin = () => {
   let params = new URL(document.URL).searchParams;
   let code = params.get("code");
   const navigate = useNavigate();

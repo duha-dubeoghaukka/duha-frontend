@@ -75,7 +75,7 @@ function ShareCardComponent({ item }) {
     if (isLoggedIn) {
       api
         .get("/auth/trip/bookmark/" + id)
-        .then(response => {
+        .then(() => {
           setIsBookmarked(!isBookmarked);
         })
         .catch(error => {

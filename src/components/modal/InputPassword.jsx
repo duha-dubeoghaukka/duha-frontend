@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { userInfoAPIs } from "../../api/api";
 import useInput from "../../hooks/useInput";
 import { logout } from "../../utils/logout";
 
 function InputPassword() {
-  const [password, setPassword, onChangePassword] = useInput();
+  const [password, _, onChangePassword] = useInput();
   const navigate = useNavigate();
 
   const onDeleteUser = () => {

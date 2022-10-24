@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "../card/Card";
 import MainCategoryCard from "../card/MainCategoryCard";
 import { Grid } from "@material-ui/core";
 

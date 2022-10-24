@@ -8,7 +8,6 @@ import { getCookie } from "../../shared/Cookie";
 
 const AddBookMarkSpot = () => {
   const [myCourse, setMyCourse] = useState([]);
-  const navigate = useNavigate();
 
   const token = getCookie("authorization");
   const nickName = decodeToken(token);

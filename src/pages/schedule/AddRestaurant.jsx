@@ -2,7 +2,6 @@ import regionNames from "../../utils/regionNames.js";
 import RegionButton from "../../components/mainpage/RegionButton";
 import Layout from "../../components/layout/Layout";
 import { useEffect, useState } from "react";
-import Item from "../../components/mainpage/Item";
 import Spinner from "../../components/Spinner/Spinner";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "react-query";

@@ -1,4 +1,3 @@
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import checkIsLoggedIn from "../../utils/checkIsLoggedIn";
@@ -37,7 +36,7 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
         .put(`/auth/${category}/review/${id}`, {
           review: editedComment
         })
-        .then(response => {
+        .then(() => {
           refetchComments();
           setIsEditMode(false);
         })

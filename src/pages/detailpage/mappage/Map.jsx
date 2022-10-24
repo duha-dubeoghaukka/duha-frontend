@@ -9,7 +9,7 @@ const Map = ({ setIsMapModalOpen, latitude, longitude }) => {
     });
     const location = new naver.maps.LatLng(latitude, longitude);
     map.setCenter(location);
-    const marker = new naver.maps.Marker({
+    new naver.maps.Marker({
       position: location,
       map: map
     });

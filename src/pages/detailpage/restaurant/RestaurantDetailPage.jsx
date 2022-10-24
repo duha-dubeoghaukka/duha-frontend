@@ -18,7 +18,6 @@ import Bookmark from "../../../components/mainpage/Bookmark";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 const RestaurantDetailPage = () => {
-  const navigator = useNavigate();
   const { mapModal } = useContext(GlobalState);
   const { isMapModalOpen, setIsMapModalOpen } = mapModal;
   const { isLoading, error, data, refetch } = useQuery(["restaurantDetail"], () => {
@@ -45,7 +44,7 @@ const RestaurantDetailPage = () => {
     } else {
       api
         .delete(`/auth/restaurant/review/${id}`)
-        .then(response => {
+        .then(() => {
           refetch();
         })
         .catch(error => {

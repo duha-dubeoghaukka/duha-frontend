@@ -12,7 +12,7 @@ const Bookmark = ({ bookmarked, numberOfBookmarks, category, id, refetchList }) 
     if (isLoggedIn) {
       api
         .get(`/auth/${category}/bookmark/${id}`)
-        .then(response => {
+        .then(() => {
           refetchList();
         })
         .catch(error => {

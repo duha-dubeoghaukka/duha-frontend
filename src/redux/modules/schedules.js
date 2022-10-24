@@ -42,10 +42,10 @@ export const schedules = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    [__getSchedules.pending]: (state, action) => {
+    [__getSchedules.pending]: (state, _) => {
       state.isLoding = true;
     },
-    [__deleteSchedule.pending]: (state, action) => {
+    [__deleteSchedule.pending]: (state, _) => {
       state.isLoding = true;
     },
     [__getSchedules.fulfilled]: (state, action) => {
@@ -59,7 +59,7 @@ export const schedules = createSlice({
         alert(action.payload[0].message);
       }
     },
-    [__editSchedule.fulfilled]: (state, action) => {
+    [__editSchedule.fulfilled]: (state, _) => {
       state.isLoding = false;
     },
     [__getSchedules.rejected]: (state, action) => {

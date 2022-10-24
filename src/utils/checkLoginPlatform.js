@@ -4,8 +4,7 @@ const checkLoginPlatform = token => {
   if (token) {
     const decode_token = jwt_decode(token);
     const array = decode_token.sub.split(":");
-    const platform = array[2];
-    return platform;
+    return array[2];
   } else {
     return null;
   }

@@ -44,7 +44,7 @@ const TouristSpotDetailPage = () => {
     } else {
       api
         .delete(`/auth/touristspot/review/${id}`)
-        .then(response => {
+        .then(() => {
           refetch();
         })
         .catch(error => {
