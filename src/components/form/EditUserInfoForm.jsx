@@ -143,7 +143,7 @@ function EditUserInfoForm() {
     userInfoAPIs
       .editUserInfo(data)
       .then(res => {
-        if (!res.data.isSuccess) {
+        if (!res.data.code === "NULL") {
           alert(res.data.message);
         } else {
           alert(message);
@@ -159,7 +159,7 @@ function EditUserInfoForm() {
           setIsDisabled(true);
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => alert(err.response.data.message));
   };
 
   const onSubmit = () => {

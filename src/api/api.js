@@ -11,7 +11,6 @@ export const api = axios.create({
 });
 // 배포 서버 주소 https://dduha.shop
 
-// 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
 api.interceptors.request.use(function (config) {
   const refreshToken = getCookie("refresh-token");
   const accessToken = getCookie("authorization");
@@ -24,17 +23,9 @@ export const scheduleAPIs = {
   register: data => {
     return api.post("/auth/trip", data);
   },
-  // 차후에 리팩토링 예정
-  // getRegisterInfo: () => {
-  //   return api.get("/auth/trip");
-  // },
   getShareSchedule: () => {
     return api.get("/trip");
   },
-  // 차후에 리팩토링 예정
-  // deleteSchedule: tripId => {
-  //   return api.delete(`/auth/trip/${tripId}`);
-  // },
   getShareDetailCourse: tripId => {
     return api.get(`/trip/${tripId}`);
   }

@@ -10,14 +10,17 @@ const GoogleLogin = props => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socialLoginAPIs.googleLogin(code).then(res => {
-      if (res.data.isSuccess) {
-        setCookie("authorization", res.headers.authorization);
-        setCookie("refresh-token", res.headers["refresh-token"]);
-        alert("구글 로그인이 완료되었습니다!");
-        navigate(`/`);
-      }
-    });
+    socialLoginAPIs
+      .googleLogin(code)
+      .then(res => {
+        if (res.data.code === "NULL") {
+          setCookie("authorization", res.headers.authorization);
+          setCookie("refresh-token", res.headers["refresh-token"]);
+          alert("구글 로그인이 완료되었습니다!");
+          navigate(`/`);
+        }
+      })
+      .catch(err => alert(err.response.data.message));
   }, []);
 
   return (

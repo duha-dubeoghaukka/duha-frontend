@@ -40,13 +40,12 @@ function Registration() {
           endAt: endDate
         })
         .then(res => {
-          if (res.data.isSuccess) {
+          if (res.data.code === "NULL") {
             alert("일정 등록이 완료되었습니다!");
             navigate(`/schedule`);
-          } else {
-            alert("일정 등록이 실패되었습니다!");
           }
-        });
+        })
+        .catch(err => alert(err.response.data.message));
     }
   };
 
@@ -59,14 +58,14 @@ function Registration() {
     };
     dispatch(__editSchedule({ id: id, editData: data }))
       .then(res => {
-        if (res.payload.isSuccess) {
+        if (res.payload.code === "NULL") {
           alert("변경이 완료되었습니다.");
           navigate(`/schedule`);
         } else {
-          alert(res.payload.message);
+          alert(res.payload.data.message);
         }
       })
-      .catch(err => alert(err.response));
+      .catch(err => alert(err.response.data.message));
   };
 
   const changeDate = e => {

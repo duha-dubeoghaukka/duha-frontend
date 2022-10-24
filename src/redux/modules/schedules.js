@@ -53,7 +53,7 @@ export const schedules = createSlice({
       state.schedules = action.payload;
     },
     [__deleteSchedule.fulfilled]: (state, action) => {
-      if (action.payload[0].isSuccess) {
+      if (action.payload[0].code === "NULL") {
         state.schedules = state.schedules.filter(item => item.id !== action.payload[1]);
       } else {
         alert(action.payload[0].message);

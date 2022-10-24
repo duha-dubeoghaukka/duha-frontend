@@ -19,7 +19,7 @@ function InputEmail({ category }) {
         userInfoAPIs
           .emailLink(data)
           .then(res => {
-            if (res.data.isSuccess) {
+            if (res.data.code === "NULL") {
               setMessage("회원가입 링크가 이메일로 전송되었습니다.");
             } else {
               setMessage(res.data.message);
@@ -36,13 +36,13 @@ function InputEmail({ category }) {
         userInfoAPIs
           .findPassword(data)
           .then(res => {
-            if (res.data.isSuccess) {
+            if (res.data.code === "NULL") {
               setMessage("비밀번호 재설정 링크가 이메일로 전송되었습니다.");
             } else {
               setMessage(res.data.message);
             }
           })
-          .catch(err => console.log("err", err.response));
+          .catch(err => alert(err.response.data.message));
       }
     }
   };
