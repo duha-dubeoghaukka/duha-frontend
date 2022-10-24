@@ -19,7 +19,6 @@ const Transportation = () => {
     return <div>{error}</div>;
   }
   if (data) {
-    // const transportations = data.data.data[0].info;
     return (
       <div>
         {transportations.map(transportation => {

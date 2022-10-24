@@ -1,30 +1,30 @@
-import regionNames from "../../../utils/regionNames.js";
-import RegionButton from "../../../components/mainpage/regionbutton/RegionButton";
-import Layout from "../../../components/layout/Layout";
+import regionNames from "../../utils/regionNames.js";
+import RegionButton from "../../components/mainpage/regionbutton/RegionButton";
+import Layout from "../../components/layout/Layout";
 import { useEffect, useState } from "react";
-import Item from "../../../components/mainpage/Item";
-import Spinner from "../../../components/Spinner/Spinner";
+import Item from "../../components/mainpage/Item";
+import Spinner from "../../components/Spinner/Spinner";
 import { Link } from "react-router-dom";
 import { useQuery } from "react-query";
-import { api } from "../../../api/api";
-import SearchField from "../../../components/search/SearchField";
-import AutoComplete from "../../../components/search/AutoComplete";
+import { api } from "../../api/api";
+import SearchField from "../../components/search/SearchField";
+import AutoComplete from "../../components/search/AutoComplete";
 import { DirectionsBusFilledOutlined } from "@mui/icons-material";
 import ArrowCircleUpOutlinedIcon from "@mui/icons-material/ArrowCircleUpOutlined";
-import scrollToTop from "../../../utils/scrollToTop";
-import Pagination from "../../../components/mainpage/Pagination";
+import scrollToTop from "../../utils/scrollToTop";
+import Pagination from "../../components/mainpage/Pagination";
 import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
 import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 
-const RestaurantsPage = () => {
-  const { isLoading, error, data, refetch } = useQuery(["restaurants"], () => {
+const AccommodationsPage = () => {
+  const { isLoading, error, data, refetch } = useQuery(["accommodations"], () => {
     let region;
     if (currentRegion.includes("&")) {
       region = currentRegion.split("&")[0];
     } else {
       region = currentRegion;
     }
-    return api.get(`/restaurant`, {
+    return api.get(`/accommodation`, {
       params: {
         page: currentPage,
         region: region === "전체" ? null : region,
@@ -120,7 +120,7 @@ const RestaurantsPage = () => {
     setIsPaginationVisible(!searchMode);
   }, [searchMode]);
   if (isLoading) {
-    return <Spinner title="맛집" />;
+    return <Spinner title={"숙소"} />;
   }
   if (error) {
     return <div>{error}</div>;
@@ -129,15 +129,15 @@ const RestaurantsPage = () => {
     const items = data.data.data.list;
     const totalNumberOfPages = data.data.data.totalPages;
     return (
-      <Layout title="맛집" highlight={"mainpage/restaurants"}>
+      <Layout title="숙소" highlight={"mainpage/accommodations"}>
         <div className="flex justify-around my-4 text-lg font-bold">
           <Link to="/spots" className="text-gray-500">
             관광
           </Link>
-          <Link to="/restaurants" className="text-green1">
+          <Link to="/restaurants" className="text-gray-500">
             맛집
           </Link>
-          <Link to="/accommodations" className="text-gray-500">
+          <Link to="/accommodations" className="text-green1">
             숙소
           </Link>
         </div>
@@ -148,7 +148,7 @@ const RestaurantsPage = () => {
             autoCompletedInput={autoCompletedInput}
             sendSearchedResults={sendSearchedResults}
             region={currentRegion}
-            category="restaurants"
+            category="accommodations"
             isAutoCompleteVisible={isAutoCompleteVisible}
           />
           {searchResults && (
@@ -162,7 +162,7 @@ const RestaurantsPage = () => {
           )}
         </div>
         <div className="mb-2">
-          <ul className="hidden md:flex flex-row justify-between">
+          <ul className="hidden md:flex justify-between">
             {regionNames.map(region => {
               return <RegionButton key={region.name} {...region} currentRegion={currentRegion} setCurrentRegion={changeCurrentRegion} />;
             })}
@@ -198,7 +198,7 @@ const RestaurantsPage = () => {
             </div>
             <div>
               {searchedResults.map(result => {
-                return <Item key={result.id} data={result} category={"restaurant"} refetchList={refetch} />;
+                return <Item key={result.id} data={result} category={"accommodation"} refetchList={refetch} />;
               })}
             </div>
           </div>
@@ -206,7 +206,7 @@ const RestaurantsPage = () => {
           <div>
             <div>
               {items.map(item => {
-                return <Item key={item.id} data={item} category={"restaurant"} refetchList={refetch} />;
+                return <Item key={item.id} data={item} category={"accommodation"} refetchList={refetch} />;
               })}
             </div>
           </div>
@@ -218,4 +218,4 @@ const RestaurantsPage = () => {
   }
 };
 
-export default RestaurantsPage;
+export default AccommodationsPage;
