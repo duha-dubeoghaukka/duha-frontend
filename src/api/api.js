@@ -11,7 +11,6 @@ export const api = axios.create({
 });
 // 배포 서버 주소 https://dduha.shop
 
-// 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
 api.interceptors.request.use(function (config) {
   const refreshToken = getCookie("refresh-token");
   const accessToken = getCookie("authorization");
