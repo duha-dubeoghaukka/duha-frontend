@@ -29,14 +29,12 @@ const SignUpForm = () => {
     userInfoAPIs
       .getUserEmail(code)
       .then(res => {
-        if (res.data.isSuccess) {
+        if (res.data.code === "NULL") {
           const email = res.data.data.email;
           setEmail(email);
-        } else {
-          alert(res.data.message);
         }
       })
-      .catch(err => console.log("err", err.response));
+      .catch(err => alert(err.response.data.message));
   }, []);
 
   const {
