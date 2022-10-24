@@ -44,16 +44,13 @@ const LogInForm = () => {
         email: inputEmail,
         password: inputPassword
       });
-      if (response.data.isSuccess) {
-        alert("로그인 되었습니다. 메인페이지로 이동합니다.");
-        setCookie("refresh-token", response.headers["refresh-token"]);
-        setCookie("authorization", response.headers.authorization);
-        navigate("/");
-      } else {
-        alert(response.data.message);
-      }
+      alert("로그인 되었습니다. 메인페이지로 이동합니다.");
+      setCookie("refresh-token", response.headers["refresh-token"]);
+      setCookie("authorization", response.headers.authorization);
+      navigate("/");
     } catch (error) {
-      throw new Error(error);
+      // throw new Error(error.response.data.message);
+      alert(error.response.data.message);
     }
   };
 
