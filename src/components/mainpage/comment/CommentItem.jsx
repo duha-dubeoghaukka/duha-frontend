@@ -5,6 +5,7 @@ import decodeToken from "../../../utils/decodeToken";
 import { useState } from "react";
 import { api } from "../../../api/api";
 import { getCookie } from "../../../shared/Cookie";
+import CommentContent from "./CommentContent";
 
 const CommentItem = ({ data, commentDeleteHandler, category, refetchComments }) => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -63,11 +64,7 @@ const CommentItem = ({ data, commentDeleteHandler, category, refetchComments }) 
           <img src="https://i.ibb.co/yyxq0XX/001.png" alt="하르방사진" className="w-10 mr-2" />
           <div>
             <p className="text-xs md:text-sm font-semibold mb-1">{reviewer}</p>
-            {isEditMode || (
-              <div className="bg-white shadow-md p-2 rounded-md">
-                <p className="text-sm md:text-base">{review}</p>
-              </div>
-            )}
+            {isEditMode || <CommentContent review={review} />}
           </div>
         </div>
         {isAuthor && (
