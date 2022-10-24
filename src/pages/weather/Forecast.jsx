@@ -1,7 +1,6 @@
 import ForecastItem from "./ForecastItem";
 import { useQuery } from "react-query";
 import axios from "axios";
-import getTomorrow from "../../utils/getTomorrow";
 import coordinates from "../../utils/coordinates";
 import { useEffect } from "react";
 import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";

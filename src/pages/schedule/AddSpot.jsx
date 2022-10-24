@@ -50,11 +50,7 @@ const TouristSpotsPage = () => {
   const sendResults = results => {
     setSearchResults(
       results.map((result, index) => {
-        if (index === 0) {
-          result.isFocused = true;
-        } else {
-          result.isFocused = false;
-        }
+        result.isFocused = index === 0;
         return result;
       })
     );
@@ -96,11 +92,7 @@ const TouristSpotsPage = () => {
   useEffect(() => {
     setSearchResults(previousSearchResults => {
       return previousSearchResults.map((result, index) => {
-        if (index === selectedAutoComplete) {
-          result.isFocused = true;
-        } else {
-          result.isFocused = false;
-        }
+        result.isFocused = index === selectedAutoComplete;
         return result;
       });
     });

@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Layout from "../../../components/layout/Layout";
 import { useContext, useEffect } from "react";
 import { useQuery } from "react-query";

@@ -143,7 +143,7 @@ function EditUserInfoForm() {
     userInfoAPIs
       .editUserInfo(data)
       .then(res => {
-        if (!res.data.code === "NULL") {
+        if (res.data.code !== "NULL") {
           alert(res.data.message);
         } else {
           alert(message);
