@@ -1,4 +1,4 @@
-import ReviewItem from "./ReviewItem";
+import CommentItem from "./CommentItem";
 
 const CommentList = ({ comments, commentDeleteHandler, category, refetchComments }) => {
   const isCommentsEmpty = comments.length === 0;
@@ -15,7 +15,7 @@ const CommentList = ({ comments, commentDeleteHandler, category, refetchComments
             <div className="grid gap-4">
               {comments.map(comment => {
                 return (
-                  <ReviewItem
+                  <CommentItem
                     key={comment.id}
                     data={comment}
                     commentDeleteHandler={commentDeleteHandler}

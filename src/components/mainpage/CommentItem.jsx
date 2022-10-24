@@ -6,7 +6,7 @@ import { useState } from "react";
 import { api } from "../../api/api";
 import { getCookie } from "../../shared/Cookie";
 
-const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) => {
+const CommentItem = ({ data, commentDeleteHandler, category, refetchComments }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const { review, reviewer, id } = data;
   let isAuthor = false;
@@ -105,4 +105,4 @@ const ReviewItem = ({ data, commentDeleteHandler, category, refetchComments }) =
   );
 };
 
-export default ReviewItem;
+export default CommentItem;
