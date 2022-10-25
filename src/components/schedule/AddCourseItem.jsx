@@ -1,13 +1,11 @@
-import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
-import Bookmark from "../mainpage/Bookmark";
 
-const AddCourseItem = ({ data, category, refetchList }) => {
+const AddCourseItem = ({ data, category }) => {
   const { tripId, currentCourseId, day } = useParams();
   const navigate = useNavigate();
-  const { id, name, description, region, thumbnailUrl, hasNearStation, bookmarkNum, bookmarked } = data;
+  const { id, name, description, region, thumbnailUrl, hasNearStation } = data;
 
   const itemClickHandler = async () => {
     try {
