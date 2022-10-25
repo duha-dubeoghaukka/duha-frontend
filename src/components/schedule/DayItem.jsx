@@ -113,11 +113,10 @@ const DayItem = () => {
                   key={course.courseId}
                   className="font-bold text-lg px-4 cursor-pointer"
                   onClick={() => {
-                    // onClickDay(course.day);
                     navigate(`/schedule/${id}/${course.day}`);
                   }}
                 >
-                  {day === course.day ? (
+                  {Number(day) === course.day ? (
                     <div className="border-b-2 pb-1 border-green1 text-green1 transition ease-in-out">Day{course.day}</div>
                   ) : (
                     <div className="border-b-2 pb-1 border-white text-gray-400 hover:border-gray-400 transition ease-in-out">
