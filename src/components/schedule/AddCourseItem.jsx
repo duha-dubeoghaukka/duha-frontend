@@ -2,11 +2,12 @@ import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
 import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../api/api";
 import DirectionsBusFilledOutlinedIcon from "@mui/icons-material/DirectionsBusFilledOutlined";
+import Bookmark from "../mainpage/Bookmark";
 
-const AddCourseItem = ({ data, category }) => {
+const AddCourseItem = ({ data, category, refetchList }) => {
   const { tripId, currentCourseId, day } = useParams();
   const navigate = useNavigate();
-  const { id, name, description, region, likeNum, thumbnailUrl, hasNearStation } = data;
+  const { id, name, description, region, thumbnailUrl, hasNearStation, bookmarkNum, bookmarked } = data;
 
   const itemClickHandler = async () => {
     try {
@@ -37,7 +38,7 @@ const AddCourseItem = ({ data, category }) => {
             <DirectionsBusFilledOutlinedIcon
               fontSize="medium"
               sx={{
-                color: "rgb(116, 175, 115)"
+                color: "#ECB390"
               }}
               className=""
             />
@@ -48,10 +49,6 @@ const AddCourseItem = ({ data, category }) => {
         </div>
         <div className="mb-2">
           <p className="text-xs">{description}</p>
-        </div>
-        <div className="flex items-center">
-          <FavoriteRoundedIcon sx={{ color: "red" }} className="mr-[3px]" />
-          <p className="text-xs">{likeNum}</p>
         </div>
       </div>
     </div>
