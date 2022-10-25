@@ -10,18 +10,46 @@ import ModeEditOutlineOutlinedIcon from "@mui/icons-material/ModeEditOutlineOutl
 import useChange from "../../hooks/useChange";
 import ShowModal from "../modal/ShowModal";
 import IosShareIcon from "@mui/icons-material/IosShare";
+import { api } from "../../api/api";
 
 function ScheduleCard() {
-  const dispatch = useDispatch();
-  const { schedules } = useSelector(state => state.schedules);
+  // const dispatch = useDispatch();
+  // const { schedules } = useSelector(state => state.schedules);
+
+  // useEffect(() => {
+  //   dispatch(__getSchedules());
+  // }, [dispatch]);
+
+  // const onDeleteSchedule = tripId => {
+  //   if (window.confirm("정말 삭제하시겠습니까?")) {
+  //     dispatch(__deleteSchedule(tripId));
+  //   }
+  // };
+
+  const [schedules, setSchedules] = useState([]);
+
+  const fetchSchedules = async () => {
+    try {
+      const { data } = await api.get(`/auth/trip`);
+      setSchedules(data.data);
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
 
   useEffect(() => {
-    dispatch(__getSchedules());
-  }, [dispatch]);
+    fetchSchedules();
+  }, []);
 
-  const onDeleteSchedule = tripId => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(__deleteSchedule(tripId));
+  const onDeleteSchedule = async id => {
+    try {
+      if (confirm("정말 삭제하시겠습니까?")) {
+        await api.delete(`/auth/trip/${id}`);
+        const newSchedules = schedules.filter(schedules => schedules.id !== id);
+        setSchedules(newSchedules);
+      } else return;
+    } catch (error) {
+      alert(error.response.data.message);
     }
   };
 
