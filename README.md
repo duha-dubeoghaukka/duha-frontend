@@ -28,10 +28,6 @@
 
 <br>
 
-## 🎨 와이어프레임 🎨
-
-<br>
-
 ## 👩🏻‍💻 Contributors 🧑🏻‍💻
 
 | [이다정](https://github.com/dajeong09)                                                          | [박세은](https://github.com/marksenee)                                       | [이수민](https://github.com/sooominnn)                             | [임연주](https://github.com/yeondooo)        | [김진욱](https://github.com/yeondooo)                                                              |
