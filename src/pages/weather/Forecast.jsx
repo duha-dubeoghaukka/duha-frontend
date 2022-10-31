@@ -4,6 +4,7 @@ import axios from "axios";
 import coordinates from "../../utils/coordinates";
 import { useEffect } from "react";
 import NonLayoutSpinner from "../../components/Spinner/NonLayoutSpinner";
+import moment from "moment";
 
 const Forecast = ({ currentRegion }) => {
   const url = "https://api.openweathermap.org/data/2.5/forecast";
@@ -28,13 +29,16 @@ const Forecast = ({ currentRegion }) => {
   }
   if (data) {
     const forecasts = data.data.list;
-    const today = new Date().getDate();
+    const today = moment();
+    const later = moment().add(5, "days");
     const dailyForecasts = [];
-    for (let i = today; i < today + 5; i++) {
+    let i = today;
+    while (i.isBefore(later, "day")) {
       const filtered = forecasts.filter(forecast => {
-        return forecast.dt_txt.slice(8, 10) === i.toString().padStart(2, "0");
+        return forecast.dt_txt.slice(8, 10) === i.format("DD");
       });
       dailyForecasts.push(filtered);
+      i.add(1, "days");
     }
     const minMaxTemperatures = dailyForecasts.map(forecast => {
       const temperatures = forecast.map(item => {
@@ -56,7 +60,7 @@ const Forecast = ({ currentRegion }) => {
           return (
             <ForecastItem
               key={index}
-              day={today + index}
+              day={moment().add(index, "days").format("DD")}
               minTemperature={Math.round(minMaxTemperatures[index].minTemperature)}
               maxTemperature={Math.round(minMaxTemperatures[index].maxTemperature)}
               weatherCode={weatherConditions[index]}
